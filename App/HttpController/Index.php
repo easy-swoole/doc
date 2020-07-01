@@ -4,32 +4,41 @@
 namespace App\HttpController;
 
 
+use App\Model\Document\Doc;
+use App\Utility\DocContainer;
 use EasySwoole\Http\AbstractInterface\Controller;
 
 class Index extends Controller
 {
-
-    public function index()
+    function index()
     {
-        $file = EASYSWOOLE_ROOT.'/vendor/easyswoole/easyswoole/src/Resource/Http/welcome.html';
-        if(!is_file($file)){
-            $file = EASYSWOOLE_ROOT.'/src/Resource/Http/welcome.html';
-        }
-        $this->response()->write(file_get_contents($file));
-    }
-
-    function test()
-    {
-        $this->response()->write('this is test');
+        $this->actionNotFound('index');
     }
 
     protected function actionNotFound(?string $action)
     {
-        $this->response()->withStatus(404);
-        $file = EASYSWOOLE_ROOT.'/vendor/easyswoole/easyswoole/src/Resource/Http/404.html';
-        if(!is_file($file)){
-            $file = EASYSWOOLE_ROOT.'/src/Resource/Http/404.html';
+        $doc = DocContainer::getInstance()->get('cn');
+        if($doc instanceof Doc){
+            $path = $this->request()->getUri()->getPath();
+            if(substr($path,-5) == '.html'){
+                $path = substr($path,0,-5);
+            }
+            $content = null;
+            if(in_array($path,['/','/index'])){
+                $content = $doc->displayHomePage();
+            }else{
+                $content = $doc->displayContentPage($path.".md");
+            }
+            if($content === null){
+                $this->response()->withStatus(404);
+                $content = $doc->displayPageNotFound();
+            }else{
+                $this->response()->withStatus(200);
+            }
+            $this->response()->withAddedHeader('Content-type',"text/html;charset=utf-8");
+            $this->response()->write($content);
+        }else{
+            $this->response()->write('not language match');
         }
-        $this->response()->write(file_get_contents($file));
     }
 }

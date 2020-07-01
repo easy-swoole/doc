@@ -2,6 +2,8 @@
 namespace EasySwoole\EasySwoole;
 
 
+use App\Model\Document\Doc;
+use App\Utility\DocContainer;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\Http\Request;
@@ -18,7 +20,13 @@ class EasySwooleEvent implements Event
 
     public static function mainServerCreate(EventRegister $register)
     {
-        // TODO: Implement mainServerCreate() method.
+        $cn = new Doc(EASYSWOOLE_ROOT.'/Cn');
+        $cn->setName('cn');
+        $cn->getTemplate()->setHomePageTpl('index.tpl');
+        $cn->getTemplate()->setSideBarMd('sideBar.md');
+        $cn->getTemplate()->setContentPageTpl('contentPage.tpl');
+        DocContainer::getInstance()->add($cn);
+
     }
 
     public static function onRequest(Request $request, Response $response): bool
