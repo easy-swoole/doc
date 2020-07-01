@@ -26,19 +26,19 @@ class Doc
         return $this->template;
     }
 
-    function displayHomePage():?string
+    function displayHomePage(?Args $args = null):?string
     {
-        return '';
+        return $this->render($this->template->getHomePageTpl(),$args);
     }
 
-    function displayContentPage(string $mdFile):?string
+    function displayContentPage(string $mdFile,?Args $args = null):?string
     {
-        return '';
+        return $this->render($mdFile,$args);
     }
 
-    function displayPageNotFound():?string
+    function displayPageNotFound(?Args $args = null):?string
     {
-        return '';
+        return $this->render($this->template->getPageNotFoundTpl(),$args);
     }
 
     /**
@@ -55,5 +55,18 @@ class Doc
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    protected function render(string $file,?Args $args = null)
+    {
+        if(!$args){
+            $args = new Args();
+        }
+        $file = $this->rootPath.$file;
+        if(!file_exists($file)){
+            return null;
+        }
+        $args->setArg("DOC_NAME",$this->name);
+        return file_get_contents($file);
     }
 }

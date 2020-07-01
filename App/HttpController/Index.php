@@ -36,7 +36,9 @@ class Index extends Controller
                 $this->response()->withStatus(200);
             }
             $this->response()->withAddedHeader('Content-type',"text/html;charset=utf-8");
-            $this->response()->write($content);
+            if($content){
+                $this->response()->write($content);
+            }
         }else{
             $this->response()->write('not language match');
         }

@@ -22,9 +22,10 @@ class EasySwooleEvent implements Event
     {
         $cn = new Doc(EASYSWOOLE_ROOT.'/Cn');
         $cn->setName('cn');
-        $cn->getTemplate()->setHomePageTpl('index.tpl');
-        $cn->getTemplate()->setSideBarMd('sideBar.md');
-        $cn->getTemplate()->setContentPageTpl('contentPage.tpl');
+        $cn->getTemplate()->setHomePageTpl('/index.tpl');
+        $cn->getTemplate()->setSideBarMd('/sideBar.md');
+        $cn->getTemplate()->setContentPageTpl('/contentPage.tpl');
+        $cn->getTemplate()->setPageNotFoundTpl('404.tpl');
         DocContainer::getInstance()->add($cn);
 
     }
