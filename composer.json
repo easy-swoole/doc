@@ -1,7 +1,8 @@
 {
     "require": {
         "easyswoole/easyswoole": "3.x-dev",
-        "easyswoole/parsedown": "^1.0"
+        "easyswoole/parsedown": "^1.0",
+        "voku/simple_html_dom": "^4.7"
     },
     "autoload": {
         "psr-4": {

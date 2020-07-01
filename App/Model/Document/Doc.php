@@ -4,6 +4,9 @@
 namespace App\Model\Document;
 
 
+use EasySwoole\ParserDown\ParserDown;
+use voku\helper\HtmlDomParser;
+
 class Doc
 {
     protected $name = 'default';
@@ -34,6 +37,15 @@ class Doc
     function displayContentPage(string $mdFile,?Args $args = null):?string
     {
         return $this->render($mdFile,$args);
+    }
+
+    function renderMdFile(string $mdFile)
+    {
+        if(file_exists($mdFile)){
+            return (new ParserDown())->parse(file_get_contents($mdFile));
+        }else{
+            return null;
+        }
     }
 
     function displayPageNotFound(?Args $args = null):?string
@@ -67,6 +79,9 @@ class Doc
             return null;
         }
         $args->setArg("DOC_NAME",$this->name);
+        $sidebar = file_get_contents($this->rootPath.$this->template->getSideBarMd());
+        $sidebar = (new ParserDown())->parse($sidebar);
+        $args->setArg("SIDE_BAR",$sidebar);
         return file_get_contents($file);
     }
 }
