@@ -121,8 +121,17 @@ class Doc
         }
         $args->setArg("doc_name",$this->name);
         if($args->getArg('content')){
+            $args->setArg('contentFile',$args->getArg('content'));
             $args->setArg('content',$this->renderMarkdown($args->getArg('content'))->toArray());
         }
+
+        $sideBar = $this->template->getSideBarMd();
+        $sideBar= $this->renderMarkdown($sideBar);
+//        $queryPath = qp($sideBar->getHtml());
+//        foreach ($queryPath->children() as $child){
+//            echo $child->writeHTML();
+//        }
+
         $temp = sys_get_temp_dir();
         $smarty = new \Smarty();
         $smarty->setTemplateDir($this->rootPath);
