@@ -65,5 +65,12 @@ class MarkDownResult
         $this->plainText = $plainText;
     }
 
-
+    function toArray()
+    {
+        return [
+            'config'=>$this->config,
+            'plainText'=>$this->plainText,
+            'html'=>$this->html
+        ];
+    }
 }

@@ -37,7 +37,16 @@ class Doc
 
     function displayContentPage(string $mdFile,?Args $args = null):?string
     {
-        return $this->render($mdFile,$args);
+        if(!$args){
+            $args = new Args();
+        }
+        $args->setArg('content',$mdFile);
+        return $this->render($this->getTemplate()->getContentPageTpl(),$args);
+    }
+
+    function displayPageNotFound(?Args $args = null):?string
+    {
+        return $this->render($this->template->getPageNotFoundTpl(),$args);
     }
 
     function renderMarkdown(string $mdFile)
@@ -89,11 +98,6 @@ class Doc
         }
     }
 
-    function displayPageNotFound(?Args $args = null):?string
-    {
-        return $this->render($this->template->getPageNotFoundTpl(),$args);
-    }
-
     /**
      * @return string
      */
@@ -115,14 +119,19 @@ class Doc
         if(!$args){
             $args = new Args();
         }
-        $file = $this->rootPath.$file;
-        if(!file_exists($file)){
-            return null;
+
+        $args->setArg("doc_name",$this->name);
+        if($args->getArg('content')){
+            $args->setArg('content',$this->renderMarkdown($args->getArg('content'))->toArray());
         }
-        $args->setArg("DOC_NAME",$this->name);
-        $sidebar = file_get_contents($this->rootPath.$this->template->getSideBarMd());
-        $sidebar = (new ParserDown())->parse($sidebar);
-        $args->setArg("SIDE_BAR",$sidebar);
-        return file_get_contents($file);
+        $temp = sys_get_temp_dir();
+        $smarty = new \Smarty();
+        $smarty->setTemplateDir($this->rootPath);
+        $smarty->setCacheDir("{$temp}/smarty/cache/");
+        $smarty->setCompileDir("{$temp}/smarty/compile/");
+        foreach ($args->getArgs() as $key => $val){
+            $smarty->assign($key,$val);
+        }
+        return $smarty->fetch($this->rootPath.$file);
     }
 }
