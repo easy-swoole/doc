@@ -119,7 +119,6 @@ class Doc
         if(!$args){
             $args = new Args();
         }
-
         $args->setArg("doc_name",$this->name);
         if($args->getArg('content')){
             $args->setArg('content',$this->renderMarkdown($args->getArg('content'))->toArray());
