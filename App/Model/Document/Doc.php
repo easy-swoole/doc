@@ -4,6 +4,7 @@
 namespace App\Model\Document;
 
 
+use EasySwoole\EasySwoole\Trigger;
 use EasySwoole\ParserDown\ParserDown;
 use voku\helper\HtmlDomParser;
 
@@ -39,10 +40,50 @@ class Doc
         return $this->render($mdFile,$args);
     }
 
-    function renderMdFile(string $mdFile)
+    function renderMarkdown(string $mdFile)
     {
+        $mdFile = $this->rootPath.$mdFile;
         if(file_exists($mdFile)){
-            return (new ParserDown())->parse(file_get_contents($mdFile));
+            $result = new MarkDownResult();
+            $content = '';
+            $head = '';
+            $file = fopen($mdFile, "r");
+            $isInHead = false;
+            while (is_resource($file) && !feof($file)) {
+                $line = fgets($file);
+                if ($isInHead) {
+                    if (strlen(trim($line))==3 && substr($line, 0, 3) == '---') {
+                        $isInHead = false;
+                    } else {
+                        $head = $head . $line;
+                    }
+                } else {
+                    if (strlen(trim($line))==3 && substr($line, 0, 3) == '---') {
+                        $isInHead = true;
+                    } else {
+                        $content = $content . $line;
+                    }
+                }
+            }
+            fclose($file);
+            if(!empty($head)){
+                $config = yaml_parse($head);
+                if($config === false){
+                    Trigger::getInstance()->error("yaml parse file {$mdFile} error");
+                }else if(is_array($config)){
+                    $result->setConfig($config);
+                }
+            }
+            if(!empty($content)){
+                $result->setHtml((new ParserDown())->parse($content));
+                $dom = HtmlDomParser::str_get_html($result->getHtml());
+                //删除代码标签
+                foreach ($dom->find("code") as $code){
+                    $code->innerhtml = '';
+                }
+                $result->setPlainText($dom->text());
+            }
+            return $result;
         }else{
             return null;
         }

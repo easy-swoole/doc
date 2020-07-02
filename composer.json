@@ -2,7 +2,8 @@
     "require": {
         "easyswoole/easyswoole": "3.x-dev",
         "easyswoole/parsedown": "^1.0",
-        "voku/simple_html_dom": "^4.7"
+        "voku/simple_html_dom": "^4.7",
+        "ext-yaml": "*"
     },
     "autoload": {
         "psr-4": {
