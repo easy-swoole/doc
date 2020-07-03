@@ -122,7 +122,13 @@ class Doc
         $args->setArg("docName",$this->name);
         if($args->getArg('content')){
             $args->setArg('contentFile',$args->getArg('content'));
-            $args->setArg('content',$this->renderMarkdown($args->getArg('content'))->toArray());
+            $c = $this->renderMarkdown($args->getArg('content'));
+            if($c){
+                $c = $c->toArray();
+            }else{
+                $c = null;
+            }
+            $args->setArg('content',$c);
         }
         $sideBar = $this->template->getSideBarMd();
         $sideBar= $this->renderMarkdown($sideBar);
