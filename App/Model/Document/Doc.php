@@ -40,7 +40,19 @@ class Doc
         if(!$args){
             $args = new Args();
         }
-        $args->setArg('content',$mdFile);
+        //侧边栏
+        $sideBar = $this->template->getSideBarMd();
+        $sideBar= $this->renderMarkdown($sideBar);
+        $args->setArg('sideBar',$sideBar->getHtml());
+        //正文
+        $args->setArg('markdownFile',$mdFile);
+        $c = $this->renderMarkdown($mdFile);
+        if($c){
+            $c = $c->toArray();
+        }else{
+            $c = null;
+        }
+        $args->setArg('markdownContent',$c);
         return $this->render($this->getTemplate()->getContentPageTpl(),$args);
     }
 
@@ -120,19 +132,6 @@ class Doc
             $args = new Args();
         }
         $args->setArg("docName",$this->name);
-        if($args->getArg('content')){
-            $args->setArg('contentFile',$args->getArg('content'));
-            $c = $this->renderMarkdown($args->getArg('content'));
-            if($c){
-                $c = $c->toArray();
-            }else{
-                $c = null;
-            }
-            $args->setArg('content',$c);
-        }
-        $sideBar = $this->template->getSideBarMd();
-        $sideBar= $this->renderMarkdown($sideBar);
-        $args->setArg('sideBar',$sideBar->getHtml());
         $temp = sys_get_temp_dir();
         $smarty = new \Smarty();
         $smarty->setTemplateDir($this->rootPath);
