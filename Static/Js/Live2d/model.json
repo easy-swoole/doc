@@ -1,0 +1,58 @@
+{
+  "type": "Live2D Model Setting",
+  "name": "live",
+  "model": "moc/live.moc",
+  "textures": ["moc/texture_00.png", "moc/texture_01.png", "moc/texture_02.png", "moc/texture_03.png", "moc/texture_04.png", "moc/texture_05.png"],
+  "physics": "physics.json",
+  "pose": "pose.json",
+  "expressions": [{
+    "name": "f01",
+    "file": "f01.exp.json"
+  }, {
+    "name": "f02",
+    "file": "f02.exp.json"
+  }, {
+    "name": "f03",
+    "file": "f03.exp.json"
+  }, {
+    "name": "f04",
+    "file": "f04.exp.json"
+  }],
+  "layout": {
+    "center_x": 0,
+    "y": 1.2,
+    "width": 2.4
+  },
+  "hit_areas": [{
+    "name": "head",
+    "id": "D_REF.HEAD"
+  }, {
+    "name": "body",
+    "id": "D_REF.BODY"
+  }],
+  "motions": {
+    "idle": [{
+      "file": "idle_00.mtn",
+      "fade_in": 2000,
+      "fade_out": 2000
+    }, {
+      "file": "idle_01.mtn",
+      "fade_in": 2000,
+      "fade_out": 2000
+    }, {
+      "file": "idle_02.mtn",
+      "fade_in": 2000,
+      "fade_out": 2000
+    }],
+    "tap_body": [{
+      "file": "tapBody_00.mtn",
+      "sound": "tapBody_00.mp3"
+    }, {
+      "file": "tapBody_01.mtn",
+      "sound": "tapBody_01.mp3"
+    }, {
+      "file": "tapBody_02.mtn",
+      "sound": "tapBody_02.mp3"
+    }]
+  }
+}
