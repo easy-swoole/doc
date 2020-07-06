@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="cn">
 <head>
-    <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -16,6 +15,13 @@
     <script src="/Js/global.js"></script>
     <script src="/Js/jquery.mark.min.js"></script>
     <script src="/Js/Layer/layer.js"></script>
+    {if isset($page.config.title)}<title>{$page.config.title}</title>{/if}
+
+    {if isset($page.config.meta)}
+        {foreach from=$page.config.meta item=item key=key}
+            <meta name="{$item.name}" content="{$item.content}">
+        {/foreach}
+    {/if}
 
 </head>
 <body>
@@ -52,7 +58,7 @@
     </header>
     <aside class="sideBar">{$sideBar}</aside>
     <section class="mainContent">
-        <div class="content markdown-body">{$markdownContent.html}</div>
+        <div class="content markdown-body">{$page.html}</div>
         <div class="right-menu" id="right-menu"></div>
     </section>
 </div>

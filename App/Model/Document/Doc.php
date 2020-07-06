@@ -63,7 +63,7 @@ class Doc
         }else{
             $c = null;
         }
-        $args->setArg('markdownContent',$c);
+        $args->setArg('page',$c);
         return $this->render($this->getTemplate()->getContentPageTpl(),$args);
     }
 
@@ -82,6 +82,9 @@ class Doc
         $path = $info['dirname'];
         if($info['filename'] != 'index'){
             $path = rtrim($path,'/')."/".$info['filename'];
+        }
+        if(empty($info['extension'])){
+            $info['extension'] = 'html';
         }
         if($path == '/' || (isset($info['extension']) && $info['extension'] == 'html')){
             $response->withAddedHeader('Content-type',"text/html;charset=utf-8");
