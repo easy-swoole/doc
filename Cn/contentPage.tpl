@@ -1,3 +1,3 @@
 this is content page
 
-{$content.html}
+{$markdownContent.html}

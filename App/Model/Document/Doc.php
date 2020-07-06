@@ -5,6 +5,8 @@ namespace App\Model\Document;
 
 
 use EasySwoole\EasySwoole\Trigger;
+use EasySwoole\Http\Request;
+use EasySwoole\Http\Response;
 use EasySwoole\ParserDown\ParserDown;
 use voku\helper\HtmlDomParser;
 
@@ -30,20 +32,29 @@ class Doc
         return $this->template;
     }
 
-    function displayHomePage(?Args $args = null):?string
+    protected function displayHomePage(?Args $args = null):?string
     {
+        if(!file_exists($this->rootPath.'/'.$this->template->getHomePageTpl())){
+            return null;
+        }
         return $this->render($this->template->getHomePageTpl(),$args);
     }
 
-    function displayContentPage(string $mdFile,?Args $args = null):?string
+    protected function displayContentPage(string $mdFile,?Args $args = null):?string
     {
+        if(!file_exists($this->rootPath.$mdFile)){
+            return null;
+        }
         if(!$args){
             $args = new Args();
         }
         //侧边栏
-        $sideBar = $this->template->getSideBarMd();
-        $sideBar= $this->renderMarkdown($sideBar);
-        $args->setArg('sideBar',$sideBar->getHtml());
+        $sideBar= $this->renderMarkdown($this->template->getSideBarMd());
+        if($sideBar){
+            $args->setArg('sideBar',$sideBar->getHtml());
+        }else{
+            $args->setArg('sideBar',null);
+        }
         //正文
         $args->setArg('markdownFile',$mdFile);
         $c = $this->renderMarkdown($mdFile);
@@ -56,14 +67,46 @@ class Doc
         return $this->render($this->getTemplate()->getContentPageTpl(),$args);
     }
 
-    function displayPageNotFound(?Args $args = null):?string
+    protected function displayPageNotFound(?Args $args = null):?string
     {
+        if(!file_exists($this->rootPath.'/'.$this->template->getPageNotFoundTpl())){
+            return null;
+        }
         return $this->render($this->template->getPageNotFoundTpl(),$args);
+    }
+
+    function display(Request $request,Response $response):void
+    {
+        $path = $request->getUri()->getPath();
+        $info = pathinfo($path);
+        $path = $info['dirname'];
+        if($info['filename'] != 'index'){
+            $path = rtrim($path,'/')."/".$info['filename'];
+        }
+        if($path == '/' || (isset($info['extension']) && $info['extension'] == 'html')){
+            $response->withAddedHeader('Content-type',"text/html;charset=utf-8");
+            if($path == '/'){
+                $content = $this->displayHomePage();
+            }else{
+                $content = $this->displayContentPage($path.".md");
+            }
+            if($content === null){
+                $response->withStatus(404);
+                $content = $this->displayPageNotFound();
+            }else{
+                $response->withStatus(200);
+            }
+            if($content){
+                $response->write($content);
+            }
+        }else{
+            $response->withStatus(404);
+        }
     }
 
     function renderMarkdown(string $mdFile)
     {
-        $mdFile = $this->rootPath.$mdFile;
+        $mdFile = $this->rootPath.'/'.$mdFile;
         if(file_exists($mdFile)){
             $result = new MarkDownResult();
             $content = '';
@@ -140,6 +183,6 @@ class Doc
         foreach ($args->getArgs() as $key => $val){
             $smarty->assign($key,$val);
         }
-        return $smarty->fetch($this->rootPath.$file);
+        return $smarty->fetch($this->rootPath.'/'.$file);
     }
 }
