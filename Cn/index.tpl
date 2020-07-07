@@ -38,7 +38,7 @@
         <div class="hero-body" style="padding-bottom: 0; padding-top: 1.5rem">
             <div class="container">
                 <h3 class="hero-headline animated fadeInUp">一种愉悦的开发方式</h3>
-                <div class="hero-btn"><a class="btn-blue" id="start" href="/hello">开始使用</a></div>
+                <div class="hero-btn"><a class="btn-blue" id="start" href="/Preface/intro.html">开始使用</a></div>
             </div>
             <embed class="image esanimation" src="/Images/index.svg" type="image/svg+xml" pluginspage="img/easy.svg"/>
         </div>

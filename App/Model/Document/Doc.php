@@ -51,7 +51,16 @@ class Doc
         //侧边栏
         $sideBar= $this->renderMarkdown($this->template->getSideBarMd());
         if($sideBar){
-            $args->setArg('sideBar',$sideBar->getHtml());
+            $sideBar = HtmlDomParser::str_get_html($sideBar->getHtml());
+            foreach ($sideBar->find('a') as $href)
+            {
+                $a = $href->href;
+                if(!empty($a) && substr($a,-2) == 'md'){
+                    $a = '/'.substr($a,0,-2).'html';
+                    $href->href = $a;
+                }
+            }
+            $args->setArg('sideBar',(string)$sideBar);
         }else{
             $args->setArg('sideBar',null);
         }
