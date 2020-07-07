@@ -17,7 +17,11 @@ class Index extends Controller
 
     protected function actionNotFound(?string $action)
     {
-        $doc = DocContainer::getInstance()->get('cn');
+        $doc = $this->request()->getRequestParam('doc');
+        if(empty($doc)){
+            $doc = 'ES_DOC_CN';
+        }
+        $doc = DocContainer::getInstance()->get($doc);
         if($doc instanceof Doc){
             $doc->display($this->request(),$this->response());
         }else{

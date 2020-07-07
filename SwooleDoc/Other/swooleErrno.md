@@ -1,0 +1,83 @@
+---
+title: swoole错误码
+meta:
+  - name: description
+    content: swoole错误码
+  - name: keywords
+    content: swoole|swoole 拓展|swoole 框架|EasySwoole|swoole|swoole错误码
+---
+
+### 错误码
+
+```php
+//获取当前错误码
+echo swoole_last_error();
+//将错误码转换为文字错误
+echo swoole_strerror(swoole_last_error(), 9); 
+```
+
+### Linux错误码
+可参考[linux错误码](https://gist.github.com/greggyNapalm/2413028)
+
+### Swoole错误码
+
+| 标识  | 标识码                   |
+|:----------|:-----------------|
+| SWOOLE_ERROR_MALLOC_FAIL	                       |501 /
+| SWOOLE_ERROR_SYSTEM_CALL_FAIL	                   |502 /
+| SWOOLE_ERROR_PHP_FATAL_ERROR	                   |503 /
+| SWOOLE_ERROR_NAME_TOO_LONG	                   |504 /
+| SWOOLE_ERROR_INVALID_PARAMS	                   |505 /
+| SWOOLE_ERROR_QUEUE_FULL	                       |506 /
+| SWOOLE_ERROR_FILE_NOT_EXIST	                   |700 /
+| SWOOLE_ERROR_FILE_TOO_LARGE	                   |701 /
+| SWOOLE_ERROR_FILE_EMPTY	                       |702 /
+| SWOOLE_ERROR_DNSLOOKUP_DUPLICATE_REQUEST	       |703 /
+| SWOOLE_ERROR_DNSLOOKUP_RESOLVE_FAILED	           |704 /
+| SWOOLE_ERROR_DNSLOOKUP_RESOLVE_TIMEOUT	       |705 /
+| SWOOLE_ERROR_BAD_IPV6_ADDRESS	                   |706 /
+| SWOOLE_ERROR_UNREGISTERED_SIGNAL	               |707 /
+| SWOOLE_ERROR_SESSION_CLOSED_BY_SERVER	           |1001 /
+| SWOOLE_ERROR_SESSION_CLOSED_BY_CLIENT	           |1002 /
+| SWOOLE_ERROR_SESSION_CLOSING	                   |1003 /
+| SWOOLE_ERROR_SESSION_CLOSED	                   |1004 /
+| SWOOLE_ERROR_SESSION_NOT_EXIST	               |1005 /
+| SWOOLE_ERROR_SESSION_INVALID_ID	               |1006 /
+| SWOOLE_ERROR_SESSION_DISCARD_TIMEOUT_DATA	       |1007 /
+| SWOOLE_ERROR_OUTPUT_BUFFER_OVERFLOW	           |1008 /
+| SWOOLE_ERROR_SSL_NOT_READY	                   |1009 /
+| SWOOLE_ERROR_SSL_CANNOT_USE_SENFILE	           |1010 /
+| SWOOLE_ERROR_SSL_EMPTY_PEER_CERTIFICATE	       |1011 /
+| SWOOLE_ERROR_SSL_VEFIRY_FAILED	               |1012 /
+| SWOOLE_ERROR_SSL_BAD_CLIENT	                   |1013 /
+| SWOOLE_ERROR_SSL_BAD_PROTOCOL	                   |1014 /
+| SWOOLE_ERROR_PACKAGE_LENGTH_TOO_LARGE	           |1201 /
+| SWOOLE_ERROR_DATA_LENGTH_TOO_LARGE	           |1202 /
+| SWOOLE_ERROR_TASK_PACKAGE_TOO_BIG	               |2001 /
+| SWOOLE_ERROR_TASK_DISPATCH_FAIL	               |2002 /
+| SWOOLE_ERROR_HTTP2_STREAM_ID_TOO_BIG	           |3001 /
+| SWOOLE_ERROR_HTTP2_STREAM_NO_HEADER	           |3002 /
+| SWOOLE_ERROR_HTTP2_STREAM_NOT_FOUND	           |3003	 /
+| SWOOLE_ERROR_AIO_BAD_REQUEST	                   |4001	 /
+| SWOOLE_ERROR_AIO_CANCELED	                       |4002 /
+| SWOOLE_ERROR_CLIENT_NO_CONNECTION                |5001 /
+| SWOOLE_ERROR_SOCKET_CLOSED	                   |5002 /
+| SWOOLE_ERROR_SOCKS5_UNSUPPORT_VERSION	           |7001 /
+| SWOOLE_ERROR_SOCKS5_UNSUPPORT_METHOD	           |7002 /
+| SWOOLE_ERROR_SOCKS5_AUTH_FAILED	               |7003 /
+| SWOOLE_ERROR_SOCKS5_SERVER_ERROR	               |7004 /
+| SWOOLE_ERROR_HTTP_PROXY_HANDSHAKE_ERROR	       |8001 /
+| SWOOLE_ERROR_HTTP_INVALID_PROTOCOL	           |8002 /
+| SWOOLE_ERROR_WEBSOCKET_BAD_CLIENT	               |8501 /
+| SWOOLE_ERROR_WEBSOCKET_BAD_OPCODE	               |8502 /
+| SWOOLE_ERROR_WEBSOCKET_UNCONNECTED	           |8503 /
+| SWOOLE_ERROR_WEBSOCKET_HANDSHAKE_FAILED	       |8504 /
+| SWOOLE_ERROR_SERVER_MUST_CREATED_BEFORE_CLIENT   |9001 /
+| SWOOLE_ERROR_SERVER_TOO_MANY_SOCKET	           |9002	 /
+| SWOOLE_ERROR_SERVER_WORKER_TERMINATED	           |9003	 /
+| SWOOLE_ERROR_SERVER_INVALID_LISTEN_PORT	       |9004	 /
+| SWOOLE_ERROR_SERVER_TOO_MANY_LISTEN_PORT	       |9005	 /
+| SWOOLE_ERROR_SERVER_PIPE_BUFFER_FULL	           |9006 /
+| SWOOLE_ERROR_SERVER_NO_IDLE_WORKER	           |9007 /
+| SWOOLE_ERROR_SERVER_ONLY_START_ONE	           |9008 /
+| SWOOLE_ERROR_SERVER_SEND_IN_MASTER	           |9009 /

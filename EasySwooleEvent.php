@@ -21,13 +21,20 @@ class EasySwooleEvent implements Event
     public static function mainServerCreate(EventRegister $register)
     {
         $cn = new Doc(EASYSWOOLE_ROOT.'/Cn');
-        $cn->setName('cn');
+        $cn->setName('ES_DOC_CN');
         $cn->getTemplate()->setHomePageTpl('index.tpl');
         $cn->getTemplate()->setSideBarMd('sideBar.md');
         $cn->getTemplate()->setContentPageTpl('contentPage.tpl');
         $cn->getTemplate()->setPageNotFoundTpl('404.tpl');
         DocContainer::getInstance()->add($cn);
 
+        $swooleDoc = new Doc(EASYSWOOLE_ROOT.'/SwooleDoc');
+        $swooleDoc->setName('SWOOLE_DOC');
+        $swooleDoc->getTemplate()->setHomePageTpl('index.tpl');
+        $swooleDoc->getTemplate()->setSideBarMd('sideBar.md');
+        $swooleDoc->getTemplate()->setContentPageTpl('contentPage.tpl');
+        $swooleDoc->getTemplate()->setPageNotFoundTpl('404.tpl');
+        DocContainer::getInstance()->add($swooleDoc);
     }
 
     public static function onRequest(Request $request, Response $response): bool
