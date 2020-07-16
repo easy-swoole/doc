@@ -106,6 +106,6 @@
   - XlsWriter-excel解析项目
   - RitaswcIpAddress IP地址归属地
 - 应用部署
-  - Docker
-  - Nginx
-  - Supervisor
+  - [Docker](Deploy/docker.md)
+  - [Nginx](Deploy/nginx.md)
+  - [Supervisor](Deploy/supervisor.md)
