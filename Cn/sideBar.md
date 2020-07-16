@@ -111,4 +111,4 @@
 - 应用部署
   - [Docker](Deploy/docker.md)
   - [Nginx](Deploy/nginx.md)
-  - Supervisor
+  - [Supervisor](Deploy/supervisor.md)
