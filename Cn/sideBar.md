@@ -110,5 +110,5 @@
   - RitaswcIpAddress IP地址归属地
 - 应用部署
   - [Docker](Deploy/docker.md)
-  - Nginx
+  - [Nginx](Deploy/nginx.md)
   - Supervisor
