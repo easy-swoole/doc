@@ -6,36 +6,32 @@
   - [框架更新记录](Update/main.md)
   - [组件更新记录](Update/component.md)
   - [版本升级指南](Update/instruct.md)
-- 新手入门
-  - 安装
-  - 快速开始
-  - 开发者必读
-  - 常见问题
-  - 新手教程和swoole文档(拿出去)
-  - 视频教程（拿出去）
-  - Demo（拿出去）
-- 核心架构
-  - 生命周期
+- 快速开始
+  - [环境要求](QuickStart/environment.md)
+  - [安装](QuickStart/install.md)
+  - [HelloWorld](QuickStart/helloworld.md)
+  - [基础命令](QuickStart/command.md)
+  - [开发者必读](QuickStart/notice.md)
+  - [常见问题](QuickStart/problem.md)
+- 框架架构
+  - 框架生命周期
   - 全局事件
-  - 注解
-  - 依赖注入
+    - bootstrap
+    - initialize
+    - mainServerCreate  
 - 基础使用
-  - Swoole实例
-  - 基础命令（这个抽掉 里面的命令分别在 自定义进程 计划任务 task里面标注）
-  - 命令行
-  - EasySwoole Bridge
+  - 获取Swoole实例
   - 自定义进程
-  - 自定义事件
-  - Task异步任务
   - Timer定时器
   - Corntab计划任务
   - 日志
   - 异常
   - 单元测试
-  - 远程控制台
-  - IOC容器
+  - 异步任务
+- 协程操作指南
+  - 什么是协程
+  - 注意事项
   - 上下文管理器
-  - 协程操作指南
 - HTTP服务
   - 路由
   - 中间件
@@ -50,6 +46,7 @@
   - 全局变量
   - i18n多语言
   - Session会话
+  - 常见问题
 - 数据库
   - DDL定义
   - Mysqli
