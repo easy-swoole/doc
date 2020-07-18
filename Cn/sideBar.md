@@ -21,9 +21,9 @@
     - mainServerCreate  
 - 基础使用
   - 获取Swoole实例
-  - 自定义进程
+  - [自定义进程](Components/Component/process.md)
   - Timer定时器
-  - Corntab计划任务
+  - [Crontab定时任务](BaseUsage/crontab.md)
   - 日志
   - 异常
   - 单元测试
@@ -103,7 +103,7 @@
   - [LinuxDash](Components/linuxDash.md)
   - U-Editor
   - 代码生成
-  - 第三方登录
+  - [第三方登录](Components/oauth.md)
   - 代码加密
   - 微信/支付宝支付
   - 微信小程序及公众号
