@@ -22,7 +22,7 @@
 - 基础使用
   - 获取Swoole实例
   - [自定义进程](Components/Component/process.md)
-  - Timer定时器
+  - [Timer定时器](Components/Component/timer.md)
   - [Crontab定时任务](BaseUsage/crontab.md)
   - 日志
   - 异常
