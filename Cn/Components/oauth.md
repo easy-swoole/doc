@@ -172,7 +172,7 @@ class AliPay extends \EasySwoole\Http\AbstractInterface\Controller
         $config->setAppId('appid');
         $config->setRedirectUri('redirect_uri');
 
-        // 进行测试开发的时候 把OAuth的源码文件里面的 API_DOMAIN 和 AUTH_DOMAIN 进行修改
+        // 使用沙箱环境测试开发的时候 把OAuth的源码文件里面的 API_DOMAIN 和 AUTH_DOMAIN 进行修改
         $oauth = new \EasySwoole\OAuth\AliPay\OAuth($config);
         $url = $oauth->getAuthUrl();
         return $this->response()->redirect($url);
