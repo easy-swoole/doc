@@ -45,7 +45,6 @@
   - 文件上传
   - 全局变量
   - i18n多语言
-  - Session会话
   - 常见问题
 - 数据库
   - DDL定义
@@ -106,6 +105,6 @@
   - [XlsWriter-excel解析项目](OpenSource/xlsWriter.md)
   - [RitaswcIpAddress IP地址归属地](OpenSource/ritaswcIpAddress.md)
 - 应用部署
-  - Docker
-  - Nginx
-  - Supervisor
+  - [Docker](Deploy/docker.md)
+  - [Nginx](Deploy/nginx.md)
+  - [Supervisor](Deploy/supervisor.md)
