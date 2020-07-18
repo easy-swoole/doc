@@ -17,9 +17,8 @@ Policy（即策略）是在特定模型或者资源中组织授权逻辑的类�
 - easyswoole/spl: ^1.1
 
 ## 安装
-```php
-composer require easyswoole/policy
-```
+
+> composer require easyswoole/policy
 
 ## 仓库地址
 

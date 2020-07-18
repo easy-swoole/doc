@@ -18,11 +18,10 @@ meta:
 
 ## 相关class位置
 
-实现该组件功能需加载核心类：
 
-```php
-EasySwoole\Utility\Random
-```
+- Random
+    - `namespace`: `EasySwoole\Utility\Random`
+
 
 
 

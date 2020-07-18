@@ -16,8 +16,8 @@ meta:
 
 ## 相关Class位置
 
-实现该组件功能需加载核心类：
-`EasySwoole\Utility\ArrayToTextTable`
+- ArrayToTextTable
+    - `namespace`: `EasySwoole\Utility\ArrayToTextTable`
 
 ## 核心对象方法
 

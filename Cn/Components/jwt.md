@@ -27,9 +27,8 @@ JSON Web Token（JWT）是目前最流行的跨域身份验证解决方案。
 
 ## 安装方法
 
-```php
-composer require easyswoole/jwt 
-```
+
+> composer require easyswoole/jwt 
 
 ## 仓库地址
 
