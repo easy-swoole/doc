@@ -1,3 +1,11 @@
+---
+title: easyswoole基础使用-command
+meta:
+  - name: description
+    content: easyswoole基础使用-command
+  - name: keywords
+    content: easyswoole基础使用-command
+---
 # Command
 
 `EasySwoole`提供了命令行操作的功能，`EasySwoole`的命令行由[easyswoole/command](https://github.com/easy-swoole/command)组件来提供。
