@@ -96,7 +96,7 @@
   - LinuxDash
   - U-Editor
   - 代码生成
-  - 第三方登录
+  - [第三方登录](Components/oauth.md)
   - 代码加密
   - 微信/支付宝支付
   - 微信小程序及公众号
