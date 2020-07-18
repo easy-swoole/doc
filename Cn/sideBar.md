@@ -80,6 +80,12 @@
 - 组件库
   - 内置组件
   - Spl组件
+    - [SplArray](Components/Spl/splArray.md)
+    - [SplBean](Components/Spl/splBean.md)
+    - [SplEnum](Components/Spl/splEnum.md)
+    - [SplStream](Components/Spl/splStream.md)
+    - [SplFileStream](Components/Spl/splFileStream.md)
+    - [SplString](Components/Spl/splString.md)
   - 连接池组件
   - Client组件
   - Actor组件

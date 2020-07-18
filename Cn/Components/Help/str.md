@@ -18,11 +18,9 @@ Str字符串助手
 
 ## 相关class位置
 
-实现该组件功能需加载核心类：
+- Str
+    - `namespace`: `EasySwoole\Utility\Str`
 
-```php
-EasySwoole\Utility\Str
-```
 
 
 

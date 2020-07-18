@@ -18,9 +18,9 @@ linuxDash封装了很多直接获取linux信息的命令,可以查看相关信�
 
 ## 安装方法
 
-```php
-composer require easyswoole/linux-dash 
-``` 
+
+> composer require easyswoole/linux-dash 
+ 
 
 ## 仓库地址
 [easyswoole/linux-dash](https://github.com/easy-swoole/linux-dash)
