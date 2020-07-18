@@ -302,5 +302,5 @@ $routeCollector->addRoute('GET', '/router2/{id:\d+}', '/Index');
 
 
 ::: warning 
- 更多使用详情请直接查看FastRouter。
+ 更多使用详情请直接查看 [FastRouter](https://github.com/nikic/FastRoute)。
 :::
