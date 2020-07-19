@@ -41,13 +41,13 @@
   - 异常处理
   - 缓存
   - 视图
-  - 验证码
+  - [验证码](Components/verifyCode.md)
   - 文件上传
   - 全局变量
-  - i18n多语言
+  - [i18n多语言](Components/i18n.md)
   - 常见问题
 - 数据库
-  - DDL定义
+  - [DDL定义](Components/ddl.md)
   - Mysqli
   - ORM
   - ElasticSearch（移到组件）
@@ -75,7 +75,7 @@
   - 配置中心
     - Apolle
   - 链路追踪(基础服务器信息部分需要更新)
-    - [Tracker](Distribute/tracker.md)
+    - [Tracker](Components/tracker.md)
   - RPC服务
 - 组件库
   - 内置组件
@@ -92,7 +92,7 @@
   - [Whoops](Components/whoops.md)
   - Oss
   - SyncInvoker
-  - 热重载
+  - [热重载](Components/hotReload.md)
   - [Policy](Components/policy.md)
   - 辅助类(杂项工具)
     - [ArrayToTextTable](Components/Help/arrayToTextTable.md)
