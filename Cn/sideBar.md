@@ -24,7 +24,7 @@
   - [自定义进程](Components/Component/process.md)
   - [Timer定时器](Components/Component/timer.md)
   - [Crontab定时任务](BaseUsage/crontab.md)
-  - 日志
+  - [日志](BaseUsage/log.md)
   - 异常
   - [单元测试](Components/phpunit.md)
   - [异步任务](Components/Component/task.md)
