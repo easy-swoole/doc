@@ -15,6 +15,9 @@
   - [常见问题](QuickStart/problem.md)
 - 框架设计
   - [启动流程](FrameDesign/start.md)
+  - 核心文件
+    - [Core.php](FrameDesign/core.md)
+    - [ServerManager.php](FrameDesign/serverManager.md)
   - 全局事件
     - bootstrap
     - initialize

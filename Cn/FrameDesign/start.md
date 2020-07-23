@@ -25,7 +25,6 @@ php easyswoole server start
 EasySwoole启动脚本会判断在项目根目录下，也就是```EASYSWOOLE_ROOT.'/bootstrap.php'```这文件如果存在，那么则会被执行一次require_once。用户可以在框架没有做任何的真实初始化之前，做自己的预处理或者是预定义。
 
 ## 四、启动命令解析
-
 EasySwoole主框架定义了一个命令容器，完整命名空间为```EasySwoole\EasySwoole\Command\CommandRunner```,这个是一个单例对象，是对```EasySwoole\Command\CommandManager```对象的进一步调用封装。在对象的构造函数中，默认注册了EasySwoole自带的几个命令：
 - Install
 - PhpUnit
@@ -34,3 +33,31 @@ EasySwoole主框架定义了一个命令容器，完整命名空间为```EasySwo
 - Crontab
 - Process
 - Server
+
+以如下启动命令为例：
+```bash
+php easyswoole server start -d
+```
+> -d可选，为守护启动参数
+
+```CommandRunner```会执行```server```命令的```start```行为，其中，```server```命令的完整实现在```EasySwoole\EasySwoole\Command\DefaultCommand\Server```。
+#### Server主命令
+```server```主命令被执行时，做了以下操作：
+- 判断是否指定了运行模式
+  ```
+  $mode = CommandManager::getInstance()->getOpt('mode');
+  if(!empty($mode)){
+      Core::getInstance()->runMode($mode);
+  }
+  ```
+  
+- 执行框架的初始化
+
+    ```Core::getInstance()->initialize()```
+
+#### Start行为    
+在```start```行为中，做了如下两件事
+- 获取配置对象并设置运行时必须参数
+- 执行框架的最终启动
+
+    ```Core::getInstance()->createServer()->start();```
