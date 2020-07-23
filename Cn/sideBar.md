@@ -13,8 +13,8 @@
   - [基础命令](QuickStart/command.md)
   - [开发者必读](QuickStart/notice.md)
   - [常见问题](QuickStart/problem.md)
-- 框架架构
-  - 框架生命周期
+- 框架设计
+  - [启动流程](FrameDesign/start.md)
   - 全局事件
     - bootstrap
     - initialize
