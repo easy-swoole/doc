@@ -22,10 +22,11 @@
 - 基础使用
   - 获取Swoole实例
   - [自定义进程](Components/Component/process.md)
+  - [自定义事件](BaseUsage/event.md)
   - [Timer定时器](Components/Component/timer.md)
   - [Crontab定时任务](BaseUsage/crontab.md)
   - [日志](BaseUsage/log.md)
-  - 异常
+  - [异常](BaseUsage/trigger.md)
   - [单元测试](Components/phpunit.md)
   - [异步任务](Components/Component/task.md)
   - 协程操作指南
