@@ -26,7 +26,7 @@ EasySwoole启动脚本会判断在项目根目录下，也就是```EASYSWOOLE_RO
 
 ## 四、启动命令解析
 
-EasySwoole主框架定义了一个命令容器，完整命名空间为```EasySwoole\EasySwoole\Command\CommandRunner```,这个是一个单例对象。在对象的构造函数中，默认注册了EasySwoole自带的几个命令：
+EasySwoole主框架定义了一个命令容器，完整命名空间为```EasySwoole\EasySwoole\Command\CommandRunner```,这个是一个单例对象，是对```EasySwoole\Command\CommandManager```对象的进一步调用封装。在对象的构造函数中，默认注册了EasySwoole自带的几个命令：
 - Install
 - PhpUnit
 - Config
