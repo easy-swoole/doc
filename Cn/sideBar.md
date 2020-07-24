@@ -18,10 +18,7 @@
   - 核心文件
     - [ServerManager.php](FrameDesign/serverManager.md)
     - [Core.php](FrameDesign/core.md)
-  - 全局事件
-    - bootstrap
-    - initialize
-    - mainServerCreate  
+  - [全局事件](FrameDesign/event.md)
 - 基础使用
   - 获取Swoole实例
   - [自定义进程](Components/Component/process.md)
