@@ -37,19 +37,18 @@ composer config -g --unset repos.packagist
 
 按下面的步骤进行手动安装
 
-(建议使用)
 ```bash
 composer require easyswoole/easyswoole=3.x
 php vendor/easyswoole/easyswoole/bin/easyswoole install
 ```
 
 
-或者(可能出错)
+或者
 ```bash
 composer require easyswoole/easyswoole=3.x
 php vendor/bin/easyswoole install
 ```
-
+如果执行成功，则会有如下界面出现
 ```bash
   php vendor/easyswoole/easyswoole/bin/easyswoole install
   ______                          _____                              _        
@@ -65,7 +64,6 @@ php vendor/bin/easyswoole install
   dev.php has already existed. do you want to replace it? [ Y/N (default) ] : n
   produce.php has already existed. do you want to replace it? [ Y/N (default) ] : n
 ```
-
 ::: danger 
 新版安装注意事项
 :::
@@ -73,6 +71,26 @@ php vendor/bin/easyswoole install
 - 新版的easyswoole安装会默认提供App命名空间，还有index控制器
 - 在这里面需要填写n，不需要覆盖，已经有的 EasySwooleEvent.php，index.php dev.php produce.php
 - 当提示exec函数被禁用时,请自己手动执行 `composer dump-autoload` 命令更新命名空间
+
+### 按照报错
+当执行安装脚本，出现类似以下错误时：
+```
+dir=$(cd "${0%[/\\]*}" > /dev/null; cd '../easyswoole/easyswoole/bin' && pwd)
+
+if [ -d /proc/cygdrive ]; then
+    case $(which php) in
+        $(readlink -n /proc/cygdrive)/*)
+            # We are in Cygwin using Windows php, so the path must be translated
+            dir=$(cygpath -m "$dir");
+            ;;
+    esac
+fi
+
+"${dir}/easyswoole" "$@"
+```
+
+请检查环境是否为宝塔等其他集成面板，或者是php.ini配置项中禁用了```symlink```与```readlink```函数，请关闭这两个函数的禁用，并删除vender目录，重新执行
+```composer require```或者是```composer install```或者是```composer update```
 
 ## 启动框架
 
@@ -107,7 +125,8 @@ php easyswoole start
     - VIP群 579434607 （本群需要付费599元）
     - EasySwoole官方一群 633921431(已满)
     - EasySwoole官方二群 709134628(已满)
-    - EasySwoole官方三群 932625047
+    - EasySwoole官方三群 932625047(已满)
+    - Easyswoole官方四群 779897753 
     
 - 商业支持：
     - QQ 291323003
