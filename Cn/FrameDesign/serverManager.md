@@ -26,5 +26,5 @@ ServerManager是EasySwoole框架中，用于全局存储Swoole对象实例所用
 | 名称 | 参数 | 功能描述 |
 | --- | --- | --- |
 | getSwooleServer | string $serverName = null | 用于获取当前的Swoole实例或者是对应子服务的subPort对象 |
-| getMainEventRegister | - | 用于获取主Swoole实例的事件回调注册容器 |
+| getEventRegister | string $serverName = null | 用于获取主Swoole实例或者是对应子服务的subPort对象的事件回调注册容器 |
 | isStart | - | 用于判断当前服务是否已经启动 |
