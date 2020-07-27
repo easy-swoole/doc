@@ -39,7 +39,7 @@
   - [控制器](HttpServer/contorller.md)
   - [请求](HttpServer/request.md)
   - [响应](HttpServer/response.md)
-  - 异常处理
+  - [异常处理](HttpServer/exception.md)
   - 缓存
   - [视图](Components/Component/template.md)
   - [验证码](Components/verifyCode.md)
