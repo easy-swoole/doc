@@ -43,7 +43,7 @@
   - 缓存
   - [视图](Components/Component/template.md)
   - [验证码](Components/verifyCode.md)
-  - 文件上传
+  - [文件上传](HttpServer/uploadFile.md)
   - 全局变量
   - [i18n多语言](Components/i18n.md)
   - 常见问题
