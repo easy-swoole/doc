@@ -41,7 +41,7 @@
   - [响应](HttpServer/response.md)
   - 异常处理
   - 缓存
-  - 视图
+  - [视图](Components/Component/template.md)
   - [验证码](Components/verifyCode.md)
   - 文件上传
   - 全局变量
