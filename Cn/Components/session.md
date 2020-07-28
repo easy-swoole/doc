@@ -55,7 +55,7 @@ class EasySwooleEvent implements Event
     {
         //可以自己实现一个标准的session handler
         $handler = new SessionFileHandler(EASYSWOOLE_TEMP_DIR);
-        //表示cookie name   还有save path
+        //easy_session为session名称, session_dir为存储的位置
         Session::getInstance($handler,'easy_session','session_dir');
     }
 
