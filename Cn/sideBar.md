@@ -107,7 +107,7 @@
     - [SplFileStream](Components/Spl/splFileStream.md)
     - [SplString](Components/Spl/splString.md)
   - 连接池组件
-  - Client组件
+  - [HttpClient](Components/httpClient.md)
   - Actor组件
   - [Whoops](Components/whoops.md)
   - Oss
