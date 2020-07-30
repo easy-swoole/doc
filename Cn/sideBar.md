@@ -77,7 +77,7 @@
     - [Server命令](Components/Redis/server.md)
     - [Geohash](Components/Redis/geoHash.md)
     - [集群方法(Cluster)](Components/Redis/clusterMethod.md)
-  - Memcached
+  - [Memcached](Components/Memcache/memcache.md)
   - [FastCache](Components/FashCache/fastCache.md)
 - 消息队列
   - Queue
