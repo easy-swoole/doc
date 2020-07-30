@@ -114,21 +114,11 @@ Memcache连接池示例
 
 ### 安装 easyswoole/pool 组件
 
-组件要求
-
-- php: >=7.1.0
-- ext-json: *
-- easyswoole/component: ^2.2.1
-- easyswoole/spl: ^1.3
-- easyswoole/utility: ^1.1
-
-安装方法
-
 > composer require easyswoole/pool
-  
-仓库地址
 
-[easyswoole/pool](https://github.com/easy-swoole/pool)
+::: warning
+具体pool相关详细用法可查看 [连接池](../Pool/introduction.html)
+:::
 
 ### 新增MemcachePool管理器
 新增文件`/App/Pool/MemcachePool.php`
@@ -205,14 +195,6 @@ go(function (){
     $memcachePool2->recycleObj($memcache2);
 });
 ```
-
-::: warning
-详细用法可查看 [pool通用连接池](../Pool/introduction.md)
-:::
-
-::: warning
-本文 memcache连接池 基于 [pool通用连接池](../Pool/introduction.md) 实现
-:::
 
 
 
