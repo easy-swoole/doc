@@ -160,6 +160,15 @@ $client->setClientSettings([
 ]);
 ```
 
+### 设置FollowLocation
+
+```php
+/** @var \EasySwoole\HttpClient\HttpClient $client **/
+$client->enableFollowLocation(5);
+```
+
+参数：
+- `$maxRedirect` 默认5，表示最多根据30x状态码进行的重定向次数。0 为关闭。
 
 ### 设置允许自签证书
 
