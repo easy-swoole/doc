@@ -117,7 +117,7 @@
   - [HttpClient](Components/httpClient.md)
   - [Actor组件](Components/actor.md)
   - [Whoops](Components/whoops.md)
-  - Oss
+  - [Oss](Components/oss.md)
   - SyncInvoker
   - [热重载](Components/hotReload.md)
   - [Policy](Components/policy.md)
