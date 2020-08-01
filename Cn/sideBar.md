@@ -112,6 +112,8 @@
     - [SplFileStream](Components/Spl/splFileStream.md)
     - [SplString](Components/Spl/splString.md)
   - 连接池组件
+    - [连接池](Components/Pool/introduction.md)
+    - [为什么使用连接池](Components/Pool/whyUsePool.md)
   - [HttpClient](Components/httpClient.md)
   - [Actor组件](Components/actor.md)
   - [Whoops](Components/whoops.md)
