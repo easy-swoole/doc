@@ -113,7 +113,7 @@
     - [SplString](Components/Spl/splString.md)
   - 连接池组件
   - [HttpClient](Components/httpClient.md)
-  - Actor组件
+  - [Actor组件](Components/actor.md)
   - [Whoops](Components/whoops.md)
   - Oss
   - SyncInvoker
