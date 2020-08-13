@@ -47,6 +47,9 @@
   - [i18n多语言](Components/i18n.md)
   - 注解处理
     - [安装](HttpServer/Annotation/install.md)
+    - [参数注解](HttpServer/Annotation/param.md)
+    - [成员属性注解](HttpServer/Annotation/property.md)
+    - [自动注解文档](HttpServer/Annotation/doc.md)
   - 常见问题
 - 数据库
   - [DDL定义](Components/ddl.md)
