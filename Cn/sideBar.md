@@ -46,6 +46,7 @@
   - 全局变量
   - [i18n多语言](Components/i18n.md)
   - 注解处理
+    - [安装](HttpServer/Annotation/install.md)
   - 常见问题
 - 数据库
   - [DDL定义](Components/ddl.md)
