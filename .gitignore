@@ -2,3 +2,5 @@
 /.idea/
 /easyswoole
 /composer.lock
+/Temp/
+/Log/
