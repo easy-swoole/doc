@@ -95,9 +95,18 @@ function index()
 ```
 * @Param(name="password",preHandler="md5")
 ```
+#### description
+该字段主要用户自动生成文档时，参数的描述说明。
+
 则通过函数自动传参，或者是```@InjectParamsContext```得到的参数时，```password```会被自动执行md5()
+
+
+## @ApiAuth
+```@ApiAuth```注解标签，完整的命名空间是```EasySwoole\HttpAnnotation\AnnotationTag\ApiAuth```，作用域在控制器的```actionMethod```与```onRequest```均为有效，本质与```@Param```标签并无区别，仅仅是在自动生成文档的时候，```@Param```被描述为请求参数，而```@ApiAuth```则会被描述为权限参数。
+
+
 ## 控制器全局参数
-全局注解标签是```@ApiGroupAuth```，完整的命名空间是
+全局注解标签是```@ApiGroupAuth```，完整的命名空间是```EasySwoole\HttpAnnotation\AnnotationTag\ApiGroupAuth```,作用域在整个控制器。
 ```
 namespace App\HttpController;
 
@@ -116,3 +125,9 @@ class Index extends AnnotationController
    
 }
 ```
+
+这样的注解表示，```Index```控制器下的任何请求，都需要```token```这个参数。
+
+
+# 参数覆盖优先顺序
+```@Param``` > ```@ApiAuth``` > ```@ApiGroupAuth```
