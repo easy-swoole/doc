@@ -48,6 +48,7 @@
   - 注解处理
     - [安装](HttpServer/Annotation/install.md)
     - [参数注解](HttpServer/Annotation/param.md)
+    - [行为注解](HttpServer/Annotation/action.md)
     - [成员属性注解](HttpServer/Annotation/property.md)
     - [自动注解文档](HttpServer/Annotation/doc.md)
   - 常见问题
