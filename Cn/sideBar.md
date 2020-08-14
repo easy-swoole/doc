@@ -5,7 +5,6 @@
 - 更新记录
   - [框架更新记录](Update/main.md)
   - [组件更新记录](Update/component.md)
-  - [版本升级指南](Update/instruct.md)
 - 快速开始
   - [环境要求](QuickStart/environment.md)
   - [安装](QuickStart/install.md)
