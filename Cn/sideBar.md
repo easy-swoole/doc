@@ -20,7 +20,6 @@
     - [Core.php](FrameDesign/core.md)
   - [全局事件](FrameDesign/event.md)
 - 基础使用
-  - 获取Swoole实例
   - [自定义进程](Components/Component/process.md)
   - [自定义事件](BaseUsage/event.md)
   - [Timer定时器](Components/Component/timer.md)
