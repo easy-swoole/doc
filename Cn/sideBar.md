@@ -13,6 +13,10 @@
   - [基础管理命令](QuickStart/command.md)
   - [开发者必读](QuickStart/notice.md)
   - [常见问题](QuickStart/problem.md)
+  - 协程操作指南
+    - [什么是协程](QuickStart/Coroutine/introduction.md)
+    - [注意事项](QuickStart/Coroutine/environment.md)
+    - [上下文管理器](Components/Component/context.md)  
 - 框架设计
   - [启动流程](FrameDesign/start.md)
   - 核心文件
@@ -20,18 +24,13 @@
     - [Core.php](FrameDesign/core.md)
   - [全局事件](FrameDesign/event.md)
 - 基础使用
-  - [自定义进程](Components/Component/process.md)
-  - [自定义事件](BaseUsage/event.md)
   - [Timer定时器](Components/Component/timer.md)
   - [Crontab定时任务](BaseUsage/crontab.md)
   - [日志](BaseUsage/log.md)
   - [异常](BaseUsage/trigger.md)
   - [单元测试](Components/phpunit.md)
   - [异步任务](Components/Component/task.md)
-  - 协程操作指南
-    - [什么是协程](BaseUsage/Coroutine/introduction.md)
-    - [注意事项](BaseUsage/Coroutine/environment.md)
-    - [上下文管理器](Components/Component/context.md)
+  - [自定义进程](Components/Component/process.md)
 - HTTP服务
   - [路由](HttpServer/route.md)
   - 中间件
