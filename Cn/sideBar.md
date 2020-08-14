@@ -10,7 +10,7 @@
   - [环境要求](QuickStart/environment.md)
   - [安装](QuickStart/install.md)
   - [HelloWorld](QuickStart/helloworld.md)
-  - [基础命令](QuickStart/command.md)
+  - [基础管理命令](QuickStart/command.md)
   - [开发者必读](QuickStart/notice.md)
   - [常见问题](QuickStart/problem.md)
 - 框架设计
