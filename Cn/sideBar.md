@@ -31,11 +31,13 @@
   - [异步任务](Components/Component/task.md)
   - [自定义进程](Components/Component/process.md)
 - HTTP服务
+  - 控制器
+  - 请求对象
+  - 响应对象
+  - 静态路由规则
+  - 动态路由
   - [路由](HttpServer/route.md)
-  - 中间件
-  - [控制器](HttpServer/contorller.md)
-  - [请求](HttpServer/request.md)
-  - [响应](HttpServer/response.md)
+  - 权限与中间件
   - [异常处理](HttpServer/exception.md)
   - [视图](Components/Component/template.md)
   - [验证码](Components/verifyCode.md)
