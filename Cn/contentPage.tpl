@@ -38,19 +38,9 @@
                 <i class="fa fa-bars" style="font-size: 1.3rem;color: #333;"></i>
             </a>
             <div class="navInnerRight">
-                <div class="navItem lang-select">
+                <div class="navItem">
                     <div class="dropdown-wrapper">
-                        <button type="button" aria-label="Select language" class="dropdown-title">
-                            <span class="title">Language</span> <span class="arrow right"></span>
-                        </button>
-                        <ul class="nav-dropdown" style="display: none;">
-                            <li class="dropdown-item">
-                                <a href="javascript:void(0)" data-lang="" class="nav-link lang-change">En</a>
-                            </li>
-                            <li class="dropdown-item">
-                                <a href="javascript:void(0)" data-lang="" class="nav-link lang-change">Cn</a>
-                            </li>
-                        </ul>
+                        <a href="/wstool.html" style="text-decoration:none;">websocket测试工具</a>
                     </div>
                 </div>
             </div>
@@ -62,25 +52,6 @@
         <div class="right-menu" id="right-menu"></div>
     </section>
 </div>
-<script>
-    (function ($) {
-        var container = $('.container');
-        $('.sideBar a').on('click', function () {
-            container.removeClass('layout-2');
-            container.addClass('layout-1');
-        });
-        var changeLayout = function () {
-            if (container.hasClass('layout-1')) {
-                container.removeClass('layout-1');
-                container.addClass('layout-2');
-            } else {
-                container.removeClass('layout-2');
-                container.addClass('layout-1');
-            }
-        }
-        $('.sideBar-toggle-button, .navBar-menu-button').on('click', changeLayout);
-    })(jQuery);
-</script>
 <script>
     hljs.initHighlightingOnLoad();
     $(function () {
