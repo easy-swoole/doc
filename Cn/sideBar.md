@@ -5,14 +5,17 @@
 - 更新记录
   - [框架更新记录](Update/main.md)
   - [组件更新记录](Update/component.md)
-  - [版本升级指南](Update/instruct.md)
 - 快速开始
   - [环境要求](QuickStart/environment.md)
   - [安装](QuickStart/install.md)
   - [HelloWorld](QuickStart/helloworld.md)
-  - [基础命令](QuickStart/command.md)
+  - [基础管理命令](QuickStart/command.md)
   - [开发者必读](QuickStart/notice.md)
   - [常见问题](QuickStart/problem.md)
+  - 协程操作指南
+    - [什么是协程](QuickStart/Coroutine/introduction.md)
+    - [注意事项](QuickStart/Coroutine/environment.md)
+    - [上下文管理器](Components/Component/context.md)  
 - 框架设计
   - [启动流程](FrameDesign/start.md)
   - 核心文件
@@ -20,25 +23,21 @@
     - [Core.php](FrameDesign/core.md)
   - [全局事件](FrameDesign/event.md)
 - 基础使用
-  - 获取Swoole实例
-  - [自定义进程](Components/Component/process.md)
-  - [自定义事件](BaseUsage/event.md)
   - [Timer定时器](Components/Component/timer.md)
   - [Crontab定时任务](BaseUsage/crontab.md)
   - [日志](BaseUsage/log.md)
   - [异常](BaseUsage/trigger.md)
   - [单元测试](Components/phpunit.md)
   - [异步任务](Components/Component/task.md)
-  - 协程操作指南
-    - [什么是协程](BaseUsage/Coroutine/introduction.md)
-    - [注意事项](BaseUsage/Coroutine/environment.md)
-    - [上下文管理器](Components/Component/context.md)
+  - [自定义进程](Components/Component/process.md)
 - HTTP服务
+  - 控制器
+  - 请求对象
+  - 响应对象
+  - 静态路由规则
+  - 动态路由
   - [路由](HttpServer/route.md)
-  - 中间件
-  - [控制器](HttpServer/contorller.md)
-  - [请求](HttpServer/request.md)
-  - [响应](HttpServer/response.md)
+  - 权限与中间件
   - [异常处理](HttpServer/exception.md)
   - [视图](Components/Component/template.md)
   - [验证码](Components/verifyCode.md)
