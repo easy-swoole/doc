@@ -1,11 +1,10 @@
 ---
-title: easyswoole协程单例
+title: easyswoole 协程单例
 meta:
   - name: description
     content: 单例模式确保类在全局只能有一个实例，因为它的实例是由自己保存，在类的外部也无法对该类进行实例化。PHP的单例模式是为了避免重复创建对象带来的资源消耗。
   - name: keywords
     content: easyswoole coroutine singleton
-
 ---
 
 # 协程单例
@@ -16,24 +15,9 @@ PHP的单例模式是为了避免重复创建对象带来的资源消耗。
 
 为兼容协程环境下的单例模式安全 可以使用CoroutineSingleTon
 
-## 组件要求
-
-- php: >=7.1.0
-- ext-swoole: ^4.4.2
-- easyswoole/spl: ^1.1
-- easyswoole/utility: ^1.0
-
-## 安装方法
-
-> composer require easyswoole/component
-
-## 仓库地址
-
-[easyswoole/component](https://github.com/easy-swoole/component)
-
 ## 基本使用
 
-直接在内中 use \EasySwoole\Component\CoroutineSingleTon;
+直接在类中 use \EasySwoole\Component\CoroutineSingleTon;
 
 > 示例:
 ```php
