@@ -36,15 +36,4 @@ class EasySwooleEvent implements Event
         $swooleDoc->getTemplate()->setPageNotFoundTpl('404.tpl');
         DocContainer::getInstance()->add($swooleDoc);
     }
-
-    public static function onRequest(Request $request, Response $response): bool
-    {
-        // TODO: Implement onRequest() method.
-        return true;
-    }
-
-    public static function afterRequest(Request $request, Response $response): void
-    {
-        // TODO: Implement afterAction() method.
-    }
 }
