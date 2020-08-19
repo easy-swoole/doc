@@ -31,7 +31,7 @@
   - [异步任务](Components/Component/task.md)
   - [自定义进程](Components/Component/process.md)
 - HTTP服务
-  - 控制器
+  - [控制器](HttpServer/contorller.md)
   - 请求对象
   - 响应对象
   - 静态路由规则
