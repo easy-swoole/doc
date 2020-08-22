@@ -19,19 +19,6 @@
                     <img src="Images/docNavLogo.png" alt="EASYSWOOLE">
                 </a>
             </div>
-            <div id="navbar" class="navbar-menu">
-                <div class="navbar-end">
-                    <a class="navbar-item changeLang" href="javascript:void(0)">language</a>
-                    <ul class="nav-dropdown" style="display: none;">
-                        <li class="dropdown-item">
-                            <a href="/Cn.html" class="nav-link">简体中文</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="/En.html" class="nav-link">ENGLISH</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </nav>
     <section class="hero has-text-centered">

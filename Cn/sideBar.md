@@ -5,14 +5,17 @@
 - 更新记录
   - [框架更新记录](Update/main.md)
   - [组件更新记录](Update/component.md)
-  - [版本升级指南](Update/instruct.md)
 - 快速开始
   - [环境要求](QuickStart/environment.md)
   - [安装](QuickStart/install.md)
   - [HelloWorld](QuickStart/helloworld.md)
-  - [基础命令](QuickStart/command.md)
+  - [基础管理命令](QuickStart/command.md)
   - [开发者必读](QuickStart/notice.md)
   - [常见问题](QuickStart/problem.md)
+  - 协程操作指南
+    - [什么是协程](QuickStart/Coroutine/introduction.md)
+    - [注意事项](QuickStart/Coroutine/environment.md)
+    - [上下文管理器](Components/Component/context.md)  
 - 框架设计
   - [启动流程](FrameDesign/start.md)
   - 核心文件
@@ -20,42 +23,71 @@
     - [Core.php](FrameDesign/core.md)
   - [全局事件](FrameDesign/event.md)
 - 基础使用
-  - 获取Swoole实例
-  - [自定义进程](Components/Component/process.md)
-  - [自定义事件](BaseUsage/event.md)
   - [Timer定时器](Components/Component/timer.md)
   - [Crontab定时任务](BaseUsage/crontab.md)
   - [日志](BaseUsage/log.md)
   - [异常](BaseUsage/trigger.md)
   - [单元测试](Components/phpunit.md)
   - [异步任务](Components/Component/task.md)
-  - 协程操作指南
-    - [什么是协程](BaseUsage/Coroutine/introduction.md)
-    - [注意事项](BaseUsage/Coroutine/environment.md)
-    - [上下文管理器](Components/Component/context.md)
+  - [自定义进程](Components/Component/process.md)
 - HTTP服务
-  - [路由](HttpServer/route.md)
-  - 中间件
   - [控制器](HttpServer/contorller.md)
-  - [请求](HttpServer/request.md)
-  - [响应](HttpServer/response.md)
+  - 请求对象
+  - 响应对象
+  - 静态路由规则
+  - 动态路由
+  - [路由](HttpServer/route.md)
+  - 权限与中间件
   - [异常处理](HttpServer/exception.md)
-  - 缓存
   - [视图](Components/Component/template.md)
   - [验证码](Components/verifyCode.md)
   - [文件上传](HttpServer/uploadFile.md)
   - 全局变量
   - [i18n多语言](Components/i18n.md)
-  - 常见问题
+  - 注解处理
+    - [安装](HttpServer/Annotation/install.md)
+    - [参数注解](HttpServer/Annotation/param.md)
+    - [行为注解](HttpServer/Annotation/action.md)
+    - [成员属性注解](HttpServer/Annotation/property.md)
+    - [自动注解文档](HttpServer/Annotation/doc.md)
+  - [常见问题](HttpServer/problem.md)
 - 数据库
   - [DDL定义](Components/ddl.md)
   - Mysqli
   - ORM
+    - [安装](Components/Orm/install.md)
+    - [定义模型](Components/Orm/definitionModel.md)
+    - [Invoke执行](Components/Orm/invoke.md)
+    - [自定义SQL执行](Components/Orm/customSqlExecution.md)
+    - [模型执行结果](Components/Orm/lastResult.md)
+    - [最后执行语句](Components/Orm/lastQuery.md)
+    - [事务操作](Components/Orm/transactionOperations.md)
+    - [读写分离](Components/Orm/readWriteSeparation.md)
+    - [查询](Components/Orm/query.md)
+    - [转换数组](Components/Orm/toArray.md)
+    - [快捷查询](Components/Orm/quickQuery.md)
+    - [特殊条件查询](Components/Orm/specialQuery.md)
+    - [新增](Components/Orm/add.md)
+    - [删除](Components/Orm/delete.md)
+    - [更新](Components/Orm/update.md)
+    - [连贯操作](Components/Orm/coherentOperation.md)
+    - [聚合](Components/Orm/aggregation.md)
+    - [获取器](Components/Orm/getter.md)
+    - [修改器](Components/Orm/modifier.md)
+    - 关联
+        - [示例](Components/Orm/Associat/example.md)
+        - [一对一关联](Components/Orm/Associat/oneToOneAssociations.md)
+        - [一对多关联](Components/Orm/Associat/oneToManyAssociations.md)
+        - [关联预查询](Components/Orm/Associat/preWithQuery.md)
+    - 事件
+        - [回调事件](Components/Orm/Event/onQuery.md)
+        - [模型事件](Components/Orm/Event/model.md)
   - ElasticSearch（移到组件）
 - Socket服务
   - [TCP服务](Socket/tcp.md)
   - [WebSocket服务](Socket/webSocket.md)
   - [UDP服务](Socket/udp.md)
+  - [常见问题](Socket/problem.md)
 - 缓存
   - Redis
     - [安装](Components/Redis/introduction.md)
@@ -81,8 +113,10 @@
   - [FastCache](Components/FashCache/fastCache.md)
 - 消息队列
   - Queue
-  - Kafka
-  - Nsq
+    - [安装](Components/Queue/install.md)
+    - [多节点](Components/Queue/nodes.md)
+  - [Kafka](Components/kafka.md)
+  - [Nsq](Components/nsq.md)
   - [FastCacheQueue](Components/FashCache/fastCacheQueue.md)
 - 微服务
   - [微服务理念](Microservices/introduction.md)
@@ -131,7 +165,9 @@
     - [Time](Components/Help/time.md)
   - [JWT令牌](Components/jwt.md)
   - Words-Match
-  - Smtp
+    - [安装](Components/WordsMatch/introduction.md)
+    - [常见问题](Components/WordsMatch/problem.md)
+  - [Smtp](Components/Stmp/smtp.md)
   - Spider爬虫
   - [LinuxDash](Components/linuxDash.md)
   - U-Editor
