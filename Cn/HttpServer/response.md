@@ -15,20 +15,20 @@ Response对象在系统中以单例模式存在，自收到客户端HTTP请求�
 ## 核心方法
 
 ### write
-该方法用于向客户响应数据。
+向客户响应数据。
 ```
 $this->response()->write('hello world');
 ```
 
 ### redirect
-该方法用于将请求重定向至指定的URL
+将请求重定向至指定的URL
 ```
 $this->response()->redirect("/newURL/index.html");
 ```
 ### setCookie
 向客户端设置一个Cookie，用法与原生的setCookie一致。
 ### getSwooleResponse
-用于获取原始的swoole_http_response实例。
+获取原始的swoole_http_response实例。
 ### end
 结束对该次HTTP请求响应,结束之后,无法再次向客户端响应数据.
 ### isEndResponse
@@ -38,7 +38,6 @@ if(!$this->response()->isEndResponse()){
     $this->response()->write('继续发送数据');
 }
 ```
-## PSR-7规范Response对象中常用方法
 
 ### withStatus
 

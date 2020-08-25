@@ -32,8 +32,8 @@
   - [自定义进程](Components/Component/process.md)
 - HTTP服务
   - [控制器](HttpServer/contorller.md)
-  - 请求对象
-  - 响应对象
+  - [请求对象](HttpServer/request.md)
+  - [响应对象](HttpServer/response.md)
   - 静态路由规则
   - 动态路由
   - [路由](HttpServer/route.md)
