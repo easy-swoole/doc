@@ -34,7 +34,7 @@
   - [控制器](HttpServer/contorller.md)
   - [请求对象](HttpServer/request.md)
   - [响应对象](HttpServer/response.md)
-  - 静态路由规则
+  - [静态路由](HttpServer/staticRoute.md)
   - 动态路由
   - [路由](HttpServer/route.md)
   - 权限与中间件
