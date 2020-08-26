@@ -1,9 +1,17 @@
-## 自定义路由
-路由其实就是把真实的url地址隐藏起来，使用访问地址来访问应用,通俗的说：路由就是把url的请求优雅的对应到你想要执行的操作方法。
-EasySwoole支持自定义路由,其路由利用[FastRoute](https://github.com/nikic/FastRoute)实现，因此其路由规则与其保持一致，该组件的详细文档请参考 [GitHub文档](https://github.com/nikic/FastRoute/blob/master/README.md) 
+---
+title: easyswoole 路由
+meta:
+  - name: description
+    content: easyswoole URL解析规则 自定义路由
+  - name: keywords
+    content:  easyswoole URL解析规则| easyswoole 自定义路由 |swoole web框架
+---
 
+# 动态路由
+动态路由就是把url的请求优雅的对应到你想要执行的操作方法。
+ES的动态路由是基于[FastRoute](https://github.com/nikic/FastRoute)实现，与其路由规则保持一致。 
 
-### 示例代码:  
+## 示例代码:  
 新建文件App\HttpController\Router.php:  
 ```php
 <?php
@@ -47,12 +55,10 @@ class Router extends AbstractRouter
 访问127.0.0.1:9501/rpc,对应为App\HttpController\Rpc.php->index()  
 
 ::: warning 
- 如果使用回调函数方式处理路由,return false 代表着不在继续往下请求,并且不能触发`afterAction`,`gc`等方法
+ 如果使用回调函数方式处理路由,return false 代表不继续往下请求
 :::
 
-> 实现原理可在源码中查看
-
-### 路由分组
+## 路由分组
 
 ```php
 class Router extends AbstractRouter
@@ -76,14 +82,14 @@ class Router extends AbstractRouter
 }
 ```
 
-### 全局模式拦截
+## 全局模式拦截
 在Router.php加入以下代码,即可开启全局模式拦截
 ```php
 $this->setGlobalMode(true);
 ```
 全局模式拦截下,路由将只匹配Router.php中的控制器方法响应,将不会执行框架的默认解析
 
-### 异常错误处理  
+## 异常错误处理  
 通过以下2个方法,可设置路由匹配错误以及未找到方法的回调:
 ```php
 <?php
@@ -101,9 +107,7 @@ $this->setRouterNotFoundCallBack(function (Request $request,Response $response){
 该回调函数只针对于fastRoute未匹配状况,如果回调里面不结束该请求响应,则该次请求将会继续进行Dispatch并尝试寻找对应的控制器进行响应处理。  
 :::
 
-
-
-### FastRoute使用
+## FastRoute使用
 
 #### addRoute方法
 
@@ -180,7 +184,6 @@ $routeCollector->get('/user/{id:\d+}', function (Request $request, Response $res
 });
 ````
 
-
 #### handler
 指定路由匹配成功后需要处理的方法，可以传入一个闭包，当传入闭包时一定要**注意处理完成之后要处理结束响应**否则请求会继续Dispatch寻找对应的控制器来处理，当然如果利用这一点，也可以对某些请求进行处理后再交给控制器执行逻辑
 
@@ -199,8 +202,3 @@ $routeCollector->addRoute('GET', '/router/{id:\d+}', function (Request $request,
 ```php
 $routeCollector->addRoute('GET', '/router2/{id:\d+}', '/Index');
 ```
-
-
-::: warning 
- 更多使用详情请直接查看 [FastRouter](https://github.com/nikic/FastRoute)。
-:::

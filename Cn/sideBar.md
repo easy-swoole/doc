@@ -35,7 +35,7 @@
   - [请求对象](HttpServer/request.md)
   - [响应对象](HttpServer/response.md)
   - [静态路由](HttpServer/staticRoute.md)
-  - 动态路由
+  - [动态路由](HttpServer/dynamicRoute.md)
   - [路由](HttpServer/route.md)
   - 权限与中间件
   - [异常处理](HttpServer/exception.md)
