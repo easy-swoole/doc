@@ -29,13 +29,10 @@ $mixData = $request->getRequestParam("orderId","type");
 var_dump($mixData);
 ```
 ### getSwooleRequest()
-该方法用于获取当前的swoole_http_request对象。
-
-## PSR-7规范ServerRequest对象中常用方法
-
+获取当前的swoole_http_request对象。
 
 ### getCookieParams()
-该方法用于获取HTTP请求中的cookie信息
+获取HTTP请求中的cookie信息
 ```php
 $all = $request->getCookieParams();
 var_dump($all);
@@ -43,7 +40,7 @@ $who = $request->getCookieParams('who');
 var_dump($who);
 ```
 ### getUploadedFiles()
-该方法用于获取客户端上传的全部文件信息。
+获取客户端上传的全部文件信息。
 ```php
 $img_file = $request->getUploadedFile('img');//获取一个上传文件,返回的是一个\EasySwoole\Http\Message\UploadFile的对象
 $data = $request->getUploadedFiles();//获取全部上传文件返回包含\EasySwoole\Http\Message\UploadFile对象的数组
@@ -53,7 +50,7 @@ var_dump($data);
 点击查看[UploadFile对象](./uploadFile.md)
 
 ### getBody()
-该方法用于获取以非form-data或x-www-form-urlenceded编码格式POST提交的原始数据，相当于PHP中的$HTTP_RAW_POST_DATA。
+获取以非form-data或x-www-form-urlenceded编码格式POST提交的原始数据，相当于PHP中的$HTTP_RAW_POST_DATA。
 
 ### 获得get内容
 ```php
