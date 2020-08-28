@@ -56,6 +56,7 @@
   - Mysqli
   - ORM
     - [安装](Components/Orm/install.md)
+    - [核心文件](Components/Orm/core.md)
     - [定义模型](Components/Orm/definitionModel.md)
     - [Invoke执行](Components/Orm/invoke.md)
     - [自定义SQL执行](Components/Orm/customSqlExecution.md)
