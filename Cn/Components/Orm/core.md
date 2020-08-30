@@ -130,6 +130,15 @@ $config->setMaxObjectNum(15);
 $config->setAutoPing(5);
 ```
 
+### 快速设置
+
+```php
+$config = new \EasySwoole\ORM\Db\Config([
+    'host' => '127.0.0.1',
+    'autoPing' => 5
+]);
+```
+
 ## Connection
 
 **实例**
