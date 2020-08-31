@@ -114,7 +114,6 @@
     - 事件
         - [回调事件](Components/Orm/Event/onQuery.md)
         - [模型事件](Components/Orm/Event/model.md)
-  - ElasticSearch（移到组件）
 - Socket服务
   - [TCP服务](Socket/tcp.md)
   - [WebSocket服务](Socket/webSocket.md)
@@ -170,6 +169,14 @@
     - [服务注册中心](Microservices/Rpc/registerCenter.md)
 - 组件库
   - 内置组件
+    - [单例](Components/Component/singleton.md)
+    - [协程单例](Components/Component/coroutineSingleton.md)
+    - [就绪等待](Components/Component/readyScheduler.md)
+    - [协程执行器](Components/Component/coroutineRunner.md)
+    - [Swoole Table](Components/Component/tableManager.md)
+    - [Atomic 计数器](Components/Component/atomic.md)
+    - [Channel Lock协程锁](Components/Component/channelLock.md)
+  - ElasticSearch
   - Spl组件
     - [SplArray](Components/Spl/splArray.md)
     - [SplBean](Components/Spl/splBean.md)
