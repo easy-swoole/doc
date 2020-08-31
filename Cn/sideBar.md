@@ -191,7 +191,7 @@
   - [Actor组件](Components/actor.md)
   - [Whoops](Components/whoops.md)
   - [Oss](Components/oss.md)
-  - SyncInvoker
+  - [SyncInvoker](Components/syncInvoker.md)
   - [热重载](Components/hotReload.md)
   - [Policy](Components/policy.md)
   - 辅助类(杂项工具)
@@ -208,6 +208,11 @@
     - [常见问题](Components/WordsMatch/problem.md)
   - [Smtp](Components/Stmp/smtp.md)
   - Spider爬虫
+    - [使用](Components/Spider/use.md)
+    - [Product](Components/Spider/product.md)
+    - [Consume](Components/Spider/consume.md)
+    - [客户端](Components/Spider/client.md)
+    - [自定义通信队列](Components/Spider/consumequeue.md)
   - [LinuxDash](Components/linuxDash.md)
   - U-Editor
   - 代码生成
