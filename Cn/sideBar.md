@@ -176,7 +176,7 @@
     - [Swoole Table](Components/Component/tableManager.md)
     - [Atomic 计数器](Components/Component/atomic.md)
     - [Channel Lock协程锁](Components/Component/channelLock.md)
-  - ElasticSearch
+  - [ElasticSearch](Components/elasticsearch.md)
   - Spl组件
     - [SplArray](Components/Spl/splArray.md)
     - [SplBean](Components/Spl/splBean.md)
