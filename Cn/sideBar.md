@@ -41,7 +41,7 @@
   - [视图](Components/Component/template.md)
   - [验证码](Components/verifyCode.md)
   - [文件上传](HttpServer/uploadFile.md)
-  - 全局变量
+  - [全局变量](HttpServer/global.md)
   - [i18n多语言](Components/i18n.md)
   - 注解处理
     - [安装](HttpServer/Annotation/install.md)
