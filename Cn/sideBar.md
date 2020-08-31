@@ -36,8 +36,7 @@
   - [响应对象](HttpServer/response.md)
   - [静态路由](HttpServer/staticRoute.md)
   - [动态路由](HttpServer/dynamicRoute.md)
-  - [路由](HttpServer/route.md)
-  - 权限与中间件
+  - [权限与中间件](HttpServer/interception.md)
   - [异常处理](HttpServer/exception.md)
   - [视图](Components/Component/template.md)
   - [验证码](Components/verifyCode.md)
