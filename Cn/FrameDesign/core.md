@@ -29,7 +29,7 @@ Core是EasySwool框架中核心的基础架构对象，这是一个单例对象�
 根据配置文件，调用```ServerManager```初始化对应的Swoole实例，并执行以下事情：
 - 调用全局```EasySwooleEvent.php```中的```mainServerCreate```事件
 - 注册框架系统默认的事件回调
-- 附加处理，例如注册```CronTab```进程、注册```Tasj=k```进程等
+- 附加处理，例如注册```CronTab```进程、注册```Task```进程等
 
 ### start
 调用```ServerManager```,启动框架。
