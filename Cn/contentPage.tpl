@@ -236,7 +236,7 @@
 
         var articles = [];
         $.ajax({
-            url: '/keyword{$lang}.json',
+            url: '/keyword{$docName}.json',
             success: function (data) {
                 articles = data;
             }

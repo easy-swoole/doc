@@ -26,4 +26,9 @@ class DocContainer
             return null;
         }
     }
+
+    function all()
+    {
+        return $this->container;
+    }
 }
