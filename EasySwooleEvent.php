@@ -4,6 +4,8 @@ namespace EasySwoole\EasySwoole;
 
 use App\Model\Document\Doc;
 use App\Utility\DocContainer;
+use App\Utility\TickProcess;
+use EasySwoole\Component\Process\Manager;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\Http\Request;
@@ -35,5 +37,7 @@ class EasySwooleEvent implements Event
         $swooleDoc->getTemplate()->setContentPageTpl('contentPage.tpl');
         $swooleDoc->getTemplate()->setPageNotFoundTpl('404.tpl');
         DocContainer::getInstance()->add($swooleDoc);
+
+        Manager::getInstance()->addProcess(new TickProcess());
     }
 }

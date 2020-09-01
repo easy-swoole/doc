@@ -5,7 +5,8 @@
         "voku/simple_html_dom": "^4.7",
         "ext-yaml": "*",
         "smarty/smarty": "^3.1",
-        "querypath/querypath": "^3.0"
+        "querypath/querypath": "^3.0",
+        "easyswoole/doc-system": "dev-master"
     },
     "autoload": {
         "psr-4": {

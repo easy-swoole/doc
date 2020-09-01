@@ -32,6 +32,14 @@ class Doc
         return $this->template;
     }
 
+    /**
+     * @return string
+     */
+    public function getRootPath(): string
+    {
+        return $this->rootPath;
+    }
+
     protected function displayHomePage(?Args $args = null):?string
     {
         if(!file_exists($this->rootPath.'/'.$this->template->getHomePageTpl())){
