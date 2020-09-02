@@ -159,7 +159,7 @@
     - [Atomic-limit](Components/atomicLimit.md)
   - 配置中心
     - [Apollo](Components/apollo.md)
-  - 链路追踪(基础服务器信息部分需要更新)
+  - 链路追踪
     - [Tracker](Components/tracker.md)
   - RPC服务
     - [架构说明](Microservices/Rpc/introduction.md)
