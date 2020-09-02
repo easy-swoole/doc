@@ -103,6 +103,14 @@ $register->set($register::onMessage,function (\Swoole\WebSocket\Server $server, 
 set方法和add方法是不同的, set将会覆盖之前配置的事件回调, 而add是增加一个新的回调。
 :::
 
+### Table && Atomic
+
+具体调用方式请看具体章节：
+
+[Table](/Components/Component/tableManager.html)
+
+[Atomic](/Components/Component/atomic.html)
+
 ### 添加自定义进程
 
 具体查看[自定义进程](/Components/Component/process.html)
