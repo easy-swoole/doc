@@ -12,6 +12,7 @@ meta:
 
   - 持续和深入地开发
   - 文档和社区的建设和维护
+  
 ## 支付宝
 ![捐赠](/Images/aliPayDonate.png)
  
