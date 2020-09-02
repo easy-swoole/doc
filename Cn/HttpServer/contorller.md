@@ -225,9 +225,12 @@ protected function actionNotFound(?string $action)
 > gc方法在afterAction执行完后调用
 
 ````php
-protected function afterAction(?string $actionName): void
+protected function gc()
 {
-
+    //恢复默认值
+    foreach ($this->defaultProperties as $property => $value) {
+        $this->{$property} = $value;
+    }
 }
 ````
 
@@ -236,12 +239,10 @@ protected function afterAction(?string $actionName): void
 > 当action执行结束后调用该方法，可自定义数据回收等逻辑
 
 ````php
-protected function gc()
+
+protected function afterAction(?string $actionName): void
 {
-    //恢复默认值
-    foreach ($this->defaultProperties as $property => $value) {
-        $this->{$property} = $value;
-    }
+
 }
 ````
 
