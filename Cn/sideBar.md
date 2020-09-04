@@ -115,12 +115,13 @@
         - [回调事件](Components/Orm/Event/onQuery.md)
         - [模型事件](Components/Orm/Event/model.md)
 - Socket服务
-  - TCP服务
-    - [服务创建](Socket/Tcp/create.md)
-    - [控制器模式](Socket/Tcp/controller.md)
-    - [常见问题](Socket/Tcp/problem.md)
+  - [TCP服务](Socket/tcp.md)
   - [WebSocket服务](Socket/webSocket.md)
   - [UDP服务](Socket/udp.md)
+  - Socket控制器
+    - 安装
+    - 使用示例
+    - 常见问题
   - [常见问题](Socket/problem.md)
 - 缓存
   - Redis
