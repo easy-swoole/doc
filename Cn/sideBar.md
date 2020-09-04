@@ -115,7 +115,10 @@
         - [回调事件](Components/Orm/Event/onQuery.md)
         - [模型事件](Components/Orm/Event/model.md)
 - Socket服务
-  - [TCP服务](Socket/tcp.md)
+  - TCP服务
+    - [服务创建](Socket/Tcp/create.md)
+    - [控制器模式](Socket/Tcp/controller.md)
+    - [常见问题](Socket/Tcp/problem.md)
   - [WebSocket服务](Socket/webSocket.md)
   - [UDP服务](Socket/udp.md)
   - [常见问题](Socket/problem.md)
