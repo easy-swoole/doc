@@ -118,6 +118,11 @@
   - [TCP服务](Socket/tcp.md)
   - [WebSocket服务](Socket/webSocket.md)
   - [UDP服务](Socket/udp.md)
+  - Socket控制器
+    - 安装与使用示例
+    - 控制器对象
+    - 响应对象
+    - 常见问题
   - [常见问题](Socket/problem.md)
 - 缓存
   - Redis
