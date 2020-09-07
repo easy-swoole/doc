@@ -24,7 +24,6 @@ title: Easyswoole框架设计原理 - 全局事件
 - 修改`Error`处理器
 - 修改`Shutdown`处理器
 - 修改`HttpException`全局处理器
-- 注册连接池
 
 具体可查看[SysConst.php](https://github.com/easy-swoole/easyswoole/blob/3.x/src/SysConst.php)
 
@@ -46,25 +45,6 @@ date_default_timezone_set('Asia/Shanghai');
 \EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::SHUTDOWN_FUNCTION,function (){
 
 });
-
-// 连接池
-$config = new \EasySwoole\ORM\Db\Config(\EasySwoole\EasySwoole\Config::getInstance()->getConf('MYSQL'));
-\EasySwoole\ORM\DbManager::getInstance()->addConnection(new \EasySwoole\ORM\Db\Connection($config));
-//创建一个协程调度器
-$scheduler = new \Swoole\Coroutine\Scheduler();
-$scheduler->add(function () {
-    $builder = new \EasySwoole\Mysqli\QueryBuilder();
-    $builder->raw('select version()');
-    \EasySwoole\ORM\DbManager::getInstance()->query($builder, true);
-    //这边重置ORM连接池的pool,避免链接被克隆到子进程，造成链接跨进程公用。
-    //DbManager如果有注册多库链接，请记得一并getConnection($name)获取全部的pool去执行reset
-    //其他的连接池请获取到对应的pool，然后执行reset()方法
-    \EasySwoole\ORM\DbManager::getInstance()->getConnection()->getClientPool()->reset();
-});
-//执行调度器内注册的全部回调
-$scheduler->start();
-//清理调度器内可能注册的定时器，不要影响到swoole server 的event loop
-\Swoole\Timer::clearAll();
 ```
 
 ## mainServerCreate
@@ -79,6 +59,7 @@ $scheduler->start();
 - 注册子服务
 - `SwooleTable/Atomic`
 - 创建自定义进程
+- 注册连接池
 
 ### 注册回调事件
 
@@ -131,6 +112,29 @@ $subPort->on('receive',function (\Swoole\Server $server, int $fd, int $reactor_i
 $subPort->set([
     
 ]);
+```
+
+### 注册连接池
+
+```php
+// 连接池
+$config = new \EasySwoole\ORM\Db\Config(\EasySwoole\EasySwoole\Config::getInstance()->getConf('MYSQL'));
+\EasySwoole\ORM\DbManager::getInstance()->addConnection(new \EasySwoole\ORM\Db\Connection($config));
+//创建一个协程调度器
+$scheduler = new \Swoole\Coroutine\Scheduler();
+$scheduler->add(function () {
+    $builder = new \EasySwoole\Mysqli\QueryBuilder();
+    $builder->raw('select version()');
+    \EasySwoole\ORM\DbManager::getInstance()->query($builder, true);
+    //这边重置ORM连接池的pool,避免链接被克隆到子进程，造成链接跨进程公用。
+    //DbManager如果有注册多库链接，请记得一并getConnection($name)获取全部的pool去执行reset
+    //其他的连接池请获取到对应的pool，然后执行reset()方法
+    \EasySwoole\ORM\DbManager::getInstance()->getConnection()->getClientPool()->reset();
+});
+//执行调度器内注册的全部回调
+$scheduler->start();
+//清理调度器内可能注册的定时器，不要影响到swoole server 的event loop
+\Swoole\Timer::clearAll();
 ```
 
 ## 开发者必读
