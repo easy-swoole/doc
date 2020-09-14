@@ -225,6 +225,7 @@
   - 代码加密
   - 微信/支付宝支付
   - 微信小程序及公众号
+  - [微信公众号](Components/WeChat/officialAccount.md)
 - 开源项目推荐
   - [栏目说明](OpenSource/explanation.md)
   - [XlsWriter-excel解析项目](OpenSource/xlsWriter.md)
