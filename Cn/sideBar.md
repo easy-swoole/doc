@@ -119,9 +119,9 @@
   - [WebSocket服务](Socket/webSocket.md)
   - [UDP服务](Socket/udp.md)
   - Socket控制器
-    - 安装与使用示例
-    - 控制器对象
-    - 响应对象
+    - [安装与使用示例](Socket/install.md)
+    - [控制器对象](Socket/controller.md)
+    - [响应对象](Socket/response.md)
     - 常见问题
   - [常见问题](Socket/problem.md)
 - 缓存
