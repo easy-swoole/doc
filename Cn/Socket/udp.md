@@ -9,49 +9,23 @@ meta:
 
 # UDP
 
-UDP 为应用程序提供了一种无需建立连接就可以发送封装的 IP 数据包的方法
+`UDP`为应用程序提供了一种无需建立连接就可以发送封装的`IP`数据包的方法。
 
-## 基本使用
-
-### EasySwooleEvent.php中进行创建子服务
+`EasySwooleEvent`中[mainServerCreate](/FrameDesign/event.html#mainServerCreate)事件，进行子服务监听：
 
 ```php
-
-public static function mainServerCreate(EventRegister $register)
+public static function mainServerCreate(\EasySwoole\EasySwoole\Swoole\EventRegister $register)
 {
-    $server = ServerManager::getInstance()->getSwooleServer();
-    $subPort = $server->addListener('0.0.0.0','9601',SWOOLE_UDP);
-    $subPort->on('packet',function (\swoole_server $server, string $data, array $client_info){
-        var_dump($data);
+    $server = \EasySwoole\EasySwoole\ServerManager::getInstance()->getSwooleServer();
+
+    $subPort = $server->addlistener('0.0.0.0', 9503, SWOOLE_UDP);
+    $subPort->on($register::onPacket, function (\Swoole\Server $server, string $data, array $clientInfo) {
+           $server->sendto($clientInfo['address'], $clientInfo['port'], 'Server：' . $data);
     });
 }
 ```
 
 
-###  UDP客户端
-```php
-
-public static function mainServerCreate(EventRegister $register)
-{
-  //添加自定义进程做定时udp发送
-    $server->addProcess(new \swoole_process(function (\swoole_process $process){
-        //服务正常关闭
-        $process::signal(SIGTERM,function ()use($process){
-            $process->exit(0);
-        });
-        //默认5秒广播一次
-        \Swoole\Timer::tick(5000,function (){
-            if($sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP))
-            {
-                socket_set_option($sock,SOL_SOCKET,SO_BROADCAST,true);
-                $msg= '123456';
-                socket_sendto($sock,$msg,strlen($msg),0,'255.255.255.255',9602);//广播地址
-                socket_close($sock);
-            }
-        });
-    }));
-}
-```
 
 
 
