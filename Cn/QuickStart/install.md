@@ -97,7 +97,7 @@ fi
 中途没有报错的话，执行：
 ```bash
 # 启动框架
-php easyswoole start
+php easyswoole server start
 ```
 此时可以访问 `http://localhost:9501` 看到框架的欢迎页面，表示框架已经安装成功
 
