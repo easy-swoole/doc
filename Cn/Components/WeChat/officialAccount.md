@@ -8,10 +8,7 @@ meta:
 
 ---
 
-# 微信SDK EasySwoole WeChat
-
-
-EasySwoole WeChat 是一个基于 Swoole 4.x `全协程`支持的微信SDK库，告别同步阻塞，轻松编写高性能的微信公众号/小程序/开放平台业务接口
+## 公众号
 
 ::: tip 
 
@@ -26,24 +23,6 @@ EasySwoole WeChat 是一个基于 Swoole 4.x `全协程`支持的微信SDK库，
 注：微信SDK文档右侧类目表与腾讯微信公众号文档基本对应
 :::
 
-## 组件要求
-
--   php >= 7.1.0
--   easyswoole/component >= 1.0
--   easyswoole/spl >= 1.3.7
--   easyswoole/http-client ^1.0
--   easyswoole/utility" ^1.0
-
-## 安装方法
-
-
-> ```
-> composer require easyswoole/wechat
-> ```
-
-## 仓库地址
-
-[easyswoole/wechat](https://github.com/easy-swoole/wechat)
 
 ## 基本使用
 
