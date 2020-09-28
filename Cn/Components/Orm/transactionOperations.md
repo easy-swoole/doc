@@ -9,10 +9,7 @@ meta:
 
 # 事务操作
 
-目前有两种方式开启事务
-
 - DbManager 链接管理器提供
-- Client 客户端直接使用 `orm >= 1.4.6`
 
 ## DbManager操作事务
 
@@ -65,24 +62,11 @@ DbManager 管理事务，传递参数为ClientInterface类型，指定操作客�
 
 效果等同于示例3，直接操作客户端
 
-```php 
+```php
 // 指定取出 write 连接名下的客户端，并且执行开启事务
-DbManager::getInstance()->invoke(function (EasySwoole\ORM\Db\ClientInterface $client){
+\EasySwoole\ORM\DbManager::getInstance()->invoke(function (EasySwoole\ORM\Db\ClientInterface $client){
     // 开启事务
-    DbManager::getInstance()->startTransaction($client);
+    \EasySwoole\ORM\DbManager::getInstance()->startTransaction($client);
     // ...
 }, 'write');
-```
-
-## 代码示例3
-
-在 `orm >= 1.4.6` 后，提供了ClientInterface直接操作事务的操作（当DbManager指定客户端连接时，也是如下调用客户端的事务方法）
-
-```php
-// 取出 default 连接名下的客户端，并且执行开启事务
-DbManager::getInstance()->invoke(function (EasySwoole\ORM\Db\ClientInterface $client){
-    // 开启事务
-    $client->startTransaction();
-    // ...
-});
 ```

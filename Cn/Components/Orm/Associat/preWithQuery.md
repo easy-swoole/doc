@@ -17,3 +17,17 @@ $res = Model::create()->with(['user_list', 'user_store'])->get(1);
 
 var_dump($res); // 此时已经有user_list,user_sotre两个关联字段的数据，不再需要先手动调用一次。
 ```
+
+支持传参数操作：
+`orm >= 1.4.25`
+
+```php
+
+$res = Model::create()->with(['user_list' => ['a' => 1, 'b' => 2]])->get(1);
+$res = Model::create()->with(['user_list' => 'test'])->get(1);
+
+// 伪代码
+function user_list($data){
+    var_dump($data); // a => 1 b=> 2 or test
+}
+```
