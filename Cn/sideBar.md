@@ -43,13 +43,13 @@
   - [文件上传](HttpServer/uploadFile.md)
   - [全局变量](HttpServer/global.md)
   - [i18n多语言](Components/i18n.md)
+  - [常见问题](HttpServer/problem.md)
   - 注解处理
     - [安装](HttpServer/Annotation/install.md)
     - [参数注解](HttpServer/Annotation/param.md)
     - [行为注解](HttpServer/Annotation/action.md)
     - [成员属性注解](HttpServer/Annotation/property.md)
     - [自动注解文档](HttpServer/Annotation/doc.md)
-  - [常见问题](HttpServer/problem.md)
 - 数据库
   - [DDL定义](Components/ddl.md)
   - Mysqli
@@ -145,15 +145,19 @@
     - [Server命令](Components/Redis/server.md)
     - [Geohash](Components/Redis/geoHash.md)
     - [集群方法(Cluster)](Components/Redis/clusterMethod.md)
-  - [Memcached](Components/Memcache/memcache.md)
-  - [FastCache](Components/FashCache/fastCache.md)
+  - Memcached
+    - [安装及使用](Components/Memcache/memcache.md)
+  - FastCache
+    - [安装及使用](Components/FashCache/fastCache.md)
 - 消息队列
   - Queue
     - [安装](Components/Queue/install.md)
     - [多节点](Components/Queue/nodes.md)
-  - [Kafka](Components/kafka.md)
-  - [Nsq](Components/nsq.md)
-  - [FastCacheQueue](Components/FashCache/fastCacheQueue.md)
+  - 分布式
+    - [Kafka](Components/kafka.md)
+    - [Nsq](Components/nsq.md)
+  - FastCacheQueue
+    - [安装及使用](Components/FashCache/fastCacheQueue.md)
 - 微服务
   - [微服务理念](Microservices/introduction.md)
   - 服务注册
@@ -181,7 +185,8 @@
     - [Swoole Table](Components/Component/tableManager.md)
     - [Atomic 计数器](Components/Component/atomic.md)
     - [Channel Lock协程锁](Components/Component/channelLock.md)
-  - [ElasticSearch](Components/elasticsearch.md)
+  - 搜索引擎
+    - [ElasticSearch](Components/elasticsearch.md)
   - Spl组件
     - [SplArray](Components/Spl/splArray.md)
     - [SplBean](Components/Spl/splBean.md)
@@ -192,13 +197,18 @@
   - 连接池组件
     - [连接池](Components/Pool/introduction.md)
     - [为什么使用连接池](Components/Pool/whyUsePool.md)
-  - [HttpClient](Components/httpClient.md)
-  - [Actor组件](Components/actor.md)
-  - [Whoops](Components/whoops.md)
-  - [Oss](Components/oss.md)
-  - [SyncInvoker](Components/syncInvoker.md)
-  - [热重载](Components/hotReload.md)
-  - [Policy](Components/policy.md)
+  - 协程客户端
+    - [HttpClient](Components/httpClient.md)
+    - [Smtp](Components/Stmp/smtp.md)
+  - 游戏开发
+    - [Actor组件](Components/actor.md)
+  - 错误视图
+    - [Whoops](Components/whoops.md)
+  - 同步程序协程调用转化驱动
+    - [SyncInvoker](Components/syncInvoker.md)
+  - 开发工具
+    - [热重载](Components/hotReload.md)
+    - [LinuxDash](Components/linuxDash.md)
   - 辅助类(杂项工具)
     - [ArrayToTextTable](Components/Help/arrayToTextTable.md)
     - [File](Components/Help/file.md)
@@ -207,25 +217,32 @@
     - [SnowFlake](Components/Help/snowFlake.md)
     - [Str](Components/Help/str.md)
     - [Time](Components/Help/time.md)
-  - [JWT令牌](Components/jwt.md)
+  - 令牌及策略
+    - [JWT令牌](Components/jwt.md)
+    - [Policy](Components/policy.md)
   - Words-Match
     - [安装](Components/WordsMatch/introduction.md)
     - [常见问题](Components/WordsMatch/problem.md)
-  - [Smtp](Components/Stmp/smtp.md)
   - Spider爬虫
     - [使用](Components/Spider/use.md)
     - [Product](Components/Spider/product.md)
     - [Consume](Components/Spider/consume.md)
     - [客户端](Components/Spider/client.md)
     - [自定义通信队列](Components/Spider/consumequeue.md)
-  - [LinuxDash](Components/linuxDash.md)
   - U-Editor
   - 代码生成
-  - [第三方登录](Components/oauth.md)
+  - 第三方
+    - [Oss](Components/oss.md)
+    - [Oauth](Components/oauth.md)
+  - 微信公众号及小程序
+    - [安装](Components/WeChat/install.md)
+    - [公众号](Components/WeChat/officialAccount.md)
+    - [小程序](Components/WeChat/miniProgram.md)
+  - 第三方支付
+    - [安装](Components/Pay/install.md)
+    - [微信](Components/Pay/wechat.md)
+    - [支付宝](Components/Pay/ali.md)
   - 代码加密
-  - 微信/支付宝支付
-  - 微信小程序及公众号
-  - [微信公众号](Components/WeChat/officialAccount.md)
 - 开源项目推荐
   - [栏目说明](OpenSource/explanation.md)
   - [XlsWriter-excel解析项目](OpenSource/xlsWriter.md)
