@@ -14,7 +14,7 @@ meta:
 一个程序可以包含多个协程，可以对比与一个进程包含多个线程，因而下面我们来比较协程和线程。而多个线程相对独立，有自己的上下文，切换受系统控制；
 
 而协程也相对独立，有自己的上下文，但是其切换由自己控制，由当前协程切换到其他协程由当前协程来控制。
-![协程](/Images/Passage/NoobCourse/Coroutine.png)
+![协程](/Images/Passage/QuickStart/Coroutine.png)
 
 
 ## 协程执行顺序

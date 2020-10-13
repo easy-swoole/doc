@@ -97,7 +97,7 @@ fi
 中途没有报错的话，执行：
 ```bash
 # 启动框架
-php easyswoole start
+php easyswoole server start
 ```
 此时可以访问 `http://localhost:9501` 看到框架的欢迎页面，表示框架已经安装成功
 
@@ -110,14 +110,6 @@ php easyswoole start
 - task socket listen fail
    - 注意，在部分环境下，例如win10的docker环境中，不可把虚拟机共享目录作为EasySwoole的Temp目录，否则会因为权限不足无法创建socket，产生报错：listen xxxxxx.sock fail,为此可以手动在dev.php配置文件里把Temp目录改为其他路径即可,如：'/Tmp'
 
-## Docker
-
-[Easyswoole官方docker](docker.md)
-
-
-::: warning 
- docker 知识请自行学习q
-:::
 
 ## 其他
 

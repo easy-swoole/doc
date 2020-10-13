@@ -47,9 +47,7 @@ return [
 - 检查防火墙是否对外开放
 ```shell script
 > netstat -anp
-
 //如果相关端口被防火墙拦截，需要放开
-
 > firewall-cmd --zone=public --add-port=9501/tcp --permanent
 ```
 ::: tip
