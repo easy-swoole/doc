@@ -28,12 +28,11 @@ None
 ## 安装方法
 
 
-> composer require easyswoole/words-match
+> composer require easyswoole/words-match:1.1.x-dev
 
 ## 仓库地址
 
 [easyswoole/words-match](https://github.com/easy-swoole/words-match)
-
 
 ## 基本使用
 
@@ -69,14 +68,16 @@ class EasySwooleEvent implements Event
     {
         // TODO: Implement initialize() method.
         date_default_timezone_set('Asia/Shanghai');
-
     }
 
     public static function mainServerCreate(EventRegister $register)
     {
         // TODO: Implement mainServerCreate() method.
         $config = [
-            'wordBank' => '/Users/xxx/sites/easyswoole/WordsMatch/comment.txt', // 词库地址
+            'wordBanks' => [
+                'one' => '/Users/xxx/sites/easyswoole/WordsMatch/comment.txt',
+                'two' => '/Users/xxx/sites/easyswoole/WordsMatch/comment1.txt'
+            ], // 词库地址
             'processNum' => 3, // 进程数
             'maxMem' => 1024, // 每个进程最大占用内存(M)
             'separator' => ',', // 词和其它信息的间隔符
@@ -116,18 +117,25 @@ class Index extends Controller
 
     function append()
     {
-        WordsMatchClient::getInstance()->append('easyswoole', [3,4,5]);
+        WordsMatchClient::getInstance()
+                    ->setWordBanks(['one']) // 必须指定词库
+                    ->append('测试词1');
     }
 
     function detect()
     {
         $content = 'php是世界上最好的语言';
-        WordsMatchClient::getInstance()->detect($content);
+        // 检测内容，不指定词库则检测所有词库
+        WordsMatchClient::getInstance()
+                    ->setWordBanks(['one']) // 不指定词库则检测所有词库
+                    ->detect($content);
     }
 
     function remove()
     {
-        WordsMatchClient::getInstance()->remove('easyswoole');
+        WordsMatchClient::getInstance()
+                        ->setWordBanks(['one']) // 必须指定词库
+                        ->remove('测试词1');
     }
 
 }
