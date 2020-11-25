@@ -9,7 +9,7 @@
 
 `3.3.x -> 3.4.x`需要重新执行`php vendor/bin/easyswoole install`.
 
-1. [command](QuickStart/command.md)命令变更.
+1. [command](/Cn/QuickStart/command.md)命令变更.
 
 2. 自定义`command`需进行[调整](https://github.com/easy-swoole/command).
 
