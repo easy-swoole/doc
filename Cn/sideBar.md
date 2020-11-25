@@ -177,7 +177,7 @@
     - [跨语言](Microservices/Rpc/otherPlatform.md)
     - [服务注册中心](Microservices/Rpc/registerCenter.md)
 - 组件库
-  - 内置组件
+  - 基础组件
     - [单例](Components/Component/singleton.md)
     - [协程单例](Components/Component/coroutineSingleton.md)
     - [就绪等待](Components/Component/readyScheduler.md)
@@ -185,8 +185,9 @@
     - [Swoole Table](Components/Component/tableManager.md)
     - [Atomic 计数器](Components/Component/atomic.md)
     - [Channel Lock协程锁](Components/Component/channelLock.md)
-  - 搜索引擎
-    - [ElasticSearch](Components/elasticsearch.md)
+  - ElasticSearch客户端
+    - [安装](a.md)
+    - [使用](a.md)
   - Spl组件
     - [SplArray](Components/Spl/splArray.md)
     - [SplBean](Components/Spl/splBean.md)
@@ -231,14 +232,17 @@
     - [自定义通信队列](Components/Spider/consumequeue.md)
   - U-Editor
   - 代码生成
-  - 第三方
-    - [Oss](Components/oss.md)
-    - [Oauth](Components/oauth.md)
+  - [第三方登录Oauth](Components/oauth.md)
+  - OSS存储客户端
+    - 安装
+    - 阿里云
+    - 腾讯
+    - 七牛  
   - 微信公众号及小程序
     - [安装](Components/WeChat/install.md)
     - [公众号](Components/WeChat/officialAccount.md)
     - [小程序](Components/WeChat/miniProgram.md)
-  - 第三方支付
+  - 第三方支付组件
     - [安装](Components/Pay/install.md)
     - [微信](Components/Pay/wechat.md)
     - [支付宝](Components/Pay/ali.md)
