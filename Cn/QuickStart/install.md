@@ -23,6 +23,11 @@ meta:
 - 安装完成之后，不会自动生成App目录，请自行根据Hello World章节配置
 
 
+## 框架更新说明(安装之前必看)
+
+- [更新说明](/Cn/Update/main.md)
+
+
 ## 切换阿里云镜像
 ````
 composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
@@ -118,7 +123,7 @@ php easyswoole server start
     - EasySwoole官方一群 633921431(已满)
     - EasySwoole官方二群 709134628(已满)
     - EasySwoole官方三群 932625047(已满)
-    - Easyswoole官方四群 779897753 
+    - EasySwoole官方四群 779897753 
     
 - 商业支持：
     - QQ 291323003
