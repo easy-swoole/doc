@@ -16,11 +16,16 @@ meta:
 注意事项，请看完再进行安装
 :::
 
-- 框架使用 `Composer` 作为依赖管理工具，在开始安装框架前，请确保已经按上一章节的要求配置好环境并安装好了`Composer` 工具
-- 关于 Composer 的安装可以参照 [Composer中国全量镜像](https://pkg.phpcomposer.com/#how-to-install-composer) 的安装教程
+- 框架使用 `Composer` 作为依赖管理工具，在开始安装框架前，请确保已经按上一章节的要求配置好环境并安装好了 `Composer` 工具
+- 关于 `Composer` 的安装可以参照 [Composer中国全量镜像](https://pkg.phpcomposer.com/#how-to-install-composer) 的安装教程
 - 目前推荐的镜像为阿里云或者梯子拉取源站
 - 在安装过程中，会释放框架的文件到项目目录，请保证项目目录有可写入权限
-- 安装完成之后，不会自动生成App目录，请自行根据Hello World章节配置
+- 安装完成之后，不会自动生成 `App` 目录，请自行根据 `Hello World` 章节配置
+
+
+## 框架更新说明(安装之前必看)
+
+- [更新说明](/Cn/Update/main.md)
 
 
 ## 切换阿里云镜像
@@ -68,9 +73,9 @@ php vendor/bin/easyswoole install
 新版安装注意事项
 :::
 
-- 新版的easyswoole安装会默认提供App命名空间，还有index控制器
-- 在这里面需要填写n，不需要覆盖，已经有的 EasySwooleEvent.php，index.php dev.php produce.php
-- 当提示exec函数被禁用时,请自己手动执行 `composer dump-autoload` 命令更新命名空间
+- 新版的 `EasySwoole` 安装会默认提供 `App` 命名空间，还有 `Index` 控制器
+- 在这里面需要填写 `n`，不需要覆盖，已经有的 `EasySwooleEvent.php、index.php、dev.php、produce.php`
+- 当提示 `exec` 函数被禁用时，请自己手动执行 `composer dump-autoload` 命令更新命名空间
 
 ### 安装报错
 当执行安装脚本，出现类似以下错误时：
@@ -89,8 +94,7 @@ fi
 "${dir}/easyswoole" "$@"
 ```
 
-请检查环境是否为宝塔等其他集成面板，或者是php.ini配置项中禁用了```symlink```与```readlink```函数，请关闭这两个函数的禁用，并删除vender目录，重新执行
-```composer require```或者是```composer install```或者是```composer update```
+请检查环境是否为宝塔等其他集成面板，或者是 `php.ini` 配置项中禁用了 ```symlink``` 与 ```readlink``` 函数，如果禁用了，请关闭这两个函数的禁用，并删除vender目录，然后重新执行 ```composer require``` 或者是 ```composer install``` 或者是 ```composer update```
 
 ## 启动框架
 
@@ -99,26 +103,27 @@ fi
 # 启动框架
 php easyswoole server start
 ```
-此时可以访问 `http://localhost:9501` 看到框架的欢迎页面，表示框架已经安装成功
+此时可以访问 `http://localhost:9501` 就看到框架的欢迎页面，表示框架已经安装成功
 
 ### 可能的问题
 - not controller class match
-   - composer.json注册 App 这个名称空间了吗？
-   - 执行过``` composer dump-autoload ```了吗？
-   - 存在Index控制器，且文件大小写，路径都对了吗？
+   - `composer.json` 注册 `App` 这个名称空间了吗？
+   - 执行过 ```composer dump-autoload``` 了吗？
+   - 存在 `Index` 控制器，但是文件大小写、路径都对了吗？
 
 - task socket listen fail
-   - 注意，在部分环境下，例如win10的docker环境中，不可把虚拟机共享目录作为EasySwoole的Temp目录，否则会因为权限不足无法创建socket，产生报错：listen xxxxxx.sock fail,为此可以手动在dev.php配置文件里把Temp目录改为其他路径即可,如：'/Tmp'
+   - 注意，在部分环境下，例如 `win10` 的 `docker` 环境中，不可把虚拟机共享目录作为 `EasySwoole` 的 `Temp` 目录，否则会因为权限不足无法创建 `socket`，产生报错：`listen xxxxxx.sock fail`，为此可以手动在 `dev.php` 配置文件里把 `Temp` 目录改为其他路径即可，如：`'/Tmp'`
 
 
 ## 其他
 
-- QQ交流群
-    - VIP群 579434607 （本群需要付费599元）
-    - EasySwoole官方一群 633921431(已满)
-    - EasySwoole官方二群 709134628(已满)
-    - EasySwoole官方三群 932625047(已满)
-    - Easyswoole官方四群 779897753 
+- QQ 交流群
+    - VIP 群 579434607 （本群需要付费599元）
+    - EasySwoole 官方一群 633921431(已满)
+    - EasySwoole 官方二群 709134628(已满)
+    - EasySwoole 官方三群 932625047(已满)
+    - EasySwoole 官方四群 779897753
+    - EasySwoole 官方五群 853946743
     
 - 商业支持：
     - QQ 291323003
@@ -131,7 +136,7 @@ php easyswoole server start
 <script>
         if(localStorage.getItem('isNew') != 1){
             localStorage.setItem('isNew',1);
-            layer.confirm('是否给EasySwoole点个赞',{offset:'c'},function (index) {
+            layer.confirm('是否给 EasySwoole 点个赞',{offset:'c'},function (index) {
                  layer.msg('感谢您的支持',{offset:'c'});
                      setTimeout(function () {
                          window.open('https://github.com/easy-swoole/easyswoole');
