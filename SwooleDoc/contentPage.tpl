@@ -26,31 +26,6 @@
             <a href="/">
                 <img src="https://www.easyswoole.com/Images/docNavLogo.png" alt="">
             </a>
-            <a class="navBar-menu-button" href="javascript:;">
-                <i class="fa fa-bars" style="font-size: 1.3rem;color: #333;"></i>
-            </a>
-            <div class="navInnerRight">
-                <div class="navItem">
-                    <div class="dropdown-wrapper">
-                        <a href="/wstool.html" style="text-decoration:none;">websocket测试工具</a>
-                    </div>
-                </div>
-                <div class="navItem lang-select">
-                    <div class="dropdown-wrapper">
-                        <button type="button" aria-label="Select language" class="dropdown-title">
-                            <span class="title">Language</span> <span class="arrow right"></span>
-                        </button>
-                        <ul class="nav-dropdown">
-                            <li class="dropdown-item">
-                                <a data-lang="Cn" class="nav-link lang-change">简体中文</a>
-                            </li>
-                            <li class="dropdown-item">
-                                <a data-lang="En" class="nav-link lang-change">English</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </header>
     <aside class="sideBar">{$sideBar}</aside>
