@@ -17,9 +17,16 @@ class Index extends Controller
 
     protected function actionNotFound(?string $action)
     {
-        $doc = $this->request()->getRequestParam('doc');
-        if(empty($doc)){
-            $doc = 'ES_DOC_CN';
+        $host = $this->request()->getUri()->getHost();
+        switch ($host){
+            case 'english.easyswoole.com':{
+                $doc = 'SWOOLE_DOC';
+                break;
+            }
+            default:{
+                $doc = 'ES_DOC_CN';
+                break;
+            }
         }
         $doc = DocContainer::getInstance()->get($doc);
         if($doc instanceof Doc){
