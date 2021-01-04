@@ -25,7 +25,7 @@ meta:
 
 ## 框架更新说明(安装之前必看)
 
-- [更新说明](/Cn/Update/main.md)
+- [更新说明](/Update/main.md)
 
 
 ## 切换阿里云镜像
