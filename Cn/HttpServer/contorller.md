@@ -129,7 +129,7 @@ class User extends Controller
 > 启动easyswoole
 
 ````
-php easyswoole start
+php easyswoole server start
 ````
 
 > 访问

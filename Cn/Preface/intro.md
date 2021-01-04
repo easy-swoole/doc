@@ -115,16 +115,17 @@ Easyswoole从最早的前身EasyPHP-Swoole，到更名为Easyswoole,再到现如
 
 ## 其他
 - [GitHub](https://github.com/easy-swoole/easyswoole)  喜欢记得点个***star***
-- [GitHub for Doc](https://github.com/easy-swoole/doc-3.3.x)
+- [GitHub for Doc](https://github.com/easy-swoole/doc)
 
-- [DEMO](https://github.com/easy-swoole/demo/)
+- [DEMO](https://github.com/easy-swoole/demo)
 
-- QQ交流群
+- QQ 交流群
     - VIP群 579434607 （本群需要付费599元）
-    - EasySwoole官方一群 633921431(已满)
-    - EasySwoole官方二群 709134628(已满)
-    - EasySwoole官方三群 932625047(已满)
-    - Easyswoole官方四群 779897753 
+    - EasySwoole 官方一群 633921431(已满)
+    - EasySwoole 官方二群 709134628(已满)
+    - EasySwoole 官方三群 932625047(已满)
+    - EasySwoole 官方四群 779897753 
+    - EasySwoole 官方五群 853946743 
     
 - 商业支持：
     - QQ 291323003
@@ -133,7 +134,7 @@ Easyswoole从最早的前身EasyPHP-Swoole，到更名为Easyswoole,再到现如
 
     ![](/Images/authWx.png)    
     
-- [捐赠](/Cn/Preface/donation.md)
+- [捐赠](/Preface/donate)
   您的捐赠是对EasySwoole项目开发组最大的鼓励和支持。我们会坚持开发维护下去。 您的捐赠将被用于:
         
   - 持续和深入地开发
