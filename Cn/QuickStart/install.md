@@ -94,7 +94,9 @@ fi
 "${dir}/easyswoole" "$@"
 ```
 
-请检查环境是否为宝塔等其他集成面板，或者是 `php.ini` 配置项中禁用了 ```symlink``` 与 ```readlink``` 函数，如果禁用了，请关闭这两个函数的禁用，并删除vender目录，然后重新执行 ```composer require``` 或者是 ```composer install``` 或者是 ```composer update```
+请检查环境是否为宝塔等其他集成面板，或者是 `php.ini` 配置项中禁用了 ```symlink``` 与 ```readlink``` 函数，如果禁用了，请关闭这两个函数的禁用，并删除vender目录，然后重新执行 ```composer require``` 或者是 ```composer install``` 或者是 ```composer update```.
+
+如果取消了函数禁用并且删除`vendor`重新`composer`,依旧出现以上错误时,大概率是因为虚拟机等权限原因导致软链接失效.可使用`php vendor/easyswoole/easyswoole/bin/easyswoole`进行开发.或者直接修改`easyswoole`文件,引入`vendor/easyswoole/easyswoole/bin/easyswoole`.
 
 ## 启动框架
 

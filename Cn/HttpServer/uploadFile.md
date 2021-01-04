@@ -39,7 +39,7 @@ $file->getStream();
 
 ```php
 /** @var \EasySwoole\Http\Message\UploadFile $file */
-$file->moveTo('/xxx/xxx/xxx.png');
+$file->moveTo('/xxx/xxx/xxx.png'); // 失败这里会抛出异常 \EasySwoole\Http\Exception\FileException
 ```
 
 ## 获取文件大小

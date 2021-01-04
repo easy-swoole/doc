@@ -126,20 +126,3 @@ meta:
 **非协程方式**
 
 > php easyswoole phpunit --no-coroutine
-
-
-## Config管理
-
-`EasySwoole`内置对于`Config`的命令行操作，方便开发者动态修改配置（仅`SwooleTable`）。
-
-可执行`php easyswoole config -h`来查看具体操作。
-
-**展示配置项信息 key支持.分隔符**
-
-> php easyswoole config show
-
-> php easyswoole config show --appoint=KEY
-
-**设置配置 key支持.分隔符**
-
-> php easyswoole config set --KEY1=VALUE1 --KEY2=VALUE2

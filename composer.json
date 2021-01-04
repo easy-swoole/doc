@@ -6,7 +6,8 @@
         "ext-yaml": "*",
         "smarty/smarty": "^3.1",
         "querypath/querypath": "^3.0",
-        "easyswoole/orm": "^1.4"
+        "easyswoole/orm": "^1.4",
+        "easyswoole/template": "^1.1"
     },
     "require-dev": {
         "easyswoole/swoole-ide-helper": "^1.3"

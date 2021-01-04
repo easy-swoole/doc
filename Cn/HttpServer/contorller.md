@@ -129,7 +129,7 @@ class User extends Controller
 > 启动easyswoole
 
 ````
-php easyswoole start
+php easyswoole server start
 ````
 
 > 访问
@@ -216,7 +216,7 @@ protected function afterAction(?string $actionName): void
 protected function actionNotFound(?string $action)
 {
     $class = static::class;
-    $this->writeJson(Status::CODE_NOT_FOUND,null,"{$class} has not action for {$action}");
+    $this->writeJson(\EasySwoole\Http\Message\Status::CODE_NOT_FOUND,null,"{$class} has not action for {$action}");
 }
 ````
 

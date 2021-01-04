@@ -13,7 +13,8 @@ meta:
 - EasySwoole官方一群 633921431(已满)
 - EasySwoole官方二群 709134628(已满)
 - EasySwoole官方三群 932625047(已满)
-- Easyswoole官方四群 779897753 
+- EasySwoole官方四群 779897753
+- EasySwoole官方五群 853946743
 
 # 联系作者
 - 微信

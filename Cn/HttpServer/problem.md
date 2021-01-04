@@ -52,23 +52,24 @@ server {
 
 ## 关于跨域处理
 
-在全局事件添加以下代码 拦截所有请求添加跨域头
+在[initialize](/FrameDesign/event.md)中注册.
 
 ```php
-public static function onRequest(Request $request, Response $response): bool
-{
-    // TODO: Implement onRequest() method.
+// onRequest v3.4.x+
+\EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::HTTP_GLOBAL_ON_REQUEST,function (\EasySwoole\Http\Request $request, \EasySwoole\Http\Response $response){
     $response->withHeader('Access-Control-Allow-Origin', '*');
     $response->withHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     $response->withHeader('Access-Control-Allow-Credentials', 'true');
     $response->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
     if ($request->getMethod() === 'OPTIONS') {
-        $response->withStatus(Status::CODE_OK);
+        $response->withStatus(\EasySwoole\Http\Message\Status::CODE_OK);
         return false;
     }
     return true;
-}
+});
 ```
+
+3.4.x版本之前：可在`EasySwooleEvent`中看到`onRequest`及`afterRequest`方法.
 
 ## 如何获取$HTTP_RAW_POST_DATA
 ```php
@@ -79,7 +80,7 @@ $raw_array = json_decode($content, true);
 举例，如何在控制器中获取客户端IP
 ```php
 //真实地址
-$ip = ServerManager::getInstance()->getSwooleServer()->connection_info($this->request()->getSwooleRequest()->fd);
+$ip = \EasySwoole\EasySwoole\ServerManager::getInstance()->getSwooleServer()->connection_info($this->request()->getSwooleRequest()->fd);
 var_dump($ip);
 //header 地址，例如经过nginx proxy后
 $ip2 = $this->request()->getHeaders();

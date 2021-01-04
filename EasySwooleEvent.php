@@ -38,13 +38,13 @@ class EasySwooleEvent implements Event
         $swooleDoc->getTemplate()->setPageNotFoundTpl('404.tpl');
         DocContainer::getInstance()->add($swooleDoc);
 
-        $swooleDoc = new Doc(EASYSWOOLE_ROOT.'/En');
-        $swooleDoc->setName('ES_DOC_EN');
-        $swooleDoc->getTemplate()->setHomePageTpl('index.tpl');
-        $swooleDoc->getTemplate()->setSideBarMd('sideBar.md');
-        $swooleDoc->getTemplate()->setContentPageTpl('contentPage.tpl');
-        $swooleDoc->getTemplate()->setPageNotFoundTpl('404.tpl');
-        DocContainer::getInstance()->add($swooleDoc);
+        $en = new Doc(EASYSWOOLE_ROOT.'/En');
+        $en->setName('ES_DOC_EN');
+        $en->getTemplate()->setHomePageTpl('index.tpl');
+        $en->getTemplate()->setSideBarMd('sideBar.md');
+        $en->getTemplate()->setContentPageTpl('contentPage.tpl');
+        $en->getTemplate()->setPageNotFoundTpl('404.tpl');
+        DocContainer::getInstance()->add($en);
 
         Manager::getInstance()->addProcess(new TickProcess());
     }
