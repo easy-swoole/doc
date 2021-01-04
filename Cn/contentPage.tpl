@@ -42,10 +42,10 @@
                         </button>
                         <ul class="nav-dropdown">
                             <li class="dropdown-item">
-                                <a data-lang="Cn" class="nav-link lang-change">简体中文</a>
+                                <a data-lang="Cn" class="nav-link lang-change" href="http://www.easyswoole.com">简体中文</a>
                             </li>
                             <li class="dropdown-item">
-                                <a data-lang="En" class="nav-link lang-change">English</a>
+                                <a data-lang="En" class="nav-link lang-change" href="http://english.easyswoole.com">English</a>
                             </li>
                         </ul>
                     </div>
