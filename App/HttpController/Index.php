@@ -33,7 +33,7 @@ class Index extends Controller
             }
         }
         /** 调试的时候，强制指定 $doc */
-        $doc = 'ES_DOC_EN';
+//        $doc = 'ES_DOC_EN';
         $doc = DocContainer::getInstance()->get($doc);
         if($doc instanceof Doc){
             $doc->display($this->request(),$this->response());
