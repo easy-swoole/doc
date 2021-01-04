@@ -63,10 +63,40 @@
 {literal}
 <script src="/Js/jquery.min.js"></script>
 <script src="/Js/highlight.min.js"></script>
+<script src="/Js/Layer/layer.js"></script>
 <script src="/Js/global.js"></script>
 <script>
     $(document).ready(function() {
+        function layerOpen(title,url)
+        {
+            $.ajax({
+                url: url,
+                method: 'POST',
+                success: function (res) {
+                    var newHtml = $(res);
+                    var newBody = newHtml.find('.markdown-body').eq(0).html();
+                    layer.open({
+                        type: 1,
+                        title: title,
+                        shadeClose: true,
+                        shade: false,
+                        maxmin: true,
+                        area: ['893px', '600px'],
+                        content: "<div style='padding-left: 5rem'>"+newBody+"<\/div>"
+                    });
+                }
+            });
+        }
+        $('layerOpen').click(function (obj){
+            layerOpen($(this).html(),$(this).attr('href'));
+        });
+
+
+
+
         hljs.initHighlightingOnLoad();
+
+
         /********** 左侧菜单栏开始 **************/
         $.each($('.sideBar li:has(li)'), function () {
             $(this).attr('isOpen', 0).addClass('fa fa-angle-right');

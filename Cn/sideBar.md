@@ -2,9 +2,10 @@
   - [项目介绍](Preface/intro.md)
   - [交流群](Preface/contact.md)
   - [捐赠](Preface/donate.md)
-- 更新记录
+- 更新与文档
   - [框架更新记录](Update/main.md)
   - [组件更新记录](Update/component.md)
+  - [文档贡献](Update/doc.md)
 - 快速开始
   - [环境要求](QuickStart/environment.md)
   - [安装](QuickStart/install.md)

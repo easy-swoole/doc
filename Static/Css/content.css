@@ -420,3 +420,13 @@ li {
 .markdown-body pre {
     background-color: #0a0a0a !important;
 }
+
+layerOpen {
+    color: #0366d6;
+    cursor:pointer;
+}
+layerOpen:hover{text-decoration:underline;color: #0366d6;}
+.navBar  a {
+    text-decoration:none;
+    color: #0a0a0a;
+}
