@@ -200,20 +200,12 @@ class EasySwooleEvent implements Event
     public static function mainServerCreate(EventRegister $register)
     {
         $register->add($register::onWorkerStart,function (){
-            //链接预热
-            DbManager::getInstance()->getConnection()->getClientPool()->keepMin();
+            // 链接预热
+            // ORM 1.4.31 版本之前请使用 getClientPool() 
+            // DbManager::getInstance()->getConnection()->getClientPool()->keepMin();
+            
+            DbManager::getInstance()->getConnection()->__getClientPool()->keepMin();
         });
-    }
-
-    public static function onRequest(Request $request, Response $response): bool
-    {
-        // TODO: Implement onRequest() method.
-        return true;
-    }
-
-    public static function afterRequest(Request $request, Response $response): void
-    {
-        // TODO: Implement afterAction() method.
     }
 }
 ```
