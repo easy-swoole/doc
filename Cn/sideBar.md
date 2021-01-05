@@ -119,12 +119,11 @@
   - [TCP服务](Socket/tcp.md)
   - [WebSocket服务](Socket/webSocket.md)
   - [UDP服务](Socket/udp.md)
+  - [常见问题](Socket/problem.md)
   - Socket控制器
     - [安装与使用示例](Socket/install.md)
     - [控制器对象](Socket/controller.md)
     - [响应对象](Socket/response.md)
-    - 常见问题
-  - [常见问题](Socket/problem.md)
 - 缓存
   - Redis
     - [安装](Components/Redis/introduction.md)
@@ -233,12 +232,10 @@
     - [自定义通信队列](Components/Spider/consumequeue.md)
   - U-Editor
   - 代码生成
-  - [第三方登录Oauth](Components/oauth.md)
-  - OSS存储客户端
-    - 安装
-    - 阿里云
-    - 腾讯
-    - 七牛  
+  - O-Auth
+    - [使用](Components/oauth.md)
+  - OSS协程客户端
+    - [使用](Components/oss.md)
   - 微信公众号及小程序
     - [安装](Components/WeChat/install.md)
     - [公众号](Components/WeChat/officialAccount.md)
