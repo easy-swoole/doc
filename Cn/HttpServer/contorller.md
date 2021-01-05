@@ -234,18 +234,6 @@ protected function gc()
 }
 ````
 
-#### afterAction 
-
-> 当action执行结束后调用该方法，可自定义数据回收等逻辑
-
-````php
-
-protected function afterAction(?string $actionName): void
-{
-
-}
-````
-
 ## 注意事项
 
 - 只有第一次请求时才会调用构造函数
