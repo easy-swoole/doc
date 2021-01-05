@@ -17,6 +17,46 @@
     - [什么是协程](QuickStart/Coroutine/introduction.md)
     - [注意事项](QuickStart/Coroutine/notice.md)
     - [上下文管理器](Components/Component/context.md)  
+- 免费视频教程
+  - 基础知识学习
+    - [php-fpm进程模型](Video/Basic/php-fpmProcessModel.md)
+    - [swoole进程模型](Video/Basic/swooleProcessModel.md)
+    - [swoole生命周期](Video/Basic/swooleLifeCycle.md)
+    - [协程简介](Video/Basic/coroutineIntroduction.md)
+    - [协程带来的影响](Video/Basic/impactOfCoroutine.md)
+  - 环境与框架安装
+    - [序章](Video/Install/prologue.md)
+    - [安装Git](Video/Install/installGit.md)
+    - [安装VirtualBox和Vagrant](Video/Install/installVagrant.md)
+    - [配置Vagrantfile](Video/Install/configureVagrantFile.md)
+    - [安装运行环境](Video/Install/installEnvironment.md)
+    - [安装Swoole](Video/Install/installSwoole.md)
+    - [安装Composer并配置共享目录](Video/Install/installComposer.md)
+    - [安装EasySwoole](Video/Install/installEasySwoole.md)
+  - Http 部分
+    - [Http解析与路由](Video/HttpRelated/route.md)
+    - [Controller对象简介和池模型介绍](Video/HttpRelated/controllerCharacteristic.md)
+    - [异常处理](Video/HttpRelated/exception.md)
+  - ORM 系列教程
+    - [安装及配置信息注册](Video/Orm/install.md)
+    - [定义模型](Video/Orm/defineModel.md)
+    - [查询](Video/Orm/search.md)
+    - [新增](Video/Orm/add.md)
+    - [删除](Video/Orm/del.md)
+    - [更新](Video/Orm/update.md)
+    - [模型结果](Video/Orm/modelResult.md)
+    - [读写分离](Video/Orm/readWrite.md)
+    - [聚合](Video/Orm/aggr.md)
+    - [事务](Video/Orm/trans.md)
+    - [修改器、获取器](Video/Orm/setterGetter.md)
+    - [invoke](Video/Orm/invoke.md)
+- 其他视频
+    - [并发查询](Video/ExtraVideo/concurrentQuery.md)
+    - [Csp编程](Video/ExtraVideo/Csp.md)
+    - [异步任务](Video/ExtraVideo/asyncTask.md)
+    - [自定义进程](Video/ExtraVideo/customProcess.md)
+    - [Http上传](Video/ExtraVideo/httpUpload.md)
+    - [Words-match文本检测](Video/ExtraVideo/words-match.md)
 - 框架设计
   - [启动流程](FrameDesign/start.md)
   - 核心文件
@@ -252,6 +292,7 @@
   - [栏目说明](OpenSource/explanation.md)
   - [XlsWriter-excel解析项目](OpenSource/xlsWriter.md)
   - [RitaswcIpAddress IP地址归属地](OpenSource/ritaswcIpAddress.md)
+- [Demo](/demo.md)
 - 应用部署
   - [Docker](Deploy/docker.md)
   - [Nginx](Deploy/nginx.md)
