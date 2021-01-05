@@ -81,7 +81,7 @@ $processConfig->setRedirectStdinStdout(false);//是否重定向标准io
 $processConfig->setPipeType($processConfig::PIPE_TYPE_SOCK_DGRAM);//设置管道类型
 $processConfig->setEnableCoroutine(true);//是否自动开启协程
 $processConfig->setMaxExitWaitTime(3);//最大退出等待时间
-Manager::getInstance()->addProcess(new CustomProcess($processConfig));
+\EasySwoole\Component\Process\Manager::getInstance()->addProcess(new CustomProcess($processConfig));
 ```
 
 ## 完整示例代码
