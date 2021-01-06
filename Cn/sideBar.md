@@ -286,6 +286,20 @@
     - [微信](Components/Pay/wechat.md)
     - [支付宝](Components/Pay/ali.md)
   - 代码加密
+- 常见问题
+  - [如何学习Swoole](Other/learnSwoole.md)
+  - [队列消费/自定义进程问题](/Other/process.md)
+  - [Redis/Kafka订阅](Other/redisSubscribe.md)
+  - [内核优化](Other/kernelOptimization.md)
+  - [随机生成问题](Other/random.md)
+  - [Trait与单例](Other/traitSingleTon.md)
+  - [MySQL索引降维](Other/mysqlIndexReduce.md)
+  - [tpORM使用问题](Other/tpORM.md)
+  - [CurlSSL错误](Other/curlSsl.md)
+  - [ChromeHeadless](Other/chromeHeadless.md)
+  - [GraphQL](Other/graphQL.md)
+  - [双机热备](Other/deploy.md)
+  - [延迟队列](Other/delayQueue.md)
 - 开源项目推荐
   - [栏目说明](OpenSource/explanation.md)
   - [XlsWriter-excel解析项目](OpenSource/xlsWriter.md)
