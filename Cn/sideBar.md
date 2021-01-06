@@ -207,6 +207,7 @@
     - [CircuitBreaker注解](Microservices/circuitBreaker.md)
   - 服务限流
     - [Atomic-limit](Components/atomicLimit.md)
+    - [IP限流](Components/ipLimit.md)
   - 配置中心
     - [Apollo](Components/apollo.md)
   - 链路追踪
@@ -286,6 +287,10 @@
     - [微信](Components/Pay/wechat.md)
     - [支付宝](Components/Pay/ali.md)
   - 代码加密
+    - [加密原理](Components/CodeEncrypt/intro.md)
+    - [使用](Components/CodeEncrypt/usage.md)
+    - [代码实现](Components/CodeEncrypt/achieve.md)
+    - [注意事项](Components/CodeEncrypt/caution.md)
 - 常见问题
   - [如何学习Swoole](Other/learnSwoole.md)
   - [队列消费/自定义进程问题](/Other/process.md)
