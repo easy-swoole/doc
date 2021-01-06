@@ -43,7 +43,7 @@ class Router extends AbstractRouter
     function initialize(RouteCollector $routeCollector)
     {
         $scanner = new Scanner();
-        $scanner->mappingRouter($routeCollector, EASYSWOOLE_ROOT . '/App', 'App\\HttpController\\');
+        $scanner->mappingRouter($routeCollector, EASYSWOOLE_ROOT . '/App/HttpController', 'App\HttpController');
     }
 }
 ```
