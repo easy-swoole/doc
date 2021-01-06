@@ -228,8 +228,12 @@
     - [Atomic 计数器](Components/Component/atomic.md)
     - [Channel Lock协程锁](Components/Component/channelLock.md)
   - ElasticSearch客户端
-    - [安装](a.md)
-    - [使用](a.md)
+    - [安装和使用](Components/ElasticSearch/install.md)
+    - [插入](Components/ElasticSearch/create.md)
+    - [删除](Components/ElasticSearch/delete.md)
+    - [修改](Components/ElasticSearch/update.md)
+    - [查询](Components/ElasticSearch/search.md)
+    - [分析](Components/ElasticSearch/analysis.md)
   - Spl组件
     - [SplArray](Components/Spl/splArray.md)
     - [SplBean](Components/Spl/splBean.md)
@@ -272,8 +276,10 @@
     - [Consume](Components/Spider/consume.md)
     - [客户端](Components/Spider/client.md)
     - [自定义通信队列](Components/Spider/consumequeue.md)
-  - U-Editor
+  - U-Editor(百度编辑器)
+    - [使用](Components/uEditor.md)
   - 代码生成
+    - [使用](Components/codeGeneration.md)
   - O-Auth
     - [使用](Components/oauth.md)
   - OSS协程客户端
