@@ -59,16 +59,7 @@ class Doc
         //侧边栏
         $sideBar= $this->renderMarkdown($this->template->getSideBarMd());
         if($sideBar){
-            $sideBar = HtmlDomParser::str_get_html($sideBar->getHtml());
-            foreach ($sideBar->find('a') as $href)
-            {
-                $a = $href->href;
-                if(!empty($a) && substr($a,-2) == 'md'){
-                    $a = '/'.substr($a,0,-2).'html';
-                    $href->href = $a;
-                }
-            }
-            $args->setArg('sideBar',(string)$sideBar);
+            $args->setArg('sideBar',(string)$sideBar->getHtml());
         }else{
             $args->setArg('sideBar',null);
         }
@@ -159,13 +150,34 @@ class Doc
                 }
             }
             if(!empty($content)){
-                $result->setHtml((new ParserDown())->parse($content));
-                $dom = HtmlDomParser::str_get_html($result->getHtml());
-                //删除代码标签
-                foreach ($dom->find("code") as $code){
-                    $code->innerhtml = '';
+                $html = (new ParserDown())->parse($content);
+                $html = HtmlDomParser::str_get_html($html);
+                foreach ($html->find('a') as $href)
+                {
+                    $a = $href->href;
+                    if(!empty($a) && substr($a,-2) == 'md'){
+                        $a = trim($a,'/');
+                        $temp = $this->rootPath.'/'.$a;
+                        if(file_exists($temp)){
+                            $a = '/'.substr($a,0,-2).'html';
+                            $href->href = $a;
+                        }
+                    }
                 }
-                $result->setPlainText($dom->text());
+                foreach ($html->find('layerOpen') as $href)
+                {
+                    $a = $href->href;
+                    if(!empty($a) && substr($a,-2) == 'md'){
+                        $a = trim($a,'/');
+                        $temp = $this->rootPath.'/'.$a;
+                        if(file_exists($temp)){
+                            $a = '/'.substr($a,0,-2).'html';
+                            $href->href = $a;
+                        }
+                    }
+                }
+                $result->setHtml($html);
+                $result->setMarkdown($content);
             }
             return $result;
         }else{

@@ -1,20 +1,9 @@
 <!DOCTYPE html>
+<html lang="cn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="/Css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/Css/document.css">
-    <link rel="stylesheet" href="/Css/highlight.css">
-    <link rel="stylesheet" href="/Css/markdown.css">
-    <script src="/Js/jquery.min.js"></script>
-    <script src="/Js/highlight.min.js"></script>
-    <script src="/Js/js.cookie.min.js"></script>
-    <script src="/Js/global.js"></script>
-    <script src="/Js/jquery.mark.min.js"></script>
-    <script src="/Js/Layer/layer.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {if isset($page.config.title)}<title>{$page.config.title}</title>{/if}
-
     {if isset($page.config.meta)}
         {foreach from=$page.config.meta item=item key=key}
             <meta name="{$item.name}" content="{$item.content}">
@@ -126,6 +115,10 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="/Css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Css/highlight.css">
+    <link rel="stylesheet" href="/Css/markdown.css">
+    <link rel="stylesheet" href="/Css/content.css">
 </head>
 <body>
 <div class="container layout-1">
@@ -141,13 +134,18 @@
                 <i class="fa fa-bars" style="font-size: 1.3rem;color: #333;"></i>
             </a>
             <div class="navInnerRight">
-                <div class="navSearch">
-                    <input aria-label="Search" autocomplete="off" spellcheck="false" class="" placeholder="" id="SearchValue">
-                    <div class="resultList" id="resultList" style="display: none"></div>
-                </div>
+                {*<div class="navSearch">*}
+                    {*<input aria-label="Search" autocomplete="off" spellcheck="false" class="" placeholder="" id="SearchValue">*}
+                    {*<div class="resultList" id="resultList" style="display: none"></div>*}
+                {*</div>*}
                 <div class="navItem">
                     <div class="dropdown-wrapper">
                         <a href="/wstool.html" style="text-decoration:none;">websocket测试工具</a>
+                        {*{if $lang eq 'Cn'}*}
+                            {*<a href="/wstool.html" style="text-decoration:none;">websocket测试工具</a>*}
+                        {*{else if}*}
+                            {*<a href="/wstool.html" style="text-decoration:none;">websocket test online</a>*}
+                        {*{/if}*}
                     </div>
                 </div>
                 <div class="navItem lang-select">
@@ -155,12 +153,19 @@
                         <button type="button" aria-label="Select language" class="dropdown-title">
                             <span class="title">Language</span> <span class="arrow right"></span>
                         </button>
+                        {*<ul class="nav-dropdown">*}
                         <ul class="nav-dropdown" style="display: none;">
-                            {foreach from=$allowLanguages item=lang key=key}
-                                <li class="dropdown-item">
-                                    <a href="javascript:void(0)" data-lang="{$key}" class="nav-link lang-change">{$lang}</a>
-                                </li>
-                            {/foreach}
+                            {*{foreach from=$allowLanguages item=lang key=key}*}
+                                {*<li class="dropdown-item">*}
+                                    {*<a href="javascript:void(0)" data-lang="{$key}" class="nav-link lang-change">{$lang}</a>*}
+                                {*</li>*}
+                            {*{/foreach}*}
+                            <li class="dropdown-item">
+                                <a data-lang="Cn" class="nav-link lang-change" href="http://www.easyswoole.com">简体中文</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a data-lang="En" class="nav-link lang-change" href="http://english.easyswoole.com">English</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -173,6 +178,15 @@
         <div class="right-menu" id="right-menu"></div>
     </section>
 </div>
+
+</body>
+{literal}
+<script src="/Js/jquery.min.js"></script>
+<script src="/Js/highlight.min.js"></script>
+<script src="/Js/Layer/layer.js"></script>
+<script src="/Js/global.js"></script>
+<script src="/Js/js.cookie.min.js"></script>
+<script src="/Js/global.js"></script>
 <script>
     (function($) {
         var container = $('.container');
@@ -194,54 +208,67 @@
 </script>
 <script>
     hljs.initHighlightingOnLoad();
-    $(function () {
-
-        $.each($('.sideBar li:has(li)'),function(){
-            // var data = $(this).append( 'asd');
-            $(this).attr('isOpen',0).addClass('fa fa-angle-right');
+    $(document).ready(function() {
+        function layerOpen(title,url)
+        {
+            $.ajax({
+                url: url,
+                method: 'POST',
+                success: function (res) {
+                    var newHtml = $(res);
+                    var newBody = newHtml.find('.markdown-body').eq(0).html();
+                    layer.open({
+                        type: 1,
+                        title: title,
+                        shadeClose: true,
+                        shade: false,
+                        maxmin: true,
+                        area: ['893px', '600px'],
+                        content: "<div style='padding-left: 5rem'>"+newBody+"<\/div>"
+                    });
+                }
+            });
+        }
+        $('layerOpen').click(function (obj){
+            layerOpen($(this).html(),$(this).attr('href'));
         });
 
-        $('.sideBar li:has(ul)').click(function(event){
+        /********** 左侧菜单栏开始 **************/
+        $.each($('.sideBar li:has(li)'), function () {
+            $(this).attr('isOpen', 0).addClass('fa fa-angle-right');
+        });
+
+        $('.sideBar li:has(ul)').click(function (event) {
             if (this == event.target) {
                 $(this).children().toggle('fast');
-                if($(this).attr('isOpen') == 1){
-                    $(this).attr('isOpen',0);
+                if ($(this).attr('isOpen') == 1) {
+                    $(this).attr('isOpen', 0);
                     $(this).removeClass('fa fa-angle-down');
                     $(this).addClass('fa fa-angle-right');
-                }else{
-                    $(this).attr('isOpen',1);
+                } else {
+                    $(this).attr('isOpen', 1);
                     $(this).removeClass('fa fa-angle-right');
                     $(this).addClass('fa fa-angle-down');
                 }
             }
         });
-
         // 自动展开菜单父级
         $.each($('.sideBar ul li a'), function () {
-            $(this).filter("a").css("text-decoration", "none").css('color','#2c3e50');
-            if ( $(this).attr('href') === window.location.pathname ) {
-                $(this).filter("a").css("text-decoration", "underline").css('color','#0080ff');
+            $(this).filter("a").css("text-decoration", "none").css('color', '#2c3e50');
+            if ($(this).attr('href') === window.location.pathname) {
+                $(this).filter("a").css("text-decoration", "underline").css('color', '#0080ff');
                 var list = [];
                 var parent = this;
-                while(1){
+                while (1) {
                     parent = $(parent).parent();
-                    if(parent.hasClass('sideBar')){
+                    if (parent.hasClass('sideBar')) {
                         break;
-                    }else{
+                    } else {
                         parent.click();
                     }
                 }
             }
         });
-
-        var articles = [];
-        $.ajax({
-            url: '/keyword{$docName}.json',
-            success: function (data) {
-                articles = data;
-            }
-        });
-
 
         /**
          * 关键词查找
@@ -378,7 +405,29 @@
 
         // 本章详情
         renderRightMenu();
+
+        // $('.fa_li').on('click', function(event) {
+        //     event.stopPropagation();
+        //     event.preventDefault()
+        //     $(this).find('ul:first').slideToggle()
+        //     if ($(this).hasClass('fa-angle-right')) {
+        //         $(this).removeClass('fa-angle-right').addClass('fa-angle-down')
+        //     } else if ($(this).hasClass('fa-angle-down')) {
+        //         $(this).removeClass('fa-angle-down').addClass('fa-angle-right')
+        //     }
+        // })
+        // $('.sideBar-toggle-button').click(function() {
+        //     $('.sideBar').toggle()
+        // })
+        /********** 左侧菜单栏结束 **************/
+        /********** 导航栏语言选择开始 **************/
+        // $('.lang-select').hover(function() {
+        //     $('.dropdown-wrapper .nav-dropdown').toggle()
+        // })
+        // $('.dropdown-wrapper .nav-dropdown').toggle()
+        /********** 导航栏语言选择结束 **************/
     });
+
     function dragFunc(id) {
         var Drag = document.getElementById(id);
         Drag.onmousedown = function(event) {
@@ -398,6 +447,7 @@
             this.style.cursor = "default";
         };
     }
+
     // ***右侧本章节导航**
     function renderRightMenu()
     {
@@ -438,5 +488,6 @@
         dragFunc("right-menu");
     }
 </script>
-</body>
+{/literal}
+
 </html>

@@ -24,6 +24,7 @@ title: Easyswoole框架设计原理 - 全局事件
 - 修改`Error`处理器
 - 修改`Shutdown`处理器
 - 修改`HttpException`全局处理器
+- 设置`Http`全局`OnRequest`及`AfterRequest`事件
 
 具体可查看[SysConst.php](https://github.com/easy-swoole/easyswoole/blob/3.x/src/SysConst.php)
 
@@ -43,6 +44,15 @@ date_default_timezone_set('Asia/Shanghai');
 
 // shutdown
 \EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::SHUTDOWN_FUNCTION,function (){
+
+});
+
+// onRequest v3.4.x+
+\EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::HTTP_GLOBAL_ON_REQUEST,function (\EasySwoole\Http\Request $request, \EasySwoole\Http\Response $response){
+
+});
+// afterRequest v3.4.x+
+\EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::HTTP_GLOBAL_AFTER_REQUEST,function (\EasySwoole\Http\Request $request, \EasySwoole\Http\Response $response){
 
 });
 ```
@@ -115,6 +125,9 @@ $subPort->set([
 ```
 
 ### 注册连接池
+
+如果在自定义进程或者自定义命令中需要使用到连接池,建议在`initialize`注册,代码中执行`\EasySwoole\EasySwoole\Core::getInstance()->initialize();`
+
 
 ```php
 // 连接池

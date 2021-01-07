@@ -15,7 +15,7 @@ class MarkDownResult
      */
     protected $html = null;
 
-    protected $plainText;
+    protected $markdown;
 
     /**
      * @return array|null
@@ -52,24 +52,24 @@ class MarkDownResult
     /**
      * @return mixed
      */
-    public function getPlainText()
+    public function getMarkdown()
     {
-        return $this->plainText;
+        return $this->markdown;
     }
 
     /**
-     * @param mixed $plainText
+     * @param mixed $markdown
      */
-    public function setPlainText($plainText): void
+    public function setMarkdown($markdown): void
     {
-        $this->plainText = $plainText;
+        $this->markdown = $markdown;
     }
 
     function toArray()
     {
         return [
             'config'=>$this->config,
-            'plainText'=>$this->plainText,
+            'plainText'=>$this->markdown,
             'html'=>$this->html
         ];
     }

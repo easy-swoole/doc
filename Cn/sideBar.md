@@ -2,9 +2,10 @@
   - [项目介绍](Preface/intro.md)
   - [交流群](Preface/contact.md)
   - [捐赠](Preface/donate.md)
-- 更新记录
+- 更新与文档
   - [框架更新记录](Update/main.md)
   - [组件更新记录](Update/component.md)
+  - [文档贡献](Update/doc.md)
 - 快速开始
   - [环境要求](QuickStart/environment.md)
   - [安装](QuickStart/install.md)
@@ -16,6 +17,46 @@
     - [什么是协程](QuickStart/Coroutine/introduction.md)
     - [注意事项](QuickStart/Coroutine/notice.md)
     - [上下文管理器](Components/Component/context.md)  
+- 免费视频教程
+  - 基础知识学习
+    - [php-fpm进程模型](Video/Basic/php-fpmProcessModel.md)
+    - [swoole进程模型](Video/Basic/swooleProcessModel.md)
+    - [swoole生命周期](Video/Basic/swooleLifeCycle.md)
+    - [协程简介](Video/Basic/coroutineIntroduction.md)
+    - [协程带来的影响](Video/Basic/impactOfCoroutine.md)
+  - 环境与框架安装
+    - [序章](Video/Install/prologue.md)
+    - [安装Git](Video/Install/installGit.md)
+    - [安装VirtualBox和Vagrant](Video/Install/installVagrant.md)
+    - [配置Vagrantfile](Video/Install/configureVagrantFile.md)
+    - [安装运行环境](Video/Install/installEnvironment.md)
+    - [安装Swoole](Video/Install/installSwoole.md)
+    - [安装Composer并配置共享目录](Video/Install/installComposer.md)
+    - [安装EasySwoole](Video/Install/installEasySwoole.md)
+  - Http 部分
+    - [Http解析与路由](Video/HttpRelated/route.md)
+    - [Controller对象简介和池模型介绍](Video/HttpRelated/controllerCharacteristic.md)
+    - [异常处理](Video/HttpRelated/exception.md)
+  - ORM 系列教程
+    - [安装及配置信息注册](Video/Orm/install.md)
+    - [定义模型](Video/Orm/defineModel.md)
+    - [查询](Video/Orm/search.md)
+    - [新增](Video/Orm/add.md)
+    - [删除](Video/Orm/del.md)
+    - [更新](Video/Orm/update.md)
+    - [模型结果](Video/Orm/modelResult.md)
+    - [读写分离](Video/Orm/readWrite.md)
+    - [聚合](Video/Orm/aggr.md)
+    - [事务](Video/Orm/trans.md)
+    - [修改器、获取器](Video/Orm/setterGetter.md)
+    - [invoke](Video/Orm/invoke.md)
+  - 其他视频
+    - [并发查询](Video/ExtraVideo/concurrentQuery.md)
+    - [Csp编程](Video/ExtraVideo/Csp.md)
+    - [异步任务](Video/ExtraVideo/asyncTask.md)
+    - [自定义进程](Video/ExtraVideo/customProcess.md)
+    - [Http上传](Video/ExtraVideo/httpUpload.md)
+    - [Words-match文本检测](Video/ExtraVideo/words-match.md)
 - 框架设计
   - [启动流程](FrameDesign/start.md)
   - 核心文件
@@ -38,6 +79,7 @@
   - [动态路由](HttpServer/dynamicRoute.md)
   - [权限与中间件](HttpServer/interception.md)
   - [异常处理](HttpServer/exception.md)
+  - [Session](HttpServer/session.md)
   - [视图](Components/Component/template.md)
   - [验证码](Components/verifyCode.md)
   - [文件上传](HttpServer/uploadFile.md)
@@ -118,12 +160,11 @@
   - [TCP服务](Socket/tcp.md)
   - [WebSocket服务](Socket/webSocket.md)
   - [UDP服务](Socket/udp.md)
+  - [常见问题](Socket/problem.md)
   - Socket控制器
     - [安装与使用示例](Socket/install.md)
     - [控制器对象](Socket/controller.md)
     - [响应对象](Socket/response.md)
-    - 常见问题
-  - [常见问题](Socket/problem.md)
 - 缓存
   - Redis
     - [安装](Components/Redis/introduction.md)
@@ -166,6 +207,7 @@
     - [CircuitBreaker注解](Microservices/circuitBreaker.md)
   - 服务限流
     - [Atomic-limit](Components/atomicLimit.md)
+    - [IP限流](Components/ipLimit.md)
   - 配置中心
     - [Apollo](Components/apollo.md)
   - 链路追踪
@@ -177,7 +219,7 @@
     - [跨语言](Microservices/Rpc/otherPlatform.md)
     - [服务注册中心](Microservices/Rpc/registerCenter.md)
 - 组件库
-  - 内置组件
+  - 基础组件
     - [单例](Components/Component/singleton.md)
     - [协程单例](Components/Component/coroutineSingleton.md)
     - [就绪等待](Components/Component/readyScheduler.md)
@@ -185,8 +227,13 @@
     - [Swoole Table](Components/Component/tableManager.md)
     - [Atomic 计数器](Components/Component/atomic.md)
     - [Channel Lock协程锁](Components/Component/channelLock.md)
-  - 搜索引擎
-    - [ElasticSearch](Components/elasticsearch.md)
+  - ElasticSearch客户端
+    - [安装和使用](Components/ElasticSearch/install.md)
+    - [插入](Components/ElasticSearch/create.md)
+    - [删除](Components/ElasticSearch/delete.md)
+    - [修改](Components/ElasticSearch/update.md)
+    - [查询](Components/ElasticSearch/search.md)
+    - [分析](Components/ElasticSearch/analysis.md)
   - Spl组件
     - [SplArray](Components/Spl/splArray.md)
     - [SplBean](Components/Spl/splBean.md)
@@ -229,24 +276,46 @@
     - [Consume](Components/Spider/consume.md)
     - [客户端](Components/Spider/client.md)
     - [自定义通信队列](Components/Spider/consumequeue.md)
-  - U-Editor
+  - U-Editor(百度编辑器)
+    - [使用](Components/uEditor.md)
   - 代码生成
-  - 第三方
-    - [Oss](Components/oss.md)
-    - [Oauth](Components/oauth.md)
+    - [使用](Components/codeGeneration.md)
+  - O-Auth
+    - [使用](Components/oauth.md)
+  - OSS协程客户端
+    - [使用](Components/oss.md)
   - 微信公众号及小程序
     - [安装](Components/WeChat/install.md)
     - [公众号](Components/WeChat/officialAccount.md)
     - [小程序](Components/WeChat/miniProgram.md)
-  - 第三方支付
+  - 第三方支付组件
     - [安装](Components/Pay/install.md)
     - [微信](Components/Pay/wechat.md)
     - [支付宝](Components/Pay/ali.md)
   - 代码加密
+    - [加密原理](Components/CodeEncrypt/intro.md)
+    - [使用](Components/CodeEncrypt/usage.md)
+    - [代码实现](Components/CodeEncrypt/achieve.md)
+    - [注意事项](Components/CodeEncrypt/caution.md)
+- 常见问题
+  - [如何学习Swoole](Other/learnSwoole.md)
+  - [队列消费/自定义进程问题](/Other/process.md)
+  - [Redis/Kafka订阅](Other/redisSubscribe.md)
+  - [内核优化](Other/kernelOptimization.md)
+  - [随机生成问题](Other/random.md)
+  - [Trait与单例](Other/traitSingleTon.md)
+  - [MySQL索引降维](Other/mysqlIndexReduce.md)
+  - [tpORM使用问题](Other/tpORM.md)
+  - [CurlSSL错误](Other/curlSsl.md)
+  - [ChromeHeadless](Other/chromeHeadless.md)
+  - [GraphQL](Other/graphQL.md)
+  - [双机热备](Other/deploy.md)
+  - [延迟队列](Other/delayQueue.md)
 - 开源项目推荐
   - [栏目说明](OpenSource/explanation.md)
   - [XlsWriter-excel解析项目](OpenSource/xlsWriter.md)
   - [RitaswcIpAddress IP地址归属地](OpenSource/ritaswcIpAddress.md)
+- [Demo](/demo.md)
 - 应用部署
   - [Docker](Deploy/docker.md)
   - [Nginx](Deploy/nginx.md)

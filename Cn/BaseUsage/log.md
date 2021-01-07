@@ -122,7 +122,7 @@ class LogHandel implements LoggerInterface
 }
 ```
 
-在`bootstrap`事件中注入自定义`logger`处理器：
+在`initialize`事件中注入自定义`logger`处理器：
 > \EasySwoole\EasySwoole\Logger::getInstance(new \App\Log\LogHandel());
 
 ## 日志中心

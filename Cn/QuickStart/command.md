@@ -14,9 +14,9 @@ meta:
 
 ## 服务管理
 
-`EasySwoole`框架主命令。  
+`EasySwoole` 框架主命令。  
 
-可执行`php easyswoole server -h`来查看具体操作。
+可执行 `php easyswoole server -h` 来查看具体操作。
 
 **服务启动**
 
@@ -28,7 +28,7 @@ meta:
 
 **指定配置文件启动服务**
 
-默认为`dev`
+默认为 `dev`
 
 > php easyswoole server start -mode=produce
 
@@ -42,13 +42,13 @@ meta:
 
 **热重启**
 
-仅会重启`worker`进程
+仅会重启 `worker` 进程
 
 > php easyswoole server reload
 
 **重启服务**
 
-`-d`可选参数：守护进程
+`-d` 可选参数：守护进程
 
 > php easyswoole server restart
 
@@ -58,15 +58,15 @@ meta:
 
 ## 进程管理
 
-`EasySwoole`内置对于`Process`的命令行操作，方便开发者友好的去管理`Process`。
+`EasySwoole` 内置对于 `Process` 的命令行操作，方便开发者友好地去管理 `Process`。
 
-可执行`php easyswoole process -h`来查看具体操作。
+可执行 `php easyswoole process -h` 来查看具体操作。
 
 **显示所有进程**
 
 > php easyswoole process show
 
-**如果想要以`MB`形式显示：**
+**如果想要以 `MB` 形式显示：**
 
 > php easyswoole process show -d
 
@@ -84,15 +84,15 @@ meta:
 
 **强制杀死进程**
 
-需要带上`-f`参数，例如：
+需要带上 `-f` 参数，例如：
 > php easyswoole process kill --pid=PID -f
 
 
 ## Crontab管理
 
-`EasySwoole`内置对于`Crontab`的命令行操作，方便开发者友好的去管理`Crontab`。
+`EasySwoole` 内置对于 `Crontab` 的命令行操作，方便开发者友好地去管理 `Crontab`。
 
-可执行`php easyswoole crontab -h`来查看具体操作。
+可执行 `php easyswoole crontab -h` 来查看具体操作。
 
 **查看所有注册的Crontab**
 
@@ -112,7 +112,7 @@ meta:
 
 ## Task管理
 
-**查看`Task`进程状态**
+**查看 `Task` 进程状态**
 
 > php easyswoole task status
 
@@ -126,20 +126,3 @@ meta:
 **非协程方式**
 
 > php easyswoole phpunit --no-coroutine
-
-
-## Config管理
-
-`EasySwoole`内置对于`Config`的命令行操作，方便开发者动态修改配置（仅`SwooleTable`）。
-
-可执行`php easyswoole config -h`来查看具体操作。
-
-**展示配置项信息 key支持.分隔符**
-
-> php easyswoole config show
-
-> php easyswoole config show --appoint=KEY
-
-**设置配置 key支持.分隔符**
-
-> php easyswoole config set --KEY1=VALUE1 --KEY2=VALUE2

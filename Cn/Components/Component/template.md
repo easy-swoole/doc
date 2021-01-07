@@ -36,7 +36,7 @@ use EasySwoole\Template\RenderInterface;
 class R implements RenderInterface
 {
 
-    public function render(string $template, array $data = [], array $options = []):?string
+    public function render(string $template, ?array $data = [], ?array $options = []):?string
     {
         return 'todo some thing';
     }
@@ -46,7 +46,7 @@ class R implements RenderInterface
         // TODO: Implement afterRender() method.
     }
 
-    public function onException(Throwable $throwable):string
+    public function onException(Throwable $throwable, $arg):string
     {
         return $throwable->getMessage();
     }
@@ -57,14 +57,27 @@ class R implements RenderInterface
 ### 自定义HTTP服务中调用
 
 ```php
-\EasySwoole\Template\Render::getInstance()->getConfig()->setRender(new R());
+class MyRender implements \EasySwoole\Template\RenderInterface {
 
-$httpServer = new \Swoole\Http\Server("0.0.0.0", 9501);
-$httpServer->on("request", function (\Swoole\Http\Request $request, \Swoole\Http\Response $response)use($render) {
-    //调用渲染器，此时会通过携程客户端，把数据发往自定义的同步进程中处理，并得到渲染结果
-    $response->end(\EasySwoole\Template\Render::getInstance()->render('custom.html'));
+    public function render(string $template, ?array $data = null, ?array $options = null): ?string
+    {
+        return "your template is {$template} and data is ".json_encode($data);
+    }
+
+    public function onException(\Throwable $throwable, $arg): string
+    {
+        return $throwable->getTraceAsString();
+    }
+}
+\EasySwoole\Template\Render::getInstance()->getConfig()->setRender(new MyRender());
+
+$http = new swoole_http_server("0.0.0.0", 9501);
+$http->on("request", function ( $request,  $response){
+    $ret = \EasySwoole\Template\Render::getInstance()->render('index.html',['easyswoole'=>'hello']);
+    $response->end($ret);
 });
-$render->attachServer($httpServer);
+
+\EasySwoole\Template\Render::getInstance()->attachServer($http);
 
 $http->start();
 ```
@@ -138,7 +151,7 @@ class Smarty implements RenderInterface
         $this->smarty->setCompileDir("{$temp}/smarty/compile/");
     }
 
-    public function render(string $template, array $data = [], array $options = []): ?string
+    public function render(string $template, ?array $data = [], ?array $options = []): ?string
     {
         foreach ($data as $key => $item){
             $this->smarty->assign($key,$item);
@@ -152,7 +165,7 @@ class Smarty implements RenderInterface
 
     }
 
-    public function onException(\Throwable $throwable): string
+    public function onException(\Throwable $throwable, $arg): string
     {
         $msg = "{$throwable->getMessage()} at file:{$throwable->getFile()} line:{$throwable->getLine()}";
         trigger_error($msg);

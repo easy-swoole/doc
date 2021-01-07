@@ -10,8 +10,37 @@ meta:
 # 请求拦截
 
 Easyswoole的控制器并没有提供类似中间件的说法，而是提供了控制器中的```onRequest```事件进行验证。
-例如，我们需要对```/api/user/*```下的路径进行cookie验证。那么步骤如下
-# 定义Base控制器
+例如，我们需要对```/api/user/*```下的路径进行cookie验证。那么有以下两种方案.
+
+## 全局Request及Response事件
+
+在[initialize](/FrameDesign/event.md)中注册.
+
+```php
+// onRequest v3.4.x+
+\EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::HTTP_GLOBAL_ON_REQUEST,function (\EasySwoole\Http\Request $request, \EasySwoole\Http\Response $response){
+    $cookie = $this->request()->getCookieParams('user_cookie');
+    //对cookie进行判断，比如在数据库或者是redis缓存中，存在该cookie信息，说明用户登录成功
+    $isLogin = true;
+    if($isLogin){
+        //返回true表示继续往下执行控制器action
+        return  true;
+    }else{
+        //这一步可以给前端响应数据，告知前端未登录
+        $this->writeJson(401,null,'请先登录');
+        //返回false表示不继续往下执行控制器action
+        return  false;
+    }
+});
+// afterRequest v3.4.x+
+\EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::HTTP_GLOBAL_AFTER_REQUEST,function (\EasySwoole\Http\Request $request, \EasySwoole\Http\Response $response){
+
+});
+```
+
+3.4.x版本之前：可在`EasySwooleEvent`中看到`onRequest`及`afterRequest`方法.
+
+## 定义Base控制器
 
 ```php
 namespace App\HttpController\Api\User;

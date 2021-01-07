@@ -15,7 +15,7 @@ return [
             'enable_static_handler'    => true,
         ],
         'TASK'=>[
-            'workerNum'=>4,
+            'workerNum'=>0,
             'maxRunningNum'=>128,
             'timeout'=>15
         ]

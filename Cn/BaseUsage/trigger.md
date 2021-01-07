@@ -73,5 +73,5 @@ class TriggerHandel implements TriggerInterface
 }
 ```
 
-在`bootstrap`事件中注入自定义`trigger`处理器：
+在`initialize`事件中注入自定义`trigger`处理器：
 > \EasySwoole\EasySwoole\Trigger::getInstance(new \App\Exception\TriggerHandel());
