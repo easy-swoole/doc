@@ -1,43 +1,44 @@
 ---
-title: easyswoole框架部署-supervisor
+title: deploying easyswoole with supervisord  
 meta:
   - name: description
-    content: easyswoole框架部署-supervisor
+    content: deploying easyswoole with supervisord 
   - name: keywords
-    content: easyswoole框架部署-supervisor
+    content: deploying easyswoole with supervisord 
 ---
 
-# Supervisor部署
 
-[Supervisor](http://supervisord.org)是用`Python`开发的一个`client/server`服务，是`Linux/Unix`系统下的一个进程管理工具，不支持`Windows`系统。很方便的监听、启动、停止、重启一个或多个进程。用`Supervisor`管理的进程，当一个进程意外被`Kill`，会自动将它重新拉起，不需要开发者自己编写`shell`进行进程管理来维护自己的服务。
+# Supervisor deployment
 
-## 安装Supervisor
+[Supervisor]( http://supervisord.org ）It is a `client / server` service developed with `Python`. It is a process management tool under `Linux / Unix` system and does not support `windows` system. It is convenient to monitor, start, stop and restart one or more processes. For processes managed by `supervisor`, when a process is accidentally `killed`, it will be automatically pulled up again. Developers do not need to write their own `shell` for process management to maintain their own services.
 
-采用`Ubuntu`系统下的安装方式进行演示：
+## Install Supervisor
+
+Use the installation method under the 'Ubuntu' system to demonstrate:
 
 > apt-get -y install supervisor
 
-## 创建配置文件
+## Create profile
 
 > vim /etc/supervisor/conf.d/easyswoole.conf
 
-文件内容如下：
+The contents of the document are as follows：
 ```
-# 设置应用名称为easyswoole
+# Set the app name to easywoole
 [program:easyswoole]
-# 设置运行目录
+# Set running directory
 directory=/data/wwwroot/EasySwoole3.4.x
-# 项目的启动命令
+# Start command for project
 command=php easyswoole server start
-# 设置用户来运行该进程
+# Set the user to run the process
 user=www-data
-# 是否随着supervisor启动时 自动启动该应用
+# Do you want to start the application automatically when supervisor starts
 autostart=true
-# 进程退出 是否自动重启进程
+# Does the process exit and restart automatically
 autorestart=true
-# 进程启动多少秒之后被认为是启动成功 默认1s
+# How many seconds after the process starts is considered to be successful. The default is 1s
 startsecs=1
-# 失败最大尝试次数 默认3
+# The maximum number of failed attempts is 3 by default
 startretries=3
 # stderr
 stderr_logfile=/data/wwwlog/easyswoole-stderr.log
@@ -51,23 +52,20 @@ stdout_logfile=/data/wwwlog/easyswoole-stdout.log
 
 ## Supervisorctl
 
-*启动EasySwoole应用*
+*Start EasySwoole*
 > supervisorctl start easyswoole
 
-*停止EasySwoole应用*
+*Stop EasySwoole*
 > supervisorctl stop easyswoole
 
-*重启EasySwoole应用*
+*Restart EasySwoole*
 > supervisorctl restart easyswoole
 
-*启动EasySwoole应用*
-> supervisorctl start easyswoole
-
-*查看所有监控的应用*
+*View all monitored apps*
 > supervisorctl status
 
-*重新加载配置文件*
+*Reload configuration file*
 > supervisorctl update
 
-*重启所有应用*
+*Restart all apps*
 > supervisorctl reload
