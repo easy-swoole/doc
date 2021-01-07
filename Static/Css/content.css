@@ -107,7 +107,8 @@ li {
         left: 0 !important;
         right: 0 !important;
         padding: 0 1.5rem .5rem 1.5rem;
-        display: none;
+        /*display: none;*/
+        display: none !important;
     }
     .navInnerRight>div {
         display: block !important;
@@ -406,7 +407,7 @@ li {
 }
 
 .container .mainContent {
-    padding-left: 15rem;
+    /*padding-left: 15rem; */
     padding-bottom: 2rem;
     display: block;
     padding-top: 4rem;

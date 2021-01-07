@@ -137,14 +137,16 @@ Easyswoole从最早的前身EasyPHP-Swoole，到更名为Easyswoole,再到现如
         
   - 持续和深入地开发
   - 文档和社区的建设和维护
-  
+
+<script src="/Js/jquery.min.js"></script>
+<script src="/Js/Layer/layer.js"></script>
 <script>
 if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
 
 }else{
         if(localStorage.getItem('isNew2') != 1){
             $.ajax({
-                url: '/Cn/Preface/contactAuthor.html',
+                url: '/Preface/contact.html',
                 method: 'POST',
                 success: function (res) {
                     var newHtml = $(res);
@@ -152,7 +154,7 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
                     localStorage.setItem('isNew2',1);
                     layer.open({
                       type: 1,
-                      title: '欢迎来到easyswoole,欢迎加入QQ交流群',
+                      title: '欢迎来到 EasySwoole，欢迎加入 QQ 交流群',
                       shadeClose: true,
                       shade: false,
                       maxmin: true, 
