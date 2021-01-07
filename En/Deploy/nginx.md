@@ -1,20 +1,20 @@
 ---
-title: easyswoole框架部署-nginx
+title: deploying easyswoole with nginx  
 meta:
   - name: description
-    content: easyswoole框架部署-nginx
+    content: deploying easyswoole with nginx 
   - name: keywords
-    content: easyswoole框架部署-nginx
+    content: deploying easyswoole with nginx 
 ---
 
-# Nginx部署
+# Nginx deployment
 
-[Nginx](http://nginx.org/)是一款轻量级的`Web`服务器/反向代理服务器及电子邮件`（IMAP/POP3）`代理服务器。其特点是占有内存少，并发能力强。可以做为`EasySwoole`的前置服务器，实现负载均衡等。
+[Nginx](http://nginx.org/）Is a lightweight `Web` server/reverse proxy server and e-mail `(IMAP / POP3)` proxy server. It is characterized by less memory and strong concurrency. It can be used as the front server of easysoole to realize load balancing.
 
-## http代理
+## http proxy
 
 ```nginx
-# 配置EasySwoole节点 至少需要一个
+# At least one is required to configure the easysoole node
 upstream easyswoole {
     server 127.0.0.1:9501;
     server 127.0.0.1:9502;
@@ -22,32 +22,32 @@ upstream easyswoole {
 }
 
 server {
-    # nginx所监听端口
+    # Port monitored by nginx
     listen 80; 
-    # 域名
+    # domain name
     server_name proxy.easyswoole.com;
 
     location / {
-        # 将客户端host及ip信息转发到对应节点  
+        # Forward the host and IP information of the client to the corresponding node 
         proxy_set_header Host $http_host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
-        # 转发Cookie，设置 SameSite
+        # Forward cookie, set samesite
         proxy_cookie_path / "/; secure; HttpOnly; SameSite=strict";
 
-        # 代理访问真实服务器
+        # Proxy access to real servers
         proxy_pass http://easyswoole;
     }
 }
 ```
 
-## websocket代理
+## websocket proxy
 
 ```nginx
-# 配置EasySwoole节点 至少需要一个
+#At least one is required to configure the easysoole node
 upstream easyswoole {
-    # 将负载均衡模式设置为IP hash，作用：不同的客户端每次请求都会与同一节点进行交互。
+    # The load balancing mode is set to IP hash. The function is that different clients will interact with the same node every time they request.
     ip_hash;
     server 127.0.0.1:9501;
     server 127.0.0.1:9502;
@@ -61,19 +61,19 @@ server {
     location / {
         # websocket的header
         proxy_http_version 1.1;
-        # 升级http1.1到websocket协议
+        # Upgrade HTTP1.1 to websocket protocol
         proxy_set_header Upgrade websocket;
         proxy_set_header Connection "Upgrade";
 
-        # 将客户端host及ip信息转发到对应节点  
+        # Forward the host and IP information of the client to the corresponding node
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header Host $http_host;
 
-        # 客户端与服务端60s之内无交互，将自动断开连接。
+        # If there is no interaction between the client and the server within 60 seconds, the connection will be disconnected automatically.
         proxy_read_timeout 60s ;
 
-        # 代理访问真实服务器
+        # Proxy access to real servers
         proxy_pass http://easyswoole;
     }
 }
