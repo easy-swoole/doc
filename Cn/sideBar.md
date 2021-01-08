@@ -13,10 +13,12 @@
   - [基础管理命令](QuickStart/command.md)
   - [开发者必读](QuickStart/notice.md)
   - [常见问题](QuickStart/problem.md)
+  - [配置文件](QuickStart/config.md)
+  - [反向代理](QuickStart/proxy.md) 
   - 协程操作指南
     - [什么是协程](QuickStart/Coroutine/introduction.md)
     - [注意事项](QuickStart/Coroutine/notice.md)
-    - [上下文管理器](Components/Component/context.md)  
+    - [上下文管理器](Components/Component/context.md)
 - 免费视频教程
   - 基础知识学习
     - [php-fpm进程模型](Video/Basic/php-fpmProcessModel.md)
