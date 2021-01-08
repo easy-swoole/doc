@@ -45,15 +45,17 @@ After the proxy, you can get the real ip of the client through `$request->getHea
 
 ## other
 
-- [Project document repository](https://github.com/easy-swoole/doc-3.3.x)
+- [Project document repository](https://github.com/easy-swoole/doc)
 
-- [DEMO](https://github.com/easy-swoole/demo/)
+- [DEMO](https://github.com/easy-swoole/demo)
 
 - QQ exchange group
-    - VIP group 579434607 (this group needs to pay 599 RMP)
+    - VIP group 579434607 (this group needs to pay 599 RMB)
     - EasySwoole official group 633921431 (full)
     - EasySwoole official two groups 709134628 (full)
-    - EasySwoole official three groups 932625047
+    - EasySwoole official three groups 932625047 (full)
+    - EasySwoole official four groups 779897753 (full)
+    - EasySwoole official five groups 853946743
     
 - Business support:
     - QQ 291323003
@@ -62,7 +64,7 @@ After the proxy, you can get the real ip of the client through `$request->getHea
 
      ![](/Images/authWx.png)
     
-- [Donation](/En/Preface/donation.md)
+- [Donation](/Preface/donate.md)
   Your donation is the greatest encouragement and support for the Swoole project development team. We will insist on development and maintenance. Your donation will be used to:
         
   - Continuous and in-depth development
