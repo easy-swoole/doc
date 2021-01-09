@@ -6,16 +6,16 @@ meta:
   - name: keywords
     content: easyswoole微信支付SDK|swoole微信支付SDK|swoole微信支付SDK
 ---
-# 协程支付网关
+# 协程支付网关(微信支付)
+
+## 组件安装方法
 ```
 composer require easyswoole/pay
 ```
 
+## 微信支付方法
 
-# 微信支付
-
-
-微信支付目前支持 3 种支付方法，对应的支付 method 如下：
+微信支付目前支持 6 种支付方法，对应的支付 method 如下：
 
 | method         | 说明         | 参数    | 返回值   |
 | --------       | ------------ | ------- | -------- |
@@ -26,7 +26,7 @@ composer require easyswoole/pay
 | barCode  | 条码当面支付 | Request | Response  |
 | App  | App支付 | Request | Response  |
 
-#### 微信参数配置
+### 微信参数配置
 
 ```php
 $wechatConfig = new Config();
