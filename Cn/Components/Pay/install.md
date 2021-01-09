@@ -16,10 +16,11 @@ EasySwoole Pay 是一个基于 Swoole 4.x `全协程`支持的支付SDK库，告
 
 -   ext-json >= 1.0
 -   ext-openssl >= 1.0
+-   ext-bcmath >= 1.0
 -   easyswoole/http >= ^1.2
 -   easyswoole/spl >= ^1.1
--   easyswoole/http-client ^1.2.5
--   easyswoole/utility" ^1.0
+-   easyswoole/http-client >= ^1.2.5
+-   easyswoole/utility >= ^1.0
 
 ## 安装方法
 

@@ -266,6 +266,7 @@
     - [SnowFlake](Components/Help/snowFlake.md)
     - [Str](Components/Help/str.md)
     - [Time](Components/Help/time.md)
+    - [IntStr](Components/Help/intStr.md)
   - 令牌及策略
     - [JWT令牌](Components/jwt.md)
     - [Policy](Components/policy.md)
