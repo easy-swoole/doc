@@ -10,7 +10,7 @@ meta:
 # Developer reading
 
 - [GitHub](https://github.com/easy-swoole/easyswoole)  Leave a star if you like
-- [GitHub for Doc](https://github.com/easy-swoole/doc-3.3.x)  Contribute document
+- [GitHub for Doc](https://github.com/easy-swoole/doc)  Contribute document
 
 ## Community Q & A
 
@@ -18,7 +18,9 @@ meta:
     - VIP group 579434607 (this group needs to pay 599 RMB)
     - EasySwoole official group 633921431 (full)
     - EasySwoole official two groups 709134628 (full)
-    - EasySwoole official three groups 932625047
+    - EasySwoole official three groups 932625047 (full)
+    - EasySwoole official four groups 779897753 (full)
+    - EasySwoole official five groups 853946743
 
 - Commercial support:
     - QQ 291323003

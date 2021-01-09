@@ -105,7 +105,7 @@ Transfer rate:          2265.40 [Kbytes/sec] received
 ```
 composer require easyswoole/easyswoole=3.x
 php vendor/bin/easyswoole install
-php easyswoole start
+php easyswoole server start
 ```
 
 ## Unit Test
@@ -125,17 +125,20 @@ docker pull easyswoole/easyswoole3
 docker run -ti -p 9501:9501 easyswoole/easyswoole3
 ```
 - WorkerDir: ***/easyswoole***
-- Run Easyswoole : ***php easyswoole start*** 
+- Run Easyswoole : ***php easyswoole server start*** 
 
 ## Others 
 - [Home Page](https://www.easyswoole.com)
-- [Git For Doc](https://github.com/easy-swoole/doc-3.3.x)
+- [Git For Doc](https://github.com/easy-swoole/doc)
 - [Git For Demo](https://github.com/easy-swoole/demo)
-- QQ交流群
-    - VIP群 579434607 （本群需要付费599元）
-    - EasySwoole官方一群 633921431(已满)
-    - EasySwoole官方二群 709134628
+- QQ exchange group
+    - VIP group 579434607 (this group needs to pay 599 RMB)
+    - EasySwoole official group 633921431 (full)
+    - EasySwoole official two groups 709134628 (full)
+    - EasySwoole official three groups 932625047 (full)
+    - EasySwoole official four groups 779897753 (full)
+    - EasySwoole official five groups 853946743 
     
-- 商业支持：
+- Business support:
     - QQ 291323003
     - EMAIL admin@fosuss.com
