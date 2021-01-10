@@ -8,7 +8,8 @@
   - [文档贡献](Update/doc.md)
 - 快速开始
   - [环境要求](QuickStart/environment.md)
-  - [安装](QuickStart/install.md)
+  - [安装 Swoole](QuickStart/installSwoole.md)
+  - [框架安装](QuickStart/install.md)
   - [HelloWorld](QuickStart/helloworld.md)
   - [基础管理命令](QuickStart/command.md)
   - [开发者必读](QuickStart/notice.md)
