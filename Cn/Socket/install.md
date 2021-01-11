@@ -169,8 +169,8 @@ class TcpParser implements ParserInterface
 $config = new \EasySwoole\Socket\Config();
 $config->setType($config::TCP);
 $config->setParser(TcpParser::class);
-$dispatcher = new Dispatcher($config);
-$config->setOnExceptionHandler(function (\Swoole\Server $server, \Throwable $throwable, string $raw, Tcp $client, Response $response) {
+$dispatcher = new \EasySwoole\Socket\Dispatcher($config);
+$config->setOnExceptionHandler(function (\Swoole\Server $server, \Throwable $throwable, string $raw, \EasySwoole\Socket\Client\Tcp $client, \EasySwoole\Socket\Bean\Response $response) {
     $response->setMessage('system error!');
     $response->setStatus($response::STATUS_RESPONSE_AND_CLOSE);
 });
@@ -242,12 +242,12 @@ class UdpParser implements ParserInterface
 $config = new \EasySwoole\Socket\Config();
 $config->setType($config::UDP);
 $config->setParser(UdpParser::class);
-$dispatcher = new Dispatcher($config);
-$config->setOnExceptionHandler(function (\Swoole\Server $server, \Throwable $throwable, string $raw, Udp $client, Response $response) {
+$dispatcher = new \EasySwoole\Socket\Dispatcher($config);
+$config->setOnExceptionHandler(function (\Swoole\Server $server, \Throwable $throwable, string $raw, \EasySwoole\Socket\Client\Udp $client, \EasySwoole\Socket\Bean\Response $response) {
     $response->setMessage('system error!');
     $response->setStatus($response::STATUS_RESPONSE_AND_CLOSE);
 });
-$server = ServerManager::getInstance()->getSwooleServer();
+$server = \EasySwoole\EasySwoole\ServerManager::getInstance()->getSwooleServer();
 $udpServer = $server->addListener('0.0.0.0', '9511', SWOOLE_UDP);
 $udpServer->on($register::onPacket, function (\Swoole\Server $server, string $data, array $clientInfo) use ($dispatcher) {
     $dispatcher->dispatch($server, $data, $clientInfo['server_socket'], $clientInfo['address'], $clientInfo['port']);
@@ -416,11 +416,12 @@ class WebSocketEvent
 `mainServerCreate`
 
 ```php
+<?php
 $config = new \EasySwoole\Socket\Config();
 $config->setType($config::WEB_SOCKET);
 $config->setParser(WebSocketParser::class);
-$dispatcher = new Dispatcher($config);
-$config->setOnExceptionHandler(function (\Swoole\Server $server, \Throwable $throwable, string $raw, WebSocket $client, Response $response) {
+$dispatcher = new \EasySwoole\Socket\Dispatcher($config);
+$config->setOnExceptionHandler(function (\Swoole\Server $server, \Throwable $throwable, string $raw, \EasySwoole\Socket\Client\WebSocket $client, \EasySwoole\Socket\Bean\Response $response) {
     $response->setMessage('system error!');
     $response->setStatus($response::STATUS_RESPONSE_AND_CLOSE);
 });
