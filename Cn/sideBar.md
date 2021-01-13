@@ -74,6 +74,7 @@
   - [单元测试](Components/phpunit.md)
   - [异步任务](Components/Component/task.md)
   - [自定义进程](Components/Component/process.md)
+  - [IOC 容器](Components/Component/ioc.md)
 - HTTP服务
   - [控制器](HttpServer/contorller.md)
   - [请求对象](HttpServer/request.md)
