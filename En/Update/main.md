@@ -15,51 +15,53 @@
 
 ### Added
 
-- 增加`SysConst::EXECUTE_COMMAND`,此常量可获取主框架内部所执行的`command`.
-- `install`命令函数检查`symlink`和`readlink`。
+- Added constant `SysConst::EXECUTE_COMMAND`, the constant can get the executed `command` inside the main frame.
+- Added check that the `install` command check whether the symlink and readlink functions are disabled.
 
-### 修复
+### Fixed
 
-- 修复`worker`异常退出，没有清理`table`信息。
+- Fixed bug that the `table` information is not cleaned up when `worker` exits abnormally.
 
-### 移除
+### Removed
 
-- 移除command及bridge中config功,因为非`swoole-table`.
+- Removed the config function in the `command` and `bridge` component, because the configuration does not use `swoole-table`.
 
-## 3.4.0 - 2020-10-24
 
-与`3.3.x`不兼容，需进行调整.
+## Version 3.4.0 - October 24th, 2020
 
-`3.3.x -> 3.4.x`需要重新执行`php vendor/bin/easyswoole install`.
+v`3.4.x` is not compatible with v`3.3.x`, 3.4.x has made relatively large adjustments.
 
-### 新增
+To upgrade from v`3.3.x` to v`3.4.x`, you need to re-execute the `php vendor/bin/easyswoole install` command to complete the upgrade.
 
-- `Core::getInstance()->runMode();`方法. 可通过此方法修改运行文件,默认`dev`,也可以通过`command`进行修改.
 
-### 变更
+### Added
 
-- [command](/QuickStart/command.md)命令变更.
+- Added method `Core::getInstance()->runMode();`. You can use the method to modify the configuration file used when the framework is running. The default configuration file used when the framework is running is `dev.php`. You can also dynamically modify this configuration file in the startup command.
 
-- 自定义`command`需进行[调整](https://github.com/easy-swoole/command).
+### Changed
 
-- `config`从`swoole-table`改为`splArray`,用户可自行调整.
+- [The basic management command](/QuickStart/command.md) of the framework has been changed.
 
-- `onRequest`及`afterRequest`全局事件
-变更为(`initialize`注册即可):
+- When upgrading the framework to v3.4.x, the user-defined command needs to be [adjusted](https://github.com/easy-swoole/command). (For versions lower than v3.4.x)
+
+- `config` is changed from the previously used `swoole-table` to `splArray`, users can adjust `config` by themselves.
+
+- The use of `onRequest` and `afterRequest` global events is changed, it needs to be registered in the `initialize` event and use, and the usage is as follows:
 ```php
 \EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::HTTP_GLOBAL_ON_REQUEST, callback);
 \EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::HTTP_GLOBAL_AFTER_REQUEST, callback);
 ```
-`callback`为回调函数,注入参数为：
+The `callback` parameter in the above function is the callback function, and the parameters that need to be injected in the callback function are as follows:
 ```php
 function (\EasySwoole\Http\Request $request, \EasySwoole\Http\Response $response){}
 ```
-`onRequest`事件需要返回`bool`,来决定程序是否继续进行`dispatcher`.
+The `onRequest` event needs to return `bool` to determine whether the program continues with the `dispatcher`.
 
-### 移除
+### Removed
 
-- 移除`EasySwooleEvent`中`onRequest`及`afterRequest`全局事件.
+- Removed global events `onRequest` and `afterRequest` in `EasySwooleEvent`.
 
-- 移除`Core::getInstance()->isDev();`方法.
+- Removed method `Core::getInstance()->isDev();`.
 
-- 移除`Core::getInstance()->globalInitialize();`,可自行调用`EasySwooleEvent::initialize()`.
+- Removed  `Core::getInstance()->globalInitialize();`, you can call `EasySwooleEvent::initialize()` by yourself.
+

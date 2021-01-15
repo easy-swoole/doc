@@ -7,7 +7,11 @@ meta:
     content: easyswoole支付宝SDK|swoole支付宝SDK|swoole协程支付宝SDK
 ---
 
-# 协程支付网关
+# 协程支付网关(支付宝支付)
+
+## 组件安装方法和说明
+> 注意：请务必检查你的 `php` 环境有没有安装 `php-bcmath` 扩展，没有安装 `php-bcmath` 扩展时安装的 `pay` 组件的版本是 `1.2.17` 之前的版本(不是最新)。想要使用最新稳定版 `pay` 组件的功能，请先安装 `php-bcmath` 扩展，`php` 安装此扩展的方法请自行查询。
+
 ```
 composer require easyswoole/pay
 ```

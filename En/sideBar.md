@@ -1,7 +1,7 @@
 - Preface
   - [Project introduction](Preface/intro.md)
-  - [Donation](Preface/donate.md)
   - [Contact author](Preface/contact.md)
+  - [Donation](Preface/donate.md)
 - Updates and documentation
   - [Framework update record](Update/main.md)
   - [Component update record](Update/component.md)
