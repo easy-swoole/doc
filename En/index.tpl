@@ -19,7 +19,7 @@
             Hello ! This Is EasySwoole
         </div>
         <div class="links">
-            <a href="/Preface/introduction.html">Get Start</a>
+            <a href="/Preface/intro.html">Get Start</a>
         </div>
     </div>
 </div>
