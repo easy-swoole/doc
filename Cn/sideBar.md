@@ -256,8 +256,9 @@
     - [Actor组件](Components/actor.md)
   - 错误视图
     - [Whoops](Components/whoops.md)
-  - 同步程序协程调用转化驱动
-    - [SyncInvoker](Components/syncInvoker.md)
+  - 同步程序协程调用转化驱动 SyncInvoker
+    - [安装](Components/SyncInvoker/syncInvoker.md)
+    - [MongoDB 客户端案例](Components/SyncInvoker/mongoDb.md)
   - 开发工具
     - [热重载](Components/hotReload.md)
     - [LinuxDash](Components/linuxDash.md)
