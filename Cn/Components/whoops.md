@@ -33,27 +33,34 @@ Easyswoole 提供了Whoops驱动，用于开发阶段，友好的排除HTTP业�
 [easyswoole/easy-whoops=3.x](https://github.com/easy-swoole/easy-whoops)
 
 ## 基本使用
-直接在EasySwoole 全局的事件中进行注册
+直接在 `EasySwoole` 全局事件中进行注册
 ```php
-use EasySwoole\EasySwoole\Swoole\EventRegister;
+<?php
+
+namespace EasySwoole\EasySwoole;
+
 use EasySwoole\EasySwoole\AbstractInterface\Event;
-use EasySwoole\Http\Request;
-use EasySwoole\Http\Response;
-use EasySwoole\Whoops\Handler\CallbackHandler;
-use EasySwoole\Whoops\Handler\PrettyPageHandler;
-use EasySwoole\Whoops\Run;
+use EasySwoole\EasySwoole\Swoole\EventRegister;
 
 class EasySwooleEvent implements Event
 {
-
     public static function initialize()
     {
         // TODO: Implement initialize() method.
         date_default_timezone_set('Asia/Shanghai');
-        if(\EasySwoole\EasySwoole\Core::getInstance()->isDev()){
-            $whoops = new Run();
-            $whoops->pushHandler(new PrettyPageHandler);  // 输出一个漂亮的页面
-            $whoops->pushHandler(new CallbackHandler(function ($exception, $inspector, $run, $handle) {
+
+        \EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::HTTP_GLOBAL_ON_REQUEST, function (\EasySwoole\Http\Request $request, \EasySwoole\Http\Response $response): bool {
+            // 拦截请求
+            if (\EasySwoole\EasySwoole\Core::getInstance()->runMode() == 'dev') {
+                \EasySwoole\Whoops\Run::attachRequest($request, $response);
+            }
+            return true;
+        });
+
+        if (\EasySwoole\EasySwoole\Core::getInstance()->runMode() == 'dev') {
+            $whoops = new \EasySwoole\Whoops\Run();
+            $whoops->pushHandler(new \EasySwoole\Whoops\Handler\PrettyPageHandler());  // 输出一个漂亮的页面
+            $whoops->pushHandler(new \EasySwoole\Whoops\Handler\CallbackHandler(function ($exception, $inspector, $run, $handle) {
                 // 可以推进多个Handle 支持回调做更多后续处理
             }));
             $whoops->register();
@@ -62,24 +69,11 @@ class EasySwooleEvent implements Event
 
     public static function mainServerCreate(EventRegister $register)
     {
-
-       if(\EasySwoole\EasySwoole\Core::getInstance()->isDev()){
-           Run::attachTemplateRender(ServerManager::getInstance()->getSwooleServer());
-       }
-    }
-
-    public static function onRequest(Request $request, Response $response): bool
-    {
-        //拦截请求
-        if(\EasySwoole\EasySwoole\Core::getInstance()->isDev()){
-            Run::attachRequest($request, $response);
+        if (\EasySwoole\EasySwoole\Core::getInstance()->runMode() == 'dev') {
+            \EasySwoole\Whoops\Run::attachTemplateRender(ServerManager::getInstance()->getSwooleServer());
         }
-        return true;
-    }
-
-    public static function afterRequest(Request $request, Response $response): void
-    {
-        // TODO: Implement afterAction() method.
     }
 }
 ```
+
+经过上面配置完成之后，就可以在框架抛出异常时，输出一个漂亮的异常页面。
