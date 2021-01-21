@@ -20,12 +20,12 @@ Easyswoole封装实现了一个轻量级的队列，默认以Redis作为队列�
 
 - ext-swoole: >=4.4.0
 - easyswoole/component: ^2.0
-- easyswoole/redis-pool: ^2.0.7
+- easyswoole/redis-pool: ~2.2.0
 
 ## 安装方法
 
 
-> composer require easyswoole/queue
+> composer require easyswoole/queue=2.1.x
 
 ## 仓库地址
 
@@ -78,70 +78,56 @@ class QueueProcess extends AbstractProcess
 ### 驱动注册
  
  ```php
+ <?php
+ 
+ 
  namespace EasySwoole\EasySwoole;
  
  
  use App\Utility\MyQueue;
  use App\Utility\QueueProcess;
  use EasySwoole\Component\Timer;
- use EasySwoole\EasySwoole\Swoole\EventRegister;
  use EasySwoole\EasySwoole\AbstractInterface\Event;
- use EasySwoole\Http\Request;
- use EasySwoole\Http\Response;
- use EasySwoole\Queue\Driver\Redis;
+ use EasySwoole\EasySwoole\Swoole\EventRegister;
  use EasySwoole\Queue\Job;
- use EasySwoole\Redis\Config\RedisConfig;
- use EasySwoole\RedisPool\RedisPool;
- use EasySwoole\Utility\Time;
- 
  
  class EasySwooleEvent implements Event
  {
- 
      public static function initialize()
      {
-         // TODO: Implement initialize() method.
          date_default_timezone_set('Asia/Shanghai');
+ 
      }
  
      public static function mainServerCreate(EventRegister $register)
      {
          //redis pool使用请看redis 章节文档
-         $config = new RedisConfig([
-             'host'=>'127.0.0.1'
-         ]);
-         $redis = new RedisPool($config);
-         $driver = new Redis($redis);
+         \EasySwoole\RedisPool\RedisPool::getInstance()->register(new \EasySwoole\Redis\Config\RedisConfig(
+             [
+                 'host' => '127.0.0.1',
+                 'port' => '6379'
+             ]
+         ), 'queue');
+         $redisPool = \EasySwoole\RedisPool\RedisPool::getInstance()->getPool('queue');
+         $driver = new \EasySwoole\Queue\Driver\Redis($redisPool, 'queue');
          MyQueue::getInstance($driver);
          //注册一个消费进程
          \EasySwoole\Component\Process\Manager::getInstance()->addProcess(new QueueProcess());
          //模拟生产者，可以在任意位置投递
-         $register->add($register::onWorkerStart,function ($ser,$id){
-             if($id == 0){
-                 Timer::getInstance()->loop(3000,function (){
-                    $job = new Job();
-                    $job->setJobData(['time'=>\time()]);
-                    MyQueue::getInstance()->producer()->push($job);
+         $register->add($register::onWorkerStart, function ($server, $id) {
+             if ($id == 0) {
+                 Timer::getInstance()->loop(3000, function () {
+                     $job = new Job();
+                     $job->setJobData(['time' => \time()]);
+                     MyQueue::getInstance()->producer()->push($job);
                  });
              }
          });
- 
-     }
- 
-     public static function onRequest(Request $request, Response $response): bool
-     {
-         // TODO: Implement onRequest() method.
-         return true;
-     }
- 
-     public static function afterRequest(Request $request, Response $response): void
-     {
-         // TODO: Implement afterAction() method.
      }
  }
  ```
  
- > 进程安全退出问题请看[进程章节](/Cn/Components/Component/process.md)。
+ > 进程安全退出问题请看[进程章节](Components/Component/process.md)。
 
 
 ## 进阶使用
@@ -165,20 +151,23 @@ interface QueueDriverInterface
 ### 组件自带的Redis驱动实现
 
 ```php
+<?php
+
+
 namespace EasySwoole\Queue\Driver;
 
 
 use EasySwoole\Queue\Job;
 use EasySwoole\Queue\QueueDriverInterface;
 use EasySwoole\Redis\Redis as Connection;
-use EasySwoole\RedisPool\RedisPool;
+use EasySwoole\RedisPool\Pool;
 
 class Redis implements QueueDriverInterface
 {
 
     protected $pool;
     protected $queueName;
-    public function __construct(RedisPool $pool,string $queueName = 'EasySwoole')
+    public function __construct(Pool $pool,string $queueName = 'easy_queue')
     {
         $this->pool = $pool;
         $this->queueName = $queueName;
@@ -186,7 +175,7 @@ class Redis implements QueueDriverInterface
 
     public function push(Job $job): bool
     {
-        $data = $job->__toString();
+        $data = serialize($job);
         return $this->pool->invoke(function (Connection $connection)use($data){
             return $connection->lPush($this->queueName,$data);
         });
@@ -195,12 +184,11 @@ class Redis implements QueueDriverInterface
     public function pop(float $timeout = 3.0): ?Job
     {
         return $this->pool->invoke(function (Connection $connection){
-            $data =  json_decode($connection->rPop($this->queueName),true);
-            if(is_array($data)){
-                return new Job($data);
-            }else{
-                return null;
+            $data =  $connection->rPop($this->queueName);
+            if($data){
+                return unserialize($data);
             }
+            return null;
         });
     }
 
