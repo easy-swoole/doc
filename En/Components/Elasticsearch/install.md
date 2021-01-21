@@ -2,9 +2,9 @@
 title: easyswoole Coroutine elasticsearch component
 meta:
   - name: description
-    content: Elasticsearch client，对官方客户端的协程化移植
+    content: Elasticsearch client，Porting of official client by coroutine
   - name: keywords
-    content:  swoole协程elasticsearch
+    content:  swoole coroutine elasticsearch
 ---
 
 # Elasticsearch
