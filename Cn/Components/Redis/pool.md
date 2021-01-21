@@ -6,110 +6,136 @@ meta:
   - name: keywords
     content: easyswoole redis协程连接池|swoole redis连接池
 ---
-# Redis连接池
-redis连接池是创建和管理一个连接的缓冲池的技术，这些连接准备好被任何需要它们的线程使用
+# Redis-Pool
+Redis-Pool 基于 [pool连接池管理](https://github.com/easy-swoole/pool),[redis协程客户端](https://github.com/easy-swoole/redis) 封装的组件
 
 
-### 组件要求
+## 安装
 
-- easyswoole/component: ^2.0
-- easyswoole/pool: ^1.0
-- easyswoole/redis: ^1.0
-- easyswoole/spl: ^1.1
-
-### 安装方法
-
-> composer require easyswoole/redis-pool
-  
-### 仓库地址
-
-[easyswoole/redis-pool](https://github.com/easy-swoole/redis-pool)
-
-
-
-## 安装 easyswoole/pool 组件自定义实现:
-
-
-> composer require easyswoole/pool
-
-::: warning
-具体pool相关详细用法可查看 [连接池](../Pool/introduction.html)
-:::
-
-
-### 新增redisPool管理器
-新增文件`/App/Pool/RedisPool.php`
-
-```php
-<?php
-/**
- * Created by PhpStorm.
- * User: Tioncico
- * Date: 2019/10/15 0015
- * Time: 14:46
- */
-
-namespace App\Pool;
-
-use EasySwoole\Pool\Config;
-use EasySwoole\Pool\AbstractPool;
-use EasySwoole\Redis\Config\RedisConfig;
-use EasySwoole\Redis\Redis;
-
-class RedisPool extends AbstractPool
-{
-    protected $redisConfig;
-
-    /**
-     * 重写构造函数,为了传入redis配置
-     * RedisPool constructor.
-     * @param Config      $conf
-     * @param RedisConfig $redisConfig
-     * @throws \EasySwoole\Pool\Exception\Exception
-     */
-    public function __construct(Config $conf,RedisConfig $redisConfig)
-    {
-        parent::__construct($conf);
-        $this->redisConfig = $redisConfig;
-    }
-
-    protected function createObject()
-    {
-        //根据传入的redis配置进行new 一个redis
-        $redis = new Redis($this->redisConfig);
-        return $redis;
-    }
-}
-```
-注册到Manager中:
-```php
-$config = new \EasySwoole\Pool\Config();
-
-$redisConfig1 = new \EasySwoole\Redis\Config\RedisConfig(\EasySwoole\EasySwoole\Config::getInstance()->getConf('REDIS1'));
-
-$redisConfig2 = new \EasySwoole\Redis\Config\RedisConfig(\EasySwoole\EasySwoole\Config::getInstance()->getConf('REDIS2'));
-
-\EasySwoole\Pool\Manager::getInstance()->register(new \App\Pool\RedisPool($config,$redisConfig1),'redis1');
-
-\EasySwoole\Pool\Manager::getInstance()->register(new \App\Pool\RedisPool($config,$redisConfig2),'redis2');
-
+```shell
+composer require easyswoole/redis-pool
 ```
 
-### 调用(可在控制器中全局调用):
+
+## 连接池注册
+
+使用连接之前注册redis连接池:
+
 ```php
-go(function (){
-   
-    $redis1=\EasySwoole\Pool\Manager::getInstance()->get('redis1')->getObj();
-    $redis2=\EasySwoole\Pool\Manager::getInstance()->get('redis1')->getObj();
+//redis连接池注册(config默认为127.0.0.1,端口6379)
+\EasySwoole\RedisPool\RedisPool::getInstance()->register(new \EasySwoole\Redis\Config\RedisConfig(),'redis');
+// config是空配置,用户需手动配置. 
 
-    $redis1->set('name','仙士可');
-    var_dump($redis1->get('name'));
+//redis集群连接池注册
+\EasySwoole\RedisPool\RedisPool::getInstance()->register(new \EasySwoole\Redis\Config\RedisClusterConfig([
+        ['172.16.253.156', 9001],
+        ['172.16.253.156', 9002],
+        ['172.16.253.156', 9003],
+        ['172.16.253.156', 9004],
+    ]
+),'redisCluster');
+```
 
-    $redis2->set('name','仙士可2号');
-    var_dump($redis2->get('name'));
+## 连接池配置
+当注册好时,将返回连接池的poolConf用于配置连接池:
 
-    //回收对象
-    \EasySwoole\Pool\Manager::getInstance()->get('redis1')->recycleObj($redis1);
-    \EasySwoole\Pool\Manager::getInstance()->get('redis2')->recycleObj($redis2);
+```php
+$redisPoolConfig = \EasySwoole\RedisPool\RedisPool::getInstance()->register(new \EasySwoole\Redis\Config\RedisConfig());
+//配置连接池连接数
+$redisPoolConfig->setMinObjectNum(5);
+$redisPoolConfig->setMaxObjectNum(20);
+
+$redisClusterPoolConfig = \EasySwoole\RedisPool\RedisPool::getInstance()->register(new \EasySwoole\Redis\Config\RedisClusterConfig([
+        ['172.16.253.156', 9001],
+        ['172.16.253.156', 9002],
+        ['172.16.253.156', 9003],
+        ['172.16.253.156', 9004],
+    ]
+));
+//配置连接池连接数
+$redisPoolConfig->setMinObjectNum(5);
+$redisPoolConfig->setMaxObjectNum(20);
+```
+
+## 使用连接池
+
+```php
+//defer方式获取连接
+$redis = \EasySwoole\RedisPool\RedisPool::defer();
+$redisCluster = \EasySwoole\RedisPool\RedisPool::defer();
+$redis->set('a', 1);
+$redisCluster->set('a', 1);
+
+//invoke方式获取连接
+\EasySwoole\RedisPool\RedisPool::invoke(function (\EasySwoole\Redis\Redis $redis) {
+    var_dump($redis->set('a', 1));
+});
+\EasySwoole\RedisPool\RedisPool::invoke(function (\EasySwoole\Redis\Redis $redis) {
+    var_dump($redis->set('a', 1));
+});
+
+//获取连接池对象
+$redisPool = \EasySwoole\RedisPool\RedisPool::getInstance()->getPool();
+$redisClusterPool = \EasySwoole\RedisPool\RedisPool::getInstance()->getPool();
+
+$redis = $redisPool->getObj();
+$redisPool->recycleObj($redis);
+```
+！！！注意，在未指定连接池名称是，注册的连接池名称为默认的```default```
+
+## 方法
+
+### register
+
+```php
+\EasySwoole\RedisPool\RedisPool::getInstance()->register();
+```
+
+参数：
+- $config ```new \EasySwoole\Redis\Config\RedisConfig() || new \EasySwoole\Redis\Config\RedisClusterConfig()```
+- $name 连接池名称 默认`default`
+- $cask 用户自定义`redis-client` 可忽略
+
+返回：
+- 注册成功返回`EasySwoole\Pool\Config`,可设置[连接池](Components/Pool/introduction.md)的配置.
+
+### defer
+
+```php
+\EasySwoole\RedisPool\RedisPool::defer();
+```
+
+参数：
+- $name 连接池名称 默认`default`
+- $timeout 取出连接超时时间
+
+返回：
+- 成功返回连接池内对象 失败为`null` 
+
+### invoke
+
+```php
+\EasySwoole\RedisPool\RedisPool::invoke(function (\EasySwoole\Redis\Redis $redis) {
+    var_dump($redis->set('a', 1));
 });
 ```
+
+参数：
+- $call 执行的闭包函数，闭包函数参数为连接池对象
+- $name 连接池名称 默认`default`
+- $timeout 取出连接超时时间
+
+返回：
+- 成功返回闭包函数内返回的结果，失败返回`null`
+
+### getPool
+
+```php
+\EasySwoole\RedisPool\RedisPool::getInstance()->getPool();
+```
+
+参数：
+- $name 连接池名称 默认`default`
+
+返回：
+- 成功返回`EasySwoole\RedisPool\Pool`,失败返回`null`.
