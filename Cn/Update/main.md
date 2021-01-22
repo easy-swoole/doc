@@ -22,7 +22,7 @@
 
 ### 移除
 
-- 移除command及bridge中config功,因为非`swoole-table`.
+- 移除 `command`及 `bridge` 中动态配置 `config` 的功能，因为 `3.4.x` 的配置的存储不是使用 `swoole-table` 来存储。
 
 ## 3.4.0 - 2020-10-24
 
