@@ -262,6 +262,7 @@
   - 开发工具
     - [热重载](Components/hotReload.md)
     - [LinuxDash](Components/linuxDash.md)
+    - [FileWatcher](Components/fileWatcher.md)
   - 辅助类(杂项工具)
     - [ArrayToTextTable](Components/Help/arrayToTextTable.md)
     - [File](Components/Help/file.md)
