@@ -9,7 +9,7 @@ meta:
 
 # Coroutine Singleton
 
-For the security of singleton mode under the compatible cooperation environment, coroutinesingleton can be used
+For the security of singleton mode under the compatible coroutine environment, coroutinesingleton can be used
 
 Reference method can refer to common Singleton trait
 
@@ -25,7 +25,7 @@ trait CoroutineSingleTon
         if(!isset(self::$instance[$cid])){
             self::$instance[$cid] = new static(...$args);
             /*
-             * 兼容非携程环境
+             * Compatible with non coroutine environment
              */
             if($cid > 0){
                 Coroutine::defer(function ()use($cid){
