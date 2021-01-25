@@ -33,7 +33,7 @@ composer require easyswoole/pay
 | mini     | 小程序支付  | Request | Response  |
 | barCode  | 条码当面支付 | Request | Response  |
 
-注意，`easyswoole/pay` 支付宝支付组件的默认签名为 `RSA2` 公私钥签名，也支持公钥证书的签名方式。放置公私钥证书的时候切记核对。
+注意，`easyswoole/pay` 支付宝支付组件的默认签名为 `RSA2` 普通公钥方式签名，也支持 `RSA2` 公钥证书的签名方式。放置应用公私钥证书、支付宝证书路径、支付宝根证书路径的时候切记核对。
 
 ## 电脑支付
 
