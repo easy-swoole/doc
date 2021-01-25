@@ -69,7 +69,7 @@ $aliConfig->setSignType('RSA2');
 // 设置 阿里应用公钥(支持 .pem 结尾的格式，默认为 PKCS1 格式)，用于支付回调时验证签名
 $aliConfig->setPublicKey('阿里应用公钥字符串'); // 示例应用公钥字符串
 // 设置 阿里应用私钥(支持 .pem 结尾的格式，默认为 PKCS1 格式)，用于生成签名
-$aliConfig->setPrivateKey('阿里应用私钥字符串'); // 示例应用私钥
+$aliConfig->setPrivateKey('阿里应用私钥字符串'); // 示例应用私钥字符串
 
 
 /**
@@ -106,7 +106,7 @@ $aliConfig->setRootCertPath(__DIR__ . '/cert/alipayRootCert.crt'); // 示例支�
 // (必须)设置 阿里应用公钥证书文件路径
 $aliConfig->setMerchantCertPath(__DIR__ . '/cert/appCertPublicKey_2016091800538780.crt');
 // (必须)设置 阿里应用私钥(支持 .pem 结尾的格式，默认为 PKCS1 格式)，用于生成签名
-$aliConfig->setPrivateKey('阿里应用私钥字符串');
+$aliConfig->setPrivateKey('阿里应用私钥字符串'); // 示例应用私钥字符串
 */
 
 // 以上【普通公钥方式】 和 【公钥证书方式】 生成密钥验签(签名和验签方式) 这 2 种方式，用户可自行选择一种】
@@ -158,7 +158,7 @@ file_put_contents('test.html', $html); // 该方法的实现请看下文
 
 #### 订单配置参数
 
-**所有订单配置中，对于客观非必选参数，用户可以自行选择是否进行，也可以不进行配置，扩展包已经为您自动处理了，比如，**`product_code`** 等参数。**
+**所有订单配置中，对于客观非必选参数，用户可以自行选择是否进行配置，也可以不进行配置，扩展包已经为您自动处理了，比如，**`product_code`** 等参数。**
 
 所有订单配置参数和官方无任何差别，兼容所有功能，所有参数请参考 [这里](https://opendocs.alipay.com/apis/api_1/alipay.trade.page.pay)，查看「请求参数」一栏。
 
