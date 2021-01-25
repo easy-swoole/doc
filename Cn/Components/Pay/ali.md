@@ -42,7 +42,6 @@ composer require easyswoole/pay
 :::
 
 ```php
-<?php
 /**
  * 普通公钥方式生成密钥验签(签名和验签方式)
  */
