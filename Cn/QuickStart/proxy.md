@@ -65,11 +65,10 @@ server {
 
      ![](/Images/Passage/authWx.png)
     
-- [捐赠](/Preface/donate.md)
-    您的捐赠是对EasySwoole项目开发组最大的鼓励和支持。我们会坚持开发维护下去。 您的捐赠将被用于:
+- [捐赠](/Preface/donate.md) 您的捐赠是对 `EasySwoole` 项目开发组最大的鼓励和支持。我们会坚持开发维护下去。 您的捐赠将被用于:
         
   - 持续和深入地开发
   - 文档和社区的建设和维护
   
-- **easySwoole** 的文档采用 **GitBook** 作为文档撰写工具，若您在使用过程中，发现文档有需要纠正 / 补充的地方，请 **fork** 项目的文档仓库，进行修改补充，提交 **Pull Request** 并联系我们
+- `EasySwoole` 的文档使用 `EasySwoole 框架` 提供服务，采用 `MarkDown 格式` 和自定义格式编写，若您在使用过程中，发现文档有需要纠正 / 补充的地方，请 `fork` 项目的文档仓库，进行修改补充，提交 `Pull Request` 并联系我们。
 

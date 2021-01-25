@@ -18,7 +18,10 @@
   - [反向代理](QuickStart/proxy.md) 
   - 协程操作指南
     - [什么是协程](QuickStart/Coroutine/introduction.md)
+    - [创建协程](QuickStart/Coroutine/coroutineCreate.md)
     - [注意事项](QuickStart/Coroutine/notice.md)
+    - [WaitGroup等待](QuickStart/Coroutine/waitGroup.md)
+    - [Csp并发](QuickStart/Coroutine/csp.md)
     - [上下文管理器](Components/Component/context.md)
 - 免费视频教程
   - 基础知识学习
@@ -163,9 +166,11 @@
         - [模型事件](Components/Orm/Event/model.md)
 - Socket服务
   - [TCP服务](Socket/tcp.md)
+  - [TCP服务器处理粘包](Socket/tcpSticky.md)
   - [WebSocket服务](Socket/webSocket.md)
   - [UDP服务](Socket/udp.md)
   - [常见问题](Socket/problem.md)
+  - [WebSocket协议](Socket/websocketProtocol.md)
   - Socket控制器
     - [安装与使用示例](Socket/install.md)
     - [控制器对象](Socket/controller.md)
@@ -262,6 +267,7 @@
   - 开发工具
     - [热重载](Components/hotReload.md)
     - [LinuxDash](Components/linuxDash.md)
+    - [FileWatcher](Components/fileWatcher.md)
   - 辅助类(杂项工具)
     - [ArrayToTextTable](Components/Help/arrayToTextTable.md)
     - [File](Components/Help/file.md)
