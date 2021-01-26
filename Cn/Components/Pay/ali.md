@@ -33,7 +33,7 @@ composer require easyswoole/pay
 | mini     | 小程序支付  | Request | Response  |
 | barCode  | 条码当面支付 | Request | Response  |
 
-注意，easyswoole/pay支付宝的默认签名为RSA2公私钥签名。放置公私钥证书的时候切记核对。
+注意，`easyswoole/pay` 支付宝支付组件的默认签名为 `RSA2` 普通公钥方式签名，也支持 `RSA2` 公钥证书的签名方式。放置应用公私钥证书、支付宝证书路径、支付宝根证书路径的时候切记核对。
 
 ## 电脑支付
 
@@ -42,43 +42,127 @@ composer require easyswoole/pay
 :::
 
 ```php
+/**
+ * 普通公钥方式生成密钥验签(签名和验签方式)
+ */
+// 设置支付配置
 $aliConfig = new \EasySwoole\Pay\AliPay\Config();
-$aliConfig->setGateWay(\EasySwoole\Pay\AliPay\GateWay::NORMAL);
+### 配置支付公共请求参数
+// (必须)设置 支付宝分配给开发者的应用ID
 $aliConfig->setAppId('2017082000295641');
-$aliConfig->setPublicKey('阿里公钥');
-$aliConfig->setPrivateKey('阿里私钥');
+// (必须)设置 请求网关(默认为 沙箱模式)
+$aliConfig->setGateWay(\EasySwoole\Pay\AliPay\GateWay::NORMAL);
+// 设置 参数格式(默认为 'JSON'，可选参数)，不建议修改
+//   $aliConfig->setFormat('JSON');
+// 设置 return_url(默认为 null，可选参数)
+//   $aliConfig->setReturnUrl(null);
+// 设置 请求使用的编码格式，如utf-8、gbk、gb2312等(默认为 'utf-8')
+//   $aliConfig->setCharset('utf-8');
+// 设置 商户生成签名字符串所使用的签名算法类型，目前支持 RSA2 和 RSA，推荐使用 RSA2(默认为 'RSA2')
+$aliConfig->setSignType('RSA2');
+// 设置 调用的接口版本(默认为 '1.0')
+//   $aliConfig->setApiVersion('1.0');
+// 设置 支付宝服务器主动通知商户服务器里指定的页面http/https路径，即支付回调地址(默认为 null，可选参数)
+//   $aliConfig->setNotifyUrl(null);
+// 设置 应用授权参数(默认为 null，可选参数)，详细请看(https://opendocs.alipay.com/open/common/105193)
+//   $aliConfig->setAppAuthToken(null);
+// 设置 阿里应用公钥(支持 .pem 结尾的格式，默认为 PKCS1 格式)，用于支付回调时验证签名
+$aliConfig->setPublicKey('阿里应用公钥字符串'); // 示例应用公钥字符串
+// 设置 阿里应用私钥(支持 .pem 结尾的格式，默认为 PKCS1 格式)，用于生成签名
+$aliConfig->setPrivateKey('阿里应用私钥字符串'); // 示例应用私钥字符串
+
+
+/**
+ * 公钥证书方式生成密钥验签(签名和验签方式)
+ */
+/*
+$aliConfig = new \EasySwoole\Pay\AliPay\Config();
+### 配置支付公共请求参数
+// (必须)设置 支付宝分配给开发者的应用ID
+$aliConfig->setAppId('2017082000295641');
+// (必须)设置 请求网关(默认为 沙箱模式)
+$aliConfig->setGateWay(\EasySwoole\Pay\AliPay\GateWay::NORMAL);
+// 设置 参数格式(默认为 'JSON'，可选参数)，不建议修改
+//   $aliConfig->setFormat('JSON');
+// 设置 return_url(默认为 null，可选参数)
+//   $aliConfig->setReturnUrl(null);
+// 设置 请求使用的编码格式，如utf-8、gbk、gb2312等(默认为 'utf-8')
+//   $aliConfig->setCharset('utf-8');
+// 设置 商户生成签名字符串所使用的签名算法类型，目前支持 RSA2 和 RSA，推荐使用 RSA2(默认为 'RSA2')
+$aliConfig->setSignType('RSA2');
+// 设置 调用的接口版本(默认为 '1.0')
+//   $aliConfig->setApiVersion('1.0');
+// 设置 支付宝服务器主动通知商户服务器里指定的页面http/https路径，即支付回调地址(默认为 null，可选参数)
+//   $aliConfig->setNotifyUrl(null);
+// 设置 应用授权参数(默认为 null，可选参数)，详细请看(https://opendocs.alipay.com/open/common/105193)
+//   $aliConfig->setAppAuthToken(null);
+
+// (必须)设置 使用公钥证书方式生密钥延签(签名和验签方式)
+$aliConfig->setCertMode(true);
+// (必须)设置 支付宝公钥文件路径
+$aliConfig->setCertPath(__DIR__ . '/cert/alipayCertPublicKey_RSA2.crt'); // 示例支付宝公钥文件路径
+// (必须)设置 支付宝根证书文件路径
+$aliConfig->setRootCertPath(__DIR__ . '/cert/alipayRootCert.crt'); // 示例支付宝公钥根证书文件路径
+// (必须)设置 阿里应用公钥证书文件路径
+$aliConfig->setMerchantCertPath(__DIR__ . '/cert/appCertPublicKey_2016091800538780.crt');
+// (必须)设置 阿里应用私钥(支持 .pem 结尾的格式，默认为 PKCS1 格式)，用于生成签名
+$aliConfig->setPrivateKey('阿里应用私钥字符串'); // 示例应用私钥字符串
+*/
+
+// 以上【普通公钥方式】 和 【公钥证书方式】 生成密钥验签(签名和验签方式) 这 2 种方式，用户可自行选择一种】
+
 
 $pay = new \EasySwoole\Pay\Pay();
 
-## 对象风格
+
+## (面向对象风格)设置请求参数 biz_content，组件自动帮你组装成对应的格式
 $order = new \EasySwoole\Pay\AliPay\RequestBean\Web();
-$order->setSubject('测试');
-$order->setOutTradeNo(time().'123456');
-$order->setTotalAmount('0.01');
-// 本库只预置了常用的请求参数，没预置的参数使用：$order->addProperty('其他字段','其他字段值');
+// (必须)设置 商户订单号(商户订单号。64 个字符以内的大小，仅支持字母、数字、下划线。需保证该参数在商户端不重复。)
+$order->setOutTradeNo(time() . '123456'); // 示例订单号(仅供参考)
+// (必须)设置 订单总金额
+$order->setTotalAmount('0.01'); // 示例订单总金额，单位：元(仅供参考)
+// (必须)设置 商品标题/交易标题/订单标题/订单关键字等。注意：不可使用特殊字符，如 /，=，& 等。
+$order->setSubject('测试'); // 示例商品标题(仅供参考)
+// (可选)设置 订单描述，默认为 null
+//   $order->setBody(null);
+// (可选)设置 在订单中设置支付宝服务器主动通知商户服务器里指定的页面http/https路径，即支付回调地址(默认为 null，可选参数)
+//   $order->setNotifyUrl(null); // 等价于在配置中设置 支付回调地址，两者中只要设置一次即可
+// (可选)设置 return_url(默认为 null，可选参数)
+// $order->setReturnUrl(null); // 等价于在配置中设置 return_url，两者中只要设置一次即可
+// 本库只预置了常用的请求参数，没预置的参数请求使用：$order->addProperty('其他字段','其他字段值');
+// 支付其他可选参数（详细请看支付宝接口的可选参数，支付宝接口对应地址请看下文）
 
-## 数组风格
-$order = new \EasySwoole\Pay\AliPay\RequestBean\App([
-    'subject'=>'测试',
-    'out_trade_no'=>'123456',
-    'total_amount'=>'0.01',
-    '额外的字段键值'=>'额外字段值'
-],true);
+## (数组风格)设置请求参数 biz_content，组件自动帮你组装成对应的格式
+/*
+$order = new \EasySwoole\Pay\AliPay\RequestBean\Web([
+    'out_trade_no' => time() . '123456', // 示例订单号(仅供参考)
+    'total_amount' => '0.01', // 示例订单总金额，单位：元(仅供参考)
+    'subject' => '测试', // 示例商品标题(仅供参考)
+    '额外的字段键值' => '额外字段值', // 示例支付其他可选参数（详细请看支付宝接口的可选参数，支付宝接口对应地址请看下文）
+], true);
+*/
 
+
+// 以上 2 种风格设置请求参数，用户可根据个人需要，选其一即可
+
+
+// 获取构造请求参数对象
 $res = $pay->aliPay($aliConfig)->web($order);
+// 将所有请求参数转为数组
 var_dump($res->toArray());
 
-$html = buildPayHtml(\EasySwoole\Pay\AliPay\GateWay::NORMAL,$res->toArray());
-file_put_contents('test.html',$html);		
+// 构造请求表单
+$html = $this->buildPayHtml(\EasySwoole\Pay\AliPay\GateWay::NORMAL, $res->toArray());
+file_put_contents('test.html', $html); // 该方法的实现请看下文	
 ```
 
 #### 订单配置参数
 
-**所有订单配置中，客观参数均不用配置，扩展包已经为大家自动处理了，比如，**`product_code`** 等参数。**
+**所有订单配置中，对于客观非必选参数，用户可以自行选择是否进行配置，也可以不进行配置，扩展包已经为您自动处理了，比如，**`product_code`** 等参数。**
 
-所有订单配置参数和官方无任何差别，兼容所有功能，所有参数请参考[这里](https://docs.open.alipay.com/270/alipay.trade.page.pay)，查看「请求参数」一栏。
+所有订单配置参数和官方无任何差别，兼容所有功能，所有参数请参考 [这里](https://opendocs.alipay.com/apis/api_1/alipay.trade.page.pay)，查看「请求参数」一栏。
 
-参数查询：https://docs.open.alipay.com/api_1/alipay.trade.page.pay
+参数查询：https://opendocs.alipay.com/apis/api_1/alipay.trade.page.pay
 
 生成支付的跳转html示例
 

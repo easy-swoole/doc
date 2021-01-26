@@ -148,10 +148,11 @@ class Index extends Controller
                 'sex' => 'man',
             ]);
             if (!$ret) {
-                return false;
+                $driver->response(false);
             }
-            return $ret->getInsertedId();
+            $driver->response($ret->getInsertedId());
         });
+        var_dump($ret);
 
         $ret = MongoClient::getInstance()->invoke()->callback(function (Driver $driver) {
             $ret = [];
@@ -159,9 +160,58 @@ class Index extends Controller
             foreach ($collections as $collection) {
                 $ret[] = (array)$collection;
             }
-            return $ret;
+            $driver->response($ret);
         });
-
+        var_dump($ret);
+        /**
+         * 输出结果：
+         * object(MongoDB\BSON\ObjectId)#109 (1) {
+             ["oid"]=>
+             string(24) "600da377004c82305a02fb52"
+           }
+         * array(1) {
+             [0]=>
+             array(1) {
+               ["MongoDB\Model\CollectionInfoinfo"]=>
+               array(5) {
+                 ["name"]=>
+                 string(4) "list"
+                 ["type"]=>
+                 string(10) "collection"
+                 ["options"]=>
+                 array(0) {
+                 }
+                 ["info"]=>
+                 array(2) {
+                   ["readOnly"]=>
+                   bool(false)
+                   ["uuid"]=>
+                   object(MongoDB\BSON\Binary)#110 (2) {
+                     ["data"]=>
+                     string(16) "EasySwoole"
+                     ["type"]=>
+                     int(4)
+                   }
+                 }
+                 ["idIndex"]=>
+                 array(4) {
+                   ["v"]=>
+                   int(2)
+                   ["key"]=>
+                   array(1) {
+                     ["_id"]=>
+                     int(1)
+                   }
+                   ["name"]=>
+                   string(4) "_id_"
+                   ["ns"]=>
+                   string(9) "user.list"
+                 }
+               }
+             }
+           } 
+        */
+        
         
         // 使用 php-mongodb 扩展时(不使用 mongodb/mongodb composer组件包)
         /*
