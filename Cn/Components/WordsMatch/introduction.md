@@ -28,7 +28,7 @@ None
 ## 安装方法
 
 
-> composer require easyswoole/words-match:1.1.x-dev
+> composer require easyswoole/words-match:1.1.1
 
 ## 仓库地址
 
@@ -52,50 +52,44 @@ golang
 ### 服务注册
 ```php
 <?php
+
 namespace EasySwoole\EasySwoole;
 
-use EasySwoole\EasySwoole\Swoole\EventRegister;
+use EasySwoole\Component\Di;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
+use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\Http\Request;
 use EasySwoole\Http\Response;
-use EasySwoole\WordsMatch\WordsMatchClient;
-use EasySwoole\WordsMatch\WordsMatchServer;
+use EasySwoole\WordsMatch\WMServer;
 
 class EasySwooleEvent implements Event
 {
-
     public static function initialize()
     {
-        // TODO: Implement initialize() method.
         date_default_timezone_set('Asia/Shanghai');
+
+        Di::getInstance()->set(SysConst::HTTP_GLOBAL_ON_REQUEST, function (Request $request, Response $response): bool {
+            // TODO: Implement onRequest() method.
+            return true;
+        });
+
+        Di::getInstance()->set(SysConst::HTTP_GLOBAL_AFTER_REQUEST, function (Request $request, Response $response): void {
+            // TODO: Implement onRequest() method.
+        });
     }
 
     public static function mainServerCreate(EventRegister $register)
     {
-        // TODO: Implement mainServerCreate() method.
-        $config = [
-            'wordBanks' => [
-                'one' => '/Users/xxx/sites/easyswoole/WordsMatch/comment.txt',
-                'two' => '/Users/xxx/sites/easyswoole/WordsMatch/comment1.txt'
-            ], // 词库地址
-            'processNum' => 3, // 进程数
-            'maxMem' => 1024, // 每个进程最大占用内存(M)
-            'separator' => ',', // 词和其它信息的间隔符
-        ];
-        WordsMatchServer::getInstance()
-            ->setConfig($config)
-            ->attachToServer(ServerManager::getInstance()->getSwooleServer());
-    }
+        // 配置 words-match
+        $wdConfig = new \EasySwoole\WordsMatch\Config();
+        $wdConfig->setDict(__DIR__ . '/dictionary.txt'); // 配置 词库地址
+        $wdConfig->setMaxMEM(1024); // 配置 每个进程最大占用内存(M)，默认为 512 M
+        $wdConfig->setTimeout(3.0); // 配置 内容检测超时时间。默认为 3.0 s
+        $wdConfig->setWorkerNum(3); // 配置 进程数
+        // $wdConfig->setSockDIR(sys_get_temp_dir()); // (不建议修改)配置 socket 存放地址，默认为 sys_get_temp_dir()，即 '/tmp'
 
-    public static function onRequest(Request $request, Response $response): bool
-    {
-        // TODO: Implement onRequest() method.
-        return true;
-    }
-
-    public static function afterRequest(Request $request, Response $response): void
-    {
-        // TODO: Implement afterAction() method.
+        // 注册服务
+        WMServer::getInstance($wdConfig)->attachServer(ServerManager::getInstance()->getSwooleServer());
     }
 }
 ```
@@ -105,39 +99,52 @@ class EasySwooleEvent implements Event
 ````php
 <?php
 
-
 namespace App\HttpController;
 
-
 use EasySwoole\Http\AbstractInterface\Controller;
-use EasySwoole\WordsMatch\WordsMatchClient;
+use EasySwoole\WordsMatch\WMServer;
 
 class Index extends Controller
 {
-
-    function append()
-    {
-        WordsMatchClient::getInstance()
-                    ->setWordBanks(['one']) // 必须指定词库
-                    ->append('测试词1');
-    }
-
     function detect()
     {
+        // 需要检测的内容敏感词
         $content = 'php是世界上最好的语言';
-        // 检测内容，不指定词库则检测所有词库
-        WordsMatchClient::getInstance()
-                    ->setWordBanks(['one']) // 不指定词库则检测所有词库
-                    ->detect($content);
+        // 检测结果（返回 -1 表示检测超时，匹配检测到时返回检测到的敏感词内容）
+        $result = WMServer::getInstance()->detect($content, 3);
+        var_dump($result);
+        /**
+         * 输出结果：
+         * array(1) {
+            [0]=>
+            object(EasySwoole\WordsMatch\Dictionary\DetectResult)#96 (5) {
+            ["word"]=>
+            string(30) "php是世界上最好的语言"
+            ["location"]=>
+            array(1) {
+              [0]=>
+              array(3) {
+                ["word"]=>
+                string(30) "php是世界上最好的语言"
+                ["length"]=>
+                int(12)
+                ["location"]=>
+                array(1) {
+                  [0]=>
+                  int(0)
+                }
+              }
+            }
+            ["count"]=>
+            int(1)
+            ["remark"]=>
+            string(0) ""
+            ["type"]=>
+            int(1)
+            }
+         * }
+         */
     }
-
-    function remove()
-    {
-        WordsMatchClient::getInstance()
-                        ->setWordBanks(['one']) // 必须指定词库
-                        ->remove('测试词1');
-    }
-
 }
 ````
 
