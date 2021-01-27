@@ -1,6 +1,27 @@
 # 组件更新记录
 > 框架更新记录仅仅整理自2020年10-24后的记录，其余记录以老版本文档或github记录为准。
 
+## Validate 
+
+### 1.2.8 - 2021-01-27
+
+#### 新增
+
+- `lessThanWithColumn` 验证字段的值必须小于`with`的字段(仅限`int`)
+- `greaterThanWithColumn` 验证字段的值必须大于`with`的字段(仅限`int`)
+
+## Mysqli
+
+### 2.2.8 - 2021-01-27
+
+#### 新增
+
+- 支持`mysql8.0+`锁.
+
+#### 修复
+
+- 修复拼接`sql`,`+86`等字符串被转为`86`.
+
 ## 辅助类组件(IntStr)
 
 ### 1.2.2 - 2021-01-08
@@ -9,7 +30,7 @@
 
 - 新增 `IntStr` 工具类，实现 `字符串` 和 `数字` 的相互转换，可用于 `生成短链接`，详见 [IntStr 工具类](/Components/Help/intStr)
 
-## Pool 组件
+## Pool
 
 ### 1.0.12 - 2021-01-07
 
@@ -105,6 +126,13 @@
 - `SPop`
 
 ## Http-Annotation
+
+### 1.5.0 - 2021-01-27
+
+#### 新增
+
+- `Param`注解增加`lessThanWithColumn`验证(`validate 1.2.8+`)
+- `Param`注解增加`greaterThanWithColumn`验证(`validate 1.2.8+`)
 
 ### 1.4.6 - 2021-01-05
 

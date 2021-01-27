@@ -1240,3 +1240,45 @@ $data = [
 $validate->addColumn('param')->url();
 $bool = $validate->validate($data);
 ```
+
+### lessThanWithColumn
+验证字段的值必须小于`with`的字段(仅限`int`)
+
+#### 函数原型
+```php
+function lessThanWithColumn($fieldName, $msg = null)
+```
+- string $filedName 需要比较的字段
+- string $msg 验证错误时提示消息
+
+#### 使用示例
+```php
+$validate = new \EasySwoole\Validate\Validate();
+$data = [
+    'foo' => 10,
+    'bar' => 9
+];
+$validate->addColumn('bar')->lessThanWithColumn('foo');
+$bool = $validate->validate($data);
+```
+
+### greaterThanWithColumn
+验证字段的值必须大于`with`的字段(仅限`int`)
+
+#### 函数原型
+```php
+function greaterThanWithColumn($fieldName, $msg = null)
+```
+- string $filedName 需要比较的字段
+- string $msg 验证错误时提示消息
+
+#### 使用示例
+```php
+$validate = new \EasySwoole\Validate\Validate();
+$data = [
+    'foo' => 10,
+    'bar' => 9
+];
+$validate->addColumn('foo')->greaterThanWithColumn('bar');
+$bool = $validate->validate($data);
+```
