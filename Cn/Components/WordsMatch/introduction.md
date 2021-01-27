@@ -27,8 +27,7 @@ None
 
 ## 安装方法
 
-
-> composer require easyswoole/words-match:1.1.1
+> composer require easyswoole/words-match
 
 ## 仓库地址
 
