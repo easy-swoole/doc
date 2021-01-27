@@ -95,6 +95,8 @@ $ret = MyInvoker::getInstance()->client()->callback(function (MyInvokerDriver $d
 - 尽量使用函数名调用方式，闭包方式调用会存在部分闭包函数序列化失败问题
 - 传递参数，返回结果尽量用数组或者字符串传递，资源对象无法序列化
 
+
+
 ## MongoDb客户端案例
 
 目前，MongoDB并没有提供协程版本的php客户端，只有同步阻塞版本。
