@@ -292,7 +292,7 @@
   - U-Editor(百度编辑器)
     - [使用](Components/uEditor.md)
   - 代码生成
-    - [使用](Components/codeGeneration.md)
+    - [使用](Components/codeGeneration_2.x.md)
   - O-Auth
     - [使用](Components/oauth.md)
   - OSS协程客户端
