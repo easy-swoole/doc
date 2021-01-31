@@ -44,7 +44,7 @@ meta:
 namespace EasySwoole\EasySwoole;
 
 
-use EasySwoole\EasySwoole\Swoole\EventRegister;
+use EasySwoole\Component\Di;use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\Http\GlobalParamHook;
 use EasySwoole\Http\Request;
@@ -58,6 +58,12 @@ class EasySwooleEvent implements Event
     {
         // TODO: Implement initialize() method.
         date_default_timezone_set('Asia/Shanghai');
+        
+        // 3.4.x+ 需要在这里注册
+        Di::getInstance()->set(SysConst::HTTP_GLOBAL_ON_REQUEST,function (Request $request, Response $response){
+            GlobalParamHook::getInstance()->onRequest($request, $response);
+            return true;
+        });
     }
 
     public static function mainServerCreate(EventRegister $register)
@@ -70,6 +76,7 @@ class EasySwooleEvent implements Event
 
     public static function onRequest(Request $request, Response $response): bool
     {
+        // 3.3.x 在这里注册
         GlobalParamHook::getInstance()->onRequest($request, $response);
         return true;
     }
