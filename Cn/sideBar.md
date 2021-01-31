@@ -8,15 +8,21 @@
   - [文档贡献](Update/doc.md)
 - 快速开始
   - [环境要求](QuickStart/environment.md)
-  - [安装](QuickStart/install.md)
+  - [安装 Swoole](QuickStart/installSwoole.md)
+  - [框架安装](QuickStart/install.md)
   - [HelloWorld](QuickStart/helloworld.md)
   - [基础管理命令](QuickStart/command.md)
   - [开发者必读](QuickStart/notice.md)
   - [常见问题](QuickStart/problem.md)
+  - [配置文件](QuickStart/config.md)
+  - [反向代理](QuickStart/proxy.md) 
   - 协程操作指南
     - [什么是协程](QuickStart/Coroutine/introduction.md)
+    - [创建协程](QuickStart/Coroutine/coroutineCreate.md)
     - [注意事项](QuickStart/Coroutine/notice.md)
-    - [上下文管理器](Components/Component/context.md)  
+    - [WaitGroup等待](QuickStart/Coroutine/waitGroup.md)
+    - [Csp并发](QuickStart/Coroutine/csp.md)
+    - [上下文管理器](Components/Component/context.md)
 - 免费视频教程
   - 基础知识学习
     - [php-fpm进程模型](Video/Basic/php-fpmProcessModel.md)
@@ -71,6 +77,7 @@
   - [单元测试](Components/phpunit.md)
   - [异步任务](Components/Component/task.md)
   - [自定义进程](Components/Component/process.md)
+  - [IOC 容器](Components/Component/ioc.md)
 - HTTP服务
   - [控制器](HttpServer/contorller.md)
   - [请求对象](HttpServer/request.md)
@@ -82,6 +89,7 @@
   - [Session](HttpServer/session.md)
   - [视图](Components/Component/template.md)
   - [验证码](Components/verifyCode.md)
+  - [验证器](Components/validate.md)
   - [文件上传](HttpServer/uploadFile.md)
   - [全局变量](HttpServer/global.md)
   - [i18n多语言](Components/i18n.md)
@@ -158,9 +166,11 @@
         - [模型事件](Components/Orm/Event/model.md)
 - Socket服务
   - [TCP服务](Socket/tcp.md)
+  - [TCP服务器处理粘包](Socket/tcpSticky.md)
   - [WebSocket服务](Socket/webSocket.md)
   - [UDP服务](Socket/udp.md)
   - [常见问题](Socket/problem.md)
+  - [WebSocket协议](Socket/websocketProtocol.md)
   - Socket控制器
     - [安装与使用示例](Socket/install.md)
     - [控制器对象](Socket/controller.md)
@@ -251,11 +261,13 @@
     - [Actor组件](Components/actor.md)
   - 错误视图
     - [Whoops](Components/whoops.md)
-  - 同步程序协程调用转化驱动
-    - [SyncInvoker](Components/syncInvoker.md)
+  - 同步程序协程调用转化驱动 SyncInvoker
+    - [安装](Components/SyncInvoker/syncInvoker.md)
+    - [MongoDB 客户端案例](Components/SyncInvoker/mongoDb.md)
   - 开发工具
     - [热重载](Components/hotReload.md)
     - [LinuxDash](Components/linuxDash.md)
+    - [FileWatcher](Components/fileWatcher.md)
   - 辅助类(杂项工具)
     - [ArrayToTextTable](Components/Help/arrayToTextTable.md)
     - [File](Components/Help/file.md)
@@ -264,6 +276,7 @@
     - [SnowFlake](Components/Help/snowFlake.md)
     - [Str](Components/Help/str.md)
     - [Time](Components/Help/time.md)
+    - [IntStr](Components/Help/intStr.md)
   - 令牌及策略
     - [JWT令牌](Components/jwt.md)
     - [Policy](Components/policy.md)
@@ -279,7 +292,7 @@
   - U-Editor(百度编辑器)
     - [使用](Components/uEditor.md)
   - 代码生成
-    - [使用](Components/codeGeneration.md)
+    - [使用](Components/codeGeneration_2.x.md)
   - O-Auth
     - [使用](Components/oauth.md)
   - OSS协程客户端

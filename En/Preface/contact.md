@@ -17,7 +17,9 @@ meta:
     - EMAIL admin@fosuss.com  
      
 - QQ exchange group
-    - VIP group 579434607 (this group needs to pay 599 RMP)
+    - VIP group 579434607 (this group needs to pay 599 RMB)
     - EasySwoole official group 633921431 (full)
     - EasySwoole official two groups 709134628 (full)
-    - EasySwoole official three groups 932625047
+    - EasySwoole official three groups 932625047 (full)
+    - EasySwoole official four groups 779897753 (full)
+    - EasySwoole official five groups 853946743

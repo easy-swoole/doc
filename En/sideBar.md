@@ -1,11 +1,11 @@
 - Preface
-    - [Project introduction](Preface/introduction.md)
-    - [Must read](Preface/developerRead.md)
-    - [Update record](Preface/updateLog.md)
-    - [Component update record](Preface/componentUpdateLog.md)
-    - [Donation](Preface/donation.md)
-    - [Contact author](Preface/contactAuthor.md)
-    - [Document maintenance team](Preface/team.md)
+  - [Project introduction](Preface/intro.md)
+  - [Contact author](Preface/contact.md)
+  - [Donation](Preface/donate.md)
+- Updates and documentation
+  - [Framework update record](Update/main.md)
+  - [Component update record](Update/component.md)
+  - [Documentation contribution](Update/doc.md)
 - Quick start
     - [Development environment](Introduction/environment.md)
     - [Install](Introduction/install.md)
@@ -273,3 +273,7 @@
 - Open source projects
     - [introduction](OpenSource/index.md)
     - [ritaswcIpAddress-IP address locations(Offline version)](OpenSource/ritaswcIpAddress.md)
+- Application deployment
+  - [Docker](Deploy/docker.md)
+  - [Nginx](Deploy/nginx.md)
+  - [Supervisor](Deploy/supervisor.md)

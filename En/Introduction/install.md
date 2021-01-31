@@ -91,10 +91,12 @@ At this point you can visit `http://localhost:9501` to see the welcome page of t
 
 ## other
 - QQ exchange group
-    - VIP group 579434607 (this group needs to pay 599 RMP)
+    - VIP group 579434607 (this group needs to pay 599 RMB)
     - EasySwoole official group 633921431 (full)
     - EasySwoole official two groups 709134628 (full)
-    - EasySwoole official three groups 932625047
+    - EasySwoole official three groups 932625047 (full)
+    - EasySwoole official four groups 779897753 (full)
+    - EasySwoole official five groups 853946743
     
 - Business support:
     - QQ 291323003
@@ -103,7 +105,7 @@ At this point you can visit `http://localhost:9501` to see the welcome page of t
 
     ![](/Images/authWx.png)    
     
-- [Donation](/En/Preface/donation.md)
+- [Donation](/Preface/donate.md)
   Your donation is the greatest encouragement and support for the Swoole project development team. We will insist on development and maintenance. Your donation will be used to:
         
   - Continuous and in-depth development

@@ -12,7 +12,7 @@ meta:
 由于在 `Swoole` 协程下，`php` 自带的 `session` 函数是不能使用的。为此，`EasySwoole` 提供了独立的 `session` 组件，实现 `php` 的 `session` 功能。
 
 ## 组件要求
-- php ： >=7.1.0"
+- php : >=7.1.0
 - easyswoole/spl : ^1.3
 - easyswoole/utility : ^1.1
 - easyswoole/component : ^2.1

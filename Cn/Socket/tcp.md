@@ -46,9 +46,10 @@ public static function mainServerCreate(\EasySwoole\EasySwoole\Swoole\EventRegis
     $server = \EasySwoole\EasySwoole\ServerManager::getInstance()->getSwooleServer();
 
     $subPort = $server->addlistener('0.0.0.0', 9502, SWOOLE_TCP);
-    $subPort->set(
+    $subPort->set([
         // swoole 相关配置
-    );
+        'open_length_check' => false,
+    ]);
     $subPort->on($register::onConnect, function (\Swoole\Server $server, int $fd, int $reactor_id) {
             echo "fd {$fd} connected";
     });

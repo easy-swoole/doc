@@ -7,8 +7,10 @@ meta:
     content:  easyswoole注解控制器 - 注解自动生成文档
 ---
 # 注解文档
-Easyswoole允许通过注解控制器的注解标签，生成文档。
-#### 控制器输出文档
+
+`Easyswoole`允许通过注解控制器的注解标签，生成文档。
+
+## 控制器输出文档
 ```
 namespace App\HttpController;
 
@@ -27,9 +29,9 @@ class Index extends AnnotationController
     }
 }
 ```
-例如在以上的代码中，我们就是直接扫描Easyswoole默认的控制器目录下的全部注解并输出对应文档，用户可以自己去做文档权限控制，或者是对应的目录限制。
+例如在以上的代码中，我们就是直接扫描`Easyswoole`默认的控制器目录下的全部注解并输出对应文档，用户可以自己去做文档权限控制，或者是对应的目录限制。
 
-#### 生成离线文档
+## 生成离线文档
 
 在项目根目录下执行如下命令：
 ```
@@ -39,7 +41,26 @@ php vendor/bin/easy-doc App/HttpController
 
 > 注意，仅当有@Api标记的控制器方法才会被渲染到文档中。
 
-#### 注解示例1
+## 注意事项
+
+有的同学在注解`@ApiSuccess`中,写入了`plainText`和`jsonArray`,会导致注解失败.有以下注意事项:
+
+执行`composer info`需保证
+`easyswoole/annotation`版本`>=2.0.3`
+
+`plaintText`用法为：
+
+`MyAnnotation(myProperty=r"{"code":200}")`
+也就是格式为
+`r"{RAW}"`
+字母r+双引号。
+
+`json Array`用法为：
+
+`@PropertyTag(input={"code":2,"result":[{"name":1}]})`
+可以直接解析为完整的数组。
+
+## 注解示例1
 ```
 namespace App\HttpController;
 
@@ -80,7 +101,7 @@ class UserApi extends AnnotationController
 }
 ```
         
-#### 注解示例2
+## 注解示例2
 ```
 
 use EasySwoole\Component\Context\ContextManager;
@@ -151,3 +172,4 @@ class Annotation extends AnnotationController
     }
 }
 ```
+
