@@ -16,8 +16,19 @@ title: Easyswoole框架设计原理 - 全局事件
 
 > 注：如果你是框架旧版升级到框架新版，需要删除框架根目录的 `easyswoole` 文件，然后重新运行 `php ./vendor/easyswoole/easyswoole/bin/easyswoole install` 进行重新安装(报错或者其他原因请重新看 [框架安装章节-执行安装步骤](/QuickStart/install))，重新安装完成之后，即可正常使用 `bootstrap` 事件
 
-### 在框架启用前(即在 bootstrap 事件中)调用协程 API
-使用示例如下：
+### 在框架启用前(在 bootstrap 事件中)调用协程 API
+开发者在 `EasySwoole` 主服务启动前调用协程 `api`，必须使用如下操作：
+```php
+$scheduler = new \Swoole\Coroutine\Scheduler();
+$scheduler->add(function() {
+    /* 调用协程API */
+});
+$scheduler->start();
+// 清除全部定时器
+\Swoole\Timer::clearAll();
+```
+
+具体使用示例如下：
 ```
 <?php
 // 全局 bootstrap 事件
@@ -129,7 +140,7 @@ class EasySwooleEvent implements Event
 }
 ```
 
-### 启用前(即在 initialize 事件中)调用协程 API
+### 启用前(在 initialize 事件中)调用协程 API
 
 开发者在 `EasySwoole` 主服务启动前调用协程 `api`，必须使用如下操作：
 ```php
@@ -252,6 +263,7 @@ public static function mainServerCreate(EventRegister $register)
 - 添加子服务监听
 - `SwooleTable/Atomic`
 - 创建自定义进程
+- 启用前(在 mainServerCreate 事件中)调用协程 API
 
 ### 注册主服务回调事件
 例如：为主服务注册 `onWorkerStart` 回调事件：
@@ -306,5 +318,14 @@ $subPort->set([
 ```
 > `Test` 是 `EasySwoole\Component\Process\AbstractProcess` 抽象类的子类
 
-
-
+### 启用前(在 mainServerCreate 事件中)调用协程 API
+开发者在 `EasySwoole` 主服务启动前调用协程 `api`，必须使用如下操作：
+```php
+$scheduler = new \Swoole\Coroutine\Scheduler();
+$scheduler->add(function() {
+    /* 调用协程API */
+});
+$scheduler->start();
+// 清除全部定时器
+\Swoole\Timer::clearAll();
+```
