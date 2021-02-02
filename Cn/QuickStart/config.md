@@ -9,11 +9,10 @@ meta:
 
 
 # 配置文件
+`EasySwoole` 框架提供了非常灵活自由的全局配置功能，配置文件采用 `PHP` 返回数组方式定义，对于一些简单的应用，无需修改任何配置，对于复杂的要求，还可以自行扩展自己独立的配置文件和进行动态配置。  
+框架安装完成后系统默认的全局配置文件是项目根目录下的 `produce.php` 、 `dev.php` 文件，(在 `3.1.2` 版本之前是 `dev.env`、`produce.env`)，`3.4.x` 版本(最新版)支持在启动 `EasySwoole` 框架时以指定的配置文件( `dev.php` / `produce.php`)运行，详细启动命令请看[基本管理命令章节](/QuickStart/command.md)。
 
-EasySwoole框架提供了非常灵活自由的全局配置功能，配置文件采用PHP返回数组方式定义，对于一些简单的应用，无需修改任何配置，对于复杂的要求，还可以自行扩展自己独立的配置文件和进行动态配置。  
-框架安装完成后系统默认的全局配置文件是项目根目录下的 `produce.php`,`dev.php` 文件，(在3.1.2版本之前是dev.env,produce.env)
-文件内容如下:
-
+配置文件内容如下:
 ```php
 <?php
 
@@ -39,8 +38,15 @@ return [
             'reload_async'          => true,
             // 开启后自动在 onTask 回调中创建协程
             'task_enable_coroutine' => true,
-            'max_wait_time'         => 3
+            'max_wait_time'         => 3,
+            // (可选参数）使用 http 上传大文件时可以进行配置
+            // 'package_max_length' => 100 * 1024 * 1024, // 即 100 M
+            
+            // (可选参数) 允许处理静态文件 html 等，详细请看 http://swoole-doc.easyswoole.com/ServerStart/Http/serverSetting.html
+            // 'document_root' => '/easyswoole/public',
+            // 'enable_static_handler' => true,
         ],
+        // 设置 EasySwoole 框架独立实现的 Task 任务组件的配置
         'TASK'=>[
             'workerNum'     => 4,
             'maxRunningNum' => 128,
@@ -54,21 +60,26 @@ return [
 ];
 ```
 
+上述参数补充说明：
+- MAIN_SERVER.SERVER_TYPE: 
+    - EASYSWOOLE_WEB_SERVER: 表示框架主服务为 `Http` 服务(框架默认提供的服务类型)
+    - EASYSWOOLE_SERVER: 表示框架主服务为 `Tcp` 服务
+    - EASYSWOOLE_WEB_SOCKET_SERVER: 表示框架主服务为 `WebSocket` 服务
+    - EASYSWOOLE_REDIS_SERVER: 表示框架主服务为 `Redis` 服务
+
 ::: warning 
- EASYSWOOLE_SERVER,EASYSWOOLE_WEB_SOCKET_SERVER类型,都需要在`EasySwooleEvent.php`的`mainServerCreate`自行设置回调(receive或message),否则将出错
+  EASYSWOOLE_SERVER、EASYSWOOLE_WEB_SOCKET_SERVER类型，都需要在 `EasySwooleEvent.php` 的 `mainServerCreate` 事件中自行设置回调( `receive` 或 `message` )，否则将出错。具体设置对应的回调的方式请参考 [Tcp服务章节](/Socket/tcp.md) 和 [WebSocket服务章节](/Socket/webSocket.md)。
 :::
 
 ::: warning 
- 框架的配置驱动默认为 swoole_table,特性为多进程共享,快速存储,但只能存储少量配置文件,自定义配置驱动可查看本文最后章节
+  框架的配置驱动默认为 `SplArray`，自定义配置驱动可查看本文最后章节
 :::
 
 ## 配置操作类
-
-配置操作类为 `EasySwoole\Config` 类，使用非常简单，见下面的代码例子，操作类还提供了 `toArray` 方法获取全部配置，`load` 方法重载全部配置，基于这两个方法，可以自己定制更多的高级操作
-
+配置操作类为 `\EasySwoole\EasySwoole\Config` 类，使用方式非常简单，具体请看下面的代码示例，操作类还提供了 `load` 方法重载全部配置，基于这个方法，可以自己定制更多的高级操作
 
 ::: warning 
- 设置和获取配置项都支持点语法分隔，见下面获取配置的代码例子
+设置和获取配置项都支持点语法分隔，具体请看下面获取配置的代码示例
 :::
 
 ```php
@@ -94,38 +105,67 @@ $instance->load($conf);
 ```
 
 ::: warning 
- 需要注意的是 由于进程隔离的原因 在Server启动后，动态新增修改的配置项，只对执行操作的进程生效，如果需要全局共享配置需要自己进行扩展
+  需要注意的是 `由于进程隔离的原因`，在 `Server` 启动后，动态新增修改的配置项，只对执行操作的进程生效，如果需要全局共享配置需要自己进行扩展
 :::
 
 ## 添加用户配置项
 
-每个应用都有自己的配置项，添加自己的配置项非常简单，其中一种方法是直接在配置文件中添加即可，如下面的例子
+每个用户都有自己的配置项，添加自己的配置项非常简单，其中一种方法是直接在配置文件中添加即可，如下面的例子:
+下面示例中添加了自定义的 `MySQL` 和 `Redis` 配置。
 
 ```php
-/*################ MYSQL CONFIG ##################*/
-
-'MYSQL' => [
-    'host'          => '192.168.75.1',
-    'port'          => '3306',
-    'user'          => 'root',
-    'timeout'       => '5',
-    'charset'       => 'utf8mb4',
-    'password'      => 'root',
-    'database'      => 'cry',
-    'POOL_MAX_NUM'  => '20',
-    'POOL_TIME_OUT' => '0.1',
-],
-
-/*################ REDIS CONFIG ##################*/
-
-'REDIS' => [
-    'host'          => '127.0.0.1',
-    'port'          => '6379',
-    'auth'          => '',
-    'POOL_MAX_NUM'  => '20',
-    'POOL_MIN_NUM'  => '5',
-    'POOL_TIME_OUT' => '0.1',
-],
+<?php
+return [
+    'SERVER_NAME' => "EasySwoole",
+    'MAIN_SERVER' => [
+        'LISTEN_ADDRESS' => '0.0.0.0',
+        'PORT' => 9501,
+        'SERVER_TYPE' => EASYSWOOLE_WEB_SERVER, //可选为 EASYSWOOLE_SERVER  EASYSWOOLE_WEB_SERVER EASYSWOOLE_WEB_SOCKET_SERVER,EASYSWOOLE_REDIS_SERVER
+        'SOCK_TYPE' => SWOOLE_TCP,
+        'RUN_MODEL' => SWOOLE_PROCESS,
+        'SETTING' => [
+            'worker_num' => 8,
+            'reload_async' => true,
+            'max_wait_time'=>3,
+            'document_root'            => EASYSWOOLE_ROOT . '/Static',
+            'enable_static_handler'    => true,
+        ],
+        'TASK'=>[
+            'workerNum'=>0,
+            'maxRunningNum'=>128,
+            'timeout'=>15
+        ]
+    ],
+    'TEMP_DIR' => null,
+    'LOG_DIR' => null,
+    
+    
+    // 添加 MySQL 及对应的连接池配置
+    /*################ MYSQL CONFIG ##################*/
+    'MYSQL' => [
+        'host'          => '192.168.75.1', // 数据库地址
+        'port'          => '3306', // 数据库端口
+        'user'          => 'root', // 数据库用户名
+        'timeout'       => '5', // 数据库连接超时时间
+        'charset'       => 'utf8mb4', // 数据库字符编码
+        'password'      => 'root', // 数据库用户密码
+        'database'      => 'cry', // 数据库名
+        'POOL_MAX_NUM'  => '20', // 数据库连接池 最大连接池数量
+        'POOL_TIME_OUT' => '0.1', // 数据库连接池 超时时间
+    ],
+    
+    
+    // 添加 Redis 及对应的连接池配置
+    /*################ REDIS CONFIG ##################*/
+    'REDIS' => [
+        'host'          => '127.0.0.1', // Redis地址
+        'port'          => '6379', // Redis端口
+        'auth'          => '', // Redis密码
+        'POOL_MAX_NUM'  => '20', // Redis连接池 最大连接池数量
+        'POOL_MIN_NUM'  => '5', // Redis连接池 最小连接池数量
+        'POOL_TIME_OUT' => '0.1', // Redis连接池 连接超时时间
+    ],
+];
 ```
 
 ## 生产与开发配置分离
