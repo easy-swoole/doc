@@ -202,7 +202,7 @@
                 container.removeClass('layout-2');
                 container.addClass('layout-1');
             }
-        }
+        };
         $('.sideBar-toggle-button, .navBar-menu-button').on('click', changeLayout);
     })(jQuery);
 </script>
