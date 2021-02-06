@@ -31,6 +31,11 @@ EasySwoole 提供了一个快速缓存，是基础UnixSock通讯和自定义进�
 我们在EasySwoole全局的事件中进行注册
 ```php
 use EasySwoole\FastCache\Cache;
+//在最新的2.x中，改为config配置文件配置
+$config = new \EasySwoole\FastCache\Config();
+$config->setTempDir(EASYSWOOLE_TEMP_DIR);
+Cache::getInstance($config)->attachToServer(ServerManager::getInstance()->getSwooleServer());
+//老版本依旧使用以下即可
 Cache::getInstance()->setTempDir(EASYSWOOLE_TEMP_DIR)->attachToServer(ServerManager::getInstance()->getSwooleServer());
 ```
 
