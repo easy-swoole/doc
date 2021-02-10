@@ -53,3 +53,7 @@ return [
 ::: tip
 以上shell命令适用于centos7，其它linux发行版请自行查找相关命令
 :::
+
+### 请求数据时 DNS 报错
+- 原因：有时会发现在使用 `Swoole` 的 `MySQL、HttpClient、Redis` 等客户端发送请求时，出现了 `DNS` 错误，这是由于 `Swoole` 底层对一些 `DNS` 不是很友好。
+- 解决方法：建议使用阿里云公共 `DNS`，具体如何配置阿里云公共 `DNS`，请看 [https://www.alidns.com/knowledge?type=SETTING_DOCS#user_linux](https://www.alidns.com/knowledge?type=SETTING_DOCS#user_linux)

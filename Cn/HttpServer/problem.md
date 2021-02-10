@@ -114,14 +114,14 @@ var_dump($ip2);
 
 ```php
 'MAIN_SERVER' => [
-        'SOCK_TYPE' => SWOOLE_TCP | SWOOLE_SSL, // 默认是 SWOOLE_TCP
-        'SETTING' => [
-            'ssl_cert_file' => '证书路径，仅支持.pem格式',
-            'ssl_key_file' => '私钥路径',
-        ]
-    ],
-
+    'SOCK_TYPE' => SWOOLE_TCP | SWOOLE_SSL, // 默认是 SWOOLE_TCP
+    'SETTING' => [
+        'ssl_cert_file' => '证书路径，仅支持.pem格式',
+        'ssl_key_file' => '私钥路径',
+    ]
+],
 ```
+
 ## DNS Lookup resolve timeout错误
 该错误一般存在与 http客户端并发时产生,原因是dns效率慢,导致多线程获取dns时超时,包括不限于以下场景:  
  - mysql host设置为域名形式,并且设置最小连接高于2(很难看到,一般是10才会偶尔报错)
@@ -150,3 +150,26 @@ var_dump($ip2);
         });
     }
 ```
+
+## CURL 发送 POST请求 EasySwoole 服务器端超时
+- 出现原因：`CURL` 在发送较大的 `POST` 请求(例如: 上传文件)时会先发一个 `100-continue` 的请求，如果收到服务器的回应才会发送实际的 `POST` 数据。而 `swoole_http_server`(即 `EasySwoole` 的 `Http` 主服务) 不支持 `100-continue`，就会导致 `CURL` 请求超时。
+- 解决方法：
+
+> 方法1：关闭 `CURL` 的 `100-continue`，在 `CURL` 的 `Header` 中配置关闭 `100-continue` 选项。
+
+示例代码(php):
+```php
+<?php
+// 创建一个新cURL资源
+$ch = curl_init();
+// 设置URL和相应的选项
+curl_setopt($ch, CURLOPT_URL, "http://127.0.0.1:9501");
+curl_setopt($ch, CURLOPT_HEADER, 0);
+curl_setopt($ch, CURLOPT_POST, 1); // 设置为POST方式
+curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:')); // 关闭 `CURL` 的 `100-continue`
+curl_setopt($ch, CURLOPT_POSTFIELDS, array('test' => str_repeat('a', 800000)));// POST 数据
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+```
+
+> 方法2：使用 `Nginx` 做前端代理，由 `Nginx` 处理 `100-Continue`(针对无法关闭 `100-continue`时)
