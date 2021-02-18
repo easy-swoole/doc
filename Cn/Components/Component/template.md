@@ -256,7 +256,7 @@ class Smarty implements RenderInterface
     {
         $temp = sys_get_temp_dir();
         $this->smarty = new \Smarty();
-        $this->smarty->setTemplateDir(EASYSWOOLE_ROOT . '/View/');
+        $this->smarty->setTemplateDir(EASYSWOOLE_ROOT . '/App/View/');
         $this->smarty->setCacheDir("{$temp}/smarty/cache/");
         $this->smarty->setCompileDir("{$temp}/smarty/compile/");
     }
