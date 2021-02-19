@@ -143,54 +143,83 @@ return [
     // 添加 MySQL 及对应的连接池配置
     /*################ MYSQL CONFIG ##################*/
     'MYSQL' => [
-        'host'          => '192.168.75.1', // 数据库地址
-        'port'          => '3306', // 数据库端口
+        'host'          => '127.0.0.1', // 数据库地址
+        'port'          => 3306, // 数据库端口
         'user'          => 'root', // 数据库用户名
-        'timeout'       => '5', // 数据库连接超时时间
-        'charset'       => 'utf8mb4', // 数据库字符编码
         'password'      => 'root', // 数据库用户密码
-        'database'      => 'cry', // 数据库名
-        'POOL_MAX_NUM'  => '20', // 数据库连接池 最大连接池数量
-        'POOL_TIME_OUT' => '0.1', // 数据库连接池 超时时间
+        'timeout'       => 45, // 数据库连接超时时间
+        'charset'       => 'utf8', // 数据库字符编码
+        'database'      => 'easyswoole', // 数据库名
+        'autoPing'      => 5, // 自动 ping 客户端链接的间隔
+        'strict_type'   => false, // 不开启严格模式
+        'fetch_mode'    => false,
+        'returnCollection'  => false, // 设置返回结果为 数组
+        // 配置 数据库 连接池配置，配置详细说明请看连接池组件 https://www.easyswoole.com/Components/Pool/introduction.html
+        'intervalCheckTime' => 15 * 1000, // 设置 连接池定时器执行频率
+        'maxIdleTime'   => 10, // 设置 连接池对象最大闲置时间 (秒)
+        'maxObjectNum'  => 20, // 设置 连接池最大数量
+        'minObjectNum'  => 5, // 设置 连接池最小数量
+        'getObjectTimeout'  => 3.0, // 设置 获取连接池的超时时间
+        'loadAverageTime'   => 0.001, // 设置 负载阈值
     ],
-    
-    
+
     // 添加 Redis 及对应的连接池配置
     /*################ REDIS CONFIG ##################*/
     'REDIS' => [
-        'host'          => '127.0.0.1', // Redis地址
-        'port'          => '6379', // Redis端口
-        'auth'          => '', // Redis密码
-        'POOL_MAX_NUM'  => '20', // Redis连接池 最大连接池数量
-        'POOL_MIN_NUM'  => '5', // Redis连接池 最小连接池数量
-        'POOL_TIME_OUT' => '0.1', // Redis连接池 连接超时时间
+        'host'          => '127.0.0.1', // Redis 地址
+        'port'          => '6379', // Redis 端口
+        'auth'          => 'easyswoole', // Redis 密码
+        'timeout'       => 3.0, // Redis 操作超时时间
+        'reconnectTimes' => 3, // Redis 自动重连次数
+        'db'            => 0, // Redis 库
+        'serialize'     => \EasySwoole\Redis\Config\RedisConfig::SERIALIZE_NONE, // 序列化类型，默认不序列化
+        'packageMaxLength' => 1024 * 1024 * 2, // 允许操作的最大数据
+        // 配置 Redis 连接池配置，配置详细说明请看连接池组件 https://www.easyswoole.com/Components/Pool/introduction.html
+        'intervalCheckTime' => 15 * 1000, // 设置 连接池定时器执行频率
+        'maxIdleTime'   => 10, // 设置 连接池对象最大闲置时间 (秒)
+        'maxObjectNum'  => 20, // 设置 连接池最大数量
+        'minObjectNum'  => 5, // 设置 连接池最小数量
+        'getObjectTimeout'  => 3.0, // 设置 获取连接池的超时时间
+        'loadAverageTime'   => 0.001, // 设置 负载阈值
     ],
 ];
 ```
 
 ## 生产与开发配置分离
-在php easyswoole start命令下,默认为开发模式,加载 `dev.php` (3.1.2之前为 `dev.env`)
-运行 php easyswoole start produce 命令时,为生产模式,加载 `produce.php` (3.1.2之前为 `produce.env`)
+在 `php easyswoole server start` 命令下，默认为开发模式，加载 `dev.php` (3.1.2 之前为 `dev.env`)
+运行 `php easyswoole server start -mode=produce` 命令时，为生产模式，加载 `produce.php` (3.1.2 之前为 `produce.env`)
+
+::: tip
+旧版本 EasySwoole (3.4.x 以前的版本)，在 `php easyswoole start` 命令下，默认为开发模式，加载 `dev.php` (3.1.2 之前为 `dev.env`)。运行 `php easyswoole start produce` 命令时，为生产模式，加载 `produce.php` (3.1.2 之前为 `produce.env`)
+:::
 
 
-## DI注入配置
-es3.x提供了几个Di参数配置,可自定义配置脚本错误异常处理回调,控制器命名空间,最大解析层级等
+
+## DI 注入配置
+`es 3.x` 提供了几个 `Di` 参数配置，可自定义配置脚本错误异常处理回调、控制器命名空间、最大解析层级等。
 ```php
 <?php
-Di::getInstance()->set(SysConst::ERROR_HANDLER,function (){}); // 配置错误处理回调
-Di::getInstance()->set(SysConst::SHUTDOWN_FUNCTION,function (){}); // 配置脚本结束回调
-Di::getInstance()->set(SysConst::HTTP_CONTROLLER_NAMESPACE,'App\\HttpController\\');// 配置控制器命名空间
-Di::getInstance()->set(SysConst::HTTP_CONTROLLER_MAX_DEPTH,5); // 配置http控制器最大解析层级
-Di::getInstance()->set(SysConst::HTTP_EXCEPTION_HANDLER,function (){}); // 配置http控制器异常回调
-Di::getInstance()->set(SysConst::HTTP_CONTROLLER_POOL_MAX_NUM,15); // http控制器对象池最大数量
+// 配置错误处理回调
+\EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::ERROR_HANDLER, function () {
+});
+// 配置脚本结束回调
+\EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::SHUTDOWN_FUNCTION, function () {
+});
+// 配置控制器命名空间
+\EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::HTTP_CONTROLLER_NAMESPACE, 'App\\HttpController\\');
+// 配置 HTTP 控制器最大解析层级
+\EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::HTTP_CONTROLLER_MAX_DEPTH, 5);
+// 配置http控制器异常回调
+\EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::HTTP_EXCEPTION_HANDLER, function () {});
+// HTTP 控制器对象池最大数量
+\EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::HTTP_CONTROLLER_POOL_MAX_NUM, 15);
 ```
 
 ## 动态配置
-当你在控制器(worker进程)中修改某一项配置时,由于进程隔离,修改的配置不会在其他进程生效,所以我们可以使用动态配置:
-动态配置将配置数据存储在swoole_table中,取/修改配置数据时是从swoole_table直接操作,所有进程都可以使用
+当你在控制器(worker 进程)中修改某一项配置时，由于进程隔离，修改的配置不会在其他进程生效，所以我们可以使用动态配置: 动态配置将配置数据存储在 swoole_table 中，取/修改配置数据时是从 swoole_table 直接操作，所有进程都可以使用。
 
 ::: warning
- 由于swoole_table的特性,不适合存储大量/大长度的配置,如果是存储支付秘钥,签名等大长度字符串,建议使用类常量方法定义,而不是通过dev.php存储
+由于 `swoole_table` 的特性，不适合存储大量/大长度的配置,如果是存储支付秘钥,签名等大长度字符串,建议使用类常量方法定义,而不是通过dev.php存储
 :::
 
 ::: warning
