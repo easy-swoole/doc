@@ -37,7 +37,9 @@ meta:
 
 是基于EasySwoole V3 并整合ES文档中的mysq/redisl协程连接池、Task异步任务、ceche缓存、chat聊天等功能的完整IM应用（demo）
 
-[im Demo地址](https://github.com/Double-Jin/jin-chat)
+[im Demo地址](https://github.com/gaobinzhan/jin-chat)(原作者暂时没维护,因此`fork`)
+
+[im Demo地址](https://github.com/Double-Jin/jin-chat)(原作者仓库地址)
 
 ### socialite (第三方登录集成组件)
 

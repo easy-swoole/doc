@@ -77,7 +77,7 @@ function index()
 * @Param(name="name",required="",lengthMax="25",from={GET,POST})
 * @Param(name="age",integer="",from={POST})
 ```
-则规定了```name```字段允许的取参顺序为：GET => POST，而```age```参数就仅仅允许为GET传参。目前from的允许值为：
+则规定了```name```字段允许的取参顺序为：GET => POST，而```age```参数就仅仅允许为 `POST` 传参。目前from的允许值为：
 ```POST```，```GET```，```COOKIE```,```HEADER```,```FILE```,```DI```,```CONTEXT```,```RAW```。在无规定from字段时，默认以```$request->getRequestParam($paramName)```方法获得参数值。具体实现可以在```EasySwoole\HttpAnnotation\AnnotationController```的```__handleMethodAnnotation```方法中查看。
 
 #### type

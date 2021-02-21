@@ -10,7 +10,8 @@
         "easyswoole/template": "^1.1",
         "easyswoole/socket": "^1.1",
         "easyswoole/redis-pool": "^2.2",
-        "easyswoole/queue": "2.1.x"
+        "easyswoole/queue": "2.1.x",
+        "easyswoole/doc-system": "dev-master"
     },
     "require-dev": {
         "easyswoole/swoole-ide-helper": "^1.3"

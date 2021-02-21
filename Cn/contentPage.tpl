@@ -134,10 +134,10 @@
                 <i class="fa fa-bars" style="font-size: 1.3rem;color: #333;"></i>
             </a>
             <div class="navInnerRight">
-                {*<div class="navSearch">*}
-                    {*<input aria-label="Search" autocomplete="off" spellcheck="false" class="" placeholder="" id="SearchValue">*}
-                    {*<div class="resultList" id="resultList" style="display: none"></div>*}
-                {*</div>*}
+                <div class="navSearch">
+                    <input aria-label="Search" autocomplete="off" spellcheck="false" class="" placeholder="" id="SearchValue">
+                    <div class="resultList" id="resultList" style="display: none"></div>
+                </div>
                 <div class="navItem">
                     <div class="dropdown-wrapper">
                         <a href="/wstool.html" style="text-decoration:none;">websocket测试工具</a>
@@ -202,7 +202,7 @@
                 container.removeClass('layout-2');
                 container.addClass('layout-1');
             }
-        }
+        };
         $('.sideBar-toggle-button, .navBar-menu-button').on('click', changeLayout);
     })(jQuery);
 </script>
@@ -267,6 +267,14 @@
                         parent.click();
                     }
                 }
+            }
+        });
+
+        var articles = [];
+        $.ajax({
+            url: '/keywordCn.json',
+            success: function (data) {
+                articles = data;
             }
         });
 
