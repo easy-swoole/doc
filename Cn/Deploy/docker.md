@@ -56,7 +56,7 @@ RUN yum install -y curl zip unzip  wget openssl-devel gcc-c++ make autoconf git
 RUN yum install -y php-devel php-openssl php-mbstring php-json php-simplexml
 # composer
 RUN curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/bin/composer && chmod +x /use/bin/composer
+    && mv composer.phar /usr/bin/composer && chmod +x /usr/bin/composer
 # use aliyun composer
 RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
