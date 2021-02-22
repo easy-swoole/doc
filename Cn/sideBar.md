@@ -68,7 +68,12 @@
   - 核心文件
     - [ServerManager.php](FrameDesign/serverManager.md)
     - [Core.php](FrameDesign/core.md)
-  - [全局事件](FrameDesign/event.md)
+  - 全局事件
+    - [Bootstrap 事件](FrameDesign/event/bootstrap.md)
+    - [Initialize 事件](FrameDesign/event/initialize.md)
+    - [MainServerCreate 事件](FrameDesign/event/mainServerCreate.md)
+    - [OnRequest 事件](FrameDesign/event/onRequest.md)
+    - [AfterRequest 事件](FrameDesign/event/afterRequest.md)
 - 基础使用
   - [Timer定时器](Components/Component/timer.md)
   - [Crontab定时任务](BaseUsage/crontab.md)
