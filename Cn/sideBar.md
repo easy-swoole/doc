@@ -170,6 +170,7 @@
     - 事件
         - [回调事件](Components/Orm/Event/onQuery.md)
         - [模型事件](Components/Orm/Event/model.md)
+    - [常见问题](Components/Orm/problem.md)
 - Socket服务
   - [TCP服务](Socket/tcp.md)
   - [TCP服务器处理粘包](Socket/tcpSticky.md)
@@ -207,9 +208,11 @@
   - FastCache
     - [安装及使用](Components/FashCache/fastCache.md)
 - 消息队列
-  - Queue
-    - [安装](Components/Queue/install.md)
-    - [多节点](Components/Queue/nodes.md)
+  - Queue 
+    - [安装及使用](Components/Queue/queue3.x.md)
+    - Queue 2.1.x
+      - [安装](Components/Queue/install.md)
+      - [多节点](Components/Queue/nodes.md)
   - 分布式
     - [Kafka](Components/kafka.md)
     - [Nsq](Components/nsq.md)
