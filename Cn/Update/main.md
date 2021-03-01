@@ -12,7 +12,7 @@
 - 调整依赖的 `http-annotation 注解组件` 为 `2.x`
 - 优化对日志等级(level)的设置，详细请看 [配置文件 章节](/QuickStart/config.md)
 - 优化用户可在配置文件中对日志处理器进行重写，详细请看 [日志 章节](/BaseUsage/log.md)
-- 优化调整 Crontab 定时任务组件状态显示、执行
+- 优化调整`Crontab`定时任务组件状态显示、执行.
 
 ### 移除
 
