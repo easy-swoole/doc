@@ -16,6 +16,7 @@
   - [常见问题](QuickStart/problem.md)
   - [配置文件](QuickStart/config.md)
   - [反向代理](QuickStart/proxy.md) 
+  - [开发工具](QuickStart/developTools.md)
   - 协程操作指南
     - [什么是协程](QuickStart/Coroutine/introduction.md)
     - [创建协程](QuickStart/Coroutine/coroutineCreate.md)

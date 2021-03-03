@@ -20,7 +20,7 @@ meta:
 *请在终端执行以下命令*
 > docker pull easyswoole/easyswoole3
 
-docker hub上的环境为 `php7.2` + `swoole4.4.17` + `easyswoole 3.3.x`
+docker hub上的环境为 `php7.2` + `swoole4.4.23` + `easyswoole 3.4.x`
 
 
 ## 框架启动
@@ -28,7 +28,7 @@ docker hub上的环境为 `php7.2` + `swoole4.4.17` + `easyswoole 3.3.x`
 > docker run -ti -p 9501:9501 easyswoole/easyswoole3
 
 默认工作目录为: `/easyswoole`  
-命令执行完成，自动进入工作目录，执行 `php easyswoole start`，宿主机浏览器访问 `http://127.0.0.1:9501/` 即可看到欢迎页。
+命令执行完成，自动进入工作目录，执行 `php easyswoole server start` 启动服务，宿主机浏览器访问 `http://127.0.0.1:9501/` 即可看到欢迎页。如果访问欢迎页遇到如下情形：`not controller class match`，请重新执行安装命令 `php easyswoole install`，并且输入 `Y`、`Y`，再次执行 `php easyswoole server start` 启动服务，就可以正常访问欢迎页了，详见 [框架安装](/QuickStart/install.md)。
 
 ## 如何开发
 
@@ -47,8 +47,8 @@ docker hub上的环境为 `php7.2` + `swoole4.4.17` + `easyswoole 3.3.x`
 FROM centos:8
 
 #version defined
-ENV SWOOLE_VERSION 4.4.17
-ENV EASYSWOOLE_VERSION 3.x
+ENV SWOOLE_VERSION 4.4.23
+ENV EASYSWOOLE_VERSION 3.4.x
 
 #install libs
 RUN yum install -y curl zip unzip  wget openssl-devel gcc-c++ make autoconf git
@@ -57,8 +57,8 @@ RUN yum install -y php-devel php-openssl php-mbstring php-json php-simplexml
 # composer
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/bin/composer && chmod +x /usr/bin/composer
-# use aliyun composer
-RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+# use aliyun composer 由于最近阿里云镜像不稳定，废弃使用
+# RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 # swoole ext
 RUN wget https://github.com/swoole/swoole-src/archive/v${SWOOLE_VERSION}.tar.gz -O swoole.tar.gz \

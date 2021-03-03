@@ -29,9 +29,13 @@ meta:
 - [更新说明](/Update/main.md)
 
 
-## 切换阿里云镜像
+## 切换 Composer 镜像
 ````
-composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+# 由于最近阿里云composer镜像不稳定，暂时废弃使用，请使用其他稳定的镜像
+# composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+
+# 推荐暂时使用腾讯云镜像
+composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer/
 ````
 
 删除镜像
@@ -128,6 +132,9 @@ fi
 请检查环境是否为宝塔等其他集成面板，或者是 `php.ini` 配置项中禁用了 ```symlink``` 与 ```readlink``` 函数，如果禁用了，请关闭这两个函数的禁用，并删除 `vender 目录`，然后重新执行 ```composer require``` 或者是 ```composer install``` 或者是 ```composer update```。
 
 如果取消了函数禁用并且删除 `vendor` 目录，并重新执行 `composer install` 之后。依旧出现以上错误时，大概率是因为虚拟机等权限原因导致软链接失效。可使用 `php vendor/easyswoole/easyswoole/bin/easyswoole` 命令进行启动框架。或者直接修改项目根目录的 `easyswoole` 文件，引入 `vendor/easyswoole/easyswoole/bin/easyswoole`。
+
+## 安装 IDE 代码提示组件
+> composer require easyswoole/swoole-ide-helper
 
 ## 启动框架
 
