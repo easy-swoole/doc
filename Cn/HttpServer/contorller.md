@@ -109,7 +109,7 @@ class User extends Controller
     }
 
     /**
-     * 当控制器逻辑抛出异常时将调用该方法进行处理异常(框架默认已经处理了异常)可覆盖该方法,进行自定义的异常处理
+     * 所有控制器请求都会先经过该方法，如果此方法返回 false 则请求不继续往下执行，可用于权限验证
      *
      * @param string|null $action
      * @return bool|null
