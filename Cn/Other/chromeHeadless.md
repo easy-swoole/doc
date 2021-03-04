@@ -20,7 +20,7 @@ docker run -d -p 9222:9222 alpeware/chrome-headless-trunk
 
 访问debug 地址即可得到接口信息
 ```
-curl http://{HOST}:9222/josn
+curl http://{HOST}:9222/json
 ```
 
 ::: warning 
