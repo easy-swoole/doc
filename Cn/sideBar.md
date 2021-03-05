@@ -210,10 +210,7 @@
     - [安装及使用](Components/FashCache/fastCache.md)
 - 消息队列
   - Queue 
-    - [安装及使用](Components/Queue/queue3.x.md)
-    - Queue 2.1.x
-      - [安装](Components/Queue/install.md)
-      - [多节点](Components/Queue/nodes.md)
+    - [安装及使用](Components/Queue/queue.md)
   - 分布式
     - [Kafka](Components/kafka.md)
     - [Nsq](Components/nsq.md)
