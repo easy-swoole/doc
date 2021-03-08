@@ -29,7 +29,7 @@ Dependency Injection  依赖注入
 
 使用示例：
 ```php
-$di = \EasySwoole\EasySwoole\Di::getInstance();
+$di = \EasySwoole\Component\Di::getInstance();
 ```
 
 ### set
