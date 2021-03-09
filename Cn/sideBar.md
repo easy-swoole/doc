@@ -231,6 +231,7 @@
     - [Tracker](Components/tracker.md)
   - RPC服务
     - [架构说明](Microservices/Rpc/introduction.md)
+    - [RPC 配置及使用](Microservices/Rpc/config.md)
     - [服务端](Microservices/Rpc/server.md)
     - [客户端](Microservices/Rpc/client.md)
     - [跨语言](Microservices/Rpc/otherPlatform.md)

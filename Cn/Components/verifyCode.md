@@ -8,7 +8,7 @@ meta:
 ---
 # EasySwoole 验证码组件  
 
-EasySwoole提供了独立的 `验证码组件` ,几行代码即可实现输出一个验证码
+`EasySwoole` 提供了独立的 `验证码组件` ，几行代码即可实现输出一个验证码
 
 ## 组件要求
 
@@ -26,11 +26,11 @@ EasySwoole提供了独立的 `验证码组件` ,几行代码即可实现输出�
 
 ## 基本使用  
 
-
 ### 配置
 
-生成验证码前需要传入Config的对象实例  
-Config类实例化后会有默认配置,无需配置也可生成验证码图片
+生成验证码前需要传入 `\EasySwoole\VerifyCode\Conf` 的对象实例，`\EasySwoole\VerifyCode\Conf` 类实例化后会有默认配置，无需配置也可生成验证码图片。
+
+下面是 `\EasySwoole\VerifyCode\Conf` 类提供的相关配置方法。
 
 ```php
 <?php
@@ -39,7 +39,7 @@ Config类实例化后会有默认配置,无需配置也可生成验证码图片
 // +----------------------------------------------------------------------
 // | WebSite: https://www.easyswoole.com
 // +----------------------------------------------------------------------
-// | Welcome Join QQGroup 633921431
+// | Welcome Join QQGroup 853946743
 // +----------------------------------------------------------------------
 
 namespace EasySwoole\VerifyCode;
@@ -261,20 +261,75 @@ class Conf extends SplBean
 
 ### 验证码生成
  
- ::: warning 
-  VerifyCode验证码操作类,如果不传入Config实例,则自动实例化一个
- :::
+::: warning 
+  `\EasySwoole\VerifyCode\VerifyCode` 验证码操作类，如果不传入 `\EasySwoole\VerifyCode\Conf` 实例，则自动实例化一个 `\EasySwoole\VerifyCode\Conf` 实例。
+:::
   
 ```php
-$config = new Conf();
+<?php
+$config = new \EasySwoole\VerifyCode\Conf();
+
+// 设置验证码长度为 4 【其他配置方法请看上文 \EasySwoole\VerifyCode\Conf 类】
+$config->setLength(4);
+
 $code = new \EasySwoole\VerifyCode\VerifyCode($config);
-$code->DrawCode();//生成验证码,返回一个Result对象
+$code->DrawCode();// 生成验证码，返回一个 Result 对象
 ```
 
 ### 验证码结果类
-验证码结果类,由VerifyCode验证码操作类调用 DrawCode() 方法时创建并返回  
+验证码结果类，由 `VerifyCode` 验证码操作类调用 `DrawCode()` 方法时创建并返回。
+
+下面是 `\EasySwoole\VerifyCode\Result` 类的具体实现，可获取创建验证码之后得到相关结果。
 
 ```php
+<?php
+// +----------------------------------------------------------------------
+// | easySwoole [ use swoole easily just like echo "hello world" ]
+// +----------------------------------------------------------------------
+// | WebSite: https://www.easyswoole.com
+// +----------------------------------------------------------------------
+// | Welcome Join QQGroup 853946743
+// +----------------------------------------------------------------------
+
+namespace EasySwoole\VerifyCode;
+
+/**
+ * 验证码结果类
+ * Class Result
+ * @author : evalor <master@evalor.cn>
+ * @package easySwoole\VerifyCode
+ */
+class Result
+{
+    private $captchaByte;  // 验证码图片
+    private $captchaMime;  // 验证码类型
+    private $captchaCode;  // 验证码内容
+    private $createTime;
+
+    function __construct($Byte, $Code, $Mime)
+    {
+        $this->captchaByte = $Byte;
+        $this->captchaMime = $Mime;
+        $this->captchaCode = $Code;
+        $this->createTime = time();
+    }
+
+    function getCreateTime():int
+    {
+        return $this->createTime;
+    }
+
+    function getCodeHash($code = null,$time = null)
+    {
+        if(!$code){
+            $code = $this->captchaCode;
+        }
+        if(!$time){
+            $time = $this->createTime;
+        }
+        return substr(md5($code.$time),8,16);
+    }
+
     /**
      * 获取验证码图片
      * @author : evalor <master@evalor.cn>
@@ -282,7 +337,7 @@ $code->DrawCode();//生成验证码,返回一个Result对象
      */
     function getImageByte()
     {
-        return $this->CaptchaByte;
+        return $this->captchaByte;
     }
 
     /**
@@ -292,8 +347,8 @@ $code->DrawCode();//生成验证码,返回一个Result对象
      */
     function getImageBase64()
     {
-        $base64Data = base64_encode($this->CaptchaByte);
-        $Mime = $this->CaptchaMime;
+        $base64Data = base64_encode($this->captchaByte);
+        $Mime = $this->captchaMime;
         return "data:{$Mime};base64,{$base64Data}";
     }
 
@@ -304,7 +359,7 @@ $code->DrawCode();//生成验证码,返回一个Result对象
      */
     function getImageCode()
     {
-        return $this->CaptchaCode;
+        return $this->captchaCode;
     }
 
     /**
@@ -313,19 +368,10 @@ $code->DrawCode();//生成验证码,返回一个Result对象
      */
     function getImageMime()
     {
-        return $this->CaptchaMime;
+        return $this->captchaMime;
     }
-
-    /**
-     * 获取验证码文件路径
-     * @author: eValor < master@evalor.cn >
-     */
-    function getImageFile()
-    {
-        return $this->CaptchaFile;
-    }
+}
 ```
-
 
 ### 使用示例
 ```php
@@ -359,50 +405,112 @@ class VerifyCode extends Controller
 }
 ```
 
+访问 `http://localhost:9501/VerifyCode/index` (示例请求地址) 即可看到验证码图片，访问 `http://localhost:9501/VerifyCode/getBase64` (示例请求地址) 即可得到验证码图片的 `base64` 编码结果。
+
 ## 进阶使用
-生成二维码图片并返回
+生成二维码图片并返回，然后进行校验。
+
+首先新建一个验证码工具类 `\App\Utility\VerifyCodeTools`，内容如下所示：
+
 ```php
 <?php
 /**
- *
  * User: luffyQAQ
  * Date: 2019/9/5 15:29
  * Email: <1769360227@qq.com>
  */
 
-namespace App\HttpController\Api\Common;
+namespace App\Utility;
 
 
-use App\Service\Common\VerifyCodeService;
+class VerifyCodeTools
+{
+    const DURATION = 5 * 60;
+
+    // 校验验证码
+    public static function checkVerifyCode($code, $time, $hash)
+    {
+        if ($time + self::DURATION < time()) {
+            return false;
+        }
+        $code = strtolower($code);
+        return self::getVerifyCodeHash($code, $time) == $hash;
+    }
+
+    // 生成验证码 hash 字符串
+    public static function getVerifyCodeHash($code, $time)
+    {
+        return md5($code . $time);
+    }
+}
+```
+
+生成验证码及对验证码进行校验。
+
+```php
+<?php
+/**
+ * User: luffyQAQ
+ * Date: 2019/9/5 15:29
+ * Email: <1769360227@qq.com>
+ */
+
+namespace App\HttpController;
+
+
+use App\Utility\VerifyCodeTools;
+use EasySwoole\Http\AbstractInterface\Controller;
 use EasySwoole\Http\Message\Status;
 use EasySwoole\Utility\Random;
 use EasySwoole\VerifyCode\Conf;
 
-class VerifyCode extends CommonBase
+class VerifyCode extends Controller
 {
     static $VERIFY_CODE_TTL = 120;
     static $VERIFY_CODE_LENGTH = 4;
 
+    // 生成验证码
     public function verifyCode()
     {
+        // 配置验证码
         $config = new Conf();
         $code = new \EasySwoole\VerifyCode\VerifyCode($config);
-        //获取随机数
-        $random = Random::character(self::$VERIFY_CODE_LENGTH,'1234567890abcdefghijklmnopqrstuvwxyz');
+        
+        // 获取随机数(即验证码的具体值)
+        $random = Random::character(self::$VERIFY_CODE_LENGTH, '1234567890abcdefghijklmnopqrstuvwxyz');
+        // var_dump($random);    string(4) "m02t"
+        
+        // 绘制验证码
         $code = $code->DrawCode($random);
+        
+        // 获取验证码的 base64 编码及设置验证码有效时间
         $time = time();
         $result = [
-            'verifyCode' => $code->getImageBase64(),
+            'verifyCode' => $code->getImageBase64(), // 得到绘制验证码的 base64 编码字符串
             'verifyCodeTime' => $time,
         ];
 
-        $this->response()->setCookie("verifyCodeHash", VerifyCodeService::getVerifyCodeHash($random, $time), $time + self::$VERIFY_CODE_TTL, '/');
+        // 将验证码加密存储在 Cookie 中，方便进行后续验证。用户也可以把验证码保存在 Session 或者 Redis中，方便后续验证。
+        $this->response()->setCookie("verifyCodeHash", VerifyCodeTools::getVerifyCodeHash($random, $time), $time + self::$VERIFY_CODE_TTL, '/');
         $this->response()->setCookie('verifyCodeTime', $time, $time + self::$VERIFY_CODE_TTL, '/');
         $this->writeJson(Status::CODE_OK, $result, 'success');
+    }
 
+    // 校验验证码
+    public function checkVerifyCode()
+    {
+        $code = $this->request()->getRequestParam('code');
+        $verifyCodeHash = $this->request()->getRequestParam('verifyCodeHash');
+        $verifyCodeTime = $this->request()->getRequestParam('verifyCodeTime');
+        if (!VerifyCodeTools::checkVerifyCode($code, $verifyCodeTime, $verifyCodeHash)) {
+            $this->writeJson(Status::CODE_OK, '验证码错误!', []);
+        }
+        $this->writeJson(Status::CODE_OK, '验证码正确!', []);
     }
 }
+
+
 ```
 ::: warning 
-  调用对应的路径接口，即可实现前台验证码显示
- :::
+  调用对应的路径接口(即访问 `http://localhost:9501/VerifyCode/verifyCode` [示例请求地址])，即可实现前台验证码显示。在 `http://localhost:9501/VerifyCode/checkVerifyCode` [示例请求地址] 接口中传递参数即可校验验证码是否正确。
+:::
