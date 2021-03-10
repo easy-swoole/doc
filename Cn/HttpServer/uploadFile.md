@@ -11,6 +11,10 @@ meta:
 
 基于`Psr`规范封装的`UploadFile`。
 
+::: tip
+  注意，当上传大于 `2M` 的文件时请调整配置文件 `MAIN_SERVER.SETTING.package_max_length` 参数，详细请看 [配置文件](/QuickStart/config.md)。
+:::
+
 在控制器内获取上传的文件：
 
 ```php
