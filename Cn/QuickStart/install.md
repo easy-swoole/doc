@@ -22,6 +22,7 @@ meta:
 - 目前推荐的镜像为阿里云或者梯子拉取源站
 - 在安装过程中，会提示用户选择是否释放框架的 `Index.php`、`Router.php` 文件到项目目录(默认不会释放，也不会生成 `App` 目录)，请保证项目目录有可写入权限
 - 安装完成之后，如果没有自动生成 `App` 目录，请自行根据 [Hello World 章节](/QuickStart/helloworld.md) 章节进行配置
+- 部分机器(例如 `Docker` 环境)在使用框架时遇到类似 `DNS Lookup resolve failed...` 错误，请更换机器的 `DNS` 为阿里云公共 DNS `223.5.5.5` 和 `223.6.6.6`。具体更换步骤可查看 [更换 DNS](https://www.alidns.com/knowledge?type=SETTING_DOCS#user_linux)
 
 
 ## 框架更新说明(安装之前必看)
