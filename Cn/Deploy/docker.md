@@ -15,6 +15,11 @@ meta:
 使用 `Docker` 部署前，需要用户自行安装[Docker](https://www.docker.com/get-started)。
 :::
 
+## 部署前必看
+
+部分机器(例如 `Docker` 环境)在使用框架时遇到类似 `DNS Lookup resolve failed...` 错误，请更换机器的 `DNS` 为阿里云公共 DNS `223.5.5.5` 和 `223.6.6.6`。具体更换步骤可查看 [更换 DNS](https://www.alidns.com/knowledge?type=SETTING_DOCS#user_linux)
+
+
 ## 镜像拉取
 
 *请在终端执行以下命令*

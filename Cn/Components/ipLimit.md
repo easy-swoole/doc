@@ -86,7 +86,7 @@ class IpList
             $this->table->set($key, [
                 'ip' => $ip,
                 'lastAccessTime' => time(),
-                'count' => $info['count'] + 1,
+                'count' => 1,
             ]);
             return 1;
         }
