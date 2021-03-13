@@ -7,9 +7,9 @@ meta:
     content:  easyswoole Http服务-文件上传
 ---
 
-# UploadFile对象
+# UploadFile 对象
 
-基于`Psr`规范封装的`UploadFile`。
+基于 [`PSR-7`](https://www.php-fig.org/psr/psr-7/) 规范封装的 `UploadFile`。
 
 ::: tip
   注意，当上传大于 `2M` 的文件时请调整配置文件 `MAIN_SERVER.SETTING.package_max_length` 参数，详细请看 [配置文件](/QuickStart/config.md)。
@@ -19,10 +19,29 @@ meta:
 
 ```php
 <?php
-$request=  $this->request();
-/** @var \EasySwoole\Http\Message\UploadFile $file */
-$file = $request->getUploadedFile('file');//获取一个上传文件,返回的是一个\EasySwoole\Http\Message\UploadFile的对象
-$files = $request->getUploadedFiles();
+
+namespace App\HttpController;
+
+use EasySwoole\Http\AbstractInterface\Controller;
+
+class Index extends Controller
+{
+    function index()
+    {
+        $request = $this->request();
+
+        // 获取一个上传文件，客户端上传的文件字段名为 'file'
+        // 返回的是一个 \EasySwoole\Http\Message\UploadFile 的对象
+        /** @var \EasySwoole\Http\Message\UploadFile $file */
+        $file = $request->getUploadedFile('file');
+        
+        $file->
+
+        // 获取所有上传的文件
+        // 返回的是一个包含多个 \EasySwoole\Http\Message\UploadFile 对象的对象数组
+        $files = $request->getUploadedFiles();
+    }
+}
 ```
 
 ## 获取临时文件名
@@ -32,7 +51,7 @@ $files = $request->getUploadedFiles();
 $file->getTempName();
 ```
 
-## 获取Stream
+## 获取 Stream
 
 ```php
 /** @var \EasySwoole\Http\Message\UploadFile $file */

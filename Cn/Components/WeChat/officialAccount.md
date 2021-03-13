@@ -268,6 +268,9 @@ access_token是公众号的全局唯一接口调用凭据，公众号调用各�
 $weChat->officialAccount()->accessToken()->getToken();
 ```
 
+> 注意：获取不到 `AccessToken` 时请务必先看下文 `刷新 AccessToken` 的文档，检查框架当前环境中是否已经配置了自动刷新 `AccessToken`，没有配置请根据下文进行配置 `刷新 AccessToken`。
+
+
 <br/>
 
 #### 刷新AccessToken
@@ -275,30 +278,83 @@ $weChat->officialAccount()->accessToken()->getToken();
 access_token的有效期目前为2个小时，需定时刷新，重复获取或超时将导致上次获取的access_token失效，因此需要刷新AccessToken。
 
 
-
 :::tip
 
  注意：
 
-`1.2.0版本以前 `：wechat sdk自带的access token管理机制会自动刷新access_token。
+`1.2.0 版本以前 `：`wechat sdk` 自带的 `access token` 管理机制会自动刷新 `access_token`。
 
-`1.2.0版本及以后`：出于分布式的考虑，wechat sdk自带的access token管理机制不再实行access_token自动刷新。用户可以起一个自定义进程，或者是worker进程实现定时更新。
+`1.2.0 版本及以后`：出于分布式的考虑，`wechat sdk` 自带的 `access token` 管理机制不再实行`access_token` 自动刷新。用户可以起一个自定义进程，或者是 `worker` 进程实现定时刷新。
 
 示例代码如下：
 
 :::
 
+1. 用户启用一个自定义进程实现刷新 `access token`，示例代码如下：
+
+新增 `\App\Processes\RefreshWcATokenProcess.php` 文件，内容如下：
+
 ```php
-use App\WeChat\WeChatManager;
+<?php
 
+namespace App\Processes;
 
-Coroutine::create(function (){
-    while (1){
-    //定时刷新
-        WeChatManager::getInstance()->officialAccount()->accessToken()->refresh();
-        Coroutine::sleep(7100);
+use EasySwoole\Component\Process\AbstractProcess;
+use Swoole\Coroutine;
+
+class RefreshWcATokenProcess extends AbstractProcess
+{
+    protected function run($arg)
+    {
+        Coroutine::create(function () {
+            while (1) {
+                // 定时刷新 
+                // weChat('default') 中 default 实例名称需要和上文注册到 WeChatManager 中的实例名称一致
+                \App\WeChat\WeChatManager::getInstance()->weChat('default')->officialAccount()->accessToken()->refresh();
+                Coroutine::sleep(7100);
+            }
+        });
     }
-});
+}
+```
+
+然后在项目根目录的 `EasySwooleEvent.php` 的 `mainServerCreate` 事件中注册自定义进程，注册步骤可查看 [自定义进程章节](/Components/Component/process.md)。
+
+2. 在 `worker` 进程中定时刷新 `access token`
+
+修改项目根目录的 `EasySwooleEvent.php` 的 `mainServerCreate` 事件函数，实现在 `worker` 进程中定时刷新 `access token`。
+
+```php
+<?php
+
+namespace EasySwoole\EasySwoole;
+
+use EasySwoole\EasySwoole\AbstractInterface\Event;
+use EasySwoole\EasySwoole\Swoole\EventRegister;
+use Swoole\Coroutine;
+
+class EasySwooleEvent implements Event
+{
+    public static function initialize()
+    {
+        date_default_timezone_set('Asia/Shanghai');
+    }
+
+    public static function mainServerCreate(EventRegister $register)
+    {
+        $register->add($register::onWorkerStart, function ($server, $id) {
+            if ($id == 0) {
+                Coroutine::create(function () {
+                    while (1) {
+                        // 定时刷新 access_token
+                        \App\WeChat\WeChatManager::getInstance()->weChat('default')->officialAccount()->accessToken()->refresh();
+                        Coroutine::sleep(7100);
+                    }
+                });
+            }
+        });
+    }
+}
 ```
 
 <br/>

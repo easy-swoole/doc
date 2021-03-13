@@ -4,79 +4,109 @@ meta:
   - name: keywords
     content: easyswoole http请求对象|easyswoole request
 ---
-# Request对象
-接收客户端的HTTP请求对象
+# Request 对象
+
+接收客户端的 `HTTP` 请求对象
 
 ## 生命周期
-Request对象在系统中以单例模式存在，自收到客户端HTTP请求时自动创建，直至请求结束自动销毁。Request对象完全符合[PSR7](psr7.md)中的所有规范。
+
+`Request` 对象在系统中以单例模式存在，自收到客户端 `HTTP` 请求时自动创建，直至请求结束自动销毁。`Request` 对象完全符合 [PSR-7](https://www.php-fig.org/psr/psr-7/) 中的所有规范。
 
 ## 核心方法
 
 ### getRequestParam()
-用于获取用户通过POST或者GET提交的参数（注意：若POST与GET存在同键名参数，则以GET为准）。
+
+用于获取用户通过 `POST` 或者 `GET` 提交的参数（注意：若 `POST` 与 `GET` 存在同键名参数，则以`POST` 为准）。
+
 示例：
+
 ```php
-// 在控制器中 可以通过 $this->request() 获取到Request对象
+// 在控制器中 可以通过 $this->request() 获取到 Request 对象
 // $request = $this->request()；
 
+// 获取 `POST` 或者 `GET` 提交的所有参数
 $data = $request->getRequestParam();
 var_dump($data);
 
+// 获取 `POST` 或者 `GET` 提交的单个参数
 $orderId = $request->getRequestParam('orderId');
 var_dump($orderId);
 
+// 获取 `POST` 或者 `GET` 提交的多个参数
 $mixData = $request->getRequestParam("orderId","type");
 var_dump($mixData);
 ```
+
 ### getSwooleRequest()
-获取当前的swoole_http_request对象。
+
+获取当前的 `swoole_http_request` 对象。
 
 ### getCookieParams()
-获取HTTP请求中的cookie信息
+
+获取 `HTTP` 请求中的 `cookie` 信息
+
 ```php
+// 获取所有 `cookie` 信息
 $all = $request->getCookieParams();
 var_dump($all);
+
+// 获取单个 `cookie` 信息
 $who = $request->getCookieParams('who');
 var_dump($who);
 ```
+
 ### getUploadedFiles()
+
 获取客户端上传的全部文件信息。
+
 ```php
-$img_file = $request->getUploadedFile('img');//获取一个上传文件,返回的是一个\EasySwoole\Http\Message\UploadFile的对象
-$data = $request->getUploadedFiles();//获取全部上传文件返回包含\EasySwoole\Http\Message\UploadFile对象的数组
+// 获取一个上传文件，返回的是一个 \EasySwoole\Http\Message\UploadFile 的对象
+$img_file = $request->getUploadedFile('img');
+
+// 获取全部上传文件返回包含 \EasySwoole\Http\Message\UploadFile 对象的数组
+$data = $request->getUploadedFiles();
 var_dump($data);
-#### \EasySwoole\Http\Message\UploadFile对象:
 ```
-点击查看[UploadFile对象](./uploadFile.html)
+
+点击查看 [UploadFile对象](./uploadFile.html)
 
 ### getBody()
-获取以非form-data或x-www-form-urlenceded编码格式POST提交的原始数据，相当于PHP中的$HTTP_RAW_POST_DATA。
 
-### 获得get内容
+获取以非 `form-data` 或 `x-www-form-urlenceded` 编码格式 `POST` 提交的原始数据，相当于PHP中的 `$HTTP_RAW_POST_DATA`。
+
+### 获得 get 内容
+
 ```php
 $get = $request->getQueryParams();
 ```
 
-### 获得post内容
+### 获得 post 内容
+
 ```php
 $post = $request->getParsedBody();
 ```
 
-### 获得raw内容
+### 获得 raw 内容
+
 ```php
 $content = $request->getBody()->__toString();
 $raw_array = json_decode($content, true);
 ```
 
 ### 获得头部
+
 ```php
 $header = $request->getHeaders();
 ```
-### 获得server
+
+### 获得 server
+
 ```php
 $server = $request->getServerParams();
 ```
-### 获得cookie
+
+### 获得 cookie
+
 ```php
 $cookie = $request->getCookieParams();
 ```
