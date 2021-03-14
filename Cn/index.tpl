@@ -3,9 +3,9 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>easyswoole - swoole中一款专为API而生的企业级PHP协程框架</title>
-    <meta name="keywords" content="swoole|easyswoole|php swoole|swoole框架|php分布式框架|php微服务框架|swoole协程"/>
-    <meta name="description" content="EasySwoole是一款常驻内存型的分布式swoole框架，专为API而生，支持同时混合监听HTTP、WebSocket、自定义TCP、UDP协议，让开发者以最低的学习成本和精力编写出多进程，可异步，高可用的应用服务"/>
+    <title>easyswoole - 基于swoole扩展实现的一款高性能php框架</title>
+    <meta name="keywords" content="swoole|easyswoole|php swoole|swoole框架|php框架|php微服务|swoole微服务"/>
+    <meta name="description" content="easyswoole是基于swoole扩展实现的一款高性能php框架,借助swoole扩展的能力，解决了传统fpm框架的性能不足，能够快速实现php tcp协议和php websocket协。解决了传统php对接物联网IOT的不足，同时也解决了php无法实现websocket聊天室等类应用的弊端。"/>
     <link href="/Css/HomePageCss/bulma-0.7.4/css/bulma.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/Css/HomePageCss/index.css">
     <link rel="stylesheet" href="/Css/font-awesome/css/font-awesome.min.css">
