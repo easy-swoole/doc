@@ -52,7 +52,7 @@ public static function initialize()
 }
 ```
 
-`3.4.x` 版本之前：可在项目根目录的 `EasySwooleEvent.php` 中看到 `onRequest` 及 `afterRequest` 方法。
+`EasySwoole 3.4.x` 版本之前：可在项目根目录的 `EasySwooleEvent.php` 中看到 `onRequest` 及 `afterRequest` 方法。
 
 ## 定义 Base 控制器
 
