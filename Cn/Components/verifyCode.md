@@ -8,7 +8,7 @@ meta:
 ---
 # EasySwoole 验证码组件  
 
-`EasySwoole` 提供了独立的 `验证码组件` ，几行代码即可实现输出一个验证码
+`EasySwoole` 提供了独立的 `验证码组件` ，几行代码即可实现输出一个验证码，支持用户自定义验证码字体
 
 ## 组件要求
 
@@ -259,6 +259,99 @@ class Conf extends SplBean
 }
 ```
 
+### 配置方法
+
+需要对验证码进行自定义配置可以使用上文提到的组件提供的 `\EasySwoole\VerifyCode\Conf` 类进行动态配置。
+
+```php
+use EasySwoole\VerifyCode\Conf;
+$Conf = new Conf();
+```
+
+#### 设置字符集合
+
+可以自定义验证码生成时使用的字符集合，设置后从集合中随机选取，不设置则从 `[0-9A-Za-z]` 中随机选取
+
+```php
+$Conf->setCharset('123456ABCD');
+```
+
+#### 设置背景色
+
+设置验证码的背景颜色，不设置则默认使用白色，支持使用完整 HEX、缩写 HEX 和 RGB 值设置
+
+```php
+$Conf->setBackColor('#3A5FCD');
+$Conf->setBackColor('CCC');
+$Conf->setBackColor([30, 144, 255]);
+```
+
+#### 设置文字颜色
+
+设置验证码的文字颜色，不设置则随机生成一个颜色，支持使用完整 HEX、缩写 HEX 和 RGB 值设置
+
+```php
+$Conf->setFontColor('#3A5FCD');
+$Conf->setFontColor('CCC');
+$Conf->setFontColor([30, 144, 255]);
+```   
+  
+#### 设置混淆
+
+支持两种混淆方式，默认两种混淆都是关闭的，需要手动开启
+```php
+// 开启或关闭混淆曲线
+$Conf->setUseCurve();
+// 开启或关闭混淆噪点
+$Conf->setUseNoise();
+```     
+     
+#### 设置字体
+默认验证码类已经带有 6 种字体，如果需要增加自己的字体库来提高识别难度，或者指定使用的字体，可以进行如下设置，注意字体路径需要使用绝对路径，即文件的完整路径
+
+```php
+// 增加单个字体传入路径字符串
+$Conf->setFonts('path/to/file.ttf');
+// 增加多个字体传入路径的数组
+$Conf->setFonts(['path/to/file1.ttf', 'path/to/file2.ttf']);
+// 指定生成使用的字体文件
+$Conf->setUseFont('path/to/file.ttf');
+```
+
+#### 其他设置
+
+可以指定验证码图片宽高，字体大小，随机生成的验证码位数等
+
+```php
+// 设置验证码图片的宽度
+$Conf->setImageWidth(400);
+// 设置验证码图片的高度
+$Conf->setImageHeight(200);
+// 设置生成字体大小
+$Conf->setFontSize(30);
+// 设置生成验证码位数
+$Conf->setLength(4);
+```     
+     
+#### 链式调用
+
+为了更流畅的进行设置，所有的配置项均支持链式调用
+
+```php
+$Conf = new Conf();
+$Conf->setUseNoise()->setUseCurve()->setFontSize(30);
+```    
+     
+可以使用上方的动态配置，将设置好的配置类传入给验证码类。
+
+```php
+$Conf = new \EasySwoole\VerifyCode\Conf();
+$Conf->setFontSize(30);
+$VCode = new \EasySwoole\VerifyCode\VerifyCode($Conf);
+```
+ 
+> 如果配置比较多，也需要全站统一验证码配置，可以将验证码的配置放入配置文件，在生成时读取配置，验证码的配置类继承自 `\EasySwoole\Spl\SplBean`，可以在设置好后使用配置类的 `toArray` 方法直接获得配置数组，实例化验证码时，读取数组重新生成 `\EasySwoole\VerifyCode\Conf` 类即可。
+
 ### 验证码生成
  
 ::: warning 
@@ -267,13 +360,27 @@ class Conf extends SplBean
   
 ```php
 <?php
-$config = new \EasySwoole\VerifyCode\Conf();
+$config = new \EasySwoole\VerifyCode\Conf([
+    // 以下配置均为可选配置，用户可根据需求自行配置
+    # 'charset'  => '1234567890AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz', # 设置验证码字符集合，默认为 数字 + 大小写字母
+    # 'useCurve'  => false, # 设置不开启 混淆曲线，默认不开启
+    # 'useNoise'  => false, # 设置不开启 随机噪点，默认不开启
+    # 'useFont'   => null,  # 设置验证码使用的字体，默认随机获取内置字体
+    # 'fontColor' => null,  # 设置 字体颜色，默认随机获取，支持使用完整 HEX，缩写 HEX 和 RGB 值设置
+    # 'backColor' => null,  # 设置 背景颜色，默认白色，支持使用完整 HEX，缩写 HEX 和 RGB 值设置
+    # 'imageL'    => null,  # 设置 验证码宽度，默认 162.5px
+    # 'imageH'    => null,  # 设置 验证码高度，默认 50px
+    # 'fonts'     => [],    # 设置 验证码可能使用的字体集合，默认组件内置支持 5 种
+    # 'fontSize'  => 25,    # 设置 验证码字体大小，默认 25px
+    # 'length'    => 4,     # 设置 验证码位数，默认 4 位
+]);
 
+# 使用方法单独配置 和 上述在构造函数中配置 等价
 // 设置验证码长度为 4 【其他配置方法请看上文 \EasySwoole\VerifyCode\Conf 类】
-$config->setLength(4);
+# $config->setLength(4);
 
 $code = new \EasySwoole\VerifyCode\VerifyCode($config);
-$code->DrawCode();// 生成验证码，返回一个 Result 对象
+$code->DrawCode();// 生成验证码，返回一个 \EasySwoole\VerifyCode\Result 对象
 ```
 
 ### 验证码结果类
@@ -391,16 +498,39 @@ class VerifyCode extends Controller
 {
     function index()
     {
+        // 配置验证码
         $config = new Conf();
         $code = new \EasySwoole\VerifyCode\VerifyCode($config);
+
+        // 生成验证码
+        $drawCode = $code->DrawCode();
+
+        // 获取生成的验证码内容字符串 string(4) "0rnh"
+        // 可存储起来和用户输入的验证码比对
+        $codeStr = $drawCode->getImageCode();
+
+        // 设置响应文件内容类型
         $this->response()->withHeader('Content-Type','image/png');
-        $this->response()->write($code->DrawCode()->getImageByte());
+
+        // 向客户端输出验证码图片
+        $this->response()->write($drawCode->getImageByte());
     }
 
-    function getBase64(){
+    function getBase64()
+    {
+        // 配置验证码
         $config = new Conf();
         $code = new \EasySwoole\VerifyCode\VerifyCode($config);
-        $this->response()->write($code->DrawCode()->getImageBase64());
+
+        // 生成验证码
+        $drawCode = $code->DrawCode();
+
+        // 获取生成的验证码内容字符串 string(4) "0rnh"
+        // 可存储起来和用户输入的验证码比对
+        $codeStr = $drawCode->getImageCode();
+
+        // 向客户端输出验证码的 base64 编码，前端可用来生成图片
+        $this->response()->write($drawCode->getImageBase64());
     }
 }
 ```
@@ -408,6 +538,7 @@ class VerifyCode extends Controller
 访问 `http://localhost:9501/VerifyCode/index` (示例请求地址) 即可看到验证码图片，访问 `http://localhost:9501/VerifyCode/getBase64` (示例请求地址) 即可得到验证码图片的 `base64` 编码结果。
 
 ## 进阶使用
+
 生成二维码图片并返回，然后进行校验。
 
 首先新建一个验证码工具类 `\App\Utility\VerifyCodeTools`，内容如下所示：
@@ -456,7 +587,6 @@ class VerifyCodeTools
  */
 
 namespace App\HttpController;
-
 
 use App\Utility\VerifyCodeTools;
 use EasySwoole\Http\AbstractInterface\Controller;

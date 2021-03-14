@@ -35,35 +35,36 @@ class Router extends AbstractRouter
 {
     function initialize(RouteCollector $routeCollector)
     {
-        // http://localhost:9501/user 将匹配 App\HttpController\Index 类的 user 方法
+        // http://localhost:9501/user 将匹配执行 App\HttpController\Index 类的 user 方法
         $routeCollector->get('/user', '/user');
 
 
-        // http://localhost:9501/user1 将匹配 App\HttpController\User 类的 user1 方法
+        // http://localhost:9501/user1 将匹配执行 App\HttpController\User 类的 user1 方法
         $routeCollector->get('/user1', '/User/user1');
 
 
-        // http://localhost:9501/rpc 将匹配 App\HttpController\Rpc 类的 index 方法
+        // http://localhost:9501/rpc 将匹配执行 App\HttpController\Rpc 类的 index 方法
         $routeCollector->get('/rpc', '/Rpc/index');
 
 
-        // http://localhost:9501/ 将直接走下面的回调
+        // http://localhost:9501/ 将直接执行下面的回调
         $routeCollector->get('/', function (Request $request, Response $response) {
             $response->write('this router index');
         });
-        # http://localhost:9501/rpc 将匹配 App\HttpController\Index 类的 index 方法
+        
+        # http://localhost:9501/ 将匹配执行 App\HttpController\Index 类的 index 方法
         // $routeCollector->get('/', '/index');
 
 
-        // http://localhost:9501/test 将直接走下面的回调，然后重新定位匹配到 App\HttpController\Index 类的 child 方法
+        // http://localhost:9501/test 将直接执行下面的回调，然后重新定位匹配执行 App\HttpController\Index 类的 child 方法
         $routeCollector->get('/test', function (Request $request, Response $response) {
             $response->write('this router test.');
-            return '/child';// 重新定位匹配到 App\HttpController\Index 类的 child 方法
+            return '/child';// 重新定位匹配执行 App\HttpController\Index 类的 child 方法
         });
 
 
         // 以下 2 个路由将匹配一样处理方法
-        // http://localhost:9501/mtest1 和 http://localhost:9501/mtest2 路由都将匹配 App\HttpController\A\B\C\D\Index 类的 index 方法 (EasySwoole 默认支持 5 个层级的控制器深度)
+        // http://localhost:9501/mtest1 和 http://localhost:9501/mtest2 路由都将匹配执行 App\HttpController\A\B\C\D\Index 类的 index 方法 (EasySwoole 默认支持 5 个层级的控制器深度)
         $routeCollector->get('/mtest1', '/a/b/c/d/index/index');
         $routeCollector->get('/mtest2', '/A/B/C/D/Index/index');
         
@@ -102,7 +103,7 @@ class Router extends AbstractRouter
 - 当 `handler` 为 `/xxx/xxx/xxx/xxx` 或者 `/Xxx/Xxx/Xxx/xxx` 时，二者其实等价，都对应执行 `App\HttpController\Xxx\Xxx\Xxx.php` 类的 `xxx()` 方法。
 - 当 `handler` 为 `/xxx/xxx/xxx/Xxx` 或者 `/Xxx/Xxx/Xxx/Xxx` 时，二者也等价，都对应执行 `App\HttpController\Xxx\Xxx\Xxx.php` 类的 `Xxx()` 方法。
 
-综上所述，其实 `handler` 中最后一个 `/` 后的一定为操作方法 (且不会转换大小写)，前面的则为对应控制器所在命名空间及路径，控制器及文件夹名称请务必以 `大写字母` 开头，否则路由将不能匹配到对应的执行方法（因为框架内部默认对每一级控制器名进行首字母转大写处理）。而对于 `route` 则没有特殊要求。
+综上所述，其实 `handler` 中最后一个 `/` 后的一定为操作方法 (且不会转换大小写)，前面的则为对应控制器所在命名空间及路径，控制器名称及文件夹名称请务必以 `大写字母` 开头，否则路由将不能匹配到对应的执行方法（因为框架内部默认对每一级控制器名进行首字母转大写处理）。而对于 `route` 则没有特殊要求。
 
 ## 路由分组
 
@@ -160,7 +161,7 @@ $this->setMethodNotAllowCallBack(function (Request $request,Response $response){
 });
 $this->setRouterNotFoundCallBack(function (Request $request,Response $response){
     $response->write('未找到路由匹配');
-    return 'index'; // 重定向到index路由
+    return 'index'; // 重定向到 index 路由
 });
 ```
 
@@ -239,6 +240,34 @@ $routeCollector->addRoute('GET', '/users/to[/{name}]', 'handler');
 ::: warning 
   从 `easyswoole/http 2.0.2` 版本开始，绑定的参数将由框架内部进行组装到框架的 `Context(上下文)` 数据之中，具体调用方法请看下文，若想要在 `get` 数据中获得绑定的参数，请看下文进行设置。
 :::
+
+1. 想从 `$this->request()->getQueryParams()` 即在 `get` 数据中获取 路由匹配的参数，需进行如下设置：
+
+```php
+$this->parseParams(Router::PARSE_PARAMS_IN_GET);
+```
+
+2. 想从 `$this->request()->getParsedBody()` 中获取路由匹配的参数，需进行如下设置：
+
+```php
+$this->parseParams(Router::PARSE_PARAMS_IN_POST);
+```
+
+3. (`Router` 默认使用的设置)想从 `\EasySwoole\Component\Context\ContextManager::getInstance()->get(Router::PARSE_PARAMS_CONTEXT_KEY)` 中获取 路由匹配的参数，需进行如下设置：
+
+```php
+$this->parseParams(Router::PARSE_PARAMS_IN_CONTEXT);
+```
+
+4. 不获取路由匹配的参数，需进行如下设置
+
+```php
+$this->parseParams(Router::PARSE_PARAMS_NONE);
+```
+
+> 注意：以上 4 种设置，用户只能设置 1 种。`Router` 默认使用的设置是第 3 种。
+
+综合使用示例如下：
 
 ```php
 <?php
@@ -332,8 +361,6 @@ class Router extends AbstractRouter
     }
 }
 ```
-
-> 注意：以上 4 种设置，用户只能设置 1 种。
 
 ::: warning
   `easyswoole/http 2.0.2` 之前版本绑定的参数将由框架内部进行组装到框架的 `get` 数据之中，调用方式如下：

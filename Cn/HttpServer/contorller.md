@@ -10,13 +10,14 @@ meta:
 # 控制器
 
 ## 功能介绍 
-毫无疑问控制器层是负责处理客户端请求，转发给响应模型，并将结果返回，es使用了对象池复用模式降低对象创建、销毁的开销，注入`request`和`response`对象来完成客户端与服务端之间的交互。
+毫无疑问，控制器层是负责处理客户端请求，转发给响应模型，并将结果返回给客户端。`EasySwoole` 使用了对象池复用模式，降低对象创建、销毁的开销，注入 `request` 和 `response` 对象来完成客户端与服务端之间的交互。
 
 ## 示例
-> 在`App/HttpController/`目录下增加User.php
+> 在 `App/HttpController/` 目录下增加文件 User.php
 
 #### 代码
-````php
+
+```php
 <?php
 /**
  * @CreateTime:   2020/8/19 12:30 上午
@@ -39,16 +40,16 @@ class User extends Controller
      */
     public function userInfo()
     {
-        // 获取get参数
+        // 获取 get 参数
         $name = $this->request()->getQueryParam('name');
 
         // 输出到终端
         var_dump($name);
 
         // 返回给客户端
-        $this->response()->write($name.PHP_EOL);
+        $this->response()->write($name . PHP_EOL);
 
-        // return返回的值会让框架在此进行控制器方法调度
+        // return 返回的值会让框架在此进行控制器方法调度，将继续执行 User 控制器类的 requestTotal 方法 
         return '/User/requestTotal';
     }
 
@@ -59,9 +60,9 @@ class User extends Controller
      */
     public function requestTotal()
     {
-        $this->response()->write('请求数+1'.PHP_EOL);
+        $this->response()->write('请求数+1' . PHP_EOL);
 
-        // 还可以return，但不要两个方法互相调用，会死循环
+        // 还可以 return，但不要两个方法互相调用，会导致死循环
     }
 
     /**
@@ -77,7 +78,7 @@ class User extends Controller
     }
 
     /**
-     * gc 方法将在执行方法,afterAction完之后自动调用,可自行覆盖实现其他的gc回收逻辑.
+     * gc 方法将在执行完 afterAction 方法之后自动调用，可自行覆盖实现其他的 gc 回收逻辑
      *
      * CreateTime: 2020/8/19 12:52 上午
      */
@@ -87,7 +88,7 @@ class User extends Controller
     }
 
     /**
-     * 当控制器方法执行结束之后将调用该方法,可自定义数据回收等逻辑
+     * 当控制器方法执行结束之后将调用该方法，可自行覆盖该方法实现数据回收等逻辑
      *
      * @param string|null $actionName
      * CreateTime: 2020/8/19 12:51 上午
@@ -98,7 +99,7 @@ class User extends Controller
     }
 
     /**
-     * 当请求方法未找到时,自动调用该方法,可自行覆盖该方法实现自己的逻辑
+     * 当请求方法未找到时，自动调用该方法，可自行覆盖该方法实现自己的逻辑
      *
      * @param string|null $action
      * CreateTime: 2020/8/19 12:51 上午
@@ -126,23 +127,23 @@ class User extends Controller
 
 #### 执行过程
 
-> 启动easyswoole
+> 启动 easyswoole
 
-````
+```
 php easyswoole server start
-````
+```
 
 > 访问
 
-````
+```
 curl http://localhost:9501/user/userInfo?name=easyswoole
-````
+```
 
 #### 执行结果
 
 > 服务端输出
 
-````
+```
 ➜  doc-new git:(master) ✗ php easyswoole server start
 #!/usr/bin/env php
   ______                          _____                              _
@@ -172,59 +173,70 @@ run mode                      dev
 temp dir                      /Users/guoyuzhao/sites/doc-new/Temp
 log dir                       /Users/guoyuzhao/sites/doc-new/Log
 string(10) "easyswoole"
-````
+```
 
 #### 客户端输出
 
-````
+```
 ➜  ssh curl http://localhost:9501/user/userInfo\?name\=easyswoole
 
 easyswoole
 请求数+1
-````
+```
 
 ## 控制器方法
-> es 在控制器基类中实现了几个通用方法，当然用户也可根据需要进行方法重写实现自己的逻辑 
+> easyswoole 在控制器基类中实现了几个通用方法，当然用户也可根据需要进行方法重写实现自己的逻辑 
 
 #### onRequest
 
-> 所有控制器请求都会先经过该方法，如果此方法返回false则请求不继续往下执行，可用于权限验证
+> 所有控制器请求都会先经过该方法，如果此方法返回 `false` 则请求不继续往下执行，可用于权限验证
 
-````php
+```php
 protected function onRequest(?string $action): ?bool
 {
     return true;
 }
-````
+```
+
+#### onException
+
+> 当执行控制器方法抛异常时会调用该方法，可自行覆盖该方法实现异常捕获等逻辑
+
+```php
+protected function onException(\Throwable $throwable): void
+{
+    throw $throwable;
+}
+```
 
 #### afterAction 
 
-> 当action执行结束后调用该方法，可自定义数据回收等逻辑
+> 当 `action` 执行结束后调用该方法，可自行覆盖该方法实现数据回收等逻辑
 
-````php
+```php
 protected function afterAction(?string $actionName): void
 {
 
 }
-````
+```
 
 #### actionNotFound 
 
 > 当请求方法未找到时，自动调用此方法
 
-````php
+```php
 protected function actionNotFound(?string $action)
 {
     $class = static::class;
     $this->writeJson(\EasySwoole\Http\Message\Status::CODE_NOT_FOUND,null,"{$class} has not action for {$action}");
 }
-````
+```
 
 #### gc 
 
-> gc方法在afterAction执行完后调用
+> gc 方法在 afterAction 方法执行完后调用
 
-````php
+```php
 protected function gc()
 {
     //恢复默认值
@@ -232,13 +244,13 @@ protected function gc()
         $this->{$property} = $value;
     }
 }
-````
+```
 
 ## 注意事项
 
 - 只有第一次请求时才会调用构造函数
-- 对象池模式只重置非静态public属性
-- 对象池复用模式只针对单一进程，多个work进程不共享
+- 对象池模式只重置非静态 public 属性
+- 对象池复用模式只针对单一进程，多个 worker 进程不共享
 - 文件夹、文件、类名为大驼峰，变量与类方法小驼峰(规范)
-- action返回的字符串将会被url解析规则以及route路由规则解析
-- 两个action的return不能互相调用，否则死循环
+- action 返回的字符串将会被 url 解析规则以及 route 路由规则解析
+- 两个 action 的 return 不能互相调用，否则将导致死循环

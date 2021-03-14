@@ -8,13 +8,13 @@ meta:
 ---
 # 错误与异常拦截
 
-## http控制器错误异常
+## http 控制器错误异常
 
-在http控制器中出现错误，系统将使用默认异常处理进行输出至客户端，代码如下：
+在 `http` 控制器中出现错误，系统将使用默认异常处理进行输出至客户端，代码如下：
 
 ```php
 <?php
-protected function hookThrowable(\Throwable $throwable,Request $request,Response $response)
+protected function onException(\Throwable $throwable, Request $request, Response $response)
 {
     if(is_callable($this->httpExceptionHandler)){
         call_user_func($this->httpExceptionHandler,$throwable,$request,$response);
@@ -25,7 +25,7 @@ protected function hookThrowable(\Throwable $throwable,Request $request,Response
 }
 ```
 
-可直接在控制器重写`onException`方法：
+可直接在控制器重写 `onException` 方法：
 
 ```php
 <?php
@@ -69,18 +69,20 @@ use EasySwoole\Http\Response;
 
 class ExceptionHandler
 {
-    public static function handle( \Throwable $exception, Request $request, Response $response )
+    public static function handle(\Throwable $exception, Request $request, Response $response)
     {
         var_dump($exception->getTraceAsString());
     }
 }
 ```
 
-在`initialize`事件中DI注册异常处理:
+在 `initialize` 事件中使用 `DI` 注册异常处理:
 
 ```php
+<?php
+
 public static function initialize()
 {
-    Di::getInstance()->set(SysConst::HTTP_EXCEPTION_HANDLER,[ExceptionHandler::class,'handle']);
+    \EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::HTTP_EXCEPTION_HANDLER, [\App\ExceptionHandler::class, 'handle']);
 }
 ```
