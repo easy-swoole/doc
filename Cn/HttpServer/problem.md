@@ -13,19 +13,21 @@ meta:
 ## 如何处理静态资源
 
 ### Apache URl rewrite
+
 ```apacheconf
 <IfModule mod_rewrite.c>
   Options +FollowSymlinks
   RewriteEngine On
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-f
-  #RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]  fcgi下无效
+  # RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]  fcgi下无效
   RewriteRule ^(.*)$  http://127.0.0.1:9501/$1 [QSA,P,L]
-   #请开启 proxy_mod proxy_http_mod request_mod
+   # 请开启 proxy_mod proxy_http_mod request_mod
 </IfModule>
 ```
 
 ### Nginx URl rewrite
+
 ```nginx
 server {
     root /data/wwwroot/;
@@ -40,115 +42,172 @@ server {
     }
 }
 ```
-### Swoole静态文件处理器
+
+### Swoole 静态文件处理器
+
+详细请可查看 [配置文件 章节](/QuickStart/config.md)
+
+修改配置文件的 `dev.php` 或者 `produce.php`，实现 `Swoole` 对静态文件进行处理。
+
 ```php
-[       
-    'document_root' => EASYSWOOLE_ROOT.'/Static/',
-    'enable_static_handler' => true,
-]
+<?php
+
+return [
+    // ...... 这里省略
+    'MAIN_SERVER' => [
+        // ...... 这里省略
+        'SETTING' => [
+            // ...... 这里省略
+            
+            # 设置处理 Swoole 静态文件
+            'document_root' => EASYSWOOLE_ROOT . '/Static/',
+            'enable_static_handler' => true,
+        ],
+        // ...... 这里省略
+    ],
+    // ...... 这里省略
+];
 ```
-> 假设你的项目根目录有个Static目录是用来放置静态文件的。
+
+> 上述配置是假设你的项目根目录有个 Static 目录是用来放置静态文件的。具体的使用可查看 [https://wiki.swoole.com/#/http_server?id=document_root](https://wiki.swoole.com/#/http_server?id=document_root)
 
 
 ## 关于跨域处理
 
-在[initialize](/FrameDesign/event.md)中注册.
+在框架的初始化事件 [initialize 事件](/FrameDesign/event/initialize.md) 中进行注册。
+
+注册示例代码如下：
 
 ```php
-// onRequest v3.4.x+
-\EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::HTTP_GLOBAL_ON_REQUEST,function (\EasySwoole\Http\Request $request, \EasySwoole\Http\Response $response){
-    $response->withHeader('Access-Control-Allow-Origin', '*');
-    $response->withHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    $response->withHeader('Access-Control-Allow-Credentials', 'true');
-    $response->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-    if ($request->getMethod() === 'OPTIONS') {
-        $response->withStatus(\EasySwoole\Http\Message\Status::CODE_OK);
-        return false;
-    }
-    return true;
-});
+public static function initialize()
+{
+    date_default_timezone_set('Asia/Shanghai');
+
+    // onRequest v3.4.x+
+    \EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::HTTP_GLOBAL_ON_REQUEST, function (\EasySwoole\Http\Request $request, \EasySwoole\Http\Response $response) {
+        $response->withHeader('Access-Control-Allow-Origin', '*');
+        $response->withHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        $response->withHeader('Access-Control-Allow-Credentials', 'true');
+        $response->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+        if ($request->getMethod() === 'OPTIONS') {
+            $response->withStatus(\EasySwoole\Http\Message\Status::CODE_OK);
+            return false;
+        }
+        return true;
+    });
+}
 ```
 
-3.4.x版本之前：可在`EasySwooleEvent`中看到`onRequest`及`afterRequest`方法.
+`EasySwoole 3.4.x` 版本之前：可在项目根目录的 `EasySwooleEvent.php` 中看到 `onRequest` 及 `afterRequest` 方法.
 
-## 如何获取$HTTP_RAW_POST_DATA
+## 如何获取 $HTTP_RAW_POST_DATA
+
 ```php
 $content = $this->request()->getBody()->__toString();
 $raw_array = json_decode($content, true);
 ```
-## 如何获取客户端IP
-举例，如何在控制器中获取客户端IP
+
+## 如何获取客户端 IP
+
+举例，如何在控制器中获取客户端 IP
+
 ```php
-//真实地址
-$ip = \EasySwoole\EasySwoole\ServerManager::getInstance()->getSwooleServer()->connection_info($this->request()->getSwooleRequest()->fd);
+// 真实地址
+// 获取连接的文件描述符
+$fd = $this->request()->getSwooleRequest()->fd;
+$ip = \EasySwoole\EasySwoole\ServerManager::getInstance()->getSwooleServer()->connection_info($fd);
 var_dump($ip);
-//header 地址，例如经过nginx proxy后
+
+// header 地址，例如经过 nginx proxy 后
 $ip2 = $this->request()->getHeaders();
 var_dump($ip2);
 ```
 
 ## HTTP 状态码总为500
-自 swoole **1.10.x** 和 **2.1.x** 版本起，执行http server回调中，若未执行response->end(),则全部返回500状态码
 
-## 如何setCookie  
-调用response对象的setCookie方法即可设置cookie
+自 swoole **1.10.x** 和 **2.1.x** 版本起，执行 `http server` 回调中，若未执行 `response->end()`，则全部返回 `500` 状态码
+
+## 如何 setCookie  
+
+调用 `response` 对象的 `setCookie` 方法即可设置 `cookie`。`setCookie` 方法和原生 `setcookie` 用法一致。
+
 ```php
-  $this->response()->setCookie('name','value');
+$this->response()->setCookie('name', 'value');
 ```
-更多操作可看[Response对象](response.md)
+
+更多操作可看 [Response 对象](/HttpServer/response.md)
 
 
-## 如何自定义App名称
-只需要修改composer.json的命名空间注册就行
+## 如何自定义 App 命名空间对应目录
+
+只需要修改项目根目录的 `composer.json` 的自动加载的 `App` 命名空间对应的目录即可，然后执行 `composer dumpautolaod -o` 注册就行。
+
 ```
+{
+    // ... 这里省略
     "autoload": {
         "psr-4": {
             "App\\": "Application/"
         }
     }
+}
 ```
 
-## 如何启用Https
-通常建议使用Nginx 或者Lb来配置证书，将https请求解析为http 反代到swoole 
-如果你仅测试使用，可以在配置文件中添加和修改以下配置来启用https
+## 如何启用 Https
+
+通常建议使用 `Nginx` 或者 `Lb` 来配置证书，将 `https` 请求解析为 `http` 反代到 `swoole` 
+
+如果你仅是测试使用，可以在配置文件 (`dev.php` 或者 `produce.php`) 中添加和修改以下配置来启用https。
 
 ```php
-'MAIN_SERVER' => [
-    'SOCK_TYPE' => SWOOLE_TCP | SWOOLE_SSL, // 默认是 SWOOLE_TCP
-    'SETTING' => [
-        'ssl_cert_file' => '证书路径，仅支持.pem格式',
-        'ssl_key_file' => '私钥路径',
-    ]
-],
+<?php
+
+return [
+    // ...... 这里省略
+    'MAIN_SERVER' => [
+        // ...... 这里省略
+        'SOCK_TYPE' => SWOOLE_TCP | SWOOLE_SSL, // 默认是 SWOOLE_TCP
+        'SETTING' => [
+            'ssl_cert_file' => '证书路径，仅支持.pem格式',
+            'ssl_key_file' => '私钥路径',
+        ]
+        // ...... 这里省略
+    ],
+    // ...... 这里省略
+];
 ```
 
-## DNS Lookup resolve timeout错误
-该错误一般存在与 http客户端并发时产生,原因是dns效率慢,导致多线程获取dns时超时,包括不限于以下场景:  
- - mysql host设置为域名形式,并且设置最小连接高于2(很难看到,一般是10才会偶尔报错)
+详细请可查看 [配置文件 章节](/QuickStart/config.md)
+
+
+## DNS Lookup resolve timeout 错误
+该错误一般存在于 `http` 客户端并发调用时产生，原因是 `dns` 效率慢，导致多线程获取 `dns` 时超时，包括不限于以下场景:  
+ - mysql host 设置为域名形式，并且设置最小连接高于 2(很难看到，一般是 10 才会偶尔报错)
  - HTTPClient 多个协程同时并发
- - csp并发编程
-等  
+ - csp 并发编程
+等
+
 ::: warning
-解决方法为:   
-在并发之前,预先使用Swoole\Coroutine::gethostbyname('www.baidu.com'); 去查询一次dns ip,swoole底层才会自动缓存该ip
+  解决方法为:   
+  在并发之前，预先使用 `Swoole\Coroutine::gethostbyname('www.baidu.com')`; 去查询一次`dns ip`，`swoole` 底层才会自动缓存该 `ip`。
 :::
  
 例如:
 ```php
-    Swoole\Coroutine::gethostbyname('www.baidu.com');
-    for ($j = 0; $j < 100; $j++) {
-        go(function () use ($j) {
-            for ($i = 0; $i < 1000; $i++) {
-                $client = new Swoole\Coroutine\Http\Client('www.baidu.com',443,true);
-                $client->get('/');
-                if (empty($client->errMsg)){
+Swoole\Coroutine::gethostbyname('www.baidu.com');
+for ($j = 0; $j < 100; $j++) {
+    go(function () use ($j) {
+        for ($i = 0; $i < 1000; $i++) {
+            $client = new Swoole\Coroutine\Http\Client('www.baidu.com', 443, true);
+            $client->get('/');
+            if (empty($client->errMsg)) {
 //var_dump($client->getBody());
-                }else{
-                    var_dump($client->errMsg);
-                }
+            } else {
+                var_dump($client->errMsg);
             }
-        });
-    }
+        }
+    });
+}
 ```
 
 ## CURL 发送 POST请求 EasySwoole 服务器端超时
