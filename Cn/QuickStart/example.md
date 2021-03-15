@@ -18,7 +18,7 @@ meta:
 ### 框架安装
 
 - 我们先把当前的 `php` 环境安装好 `swoole` 拓展，安装 `swoole 扩展` 步骤可查看 [安装 Swoole](/QuickStart/installSwoole.md) 章节，然后执行 `php --ri swoole` 确保可以看到 `swoole` 拓展版本为 `4.4.23`
-- 建立一个目录，名为 `Test` ，执行 `composer require easyswoole/easyswoole=3.x` 引入 `easyswoole`
+- 建立一个目录，名为 `Test` ，执行 `composer require easyswoole/easyswoole=3.4.x` 引入 `easyswoole`
 - 执行 `php vendor/bin/easyswoole install` 进行安装，然后输入 `Y`、`Y`
 
 ### 组件引入

@@ -32,23 +32,23 @@ EasySwoole 文档采用三级目录风格，语言->模块->章节 的形式进�
 如果希望用户在终端执行某命令，可以使用 `引用` 语法。
 
 ```md
-> composer require easyswoole/easyswoole=3.x
+> composer require easyswoole/easyswoole=3.4.x
 ```
 
 效果如下：
-> composer require easyswoole/easyswoole=3.x
+> composer require easyswoole/easyswoole=3.4.x
 
 如果希望用户在特定的地方执行命令，最好使用 `重点` 注释说明
 
 ```md
 *请在终端执行以下命令*
-> composer require easyswoole/easyswoole=3.x
+> composer require easyswoole/easyswoole=3.4.x
 ```
 
 效果如下：  
 
 *请在终端执行以下命令*
-> composer require easyswoole/easyswoole=3.x
+> composer require easyswoole/easyswoole=3.4.x
 
 #### 高亮关键名词
 

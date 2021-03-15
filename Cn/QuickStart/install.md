@@ -49,13 +49,13 @@ composer config -g --unset repos.packagist
 按下面的步骤进行手动安装
 
 ```bash
-composer require easyswoole/easyswoole=3.x
+composer require easyswoole/easyswoole=3.4.x
 php vendor/easyswoole/easyswoole/bin/easyswoole install
 ```
 
 或者
 ```bash
-composer require easyswoole/easyswoole=3.x
+composer require easyswoole/easyswoole=3.4.x
 php vendor/bin/easyswoole install
 ```
 

@@ -13,7 +13,7 @@ The base development example is open source, address: https://github.com/easy-sw
 ## Installation
 ### Frame installation
 - We first install the swoole extension, execute `php --ri swoole` to make sure you can see the swoole extension version is 4.4.8.
-- Create a directory called `Test` and execute `composer require easyswoole/easyswoole=3.x` to introduce easyswoole
+- Create a directory called `Test` and execute `composer require easyswoole/easyswoole=3.4.x` to introduce easyswoole
   - Execute ```php vendor/bin/easyswoole install``` to install
 
 ### Namespace registration
