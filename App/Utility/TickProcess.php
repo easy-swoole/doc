@@ -27,7 +27,7 @@ class TickProcess extends AbstractProcess
                     file_put_contents(EASYSWOOLE_ROOT . "/Static/keyword{$dir}.json", json_encode($json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
                 }
             } catch (\Throwable $throwable) {
-                Trigger::getInstance()->throwable($throwable);
+                \EasySwoole\EasySwoole\Trigger::getInstance()->throwable($throwable);
             }
 
             //本项目是git克隆下来的，因此自动同步
