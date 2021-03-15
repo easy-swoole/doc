@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>easyswoole - 基于swoole扩展实现的一款高性能php框架</title>
-    <meta name="keywords" content="swoole|easyswoole|php swoole|swoole框架|php框架|php微服务|swoole微服务"/>
+    <meta name="keywords" content="swoole|easyswoole|php swoole|swoole框架|php框架|php微服务|php websocket"/>
     <meta name="description" content="easyswoole是基于swoole扩展实现的一款高性能php框架,借助swoole扩展的能力，解决了传统fpm框架的性能不足，能够快速实现php tcp协议和php websocket协。解决了传统php对接物联网IOT的不足，同时也解决了php无法实现websocket聊天室等类应用的弊端。"/>
     <link href="/Css/HomePageCss/bulma-0.7.4/css/bulma.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/Css/HomePageCss/index.css">
