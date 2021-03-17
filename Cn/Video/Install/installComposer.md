@@ -13,7 +13,7 @@ meta:
     var videoObject = {
     		container: '.video',
     		variable: 'player',
-    		video:'http://video-oss.easyswoole.com/install/1-6-%e5%ae%89%e8%a3%85composer%e5%92%8c%e8%ae%be%e7%bd%ae%e5%85%b1%e4%ba%ab%e7%9b%ae%e5%bd%95.mp4'
+    		video:'http://easyswoole.oss-cn-shenzhen.aliyuncs.com/install/1-6-%e5%ae%89%e8%a3%85composer%e5%92%8c%e8%ae%be%e7%bd%ae%e5%85%b1%e4%ba%ab%e7%9b%ae%e5%bd%95.mp4'
     	};
     var player=new ckplayer(videoObject);
 </script>

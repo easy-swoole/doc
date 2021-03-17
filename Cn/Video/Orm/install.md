@@ -13,7 +13,7 @@ meta:
     var videoObject = {
     		container: '.video',
     		variable: 'player',
-    		video:'http://video-oss.easyswoole.com/es-orm/1.+%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E6%B3%A8%E5%86%8C.mp4'
+    		video:'http://easyswoole.oss-cn-shenzhen.aliyuncs.com/es-orm/1.+%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E6%B3%A8%E5%86%8C.mp4'
     	};
     var player=new ckplayer(videoObject);
 </script>
