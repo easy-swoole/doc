@@ -170,9 +170,6 @@
     <footer class="footer" style="padding-bottom: 1rem;padding-top: 1rem">
         <div class="container">
             <div class="content has-text-centered">
-                <p>
-                    本站由 <strong><a href="https://www.verycloud.cn/" target="_blank">verycloud</a></strong> 提供云计算与安全服务
-                </p>
                 <p><a href="http://www.beian.miit.gov.cn" rel="nofollow noopener" target="_blank">闽ICP备19004753号-4</a></p>
             </div>
         </div>
