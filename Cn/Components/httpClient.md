@@ -34,6 +34,26 @@ $client = new \EasySwoole\HttpClient\HttpClient('http://easyswoole.com');
 $client->setUrl('http://easyswoole.com');
 ```
 
+### 设置query
+
+通过`url`传入.
+
+```php
+/** @var \EasySwoole\HttpClient\HttpClient $client **/
+$client->setUrl('http://easyswoole.com?a=1');
+```
+
+通过方法传入.
+
+```php
+/** @var \EasySwoole\HttpClient\HttpClient $client **/
+$client->setQuery(['a' => 1]);
+```
+
+注意：
+
+`setQuery`方法将你原本`url`的参数也带过来.
+
 ### 设置Ssl
 
 ```php
