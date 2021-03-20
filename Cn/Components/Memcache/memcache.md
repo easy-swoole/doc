@@ -108,6 +108,21 @@ version(int $timeout = null)
 flush(int $expiration = null, int $timeout = null)
 ```
 
+### setMulti 存储多个元素
+````php
+public function setMulti(array $items, $expiration = null, $timeout = null)
+````
+
+### getMulti 检索多个元素
+````php
+public function getMulti(array $keys, bool $isCas = false, $timeout = null)
+````
+
+### cas 检查并设置
+````php
+public function cas(float $casToken, string $key, $value, int $expiration = null, $timeout = null)
+````
+
 ## 进阶使用
 
 Memcache连接池示例

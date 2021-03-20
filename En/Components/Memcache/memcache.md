@@ -97,5 +97,17 @@ Version(int $timeout = null)
 flush(int $expiration = null, int $timeout = null)
 ```
 
+### setMulti Store multiple elements
+````php
+public function setMulti(array $items, $expiration = null, $timeout = null)
+````
 
+### getMulti Retrieve multiple elements
+````php
+public function getMulti(array $keys, bool $isCas = false, $timeout = null)
+````
 
+### cas Check and set
+````php
+public function cas(float $casToken, string $key, $value, int $expiration = null, $timeout = null)
+````
