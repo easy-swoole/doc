@@ -132,6 +132,29 @@ class Router extends AbstractRouter
                 return $path;
             });
         });
+        
+        
+        // 注意：http://localhost:9501/admins/index?version=x 不能匹配到下面这个 action 路由配置参数
+        // 需要单独配置路由，如下所示：即执行对应的 App\HttpController\V1\Admins.php 类的 index() 方法
+        // $collector->addRoute('GET', '/admins/index', '/V1/Admin/index');
+        $routeCollector->addGroup('/admins', function (RouteCollector $collector) {
+            // 访问 http://localhost:9501/admins/test?version=x 将匹配如下路由，并且进行再次匹配执行
+            $collector->addRoute('GET', '/{action}', function (Request $request, Response $response) {
+                $version = $request->getQueryParam('version');
+                // 这里可以根据 version 参数判断返回新路径
+                if ($version == 1) {
+                    // http://localhost:9501/admins/test?version=1 将匹配路由 "/V1/admins/test"
+                    // 即执行对应的 App\HttpController\V1\Admins.php 类的 test() 方法
+                    $path = '/V1' . $request->getUri()->getPath(); // "/V1/admins/test"
+                } else {
+                    // http://localhost:9501/admins/test?version=2 将匹配路由 "/V2/admins/test"
+                    // 即执行对应的 App\HttpController\V2\Admins.php 类的 test() 方法
+                    $path = '/V2' . $request->getUri()->getPath(); // "/V2/admins/test"
+                }
+                // 返回新的构造的path
+                return $path;
+            });
+        });
     }
 }
 ```
