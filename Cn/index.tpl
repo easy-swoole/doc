@@ -171,6 +171,14 @@
                     <p>宝宝巴士（BabyBus）是专注0-6岁宝宝启蒙的移动互联网早教品牌，历经7年产品研发，精准覆盖全球4亿家庭用户，同时提供一站式教养解决方案，是谷歌“Best for Kids”全球家庭应用品牌。</p>
                 </div>
             </a>
+            <a href="https://www.jsrxjt.com/" title="瑞祥科技集团" class="partner-one" target="_blank">
+                <img src="/Images/HomePagePartner/ruixiangjituan.png">
+                <div class="partner-name">瑞祥科技集团</div>
+                <div class="detail-card">
+                    <h4>瑞祥科技集团</h4>
+                    <p>江苏瑞祥科技集团有限公司（以下简称集团），前身是镇江城市通卡运营管理有限公司，成立于2008年，是一家总部位于镇江，拥有2000余人专业团队的综合型集团公司，多年来一直致力于贯通“第三方支付”、“智慧新零售”、基于“线上线下”多方向的企业端服务工作。凭借在企业福利行业13年的深耕细作，目前服务超16万家企业用户，与3000个品牌60000家连锁商超、百货、餐饮等业态深度合作，每年新增个人用户约2500万人。</p>
+                </div>
+            </a>
         </div>
         <div class="clear"></div>
     </div>
