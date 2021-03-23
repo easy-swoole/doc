@@ -16,13 +16,6 @@ meta:
 
 ```php
 <?php
-/**
- * Created by PhpStorm.
- * User: yf
- * Date: 2018/8/15
- * Time: 上午10:39
- */
-
 namespace App\HttpController;
 
 use EasySwoole\Component\Context\ContextManager;
@@ -68,7 +61,7 @@ class Router extends AbstractRouter
         $routeCollector->get('/mtest1', '/a/b/c/d/index/index');
         $routeCollector->get('/mtest2', '/A/B/C/D/Index/index');
         
-        // 从 `easyswoole/http 2.0.2` 版本开始，绑定的参数将由框架内部进行组装到框架的 `Context(上下文)` 数据之中，具体使用请看下文。
+        // 从 `easyswoole/http 2.x 版本开始，绑定的参数将由框架内部进行组装到框架的 `Context(上下文)` 数据之中，具体使用请看下文。
         $routeCollector->get('/user/{id:\d+}', function (Request $request, Response $response) {
             $response->write(json_encode([
                 'get' => $request->getQueryParams(),
@@ -79,7 +72,7 @@ class Router extends AbstractRouter
             return false;// 不再往下请求,结束此次响应
         });
         
-        /** `easyswoole/http 2.0.2` 之前版本请使用如下方式，获取绑定的 id 参数 ( $request->getQueryParam('id') */
+        /** `easyswoole/http 2.x` 之前版本请使用如下方式，获取绑定的 id 参数 ( $request->getQueryParam('id') */
         /* 
         $routeCollector->get('/user/{id:\d+}', function (Request $request, Response $response) {
             // 获取到路由匹配的 id
@@ -110,13 +103,13 @@ class Router extends AbstractRouter
 ```php
 <?php
 
-class Router extends AbstractRouter
+class Router extends \EasySwoole\Http\AbstractInterface\AbstractRouter
 {
-    function initialize(RouteCollector $routeCollector)
+    function initialize(\FastRoute\RouteCollector $routeCollector)
     {
-        $routeCollector->addGroup('/admin', function (RouteCollector $collector) {
+        $routeCollector->addGroup('/admin', function (\FastRoute\RouteCollector $collector) {
             // 访问 http://localhost:9501/admin/test?version=x 将匹配如下路由，并且进行再次匹配执行
-            $collector->addRoute('GET', '/test', function (Request $request, Response $response) {
+            $collector->addRoute('GET', '/test', function (\EasySwoole\Http\Request $request, \EasySwoole\Http\Response $response) {
                 $version = $request->getQueryParam('version');
                 // 这里可以根据 version 参数判断返回新路径
                 if ($version == 1) {
@@ -137,9 +130,9 @@ class Router extends AbstractRouter
         // 注意：http://localhost:9501/admins/index?version=x 不能匹配到下面这个 action 路由配置参数
         // 需要单独配置路由，如下所示：即执行对应的 App\HttpController\V1\Admins.php 类的 index() 方法
         // $collector->addRoute('GET', '/admins/index', '/V1/Admin/index');
-        $routeCollector->addGroup('/admins', function (RouteCollector $collector) {
+        $routeCollector->addGroup('/admins', function (\FastRoute\RouteCollector $collector) {
             // 访问 http://localhost:9501/admins/test?version=x 将匹配如下路由，并且进行再次匹配执行
-            $collector->addRoute('GET', '/{action}', function (Request $request, Response $response) {
+            $collector->addRoute('GET', '/{action}', function (\EasySwoole\Http\Request $request, Response $response) {
                 $version = $request->getQueryParam('version');
                 // 这里可以根据 version 参数判断返回新路径
                 if ($version == 1) {
@@ -178,11 +171,11 @@ $this->setGlobalMode(true);
 
 ```php
 <?php
-$this->setMethodNotAllowCallBack(function (Request $request,Response $response){
+$this->setMethodNotAllowCallBack(function (\EasySwoole\Http\Request $request,\EasySwoole\Http\Response $response){
     $response->write('未找到处理方法');
     return false; // 结束此次响应
 });
-$this->setRouterNotFoundCallBack(function (Request $request,Response $response){
+$this->setRouterNotFoundCallBack(function (\EasySwoole\Http\Request $request,\EasySwoole\Http\Response $response){
     $response->write('未找到路由匹配');
     return 'index'; // 重定向到 index 路由
 });
@@ -194,7 +187,7 @@ $this->setRouterNotFoundCallBack(function (Request $request,Response $response){
 
 ## FastRoute 使用
 
-#### addRoute 方法
+### addRoute 方法
 
 定义路由的 `addRoute` 方法原型如下，该方法需要三个参数，下面围绕这三个参数我们对路由组件进行更深一步的了解
 
@@ -220,9 +213,29 @@ $routeCollector->addRoute(['GET', 'POST'], '/router', '/Index');
 
 #### routePattern
 
-传入一个路由匹配表达式，符合该表达式要求的路由才会被拦截并进行处理，表达式支持 `{参数名称:匹配规则}` 这样的占位符匹配，用于限定路由参数
+传入一个路由匹配表达式，符合该表达式要求的路由才会被拦截并进行处理，表达式支持 `{参数名称:匹配规则}` 这样的占位符匹配，用于限定路由参数。
 
-#### 基本匹配
+#### handler
+
+指定路由匹配成功后需要处理的方法，可以传入一个闭包，当传入闭包时一定要 **注意处理完成之后要处理结束响应**，否则请求会继续 `Dispatch` 寻找对应的控制器来处理，当然如果利用这一点，也可以对某些请求进行处理后再交给控制器执行逻辑。
+
+```php
+// 传入闭包的情况
+$routeCollector->addRoute('GET', '/router/{id:\d+}', function (Request $request, Response $response) {
+    $id = $request->getQueryParam('id');
+	$response->write('Userid : ' . $id);
+	return false;
+});
+
+```
+
+也可以直接传入控制器路径
+
+```php
+$routeCollector->addRoute('GET', '/router2/{id:\d+}', '/Index');
+```
+
+### 基本匹配
 
 下面的定义将会匹配 `http://localhost:9501/users/info`
 
@@ -230,7 +243,7 @@ $routeCollector->addRoute(['GET', 'POST'], '/router', '/Index');
 $routeCollector->addRoute('GET', '/users/info', 'handler');
 ```
 
-#### 绑定参数
+### 绑定参数
 
 下面的定义将 `/users/` 后面的部分作为参数，并且限定参数只能是数字 `[0-9]`
 
@@ -260,32 +273,45 @@ $routeCollector->addRoute('GET', '/users/{name}', 'handler');
 $routeCollector->addRoute('GET', '/users/to[/{name}]', 'handler');
 ```
 
-::: warning 
-  从 `easyswoole/http 2.0.2` 版本开始，绑定的参数将由框架内部进行组装到框架的 `Context(上下文)` 数据之中，具体调用方法请看下文，若想要在 `get` 数据中获得绑定的参数，请看下文进行设置。
+::: tip 
+  从 `easyswoole/http 2.x` 版本开始，绑定的参数将由框架内部进行组装到框架的 `Context(上下文)` 数据之中，具体调用方法请看下文，若想要在 `get` 数据中获得绑定的参数，请看下文进行设置。
 :::
 
-1. 想从 `$this->request()->getQueryParams()` 即在 `get` 数据中获取 路由匹配的参数，需进行如下设置：
+
+以下操作均在`Router.php`中`initialize`方法中操作.
+
+#### GET获取路由参数
+
+从 `$this->request()->getQueryParams()` 即在 `get` 数据中获取 路由匹配的参数，需进行如下设置：
 
 ```php
-$this->parseParams(Router::PARSE_PARAMS_IN_GET);
+$this->parseParams(\EasySwoole\Http\Tests\ControllerWithRouter\Router::PARSE_PARAMS_IN_GET);
 ```
 
-2. 想从 `$this->request()->getParsedBody()` 中获取路由匹配的参数，需进行如下设置：
+#### POST获取路由参数
+
+从 `$this->request()->getParsedBody()` 中获取路由匹配的参数，需进行如下设置：
 
 ```php
-$this->parseParams(Router::PARSE_PARAMS_IN_POST);
+$this->parseParams(\EasySwoole\Http\Tests\ControllerWithRouter\Router::PARSE_PARAMS_IN_POST);
 ```
 
-3. (`Router` 默认使用的设置)想从 `\EasySwoole\Component\Context\ContextManager::getInstance()->get(Router::PARSE_PARAMS_CONTEXT_KEY)` 中获取 路由匹配的参数，需进行如下设置：
+#### Context获取路由参数
+
+从 `\EasySwoole\Component\Context\ContextManager::getInstance()->get(Router::PARSE_PARAMS_CONTEXT_KEY)` 中获取 路由匹配的参数，需进行如下设置：
 
 ```php
-$this->parseParams(Router::PARSE_PARAMS_IN_CONTEXT);
+$this->parseParams(\EasySwoole\Http\Tests\ControllerWithRouter\Router::PARSE_PARAMS_IN_CONTEXT);
 ```
 
-4. 不获取路由匹配的参数，需进行如下设置
+此配置项是`easyswoole/http 2.x`版本默认配置.
+
+#### NONE
+ 
+不获取路由匹配的参数，需进行如下设置:
 
 ```php
-$this->parseParams(Router::PARSE_PARAMS_NONE);
+$this->parseParams(\EasySwoole\Http\Tests\ControllerWithRouter\Router::PARSE_PARAMS_NONE);
 ```
 
 > 注意：以上 4 种设置，用户只能设置 1 种。`Router` 默认使用的设置是第 3 种。
@@ -305,9 +331,8 @@ class Router extends AbstractRouter
 {
     function initialize(RouteCollector $routeCollector)
     {
-        ######   针对从 easyswoole/http 2.0.2 开始的   ######
+        ######   针对从 easyswoole/http 2.x 开始的   ######
         ### 获取路由中匹配的参数
-        // 从 easyswoole/http 2.0.2 开始不再支持自动获取路由匹配的参数，例如下面的 id 参数
         // 可采取如下形式来获取 路由匹配的参数
         # 1. 在 $this->request()->getQueryParams() 中获取 路由匹配的参数，需进行如下设置
         // $this->parseParams(Router::PARSE_PARAMS_IN_GET);
@@ -355,8 +380,7 @@ class Router extends AbstractRouter
             $response->write(json_encode([
                 'get' => $request->getQueryParams(),
                 'post' => $request->getParsedBody(),
-                // 在这里可以获取 id 参数
-                'context' => ContextManager::getInstance()->get(Router::PARSE_PARAMS_CONTEXT_KEY)
+                'context' => ContextManager::getInstance()->get(Router::PARSE_PARAMS_CONTEXT_KEY)   // 在这里可以获取 id 参数
             ]));
             return false;// 不再往下请求,结束此次响应
         });
@@ -373,7 +397,6 @@ class Router extends AbstractRouter
             $response->write(json_encode([
                 'get' => $request->getQueryParams(),
                 'post' => $request->getParsedBody(),
-                // 在这里可以获取 id 参数
                 'context' => ContextManager::getInstance()->get(Router::PARSE_PARAMS_CONTEXT_KEY)
             ]));
             return false;// 不再往下请求,结束此次响应
@@ -385,8 +408,8 @@ class Router extends AbstractRouter
 }
 ```
 
-::: warning
-  `easyswoole/http 2.0.2` 之前版本绑定的参数将由框架内部进行组装到框架的 `get` 数据之中，调用方式如下：
+::: tip
+  `easyswoole/http 2.x` 之前版本绑定的参数将由框架内部进行组装到框架的 `get` 数据之中，调用方式如下：
 :::
 
 ```php
@@ -401,7 +424,7 @@ class Router extends AbstractRouter
 {
     function initialize(RouteCollector $routeCollector)
     {
-        // easyswoole/http 2.0.2 版本之前的路由匹配采用如下方式即可获取 ( $request->getQueryParam('id') )
+        // easyswoole/http 2.x 版本之前的路由匹配采用如下方式即可获取 ( $request->getQueryParam('id') )
         $routeCollector->get('/user/{id:\d+}', function (Request $request, Response $response) {
             // 获取到路由匹配的 id
             $response->write("this is router user ,your id is {$request->getQueryParam('id')}");
@@ -409,24 +432,4 @@ class Router extends AbstractRouter
         });
     }
 }
-```
-
-#### handler
-
-指定路由匹配成功后需要处理的方法，可以传入一个闭包，当传入闭包时一定要 **注意处理完成之后要处理结束响应**，否则请求会继续 `Dispatch` 寻找对应的控制器来处理，当然如果利用这一点，也可以对某些请求进行处理后再交给控制器执行逻辑。
-
-```php
-// 传入闭包的情况
-$routeCollector->addRoute('GET', '/router/{id:\d+}', function (Request $request, Response $response) {
-    $id = $request->getQueryParam('id');
-	$response->write('Userid : ' . $id);
-	return false;
-});
-
-```
-
-也可以直接传入控制器路径
-
-```php
-$routeCollector->addRoute('GET', '/router2/{id:\d+}', '/Index');
 ```

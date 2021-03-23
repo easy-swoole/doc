@@ -11,11 +11,13 @@ meta:
 
 ## @Api
 
+标记这个`method`为`api`.
+
 - `name` 注解文档的`api`标题.
 - `path` 路由（可注册到fast-route）
 - `version` `api`版本号（暂时没用）
 - `description` `api`描述（新版本建议使用`@ApiDescription`）
-- `deprecated` 注解文档标注此`api`为废弃
+- `deprecated` 注解文档标注此`api`为废弃（将会不可访问,返回`423`状态）
 
 ## @ApiDescription
 

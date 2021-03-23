@@ -7,15 +7,23 @@ meta:
     content:  easyswoole注解控制器 - 参数注解
 ---
 # 参数注解校验
-Easyswoole控制器总共有三个参数注解标签，分别是
+
+`Easyswoole`控制器总共有三个参数注解标签，分别是：
+
 - @Param ```EasySwoole\HttpAnnotation\AnnotationTag\Param```
 - @ApiAuth ```EasySwoole\HttpAnnotation\AnnotationTag\ApiAuth```
 - @ApiGroupAuth ```EasySwoole\HttpAnnotation\AnnotationTag\ApiGroupAuth```
 
-其中，```ApiAuth```与```ApiGroupAuth```均继承自```Param```，对于任意一个参数注解，都要求填写注解的```name```字段。```Param```对象实际上是对```Easyswoole/Validate```参数验证组件验证规则的封装，底层是调用该组件进行参数校验。当校验失败的时候，则会抛出一个```EasySwoole\HttpAnnotation\Exception\Annotation\ParamValidateError```异常，可以在控制器的```onExcepion```中进行处理。
+`ApiAuth`与`ApiGroupAuth`均继承自`Param`，对于任意一个参数注解，都要求填写注解的`name`字段。
+
+`Param`对象实际上是对`Easyswoole/Validate`参数验证组件验证规则的封装，底层是调用该组件进行参数校验。
+
+当校验失败的时候，则会抛出一个`EasySwoole\HttpAnnotation\Exception\Annotation\ParamValidateError`异常，可以在控制器的`onExcepion`中进行处理。
 
 ## @Param
-基础参数注解，作用域在控制器的```actionMethod```与```onRequest```均为有效。例如在以下代码中：
+
+基础参数注解，作用域在控制器的`actionMethod`与`onRequest`均为有效。例如在以下代码中：
+
 ```
 /**
 * @Param(name="name",required="",lengthMax="25")
@@ -27,12 +35,15 @@ function index()
     $this->response()->write("your name is {$data['name']} and age {$data['age']}");
 }
 ```
-那么则规定了```index```这个action需要```name```与```age```这两个参数，且校验规则分别为```required="",lengthMax="25"```与```integer=""```
+
+那么则规定了`index`这个action需要`name`与`age`这两个参数，且校验规则分别为`required="",lengthMax="25"`与`integer=""`
 
 #### 参数的接收
+
 在控制器的```Request```对象中得到的参数值，为客户端提交的原始值，参数的注解校验或者预处理，并不会影响原始值。但是通过控制器自动传参或者是上下文注解标签得到的参数，则为经过预处理后的参数。
 
 ##### 自动传参
+
 ```
 /**
 * @Param(name="name",required="",lengthMax="25",from={GET,POST})
@@ -45,7 +56,9 @@ function index($age,$name)
 }
 ```
 当某个action定义了参数，且有注解的时候，那么控制器会利用反射机制，根据函数定义的参数名，去取对应的参数。
+
 ##### 注解传参数
+
 ```
 /**
 * @Param(name="name",required="",lengthMax="25",from={GET,POST})
@@ -58,7 +71,9 @@ function index()
     $this->response()->write("your name is {$data['name']} and age {$data['age']}");
 }
 ```
+
 通过```@InjectParamsContext```标签，完整命名空间是```EasySwoole\HttpAnnotation\AnnotationTag\InjectParamsContext```，我们可以把通过验证的参数，设置到指定的协成上下文中，并通过上下文管理器```EasySwoole\Component\Context\ContextManager```得到对应的参数。其中，除了必填的```key```字段，还有如下几个字段：
+
 - onlyParamTag
 
     忽略```@ApiAuth```与```@ApiGroupAuth```定义的参数
