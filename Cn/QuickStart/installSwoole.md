@@ -15,6 +15,9 @@ meta:
 ```
 ## 下载
 tioncico@tioncico-PC:/tmp$ wget https://github.com/swoole/swoole-src/archive/v4.4.23.tar.gz
+# 如果使用 github 下载慢，请到 pecl 进行下载 
+# tioncico@tioncico-PC:/tmp$ wget https://pecl.php.net/get/swoole-4.4.23.tgz 
+
 
 ## 解压到当前目录
 tioncico@tioncico-PC:/tmp$ tar -zvxf v4.4.23.tar.gz
@@ -42,11 +45,14 @@ Installing header files:          /usr/local/php-7.2.2/include/php/
 ```
 
 这个时候已经安装成功，需要修改 `php` 配置文件 `php.ini`，在最后面增加如下内容:
+
 ```
 extension=swoole.so
 ```
+
 注意：不知道 php.ini 所在目录时，您可以通过运行 `php --ini` 确定。
 例如，我这里 `php.ini` 是在 `/usr/local/php-7.2.2/etc` 目录：
+
 ```
 tioncico@tioncico-PC:/tmp/swoole-src-4.4.23$ php --ini
 Configuration File (php.ini) Path: /usr/local/php-7.2.2/etc
@@ -95,19 +101,20 @@ swoole.unixsock_buffer_size => 8388608 => 8388608
 
 ## 常见问题
 ### phpize 命令不存在
-安装phpize 
+安装 `phpize`
+
 ```
 yum install php-devel ## centos
 sudo apt-get install php-dev  ## ubuntu
 ```
 
 ### 提示 swoole.so.so 类似的报错
-说明你的 phpize 版本和 php-config 设定的版本不一致，请重新编译
+说明你的 `phpize` 版本和 `php-config` 设定的版本不一致，请重新编译
 
 ::: warning
-phpize 命令也可以使用绝对路径: php安装路径/bin/phpize 用于执行  
-在之后的 --with-php-config 也得使用同样的路径: php安装路径/bin/php-config
+ `phpize` 命令也可以使用绝对路径: `php安装路径/bin/phpize` 用于执行创建编译文件。
+ 在之后的 `--with-php-config` 也得使用同样的路径: `php安装路径/bin/php-config`
 :::
 
 ### 安装成功 php --ri 没有 Swoole 扩展信息
-说明你的 php 命令行版本，和安装 Swoole 的 php 版本不一致，可以通过: php安装路径/bin/php --ri swoole 进行确认是否安装成功
+说明你的 `php` 命令行版本，和安装 `Swoole` 的 `php` 版本不一致，可以通过: `php安装路径/bin/php --ri swoole` 进行确认是否安装成功

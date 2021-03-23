@@ -110,6 +110,7 @@ go(function () {
     // 生成 unitTest (默认生成 unitTest 的路径前缀为项目根目录的 UnitTest 目录，例如：如下生成的单元测试用例为 UserTest【UnitTest\Api\User\UserTest.php】 和 基础单元测试用例【UnitTest\BaseTest.php】)
     $codeGeneration->generationUnitTest("\\Api\\User", null);
 });
+\Swoole\Timer::clearAll();
 ```
 
 在配置好数据库和数据库配置文件之后，然后在项目根目录运行 `TestCodeGeneration.php`(`php TestCodeGeneration.php`)，即可看到自动生成的模型、控制器和单元测试用例。
@@ -303,6 +304,7 @@ go(function () {
     $result = $modelGeneration->generate();
     var_dump($result);//生成成功返回生成文件路径,否则返回false
 });
+\Swoole\Timer::clearAll();
 ```
 
 #### Model方法
@@ -378,6 +380,7 @@ go(function () {
     $result = $controllerGeneration->generate();
     var_dump($result);
 });
+\Swoole\Timer::clearAll();
 ```
 #### Controller方法.
 Controller支持了5个方法,`Add`,`Delete`,`GetList`,`GetOne`,`Update`.
@@ -486,7 +489,7 @@ go(function () {
     $result = $unitTestGeneration->generate();
     var_dump($result);
 });
-
+\Swoole\Timer::clearAll();
 ```
 
 #### UnitTest方法.
