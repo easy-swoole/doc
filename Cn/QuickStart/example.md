@@ -115,7 +115,7 @@ return [
 执行以下命令用于实现数据库 ORM 库的引入。
 
 ```php
-composer require easyswoole/orm=1.4.33
+composer require easyswoole/orm=1.4.x
 ```
 
 ### 注册数据库连接池
