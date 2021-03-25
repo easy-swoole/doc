@@ -35,7 +35,7 @@ meta:
 # 由于最近阿里云composer镜像不稳定，暂时废弃使用，请使用其他稳定的镜像
 # composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
-# 推荐暂时使用腾讯云镜像
+# 推荐暂时使用腾讯云镜像（如果使用此镜像还是不行请自行更换其他源下载）
 composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer/
 ````
 
