@@ -49,7 +49,7 @@ class Router extends AbstractRouter
     }
 }
 ```
-> 这样就可以把@Api注解中的path注入到fast-route,具体用法查看[动态路由](HttpServer/dynamicRoute.html)
+> 这样就可以把@Api注解中的path注入到fast-route,具体用法查看[动态路由](/HttpServer/dynamicRoute.html)
 
 # example
 

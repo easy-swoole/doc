@@ -93,27 +93,33 @@ function index()
 * @Param(name="age",integer="",from={POST})
 ```
 则规定了```name```字段允许的取参顺序为：GET => POST，而```age```参数就仅仅允许为 `POST` 传参。目前from的允许值为：
-```POST```，```GET```，```COOKIE```,```HEADER```,```FILE```,```DI```,```CONTEXT```,```RAW```。在无规定from字段时，默认以```$request->getRequestParam($paramName)```方法获得参数值。具体实现可以在```EasySwoole\HttpAnnotation\AnnotationController```的```__handleMethodAnnotation```方法中查看。
+```POST```，```GET```，```COOKIE```,```HEADER```,```FILE```,```DI```,```CONTEXT```,```RAW```,```JSON```,```SESSION```,```ROUTER_PARAMS```。在无规定from字段时，默认以```$request->getRequestParam($paramName)```方法获得参数值。具体实现可以在```EasySwoole\HttpAnnotation\AnnotationController```的```__handleMethodAnnotation```方法中查看。
 
-#### type
+##### type
+
 例如以下注解中：
 ```
 * @Param(name="age",type="int")
 ```
-通过函数自动传参，或者是```@InjectParamsContext```得到的参数时，会对```age```这个参数进行intval()处理。```type```字段可选值为：```string```，```int```,```double```,```real```,```float```，```bool```，```object```，```array```，具体可以在```EasySwoole\HttpAnnotation\AnnotationTag\Param```的```typeCast```方法中查看。
+通过函数自动传参，或者是```@InjectParamsContext```得到的参数时，会对```age```这个参数进行intval()处理。```type```字段可选值为：```string```，```int```,```double```,```real```,```float```，```bool```，```json```，```array```，具体可以在```EasySwoole\HttpAnnotation\AnnotationTag\Param```的```typeCast```方法中查看。
 
-#### defaultValue
+##### defaultValue
+
 在客户端没有传递该参数的值时，可以用该字段进行默认值的定义。
 
-#### preHandler
+##### preHandler
+
 该字段是用于对某个参数值不为null时进行预处理。```preHandler```需要是一个callable，例如
 ```
 * @Param(name="password",preHandler="md5")
 ```
-#### description
-该字段主要用户自动生成文档时，参数的描述说明。
 
 则通过函数自动传参，或者是```@InjectParamsContext```得到的参数时，```password```会被自动执行md5()
+
+##### description
+
+该字段主要用户自动生成文档时，参数的描述说明。
+
 
 
 ## @ApiAuth
