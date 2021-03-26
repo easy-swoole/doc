@@ -11,6 +11,11 @@ meta:
 composer require easyswoole/http-annotation
 ```
 
+::: tip
+  注意：用户在使用 `EasySwoole 注解组件` 进行 `EasySwoole` 开发时，仍需要 `use` 注解相对应的命名空间。这显然不是一个高效的做法。我们推荐在 `PhpStorm` 环境下进行开发，并且在 `PhpStorm` 中安装 `Jetbrain` 自带的 `PHP Annotation` 组件，可以提供注解命名空间自动补全、注解属性代码提醒、注解类跳转等非常有帮助的。(`PhpStorm 2019` 以上版本的 `IDE`，该组件可能不能正常使用。)
+:::
+
+
 # 实现原理
 注解控制器，完整命名空间为```EasySwoole\HttpAnnotation\AnnotationController```，是继承自
 ```use EasySwoole\Http\AbstractInterface\Controller```的子类。它重写了父类的```__construct```和```__exec```方法，从而实现的注解支持。

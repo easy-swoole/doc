@@ -85,7 +85,7 @@ $configArray = [
   'appId'     => 'you appId',
   'appSecret' => 'you appSecret',
   'token'     => 'you token',
-  'AesKey'    => 'you AesKey',
+  'aesKey'    => 'you AesKey',
 ];
 $weChatConfig->officialAccount($configArray);
 
