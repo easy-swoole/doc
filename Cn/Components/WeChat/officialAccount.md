@@ -934,7 +934,7 @@ $msg->setMsgId('消息ID');
 
 ```php
 /** @var string 微信发送的Body体 $rawContent */
-$rawContent = $this->request()->getBody();
+$rawContent = $this->request()->getBody()->getContents();
 
 // 将请求转发给名为 'default' WeChat接管 会返回 XML string 或者 null
 try {
