@@ -137,6 +137,8 @@ return [
 
 ### event 日志写入后执行回调
 
+使用 `event` 时，请先注册 `Event`。
+
 ```php
 // 日志写入之后执行
 \EasySwoole\EasySwoole\Logger::getInstance()->onLog()->set('myHook', function ($msg, $logLevel, $category) {
@@ -208,7 +210,7 @@ class LogHandler implements LoggerInterface
 
 ### 注册自定义日志处理器
 
-> 1. 在配置文件 (dev.php / produce.php)中注册自定义日志处理器 (`EasySwoole 3.4.4` 及以上版本可使用)
+> (`EasySwoole 3.4.4` 及以上版本可使用) 方法1. 在配置文件 (`dev.php` / `produce.php`)中注册自定义日志处理器 
 
 ```php
 <?php
@@ -233,7 +235,7 @@ return [
 ];
 ```
 
-> 2. 在 [`initialize` 事件](/FrameDesign/event/initialize.md) 中注册自定义 `logger` 处理器 (`EasySwoole 3.4.x+` 版本可使用)
+> (`EasySwoole 3.4.x+` 版本可使用) 方法2. 在 [`initialize` 事件](/FrameDesign/event/initialize.md) 中注册自定义 `logger` 处理器 
 
 注册示例代码如下：
 
