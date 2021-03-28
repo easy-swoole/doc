@@ -152,7 +152,7 @@ class EasySwooleEvent implements Event
 }
 ```
 
-::: warnging 
+::: warning 
   在 `initialize` 事件中注册数据库连接池，使用这个 `$config` 可同时配置连接池大小等。
   具体查看 [ORM 组件章节](/Components/Orm/install.md) 的使用。
 :::
@@ -976,7 +976,7 @@ class User extends AdminBase
 }
 ```
 
-::: warnging
+::: warning
   后台管理员登录之后，可通过此文件的接口，去进行会员的增删改查操作 (即 CURD)。
 :::
 
