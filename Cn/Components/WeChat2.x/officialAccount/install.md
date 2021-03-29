@@ -46,7 +46,7 @@ meta:
 
 ## 安装方法
 
-> $ composer require "easyswoole/wechat:^2.0" --no-dev
+> $ composer require easyswoole/wechat "v2.0.0-alpha"
 
 ## 仓库地址
 
