@@ -16,7 +16,7 @@ meta:
 
 用户可以在一切支持 `Swoole` 协程环境的框架（`EasySwoole`、`Hyperf`、`Swoft` 等）中使用，安装和使用方法请看下文。
 
-> 注意：`WeChat` 组件目前最新版本为 `2.x`，下面的文档也以 `2.x` 为准。
+> 注意：`WeChat` 组件目前最新版本为 `2.0.0-alpha` 测试版，`2.0.0` 正式版本暂时未发布。线上环境需要使用请先使用旧版 `1.2.x`，详细请看下文注意事项。
 
 ::: tip
   旧版 `1.2.x` 的文档请移步查看 **`1.2.x` 微信公众号 `SDK` 文档** - [安装](/Components/WeChat/install.md) 和 [API 文档](/Components/WeChat/officialAccount.md)
@@ -46,7 +46,7 @@ meta:
 
 ## 安装方法
 
-> $ composer require "easyswoole/wechat:^2.0" --no-dev
+> $ composer require easyswoole/wechat "v2.0.0-alpha"
 
 ## 仓库地址
 
