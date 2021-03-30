@@ -120,7 +120,7 @@ composer require easyswoole/orm=1.4.x
 
 ### 注册数据库连接池
 
-编辑 `Test` 项目根目录下的 `EasySwooleEvent.php` 文件，在 `mainServerCreate` 事件函数中进行 `ORM` 的连接池的注册，内容如下：
+编辑 `Test` 项目根目录下的 `EasySwooleEvent.php` 文件，在 `initialize` 或 `mainServerCreate` 事件函数中进行 `ORM` 的连接池的注册，内容如下：
 
 ```php
 <?php
@@ -147,7 +147,12 @@ class EasySwooleEvent implements Event
 
     public static function mainServerCreate(EventRegister $register)
     {
-
+        // 或者 在此函数中注册 和上面等价
+        ###### 注册 mysql orm 连接池 ######
+        // $config = new \EasySwoole\ORM\Db\Config(Config::getInstance()->getConf('MYSQL'));
+        // 【可选操作】我们已经在 dev.php 中进行了配置
+        # $config->setMaxObjectNum(20); // 配置连接池最大数量
+        // DbManager::getInstance()->addConnection(new Connection($config));
     }
 }
 ```

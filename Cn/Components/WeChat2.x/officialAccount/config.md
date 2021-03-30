@@ -47,15 +47,7 @@ return [
     'secret'  => 'your-app-secret',     // AppSecret
     'token'   => 'your-token',          // Token
     'aesKey'  => 'your-EncodingAESKey', // EncodingAESKey，兼容与安全模式下请一定要填写！！！
-   
-    /**
-     * 日志配置
-     * 日志文件名为 wechat.log
-     * tempDir：日志文件存放位置 (绝对路径!!!)，要求可写权限
-     */
-    'log' => [
-        'tempDir' => sys_get_temp_dir(), // 默认使用的 sys_get_temp_dir()
-    ],
+    
     
     /** 
      * 缓存配置
@@ -64,16 +56,7 @@ return [
      */
     'cache' => [
         'tempDir' => sys_get_temp_dir(), // 默认使用的 sys_get_temp_dir()
-    ],
-   
-    /**
-     * 发送 http 请求驱动配置
-     *
-     * httpClientDriver：发送 http 请求驱动类
-     */
-    'request' => [
-        'httpClientDriver' => \EasySwoole\WeChat\Kernel\HttpClient\SwooleClientDriver::class
-    ],
+    ]
 ];
 ```
 
