@@ -644,7 +644,9 @@ class Banner extends CommonBase
 ```
 
 ::: warning
-  可以看到，在 `getAll` 方法中，有着 `@Param(name="page", alias="页数", optional="", integer="")` 的注释，这个是注解支持写法，可以这样写也不可以不写，当写上这个注释之后，将会约束`page` 参数必须是 `int`，具体的验证机制可查看 [`validate` 验证器 章节](/Components/validate.md)
+  注意：可以看到，在上文 `getAll` 方法中，有个特殊的 `@Param(name="page", alias="页数", optional="", integer
+  ="")` 的注释，这个是有特殊含义的，是注解支持写法，类似 `Java` 语言的注解，可以使用这种注解写法，也可以不使用，用户可自行选择。当写上这个注释之后，将会约束 `page` 参数必须是 `int
+  `，具体的验证机制可查看 [`validate` 验证器 章节](/Components/validate.md)。不写这个注释则没有约束。框架中如何使用注解请查看 [注解 章节](/HttpServer/Annotation/install.md)
 :::
 
 ::: warning
