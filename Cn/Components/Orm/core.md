@@ -79,6 +79,13 @@ $config->setStrictType(true);
 $config->setFetchMode(true);
 ```
 
+**设置超时时间**
+
+```php
+/** @var \EasySwoole\ORM\Db\Config  $config **/
+$config->setTimeout(15);
+```
+
 **设置返回结果为结果集**
 
 可以快速`all()->toArray()`
