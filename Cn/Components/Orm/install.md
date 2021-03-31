@@ -55,6 +55,7 @@ public static function initialize()
     $config->setUser('root');
     $config->setPassword('');
     $config->setHost('127.0.0.1');
+    $config->setTimeout(15); // 超时时间
 
     DbManager::getInstance()->addConnection(new Connection($config));
 
@@ -83,6 +84,7 @@ public static function initialize()
     $config->setUser('root');
     $config->setPassword('');
     $config->setHost('127.0.0.1');
+    $config->setTimeout(15); // 超时时间
     //连接池配置
     $config->setGetObjectTimeout(3.0); //设置获取连接池对象超时时间
     $config->setIntervalCheckTime(30*1000); //设置检测连接存活执行回收和创建的周期
