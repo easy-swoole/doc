@@ -24,10 +24,36 @@ $config = [
     'token' => 'dczmnau31ea9nzcnxxxxxxxxx',
     
     // 微信公众平台后台配置的 EncodingAESKey
-    'aesKey' => 'easyswoole'
+    'aesKey' => 'easyswoole',
+   
+    // 微信公众平台后台配置的 AppSecret
+    'secret' => 'your-AppSecret'
 ];
 
+// 公众号
 $officialAccount = \EasySwoole\WeChat\Factory::officialAccount($config);
 ```
 
 `$officialAccount` 在后文所有相关公众号的文档都是指 `\EasySwoole\WeChat\Factory::officialAccount` 得到的实例，下面就不在每个页面单独写了。
+
+## 重点总结
+
+所有的应用服务都通过主入口 `EasySwoole\WeChat\Factory` 类来创建：
+
+```php
+<?php
+
+use EasySwoole\WeChat\Factory;
+
+// 公众号
+$officialAccount = Factory::officialAccount($config);
+
+// 小程序
+$miniProgram = Factory::miniProgram($config);
+
+// 开放平台
+$openPlatform = Factory::openPlatform($config);
+
+// 企业微信
+$work = Factory::work($config);
+```

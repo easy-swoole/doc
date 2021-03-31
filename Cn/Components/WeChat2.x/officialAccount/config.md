@@ -24,11 +24,15 @@ $config = [
     'token' => 'dczmnau31ea9nzcnxxxxxxxxx',
 
     // 微信公众平台后台配置的 EncodingAESKey
-    'aesKey' => 'easyswoole'
+    'aesKey' => 'easyswoole',
+    
+    // 微信公众平台后台配置的 AppSecret
+    'secret' => 'AppSecret',
 
     //...
 ];
 
+// 公众号
 $officialAccount = Factory::officialAccount($config);
 ```
 
