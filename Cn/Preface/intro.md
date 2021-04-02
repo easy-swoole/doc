@@ -58,6 +58,11 @@ EasySwoole 高度封装了 Swoole Server 而依旧维持 Swoole Server 原有特
 - Atomic 限流器
 - Fast-Cache 组件
 - Policy 权限组件
+- 注解及API文档自动生成组件
+- Casbin 验证权限组件
+- 自动生成代码组件
+- OAuth 组件
+- 协程 OSS 客户端
 
 
 ::: warning 

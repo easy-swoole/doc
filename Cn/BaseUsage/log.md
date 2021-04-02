@@ -19,7 +19,7 @@ meta:
 - 设置记录日志文件时日志文件存放目录 (dir)，用户可以自己设置日志存放目录(但是一定要保证日志有写入权限)，配置值为 `路径`，默认为 `框架根目录的 Log 目录`。
 - 设置记录日志时的日志最低等级 (level)，等级配置值默认为 `\EasySwoole\Log\LoggerInterface::LOG_LEVEL_DEBUG`，等级值支持 `\EasySwoole\Log\LoggerInterface::LOG_LEVEL_DEBUG (0级)`、`\EasySwoole\Log\LoggerInterface::LOG_LEVEL_INFO (1级)`、`\EasySwoole\Log\LoggerInterface::LOG_LEVEL_NOTICE (2级)`、`\EasySwoole\Log\LoggerInterface::LOG_LEVEL_WARNING (3级)`、`\EasySwoole\Log\LoggerInterface::LOG_LEVEL_ERROR (4级)`。例如当我们在配置文件中把日志等级设置为 `\EasySwoole\Log\LoggerInterface::LOG_LEVEL_INFO (1级)` 时，就不会把我们在框架中调用打印小于这个等级的日志记录记录到日志文件中 (比如 `LOG_LEVEL_DEBUG (0级)` 就不会被记录到日志当中了，也不会显示在控制台了)。
 - 设置日志处理器 `handler` (handler)，默认使用框架内置 `handler`，用户可以自定义日志类实现 `\EasySwoole\Log\LoggerInterface` 接口，来处理记录日志。配置值为 `自定义处理类名`，默认为 `\EasySwoole\Log\Logger`。具体自定义实现日志处理器可看下文。
-- 设置控制台的日志是否开启记录到日志文件 (logConsole)。配置值为 `boolean` 值，默认为 `true`，即开启。
+- 设置记录日志到日志文件时是否在控制台打印日志 (logConsole)。配置值为 `boolean` 值，默认为 `true`，即开启。
 - 设置是否开启在控制台打印日志 (displayConsole)。配置值为 `boolean` 值，默认为 `true`，即开启。
 - 设置打印日志时忽略哪些分类的日志不进行记录 (ignoreCategory) 。配置值为 `array` 类型值，默认为 `null` (即不忽略任何分类的日志，任何分类的日志都进行在控制台显示打印并记录到文件)，配置忽略分类值支持 `debug`、`info`、`notice`、`warning`、`error` 作为配置值 `array` 中的可选值。例如：设置为 ```['debug', 'notice']``` 时，即当我们在框架中使用下面列举的使用日志的方法时，调用 `debug` 和 `notice` 方法记录日志时，不会把 `debug` 和 `notice` 分类的日志在控制台显示，也不会记录到日志文件中。
 
@@ -42,7 +42,7 @@ return [
         'level' => LoggerInterface::LOG_LEVEL_DEBUG,
         // 设置日志处理器 `handler` (handler)
         'handler' => null,
-        // 设置开启控制台日志记录到日志文件
+        // 设置开启在记录日志到日志文件时在控制台打印日志
         'logConsole' => true,
         // 设置开启在控制台显示日志
         'displayConsole'=>true,
