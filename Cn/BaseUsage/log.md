@@ -226,7 +226,7 @@ return [
         'dir' => null,
         'level' => LoggerInterface::LOG_LEVEL_DEBUG,
         // 注册日志处理器 `handler` (handler)
-        'handler' =>  \App\Log\LogHandler::class,
+        'handler' =>  new \App\Log\LogHandler(),
         'logConsole' => true,
         'displayConsole'=>true,
         'ignoreCategory' => []

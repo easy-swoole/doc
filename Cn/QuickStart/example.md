@@ -1089,64 +1089,66 @@ namespace App\HttpController\Api\User;
 use App\HttpController\Api\ApiBase;
 use App\Model\User\UserModel;
 use EasySwoole\Http\Message\Status;
+use EasySwoole\HttpAnnotation\AnnotationTag\Param;
 
-class UserBase extends ApiBase
+class Auth extends ApiBase
 {
-    protected $who;
-    // session 的 cookie 头
-    protected $sessionKey = 'userSession';
-    // 白名单
-    protected $whiteList = ['login'];
+    protected $whiteList = ['login', 'register'];
 
     /**
-     * onRequest
-     * @param null|string $action
-     * @return bool|null
+     * login
+     * @Param(name="userAccount", alias="用户名", required="", lengthMax="32")
+     * @Param(name="userPassword", alias="密码", required="", lengthMin="6",lengthMax="18")
+     * @throws \EasySwoole\ORM\Exception\Exception
      * @throws \Throwable
-     * @author yangzhenyu
-     * Time: 13:49
+     * @author Tioncico
+     * Time: 15:06
      */
-    function onRequest(?string $action): ?bool
+    public function login()
     {
-        if (parent::onRequest($action)) {
-            // 白名单判断
-            if (in_array($action, $this->whiteList)) {
-                return true;
-            }
-            // 获取登入信息
-            if (!$data = $this->getWho()) {
-                $this->writeJson(Status::CODE_UNAUTHORIZED, '', '登入已过期');
-                return false;
-            }
-            // 刷新 cookie 存活
-            $this->response()->setCookie($this->sessionKey, $data->userSession, time() + 3600, '/');
+        $param = $this->request()->getRequestParam();
+        $model = new UserModel();
+        $model->userAccount = $param['userAccount'];
+        $model->userPassword = md5($param['userPassword']);
 
-            return true;
+        if ($userInfo = $model->login()) {
+            $sessionHash = md5(time() . $userInfo->userId);
+            $userInfo->update([
+                'lastLoginIp' => $this->clientRealIP(),
+                'lastLoginTime' => time(),
+                'userSession' => $sessionHash
+            ]);
+            $rs = $userInfo->toArray();
+            unset($rs['userPassword']);
+            $rs['userSession'] = $sessionHash;
+            $this->response()->setCookie('userSession', $sessionHash, time() + 3600, '/');
+            $this->writeJson(Status::CODE_OK, $rs);
+        } else {
+            $this->writeJson(Status::CODE_BAD_REQUEST, '', '密码错误');
         }
-        return false;
     }
 
-    /**
-     * getWho
-     * @author yangzhenyu
-     * Time: 13:51
-     */
-    function getWho(): ?UserModel
+    public function logout()
     {
-        if ($this->who instanceof UserModel) {
-            return $this->who;
-        }
-        $sessionKey = $this->request()->getRequestParam($this->sessionKey);
+        $sessionKey = $this->request()->getRequestParam('userSession');
         if (empty($sessionKey)) {
-            $sessionKey = $this->request()->getCookieParams($this->sessionKey);
+            $sessionKey = $this->request()->getCookieParams('userSession');
         }
         if (empty($sessionKey)) {
-            return null;
+            $this->writeJson(Status::CODE_UNAUTHORIZED, '', '尚未登入');
+            return false;
         }
-        $userModel = new UserModel();
-        $userModel->userSession = $sessionKey;
-        $this->who = $userModel->getOneBySession();
-        return $this->who;
+        $result = $this->getWho()->logout();
+        if ($result) {
+            $this->writeJson(Status::CODE_OK, '', "登出成功");
+        } else {
+            $this->writeJson(Status::CODE_UNAUTHORIZED, '', 'fail');
+        }
+    }
+
+    public function getInfo()
+    {
+        $this->writeJson(200, $this->getWho(), 'success');
     }
 }
 ```
