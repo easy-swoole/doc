@@ -2,6 +2,68 @@
   - [项目介绍](Preface/intro.md)
   - [交流群](Preface/contact.md)
   - [捐赠](Preface/donate.md)
+- PHP基础知识
+  - [新手必看](NoobCourse/introduction.md)
+  - 运行模式
+    - [运行模式](NoobCourse/RunMode/introduction.md)
+    - [php-fpm](NoobCourse/RunMode/php-fpm.md)
+    - php-cli
+      - [基础介绍](NoobCourse/RunMode/php-cli/introduction.md)
+  - 网络协议
+    - [网络协议](NoobCourse/NetworkrPotocol/introduction.md)
+    - [ip](NoobCourse/NetworkrPotocol/ip.md)
+    - tcp
+        - [tcp](NoobCourse/NetworkrPotocol/Tcp/tcp.md)
+        - [http](NoobCourse/NetworkrPotocol/Tcp/http.md)
+        - [webSocket](NoobCourse/NetworkrPotocol/Tcp/websocket.md)
+    - [udp](NoobCourse/NetworkrPotocol/udp.md)
+    - [port端口](NoobCourse/NetworkrPotocol/port.md)
+  - 会话管理
+    - [会话管理](NoobCourse/Conversation/introduction.md)
+    - [cookie](NoobCourse/Conversation/cookie.md)
+    - [session](NoobCourse/Conversation/session.md)
+    - [api/token](NoobCourse/Conversation/token.md)
+  - linux基础
+    - [linux基础](NoobCourse/Linux/introduction.md)
+    - [lnmp安装](NoobCourse/Linux/lnmp.md)
+    - [命令](NoobCourse/Linux/command.md)
+    - [进程管理](NoobCourse/Linux/process.md)
+    - [扩展安装](NoobCourse/Linux/extention.md)
+    - [端口监控](NoobCourse/Linux/port.md)
+    - [防火墙说明](NoobCourse/Linux/firewall.md)
+  - php7.0
+    - [部分新特性](NoobCourse/PHP/php7.md)
+  - php回调/闭包
+    - [回调事件](NoobCourse/PHP/callback.md)
+    - [闭包/匿名函数](NoobCourse/PHP/closures.md)
+  - php多进程
+    - [php多进程](NoobCourse/PHP/Multiprocess/introduction.md)
+    - [多进程开启](NoobCourse/PHP/Multiprocess/fork.md)
+    - [进程通信](NoobCourse/PHP/Multiprocess/processCommunication.md)
+    - [进程信号](NoobCourse/PHP/Multiprocess/processSignal.md)
+    - [僵尸进程](NoobCourse/PHP/Multiprocess/zombieProcess.md)
+    - [孤儿进程](NoobCourse/PHP/Multiprocess/orphanProcess.md)
+    - [守护进程](NoobCourse/PHP/Multiprocess/deamon.md)
+  - 同步/异步
+    - [同步/异步](NoobCourse/sync.md)
+  - 阻塞/非阻塞
+    - [阻塞/非阻塞](NoobCourse/block.md)
+  - 协程
+    - [协程](NoobCourse/coroutine.md)
+  - Swoole
+    - [初识Swoole](NoobCourse/Swoole/start.md)
+    - [运行机制](NoobCourse/Swoole/runningMode.md)
+    - [生命周期](NoobCourse/Swoole/lifecycle.md)
+  - Composer 使用
+    - [composer使用](NoobCourse/composer.md)
+  - EasySwoole
+    - [EasySwoole](NoobCourse/EasySwoole/introduction.md)
+    - [设计理念](NoobCourse/EasySwoole/designIdea.md)
+    - [组件说明](NoobCourse/EasySwoole/section.md)
+    - [运行过程](NoobCourse/EasySwoole/runSteps.md)
+    - [demo](NoobCourse/EasySwoole/demo.md)
+  - 提问的艺术
+    - [提问的艺术](NoobCourse/artOfAskingQuestions.md)
 - 更新与文档
   - [框架更新记录](Update/main.md)
   - [组件更新记录](Update/component.md)
@@ -369,67 +431,4 @@
   - [Docker](Deploy/docker.md)
   - [Nginx](Deploy/nginx.md)
   - [Supervisor](Deploy/supervisor.md)
-- PHP基础知识
-  - [新手必看](NoobCourse/introduction.md)
-  - 运行模式
-    - [运行模式](NoobCourse/RunMode/introduction.md)
-    - [php-fpm](NoobCourse/RunMode/php-fpm.md)
-    - php-cli
-      - [基础介绍](NoobCourse/RunMode/php-cli/introduction.md)
-  - 网络协议
-    - [网络协议](NoobCourse/NetworkrPotocol/introduction.md)
-    - [ip](NoobCourse/NetworkrPotocol/ip.md)
-    - tcp
-        - [tcp](NoobCourse/NetworkrPotocol/Tcp/tcp.md)
-        - [http](NoobCourse/NetworkrPotocol/Tcp/http.md)
-        - [webSocket](NoobCourse/NetworkrPotocol/Tcp/websocket.md)
-    - [udp](NoobCourse/NetworkrPotocol/udp.md)
-    - [port端口](NoobCourse/NetworkrPotocol/port.md)
-  - 会话管理
-    - [会话管理](NoobCourse/Conversation/introduction.md)
-    - [cookie](NoobCourse/Conversation/cookie.md)
-    - [session](NoobCourse/Conversation/session.md)
-    - [api/token](NoobCourse/Conversation/token.md)
-  - linux基础
-    - [linux基础](NoobCourse/Linux/introduction.md)
-    - [lnmp安装](NoobCourse/Linux/lnmp.md)
-    - [命令](NoobCourse/Linux/command.md)
-    - [进程管理](NoobCourse/Linux/process.md)
-    - [扩展安装](NoobCourse/Linux/extention.md)
-    - [端口监控](NoobCourse/Linux/port.md)
-    - [防火墙说明](NoobCourse/Linux/firewall.md)
-  - php7.0
-    - [部分新特性](NoobCourse/PHP/php7.md)
-  - php回调/闭包
-    - [回调事件](NoobCourse/PHP/callback.md)
-    - [闭包/匿名函数](NoobCourse/PHP/closures.md)
-  - php多进程
-    - [php多进程](NoobCourse/PHP/Multiprocess/introduction.md)
-    - [多进程开启](NoobCourse/PHP/Multiprocess/fork.md)
-    - [进程通信](NoobCourse/PHP/Multiprocess/processCommunication.md)
-    - [进程信号](NoobCourse/PHP/Multiprocess/processSignal.md)
-    - [僵尸进程](NoobCourse/PHP/Multiprocess/zombieProcess.md)
-    - [孤儿进程](NoobCourse/PHP/Multiprocess/orphanProcess.md)
-    - [守护进程](NoobCourse/PHP/Multiprocess/deamon.md)
-  - 同步/异步
-    - [同步/异步](NoobCourse/sync.md)
-  - 阻塞/非阻塞
-    - [阻塞/非阻塞](NoobCourse/block.md)
-  - 协程
-    - [协程](NoobCourse/coroutine.md)
-  - Swoole
-    - [初识Swoole](NoobCourse/Swoole/start.md)
-    - [运行机制](NoobCourse/Swoole/runningMode.md)
-    - [生命周期](NoobCourse/Swoole/lifecycle.md)
-    - [常见问题](.md)
-  - Composer 使用
-    - [composer使用](NoobCourse/composer.md)
-  - EasySwoole
-    - [EasySwoole](NoobCourse/EasySwoole/introduction.md)
-    - [设计理念](NoobCourse/EasySwoole/designIdea.md)
-    - [组件说明](NoobCourse/EasySwoole/section.md)
-    - [运行过程](NoobCourse/EasySwoole/runSteps.md)
-    - [demo](NoobCourse/EasySwoole/demo.md)
-  - 提问的艺术
-    - [提问的艺术](NoobCourse/artOfAskingQuestions.md)
 
