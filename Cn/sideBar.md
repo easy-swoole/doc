@@ -208,7 +208,7 @@
   - Memcached
     - [安装及使用](Components/Memcache/memcache.md)
   - FastCache
-    - [安装及使用](Components/FashCache/fastCache.md)
+    - [安装及使用](Components/FastCache/fastCache.md)
 - 消息队列
   - Queue 
     - [安装及使用](Components/Queue/queue.md)
@@ -216,7 +216,7 @@
     - [Kafka](Components/kafka.md)
     - [Nsq](Components/nsq.md)
   - FastCacheQueue
-    - [安装及使用](Components/FashCache/fastCacheQueue.md)
+    - [安装及使用](Components/FastCache/fastCacheQueue.md)
 - 微服务
   - [微服务理念](Microservices/introduction.md)
   - 服务注册
