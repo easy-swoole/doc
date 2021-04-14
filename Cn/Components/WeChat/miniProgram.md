@@ -7,7 +7,7 @@ meta:
     content: easyswoole微信小程序SDK|swoole微信小程序SDK
 ---
 
-## 微信小程序
+## 微信小程序组件 1.2.x
 
 
 ### 获取小程序对象

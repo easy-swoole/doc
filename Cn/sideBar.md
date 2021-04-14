@@ -281,6 +281,12 @@
     - [安装及使用](Components/FastCache/fastCacheQueue.md)
 - 微服务
   - [微服务理念](Microservices/introduction.md)
+  - RPC
+    - [RPC 架构]()
+    - [节点注册中心]()
+    - [服务端]()
+    - [客户端]()
+    - [跨平台调用]()
   - 服务注册
     - [Consul](Components/consul.md)
   - 服务熔断及降级
@@ -300,7 +306,7 @@
     - [跨语言](Microservices/Rpc/otherPlatform.md)
     - [服务注册中心](Microservices/Rpc/registerCenter.md)
 - 微信公众号 SDK
-  - [安装](Components/WeChat2.x/officialAccount/install.md)
+  - [安装](Components/WeChat2.x/install.md)
   - [入门](Components/WeChat2.x/officialAccount/getStart.md)
   - [快速开始](Components/WeChat2.x/officialAccount/quickStart.md)
   - [配置](Components/WeChat2.x/officialAccount/config.md)
@@ -327,6 +333,17 @@
   - [自动回复](Components/WeChat2.x/officialAccount/autoReply.md)
   - [评论数据管理](Components/WeChat2.x/officialAccount/comment.md)
   - [返佣商品](Components/WeChat2.x/officialAccount/goods.md)
+- 微信小程序 SDK
+  - [安装](Components/WeChat2.x/install.md)
+  - [入门](Components/WeChat2.x/miniProgram/getStart.md)
+- 微信开放平台 SDK
+  - [安装](Components/WeChat2.x/install.md)
+  - [入门](Components/WeChat2.x/openPlatform/getStart.md)
+  - [服务端](Components/WeChat2.x/openPlatform/server.md)
+  - [代授权](Components/WeChat2.x/openPlatform/authorizerDelegate.md)
+- 微信企业微信 SDK
+  - [安装](Components/WeChat2.x/install.md)
+  - [入门](Components/WeChat2.x/work/getStart.md)
 - 组件库
   - 基础组件
     - [单例](Components/Component/singleton.md)

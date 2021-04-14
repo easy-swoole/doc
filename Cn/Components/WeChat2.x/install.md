@@ -10,7 +10,7 @@ meta:
 
 # 微信SDK EasySwoole WeChat 2.x
 
-`EasySwoole WeChat` 是一个基于 `Swoole 4.x` 全协程支持的微信 `SDK 库`，告别同步阻塞，轻松编写高性能的微信公众号/小程序/开放平台业务接口。
+`EasySwoole WeChat` 是一个基于 `Swoole 4.x` 全协程支持的微信 `SDK 库`，告别同步阻塞，轻松编写高性能的微信公众号/小程序/开放平台/企业微信业务接口。用户如果想要使用关于微信支付业务的使用可以查看 [EasySwoole Pay 组件](/Components/Pay/wechat.md)。
 
 该组件库是仿照 `easywechat API` 实现的协程安全的 `wechat sdk` 库。
 
@@ -18,9 +18,15 @@ meta:
 
 > 注意：`WeChat` 组件目前最新版本为 `2.0.0-alpha` 测试版，`2.0.0` 正式版本暂时未发布。线上环境需要使用请先使用旧版 `1.2.x`，详细请看下文注意事项。
 
+## 旧版组件兼容说明
+
 ::: tip
-  旧版 `1.2.x` 的文档请移步查看 **`1.2.x` 微信公众号 `SDK` 文档** - [安装](/Components/WeChat/install.md) 和 [API 文档](/Components/WeChat/officialAccount.md)
+  - 微信公众号组件：旧版本 `1.2.x` 微信公众号组件的文档请移步查看 **`1.2.x` 微信公众号 `SDK` 文档** - [安装](/Components/WeChat/install.md) 和 [API 文档](/Components/WeChat/officialAccount.md)
+  - 微信小程序组件：旧版本 `1.2.x` 微信小程序组件的文档请移步查看 **`1.2.x` 微信小程序 `SDK` 文档** - [安装](/Components/WeChat/install.md) 和 [API 文档](/Components/WeChat/miniProgram.md)
+  - 开放平台组件：旧版本未做支持。
+  - 企业微信组件：旧版本未做支持。
 :::
+
 
 
 ## 说明
@@ -46,11 +52,11 @@ meta:
 
 ## 安装方法
 
-> $ composer require easyswoole/wechat "v2.0.0-alpha"
+> $ composer require easyswoole/wechat "v2.0.2-alpha"
 
 ## 仓库地址
 
-[easyswoole/wechat 2.x](https://github.com/easy-swoole/wechat)
+[easyswoole/wechat=2.x](https://github.com/easy-swoole/wechat)
 
 ## 常见问题汇总
 
