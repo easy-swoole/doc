@@ -1086,12 +1086,12 @@ class UserBase extends ApiBase
 
 namespace App\HttpController\Api\User;
 
-use App\HttpController\Api\ApiBase;
+use App\HttpController\Api\User\UserBase;
 use App\Model\User\UserModel;
 use EasySwoole\Http\Message\Status;
 use EasySwoole\HttpAnnotation\AnnotationTag\Param;
 
-class Auth extends ApiBase
+class Auth extends UserBase
 {
     protected $whiteList = ['login', 'register'];
 
