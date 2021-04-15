@@ -6,7 +6,7 @@ meta:
   - name: keywords
     content: easyswoole参数验证器|swoole参数验证器
 ---
-# EasySwoole 验证器组件
+# EasySwoole 验证器组件 1.3.x
 
 `EasySwoole` 提供了独立的 `验证器组件`，几行代码即可实现对请求参数进行验证。常用于对 `HTTP` 等请求中的请求参数的验证。
 
@@ -20,10 +20,12 @@ meta:
 - psr/http-message: ^1.0
 
 ## 安装方法
+
 框架 `3.4.x` 及以上版本自带 `validate` 组件，所以不需要单独安装。`3.4.x` 之前的版本请单独安装，安装方法如下：
-> composer require easyswoole/validate
+> composer require easyswoole/validate=1.3.x
 
 ## 仓库地址
+
 [easyswoole/validate](https://github.com/easy-swoole/validate)
 
 
@@ -476,23 +478,105 @@ $bool = $validate->validate($data);
 调用自定义验证规则验证数据
 
 #### 函数原型
+
 ```php
-function callUserRule(\EasySwoole\Validate\ValidateInterface $rule, $msg = null, ...$args)
+function callUserRule(\EasySwoole\Validate\Functions\AbstractValidateFunction $rule, $msg = null, ...$args)
 ```
-- \EasySwoole\Validate\ValidateInterface $rule 实现了 `\EasySwoole\Validate\ValidateInterface` 接口的自定义验证规则类
+- \EasySwoole\Validate\Functions\AbstractValidateFunction $rule 为继承了 `\EasySwoole\Validate\Functions\AbstractValidateFunction` 类的自定义验证规则类
 - string $msg  验证错误时提示消息
 - mixed $args  可选参数
 
 #### 使用示例
-先定义一个自定义验证规则类 `CustomValidator` 并且实现 `\EasySwoole\Validate\ValidateInterface` 接口，具体实现代码如下：
+
+先定义一个自定义验证规则类 `CustomValidator` 并且继承了 `\EasySwoole\Validate\ValidateInterface` 接口，具体实现代码如下：
+
 ```php
 <?php
 /**
  * Created by PhpStorm.
- * User: easyswoole
- * Date: 2021/1/13
- * Time: 23:48
+ * User: XueSi
+ * Email: <1592328848@qq.com>
+ * Date: 2021/4/15
+ * Time: 22:43
  */
+
+namespace App\Utility;
+
+
+use EasySwoole\Validate\Functions\AbstractValidateFunction;
+use EasySwoole\Validate\Validate;
+
+class CustomValidator extends AbstractValidateFunction
+{
+    /**
+     * 返回当前校验规则的名字
+     */
+    public function name(): string
+    {
+        return 'mobile';
+    }
+
+    /**
+     * 校验失败返回false，或者抛出异常，否则返回true
+     * @param $itemData
+     * @param $arg
+     * @param $column
+     * @param Validate $validate
+     * @return bool
+     */
+    public function validate($itemData, $arg, $column, Validate $validate): bool
+    {
+        $regular = '/^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(17[0,1,3,5,6,7,8]))\\d{8}$/';
+        if (!preg_match($regular, $itemData)) {
+            return false;
+        }
+
+        return true;
+    }
+}
+```
+
+调用自定义验证规则类验证数据，具体实现如下：
+```php
+<?php
+require_once __DIR__ . "/vendor/autoload.php";
+
+$validate = new \EasySwoole\Validate\Validate();
+$data = [
+    'mobile' => '13312345678_',
+];
+$validate->addFunction(new \App\Utility\CustomValidator());
+$validate->addColumn('mobile')->callUserRule(new \App\Utility\CustomValidator(), '手机号未通过验证');
+$bool = $validate->validate($data);
+if ($bool) {
+    var_dump("验证通过");
+} else {
+    // 获取验证错误信息
+    $errorMsg = $validate->getError()->__toString();
+    var_dump($errorMsg);
+}
+/**
+ * 输出结果：
+ * string(24) "手机号未通过验证"
+ */
+```
+
+> 该方法在 `Validate 2.0.0` 版本之前的组件函数原型为：
+
+```php
+function callUserRule(\EasySwoole\Validate\ValidateInterface $rule, $msg = null, ...$args)
+```
+- \EasySwoole\Validate\ValidateInterface $rule 为实现了 `\EasySwoole\Validate\ValidateInterface` 接口的自定义验证规则类
+- string $msg  验证错误时提示消息
+- mixed $args  可选参数
+
+
+使用示例如下：
+
+先定义一个自定义验证规则类 `CustomValidator` 并且实现 `\EasySwoole\Validate\ValidateInterface` 接口，具体实现代码如下：
+
+```php
+<?php
 namespace App\Utility;
 use EasySwoole\Spl\SplArray;
 use EasySwoole\Validate\ValidateInterface;
