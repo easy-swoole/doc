@@ -285,7 +285,7 @@ $routeCollector->addRoute('GET', '/users/to[/{name}]', 'handler');
 从 `$this->request()->getQueryParams()` 即在 `get` 数据中获取 路由匹配的参数，需进行如下设置：
 
 ```php
-$this->parseParams(\EasySwoole\Http\Tests\ControllerWithRouter\Router::PARSE_PARAMS_IN_GET);
+$this->parseParams(\EasySwoole\Http\AbstractInterface\AbstractRouter::PARSE_PARAMS_IN_GET);
 ```
 
 #### POST获取路由参数
@@ -293,7 +293,7 @@ $this->parseParams(\EasySwoole\Http\Tests\ControllerWithRouter\Router::PARSE_PAR
 从 `$this->request()->getParsedBody()` 中获取路由匹配的参数，需进行如下设置：
 
 ```php
-$this->parseParams(\EasySwoole\Http\Tests\ControllerWithRouter\Router::PARSE_PARAMS_IN_POST);
+$this->parseParams(\EasySwoole\Http\AbstractInterface\AbstractRouter::PARSE_PARAMS_IN_POST);
 ```
 
 #### Context获取路由参数
@@ -301,7 +301,7 @@ $this->parseParams(\EasySwoole\Http\Tests\ControllerWithRouter\Router::PARSE_PAR
 从 `\EasySwoole\Component\Context\ContextManager::getInstance()->get(Router::PARSE_PARAMS_CONTEXT_KEY)` 中获取 路由匹配的参数，需进行如下设置：
 
 ```php
-$this->parseParams(\EasySwoole\Http\Tests\ControllerWithRouter\Router::PARSE_PARAMS_IN_CONTEXT);
+$this->parseParams(\EasySwoole\Http\AbstractInterface\AbstractRouter::PARSE_PARAMS_IN_CONTEXT);
 ```
 
 此配置项是`easyswoole/http 2.x`版本默认配置.
@@ -311,7 +311,7 @@ $this->parseParams(\EasySwoole\Http\Tests\ControllerWithRouter\Router::PARSE_PAR
 不获取路由匹配的参数，需进行如下设置:
 
 ```php
-$this->parseParams(\EasySwoole\Http\Tests\ControllerWithRouter\Router::PARSE_PARAMS_NONE);
+$this->parseParams(\EasySwoole\Http\AbstractInterface\AbstractRouter::PARSE_PARAMS_NONE);
 ```
 
 > 注意：以上 4 种设置，用户只能设置 1 种。`Router` 默认使用的设置是第 3 种。
