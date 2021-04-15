@@ -6,7 +6,7 @@ meta:
   - name: keywords
     content: easyswoole参数验证器|swoole参数验证器
 ---
-# EasySwoole 验证器组件
+# EasySwoole 验证器组件 1.3.x
 
 `EasySwoole` 提供了独立的 `验证器组件`，几行代码即可实现对请求参数进行验证。常用于对 `HTTP` 等请求中的请求参数的验证。
 
@@ -20,10 +20,12 @@ meta:
 - psr/http-message: ^1.0
 
 ## 安装方法
+
 框架 `3.4.x` 及以上版本自带 `validate` 组件，所以不需要单独安装。`3.4.x` 之前的版本请单独安装，安装方法如下：
-> composer require easyswoole/validate
+> composer require easyswoole/validate=1.3.x
 
 ## 仓库地址
+
 [easyswoole/validate](https://github.com/easy-swoole/validate)
 
 

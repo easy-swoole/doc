@@ -159,7 +159,7 @@
   - [Session](HttpServer/session.md)
   - [视图](Components/Component/template.md)
   - [验证码](Components/verifyCode.md)
-  - [验证器](Components/validate.md)
+  - [验证器](Components/Validate/validate.md)
   - [文件上传](HttpServer/uploadFile.md)
   - [全局变量](HttpServer/global.md)
   - [i18n多语言](Components/i18n.md)
