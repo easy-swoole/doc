@@ -20,7 +20,7 @@ Kafka是一种高吞吐量的分布式发布订阅消息系统，有如下特性
 - php: >=7.1.0
 - ext-swoole: ^4.4.5
 - easyswoole/component: ^2.0
- -easyswoole/spl: ^1.1
+- easyswoole/spl: ^1.1
 
 ## 安装方法
 
