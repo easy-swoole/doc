@@ -232,3 +232,54 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 ```
 
 > 方法2：使用 `Nginx` 做前端代理，由 `Nginx` 处理 `100-Continue`(针对无法关闭 `100-continue`时)
+
+## http 服务中公共函数如何引入
+很多开发小伙伴在开发过程中可能遇到疑惑，在 `EasySwoole` 怎么像 `ThinkPHP` 框架那样引入自定义的公共函数，接下来简单说明下引入方法，这边推荐借助 `composer` 的自动加载机制 （`Files`）实现。
+
+修改项目根目录的 `composer.json` 文件的 `autoload.files` 选项，示例如下：
+
+```json
+{
+    // ... 这里省略
+    "autoload": {
+        // ... 这里省略
+        "files": ["App/Common/functions.php"]
+    }
+}
+```
+
+然后新建文件 `App\Common\functions.php`，在 `functions.php` 中编写自己的自定义函数，再在项目根目录执行 `composer dumpautoload` 完成自动加载，就可以在框架的任意位置进行调用函数了。
+
+示例如下：
+
+```php
+<?php
+// functions.php
+if (!function_exists('helloEasySwoole')) {
+    function helloEasySwoole()
+    {
+        echo 'Hello EasySwoole!';
+    }
+}
+
+// ... 更多自定义函数
+```
+
+调用示例：
+
+```php
+<?php
+namespace App\HttpController;
+
+use EasySwoole\Http\AbstractInterface\Controller;
+
+class Index extends Controller
+{
+    function index()
+    {
+        \helloEasySwoole();
+    }
+}
+```
+
+> 自定义函数都可以放在这个文件中。
