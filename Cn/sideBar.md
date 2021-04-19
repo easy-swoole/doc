@@ -419,6 +419,8 @@
     - [使用](Components/CodeEncrypt/usage.md)
     - [代码实现](Components/CodeEncrypt/achieve.md)
     - [注意事项](Components/CodeEncrypt/caution.md)
+  - 云打印机 Printer 组件
+    - [安装](Components/printer.md)
 - 常见问题
   - [如何学习Swoole](Other/learnSwoole.md)
   - [队列消费/自定义进程问题](/Other/process.md)
