@@ -63,6 +63,7 @@ EasySwoole 高度封装了 Swoole Server 而依旧维持 Swoole Server 原有特
 - 自动生成代码组件
 - OAuth 组件
 - 协程 OSS 客户端
+- Printer 云打印机 SDK
 
 
 ::: warning 
