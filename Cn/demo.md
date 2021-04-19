@@ -19,7 +19,7 @@ meta:
 
 基于 `EasySwoole` 框架实现的后台系统，内部使用 `Policy` 组件、`FastCache` 组件、`mysqli` 连接池组件等。用于：API 开发过程学习、组件使用学习、项目后台。 
 
-[admin 后台模板地址](https://github.com/xuanyanwow/easyswoole_admin)
+[admin 后台模板地址](https://github.com/easyswoole-panel/easyswoole_panel)
 
 ### EasySwoole-Http-Monitor
 

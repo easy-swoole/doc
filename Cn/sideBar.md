@@ -2,6 +2,68 @@
   - [项目介绍](Preface/intro.md)
   - [交流群](Preface/contact.md)
   - [捐赠](Preface/donate.md)
+- PHP基础知识
+  - [新手必看](NoobCourse/introduction.md)
+  - 运行模式
+    - [运行模式](NoobCourse/RunMode/introduction.md)
+    - [php-fpm](NoobCourse/RunMode/php-fpm.md)
+    - php-cli
+      - [基础介绍](NoobCourse/RunMode/php-cli/introduction.md)
+  - 网络协议
+    - [网络协议](NoobCourse/NetworkrPotocol/introduction.md)
+    - [ip](NoobCourse/NetworkrPotocol/ip.md)
+    - tcp
+        - [tcp](NoobCourse/NetworkrPotocol/Tcp/tcp.md)
+        - [http](NoobCourse/NetworkrPotocol/Tcp/http.md)
+        - [webSocket](NoobCourse/NetworkrPotocol/Tcp/websocket.md)
+    - [udp](NoobCourse/NetworkrPotocol/udp.md)
+    - [port端口](NoobCourse/NetworkrPotocol/port.md)
+  - 会话管理
+    - [会话管理](NoobCourse/Conversation/introduction.md)
+    - [cookie](NoobCourse/Conversation/cookie.md)
+    - [session](NoobCourse/Conversation/session.md)
+    - [api/token](NoobCourse/Conversation/token.md)
+  - linux基础
+    - [linux基础](NoobCourse/Linux/introduction.md)
+    - [lnmp安装](NoobCourse/Linux/lnmp.md)
+    - [命令](NoobCourse/Linux/command.md)
+    - [进程管理](NoobCourse/Linux/process.md)
+    - [扩展安装](NoobCourse/Linux/extention.md)
+    - [端口监控](NoobCourse/Linux/port.md)
+    - [防火墙说明](NoobCourse/Linux/firewall.md)
+  - php7.0
+    - [部分新特性](NoobCourse/PHP/php7.md)
+  - php回调/闭包
+    - [回调事件](NoobCourse/PHP/callback.md)
+    - [闭包/匿名函数](NoobCourse/PHP/closures.md)
+  - php多进程
+    - [php多进程](NoobCourse/PHP/Multiprocess/introduction.md)
+    - [多进程开启](NoobCourse/PHP/Multiprocess/fork.md)
+    - [进程通信](NoobCourse/PHP/Multiprocess/processCommunication.md)
+    - [进程信号](NoobCourse/PHP/Multiprocess/processSignal.md)
+    - [僵尸进程](NoobCourse/PHP/Multiprocess/zombieProcess.md)
+    - [孤儿进程](NoobCourse/PHP/Multiprocess/orphanProcess.md)
+    - [守护进程](NoobCourse/PHP/Multiprocess/deamon.md)
+  - 同步/异步
+    - [同步/异步](NoobCourse/sync.md)
+  - 阻塞/非阻塞
+    - [阻塞/非阻塞](NoobCourse/block.md)
+  - 协程
+    - [协程](NoobCourse/coroutine.md)
+  - Swoole
+    - [初识Swoole](NoobCourse/Swoole/start.md)
+    - [运行机制](NoobCourse/Swoole/runningMode.md)
+    - [生命周期](NoobCourse/Swoole/lifecycle.md)
+  - Composer 使用
+    - [composer使用](NoobCourse/composer.md)
+  - EasySwoole
+    - [EasySwoole](NoobCourse/EasySwoole/introduction.md)
+    - [设计理念](NoobCourse/EasySwoole/designIdea.md)
+    - [组件说明](NoobCourse/EasySwoole/section.md)
+    - [运行过程](NoobCourse/EasySwoole/runSteps.md)
+    - [demo](NoobCourse/EasySwoole/demo.md)
+  - 提问的艺术
+    - [提问的艺术](NoobCourse/artOfAskingQuestions.md)
 - 更新与文档
   - [框架更新记录](Update/main.md)
   - [组件更新记录](Update/component.md)
@@ -97,7 +159,7 @@
   - [Session](HttpServer/session.md)
   - [视图](Components/Component/template.md)
   - [验证码](Components/verifyCode.md)
-  - [验证器](Components/validate.md)
+  - [验证器](Components/Validate/validate.md)
   - [文件上传](HttpServer/uploadFile.md)
   - [全局变量](HttpServer/global.md)
   - [i18n多语言](Components/i18n.md)
@@ -208,7 +270,7 @@
   - Memcached
     - [安装及使用](Components/Memcache/memcache.md)
   - FastCache
-    - [安装及使用](Components/FashCache/fastCache.md)
+    - [安装及使用](Components/FastCache/fastCache.md)
 - 消息队列
   - Queue 
     - [安装及使用](Components/Queue/queue.md)
@@ -216,7 +278,7 @@
     - [Kafka](Components/kafka.md)
     - [Nsq](Components/nsq.md)
   - FastCacheQueue
-    - [安装及使用](Components/FashCache/fastCacheQueue.md)
+    - [安装及使用](Components/FastCache/fastCacheQueue.md)
 - 微服务
   - [微服务理念](Microservices/introduction.md)
   - 服务注册
@@ -237,6 +299,45 @@
     - [客户端](Microservices/Rpc/client.md)
     - [跨语言](Microservices/Rpc/otherPlatform.md)
     - [服务注册中心](Microservices/Rpc/registerCenter.md)
+- 微信公众号 SDK
+  - [安装](Components/WeChat2.x/install.md)
+  - [入门](Components/WeChat2.x/officialAccount/getStart.md)
+  - [快速开始](Components/WeChat2.x/officialAccount/quickStart.md)
+  - [配置](Components/WeChat2.x/officialAccount/config.md)
+  - [基础接口](Components/WeChat2.x/officialAccount/base.md)
+  - [服务端](Components/WeChat2.x/officialAccount/server.md)
+  - [消息](Components/WeChat2.x/officialAccount/messages.md)
+  - [多客服消息转发](Components/WeChat2.x/officialAccount/messageTransfer.md)
+  - [消息群发](Components/WeChat2.x/officialAccount/broadcasting.md)
+  - [模板消息](Components/WeChat2.x/officialAccount/templateMessage.md)
+  - [用户](Components/WeChat2.x/officialAccount/user.md)
+  - [用户标签](Components/WeChat2.x/officialAccount/userTag.md)
+  - [网页授权](Components/WeChat2.x/officialAccount/oauth.md)
+  - [JSSDK](Components/WeChat2.x/officialAccount/jssdk.md)
+  - [临时素材](Components/WeChat2.x/officialAccount/media.md)
+  - [二维码](Components/WeChat2.x/officialAccount/qrcode.md)
+  - [素材管理](Components/WeChat2.x/officialAccount/material.md)
+  - [菜单](Components/WeChat2.x/officialAccount/menu.md)
+  - [卡券](Components/WeChat2.x/officialAccount/card.md)
+  - [门店](Components/WeChat2.x/officialAccount/poi.md)
+  - [客服](Components/WeChat2.x/officialAccount/customerService.md)
+  - [摇一摇周边](Components/WeChat2.x/officialAccount/shakeAround.md)
+  - [数据统计与分析](Components/WeChat2.x/officialAccount/dataCube.md)
+  - [语义理解](Components/WeChat2.x/officialAccount/semantic.md)
+  - [自动回复](Components/WeChat2.x/officialAccount/autoReply.md)
+  - [评论数据管理](Components/WeChat2.x/officialAccount/comment.md)
+  - [返佣商品](Components/WeChat2.x/officialAccount/goods.md)
+- 微信小程序 SDK
+  - [安装](Components/WeChat2.x/install.md)
+  - [入门](Components/WeChat2.x/miniProgram/getStart.md)
+- 微信开放平台 SDK
+  - [安装](Components/WeChat2.x/install.md)
+  - [入门](Components/WeChat2.x/openPlatform/getStart.md)
+  - [服务端](Components/WeChat2.x/openPlatform/server.md)
+  - [代授权](Components/WeChat2.x/openPlatform/authorizerDelegate.md)
+- 微信企业微信 SDK
+  - [安装](Components/WeChat2.x/install.md)
+  - [入门](Components/WeChat2.x/work/getStart.md)
 - 组件库
   - 基础组件
     - [单例](Components/Component/singleton.md)
@@ -304,11 +405,10 @@
     - [使用](Components/codeGeneration_2.x.md)
   - O-Auth
     - [使用](Components/oauth.md)
-  - OSS协程客户端
+  - OSS 协程客户端
     - [使用](Components/oss.md)
-  - 微信公众号及小程序
+  - 微信小程序 SDK
     - [安装](Components/WeChat/install.md)
-    - [公众号](Components/WeChat/officialAccount.md)
     - [小程序](Components/WeChat/miniProgram.md)
   - 第三方支付组件
     - [安装](Components/Pay/install.md)
@@ -319,6 +419,8 @@
     - [使用](Components/CodeEncrypt/usage.md)
     - [代码实现](Components/CodeEncrypt/achieve.md)
     - [注意事项](Components/CodeEncrypt/caution.md)
+  - 云打印机 Printer 组件
+    - [安装](Components/printer.md)
 - 常见问题
   - [如何学习Swoole](Other/learnSwoole.md)
   - [队列消费/自定义进程问题](/Other/process.md)
@@ -342,67 +444,4 @@
   - [Docker](Deploy/docker.md)
   - [Nginx](Deploy/nginx.md)
   - [Supervisor](Deploy/supervisor.md)
-- PHP基础知识
-  - [新手必看](NoobCourse/introduction.md)
-  - 运行模式
-    - [运行模式](NoobCourse/RunMode/introduction.md)
-    - [php-fpm](NoobCourse/RunMode/php-fpm.md)
-    - php-cli
-      - [基础介绍](NoobCourse/RunMode/php-cli/introduction.md)
-  - 网络协议
-    - [网络协议](NoobCourse/NetworkrPotocol/introduction.md)
-    - [ip](NoobCourse/NetworkrPotocol/ip.md)
-    - tcp
-        - [tcp](NoobCourse/NetworkrPotocol/Tcp/tcp.md)
-        - [http](NoobCourse/NetworkrPotocol/Tcp/http.md)
-        - [webSocket](NoobCourse/NetworkrPotocol/Tcp/websocket.md)
-    - [udp](NoobCourse/NetworkrPotocol/udp.md)
-    - [port端口](NoobCourse/NetworkrPotocol/port.md)
-  - 会话管理
-    - [会话管理](NoobCourse/Conversation/introduction.md)
-    - [cookie](NoobCourse/Conversation/cookie.md)
-    - [session](NoobCourse/Conversation/session.md)
-    - [api/token](NoobCourse/Conversation/token.md)
-  - linux基础
-    - [linux基础](NoobCourse/Linux/introduction.md)
-    - [lnmp安装](NoobCourse/Linux/lnmp.md)
-    - [命令](NoobCourse/Linux/command.md)
-    - [进程管理](NoobCourse/Linux/process.md)
-    - [扩展安装](NoobCourse/Linux/extention.md)
-    - [端口监控](NoobCourse/Linux/port.md)
-    - [防火墙说明](NoobCourse/Linux/firewall.md)
-  - php7.0
-    - [部分新特性](NoobCourse/PHP/php7.md)
-  - php回调/闭包
-    - [回调事件](NoobCourse/PHP/callback.md)
-    - [闭包/匿名函数](NoobCourse/PHP/closures.md)
-  - php多进程
-    - [php多进程](NoobCourse/PHP/Multiprocess/introduction.md)
-    - [多进程开启](NoobCourse/PHP/Multiprocess/fork.md)
-    - [进程通信](NoobCourse/PHP/Multiprocess/processCommunication.md)
-    - [进程信号](NoobCourse/PHP/Multiprocess/processSignal.md)
-    - [僵尸进程](NoobCourse/PHP/Multiprocess/zombieProcess.md)
-    - [孤儿进程](NoobCourse/PHP/Multiprocess/orphanProcess.md)
-    - [守护进程](NoobCourse/PHP/Multiprocess/deamon.md)
-  - 同步/异步
-    - [同步/异步](NoobCourse/sync.md)
-  - 阻塞/非阻塞
-    - [阻塞/非阻塞](NoobCourse/block.md)
-  - 协程
-    - [协程](NoobCourse/coroutine.md)
-  - Swoole
-    - [初识Swoole](NoobCourse/Swoole/start.md)
-    - [运行机制](NoobCourse/Swoole/runningMode.md)
-    - [生命周期](NoobCourse/Swoole/lifecycle.md)
-    - [常见问题](.md)
-  - Composer 使用
-    - [composer使用](NoobCourse/composer.md)
-  - EasySwoole
-    - [EasySwoole](NoobCourse/EasySwoole/introduction.md)
-    - [设计理念](NoobCourse/EasySwoole/designIdea.md)
-    - [组件说明](NoobCourse/EasySwoole/section.md)
-    - [运行过程](NoobCourse/EasySwoole/runSteps.md)
-    - [demo](NoobCourse/EasySwoole/demo.md)
-  - 提问的艺术
-    - [提问的艺术](NoobCourse/artOfAskingQuestions.md)
 

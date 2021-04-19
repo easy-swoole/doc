@@ -9,6 +9,8 @@ meta:
 
 # Socket
 
+关于 `Socket` 控制器使用的具体示例，请查看 [demo](https://github.com/gaobinzhan/EasySwooleSocketDemo)
+
 ## 安装
 
 > composer require easyswoole/socket
@@ -103,8 +105,6 @@ $server->start();
 ```
 
 ## 框架内使用
-
-具体[demo](https://github.com/gaobinzhan/EasySwooleSocketDemo)
 
 ### Tcp
 

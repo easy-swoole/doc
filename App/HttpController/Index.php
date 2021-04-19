@@ -19,7 +19,7 @@ class Index extends Controller
     {
         $host = $this->request()->getUri()->getHost();
         switch ($host){
-            case 'swoole-doc.easyswoole.com':{
+            case 'swoole.easyswoole.com':{
                 $doc = 'SWOOLE_DOC';
                 break;
             }

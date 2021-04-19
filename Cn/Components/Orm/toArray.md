@@ -60,20 +60,12 @@ $hidden = $model->hidden('user_list')->toArray(false, false); // 返回的数组
 
 ```
 
-## toArray数据集
-
-如果设置了[returnCollection](/Components/Orm/core.html)为`true`，无需进行`foreach`。可直接：
-
-```php
-\EasySwoole\ORM\Tests\models\TestUserModel::create()->all()->toArray();
-```
-
 ### 追加
 
 追加非模型字段的属性，必须设置获取器。
 
 ```php
-\EasySwoole\ORM\Tests\models\TestUserModel::create()->all()->append(['a' => 1])->toArray();
+\EasySwoole\ORM\Tests\models\TestUserListModel::create()->all()->append(['append_one'])->toArray();
 ```
 
 ### 显示
@@ -91,3 +83,37 @@ $hidden = $model->hidden('user_list')->toArray(false, false); // 返回的数组
 ```php
 \EasySwoole\ORM\Tests\models\TestUserModel::create()->all()->hidden(['password'])->toArray();
 ``` 
+
+
+## 注意事项
+
+模型层`all`方法,默认是不返回`Collection`的,需要通过`foreach`进行:
+
+```php
+$results = \EasySwoole\ORM\Tests\models\TestUserModel::create()->all();
+/** @var \EasySwoole\ORM\AbstractModel $result */
+foreach($results as $result) {
+    $result->toArray();
+}
+
+```
+
+可以通过配置项[returnCollection](/Components/Orm/core.html)进行配置,即可快速调用：
+
+```php
+\EasySwoole\ORM\Tests\models\TestUserModel::create()->all()->toArray();
+```
+
+> get方法不受此配置项影响。
+
+如果不想修改此配置项，兼容以前代码可以通过以下代码快速实现`toArray`.
+
+```php
+$ret = \EasySwoole\ORM\Tests\models\TestUserModel::create()->all();
+if (!$ret instanceof \EasySwoole\ORM\Collection\Collection) {
+    $ret = new \EasySwoole\ORM\Collection\Collection($ret);
+}
+$ret->toArray();
+```
+
+> 以上代码自己去做封装.

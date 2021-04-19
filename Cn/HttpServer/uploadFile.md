@@ -34,8 +34,6 @@ class Index extends Controller
         // 返回的是一个 \EasySwoole\Http\Message\UploadFile 的对象
         /** @var \EasySwoole\Http\Message\UploadFile $file */
         $file = $request->getUploadedFile('file');
-        
-        $file->
 
         // 获取所有上传的文件
         // 返回的是一个包含多个 \EasySwoole\Http\Message\UploadFile 对象的对象数组

@@ -115,12 +115,12 @@ return [
 执行以下命令用于实现数据库 ORM 库的引入。
 
 ```php
-composer require easyswoole/orm=1.4.33
+composer require easyswoole/orm=1.4.x
 ```
 
 ### 注册数据库连接池
 
-编辑 `Test` 项目根目录下的 `EasySwooleEvent.php` 文件，在 `mainServerCreate` 事件函数中进行 `ORM` 的连接池的注册，内容如下：
+编辑 `Test` 项目根目录下的 `EasySwooleEvent.php` 文件，在 `initialize` 或 `mainServerCreate` 事件函数中进行 `ORM` 的连接池的注册，内容如下：
 
 ```php
 <?php
@@ -147,12 +147,17 @@ class EasySwooleEvent implements Event
 
     public static function mainServerCreate(EventRegister $register)
     {
-
+        // 或者 在此函数中注册 和上面等价
+        ###### 注册 mysql orm 连接池 ######
+        // $config = new \EasySwoole\ORM\Db\Config(Config::getInstance()->getConf('MYSQL'));
+        // 【可选操作】我们已经在 dev.php 中进行了配置
+        # $config->setMaxObjectNum(20); // 配置连接池最大数量
+        // DbManager::getInstance()->addConnection(new Connection($config));
     }
 }
 ```
 
-::: warnging 
+::: warning 
   在 `initialize` 事件中注册数据库连接池，使用这个 `$config` 可同时配置连接池大小等。
   具体查看 [ORM 组件章节](/Components/Orm/install.md) 的使用。
 :::
@@ -639,7 +644,9 @@ class Banner extends CommonBase
 ```
 
 ::: warning
-  可以看到，在 `getAll` 方法中，有着 `@Param(name="page", alias="页数", optional="", integer="")` 的注释，这个是注解支持写法，可以这样写也不可以不写，当写上这个注释之后，将会约束`page` 参数必须是 `int`，具体的验证机制可查看 [`validate` 验证器 章节](/Components/validate.md)
+  注意：可以看到，在上文 `getAll` 方法中，有个特殊的 `@Param(name="page", alias="页数", optional="", integer
+  ="")` 的注释，这个是有特殊含义的，是注解支持写法，类似 `Java` 语言的注解，可以使用这种注解写法，也可以不使用，用户可自行选择。当写上这个注释之后，将会约束 `page` 参数必须是 `int
+  `，具体的验证机制可查看 [`validate` 验证器 章节](/Components/validate.md)。不写这个注释则没有约束。框架中如何使用注解请查看 [注解 章节](/HttpServer/Annotation/install.md)
 :::
 
 ::: warning
@@ -976,7 +983,7 @@ class User extends AdminBase
 }
 ```
 
-::: warnging
+::: warning
   后台管理员登录之后，可通过此文件的接口，去进行会员的增删改查操作 (即 CURD)。
 :::
 
@@ -1077,64 +1084,55 @@ class UserBase extends ApiBase
  * Time: 5:39 PM
  */
 
-namespace App\HttpController\Api\Admin;
+namespace App\HttpController\Api\User;
 
-use App\Model\Admin\AdminModel;
+use App\HttpController\Api\User\UserBase;
+use App\Model\User\UserModel;
 use EasySwoole\Http\Message\Status;
 use EasySwoole\HttpAnnotation\AnnotationTag\Param;
 
-class Auth extends AdminBase
+class Auth extends UserBase
 {
-    protected $whiteList = ['login'];
+    protected $whiteList = ['login', 'register'];
 
     /**
      * login
-     * 登陆,参数验证注解写法
-     * @\EasySwoole\HttpAnnotation\AnnotationTag\Param(name="account", alias="帐号", required="", lengthMax="20")
-     * @Param(name="password", alias="密码", required="", lengthMin="6", lengthMax="16")
+     * @Param(name="userAccount", alias="用户名", required="", lengthMax="32")
+     * @Param(name="userPassword", alias="密码", required="", lengthMin="6",lengthMax="18")
      * @throws \EasySwoole\ORM\Exception\Exception
      * @throws \Throwable
      * @author Tioncico
-     * Time: 10:18
+     * Time: 15:06
      */
     public function login()
     {
         $param = $this->request()->getRequestParam();
-        $model = new AdminModel();
-        $model->adminAccount = $param['account'];
-        $model->adminPassword = md5($param['password']);
+        $model = new UserModel();
+        $model->userAccount = $param['userAccount'];
+        $model->userPassword = md5($param['userPassword']);
 
-        if ($user = $model->login()) {
-            $sessionHash = md5(time() . $user->adminId);
-            $user->update([
-                'adminLastLoginTime' => time(),
-                'adminLastLoginIp' => $this->clientRealIP(),
-                'adminSession' => $sessionHash
+        if ($userInfo = $model->login()) {
+            $sessionHash = md5(time() . $userInfo->userId);
+            $userInfo->update([
+                'lastLoginIp' => $this->clientRealIP(),
+                'lastLoginTime' => time(),
+                'userSession' => $sessionHash
             ]);
-
-            $rs = $user->toArray();
-            unset($rs['adminPassword']);
-            $rs['adminSession'] = $sessionHash;
-            $this->response()->setCookie('adminSession', $sessionHash, time() + 3600, '/');
+            $rs = $userInfo->toArray();
+            unset($rs['userPassword']);
+            $rs['userSession'] = $sessionHash;
+            $this->response()->setCookie('userSession', $sessionHash, time() + 3600, '/');
             $this->writeJson(Status::CODE_OK, $rs);
         } else {
             $this->writeJson(Status::CODE_BAD_REQUEST, '', '密码错误');
         }
     }
 
-    /**
-     * logout
-     * 退出登录,参数注解写法
-     * @Param(name="adminSession", from={COOKIE}, required="")
-     * @return bool
-     * @author Tioncico
-     * Time: 10:23
-     */
     public function logout()
     {
-        $sessionKey = $this->request()->getRequestParam($this->sessionKey);
+        $sessionKey = $this->request()->getRequestParam('userSession');
         if (empty($sessionKey)) {
-            $sessionKey = $this->request()->getCookieParams('adminSession');
+            $sessionKey = $this->request()->getCookieParams('userSession');
         }
         if (empty($sessionKey)) {
             $this->writeJson(Status::CODE_UNAUTHORIZED, '', '尚未登入');
@@ -1150,7 +1148,7 @@ class Auth extends AdminBase
 
     public function getInfo()
     {
-        $this->writeJson(200, $this->getWho()->toArray(), 'success');
+        $this->writeJson(200, $this->getWho(), 'success');
     }
 }
 ```

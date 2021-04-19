@@ -97,7 +97,7 @@ public function index()
 | status        |                                          | 获取连接池状态信息                                           | 获取当前连接池已创建,已使用,最大创建,最小创建数据 |
 | isPoolObject  | $obj                                     | 查看$obj对象是否由该连接池创建                                |                                             |
 | isInPool      | $obj                                     | 获取当前连接是否在连接池内未使用                               |                                             |
-| destroyPool   |                                          | 销毁该连接池                                                |                                             |
+| destroy       |                                          | 销毁该连接池                                                |                                             |
 | reset         |                                          | 重置该连接池                                                |                                             |
 | invoke        | callable $call,float $timeout = null     | 获取一个连接,传入到$call回调函数中进行处理,回调结束后自动回收连接 |                                             |
 | defer         | float $timeout = null                    | 获取一个连接,协程结束后自动回收                               |                                             |

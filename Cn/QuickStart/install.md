@@ -35,7 +35,7 @@ meta:
 # 由于最近阿里云composer镜像不稳定，暂时废弃使用，请使用其他稳定的镜像
 # composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
-# 推荐暂时使用腾讯云镜像
+# 推荐暂时使用腾讯云镜像（如果使用此镜像还是不行请自行更换其他源下载）
 composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer/
 ````
 
@@ -144,7 +144,7 @@ fi
 # 启动框架
 php easyswoole server start
 ```
-此时可以访问 `http://localhost:9501` 就看到框架的欢迎页面，表示框架已经安装成功
+此时可以访问 `http://localhost:9501` 就看到框架的欢迎页面，表示框架已经安装成功。
 
 ### 可能的问题
 - not controller class match
@@ -154,6 +154,9 @@ php easyswoole server start
 
 - task socket listen fail
    - 注意，在部分环境下，例如 `win10` 的 `docker` 环境中，不可把虚拟机共享目录作为 `EasySwoole` 的 `Temp` 目录，否则会因为权限不足无法创建 `socket`，产生报错：`listen xxxxxx.sock fail`，为此可以手动在 `dev.php` 配置文件里把 `Temp` 目录改为其他路径即可，如：`'/Tmp'`
+   
+- 外网无法正常访问
+  - 注意：用户如果外网无法正常访问时，请检查机器环境的防火墙/安全组是否开放 `9501` 或其他对应端口。详细解决方案请看 [常见问题](/QuickStart/problem.md)
 
 
 ## 其他
@@ -174,7 +177,7 @@ php easyswoole server start
 
      ![](/Images/authWx.png)
      
-- [捐赠](/Preface/donate.md) 您的捐赠是对EasySwoole项目开发组最大的鼓励和支持。我们会坚持开发维护下去。 您的捐赠将被用于：
+- [捐赠](/Preface/donate.md) 您的捐赠是对 `EasySwoole` 项目开发组最大的鼓励和支持。我们会坚持开发维护下去。 您的捐赠将被用于：
     - 持续和深入地开发
     - 文档和社区的建设和维护
     

@@ -67,6 +67,7 @@ go(function () {
     // 生成unitTest
     $codeGeneration->generationUnitTest("\\User", null);
 });
+\Swoole\Timer::clearAll();
 ```
 ::: warning
 `EasySwoole\CodeGeneration\CodeGeneration` 方法可自行查看，代码很简单。
@@ -200,6 +201,7 @@ go(function () {
     $result = $modelGeneration->generate();
     var_dump($result);//生成成功返回生成文件路径,否则返回false
 });
+\Swoole\Timer::clearAll();
 ```
 
 #### Model方法
@@ -275,6 +277,7 @@ go(function () {
     $result = $controllerGeneration->generate();
     var_dump($result);
 });
+\Swoole\Timer::clearAll();
 ```
 #### Controller方法.
 Controller支持了5个方法,`Add`,`Delete`,`GetList`,`GetOne`,`Update`.
@@ -383,7 +386,7 @@ go(function () {
     $result = $unitTestGeneration->generate();
     var_dump($result);
 });
-
+\Swoole\Timer::clearAll();
 ```
 
 #### UnitTest方法.

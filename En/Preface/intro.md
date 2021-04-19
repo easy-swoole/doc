@@ -88,13 +88,12 @@ These companies are using EasySwoole.
     - 如果的如果 admin@fosuss.com
 - team member
     - 阿正 1589789807@qq.com
-    - 不忘初心 2788828128@qq.com
+    - 会长 2788828128@qq.com
     - 北溟有鱼 1769360227@qq.com
     - 机器人 694050314@qq.com
-    - Manlin 476295133@qq.com
     - Siam(宣言) 59419979@qq.com
-    - 小菜瓜 1276407988@qq.com
     - 仙士可 1067197739@qq.com
+    - 史迪仔 975975398@qq.com
     
 
 ::: warning 

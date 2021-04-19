@@ -634,6 +634,7 @@ class VerifyCode extends Controller
         $verifyCodeTime = $this->request()->getRequestParam('verifyCodeTime');
         if (!VerifyCodeTools::checkVerifyCode($code, $verifyCodeTime, $verifyCodeHash)) {
             $this->writeJson(Status::CODE_OK, '验证码错误!', []);
+            return false;
         }
         $this->writeJson(Status::CODE_OK, '验证码正确!', []);
     }

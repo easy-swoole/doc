@@ -798,12 +798,13 @@ var_dump($result);
 ```
 
 
-
 ## 服务器确认收到异步通知字符串获取
 
+可通过调用如下方法得到响应支付宝的异步通知字符串：'success'/'failure'
+
 ```php
-\EasySwoole\Pay\AliPay::success();//成功响应
-\EasySwoole\Pay\AliPay::fail();//失败响应
+\EasySwoole\Pay\AliPay\AliPay::success(); // 成功响应
+\EasySwoole\Pay\AliPay\AliPay::fail(); // 失败响应
 ```
 
 
