@@ -13,6 +13,7 @@ EasySwoole/Phpunit 是对 `Phpunit` 的协程定制化封装，主要为解决�
 
 ## 组件要求
 
+- php: >= 7.3
 - ext-swoole: ^4.4.0
 - phpunit/phpunit: ^9.3
 
