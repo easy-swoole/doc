@@ -7,7 +7,7 @@ meta:
     content: easysowole云打印机SDK|php 云打印机SDK|easyswoole printer
 ---
 
-# EasySwoole 云打印 (Printer) 组件
+# EasySwoole 易联云打印 (Printer) 组件
 
 `EasySwoole` 提供了全协程支持的云打印机 `SDK`，易于使用的操作接口和风格，轻松推送海量任务至云打印机。
 
@@ -133,7 +133,6 @@ class FileDriver implements \Psr\SimpleCache\CacheInterface
     public function set($key, $value, $ttl = null)
     {
         $file = $this->getCacheKey($key);
-        var_dump($file);
         $data = serialize($value);
         $this->fileSystem->put($file, $data);
         if ($ttl < time()) {
@@ -216,7 +215,6 @@ class FileDriver implements \Psr\SimpleCache\CacheInterface
         }
         $result = [];
         foreach ($keys as $i => $key) {
-            var_dump($key);
             $result[$key] = $this->get($key, $default);
         }
         return $result;
