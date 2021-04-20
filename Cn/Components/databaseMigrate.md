@@ -200,14 +200,16 @@ class User
 >
 > 不加操作项即为执行填充数据操作，添加操作项即为创建填充模板
 >
-> 生成模板文件之后，方法内的操作可以使用 [easyswoole/mysqli](https://github.com/easy-swoole/mysqli) 或者 [easyswoole/orm](https://github.com/easy-swoole/orm) 做数据填充，
+> 生成模板文件之后，方法内的操作使用 [easyswoole/mysqli](https://github.com/easy-swoole/mysqli) 做数据填充，
 
 可用操作选项：
 
-- `--class`：指定要填充的class name，也就是文件名 ==（请保证填充工具文件名与类名完全相同）==
-    - 示例：`php easyswoole migrate seed --class=UserTable`
 - `--create`：创建一个数据填充模板
-    - 示例：`php easyswoole migrate seed --create=UserTable`
+  - 示例：`php easyswoole migrate seed --create=UserTable`
+- 直接填写文件名或者类名，即为执行指定填充文件(多个文件用 ',' 隔开)
+  - 示例：`php easyswoole migrate seed UserTable,UserInfoTable.php`
+- 直接执行seed命令为执行数据填充目录下所有填充操作
+  - 示例：`php easyswoole migrate seed`
 
 ### status
 > 迁移状态
