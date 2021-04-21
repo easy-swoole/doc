@@ -27,7 +27,7 @@ $config = [
     'aesKey' => 'easyswoole',
    
     // 开放平台第三方平台 Secret
-    'secret' => 'your-AppSecret'
+    'appSecret' => 'your-AppSecret'
 ];
 
 // 开放平台
