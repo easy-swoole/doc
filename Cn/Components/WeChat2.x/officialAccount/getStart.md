@@ -27,7 +27,7 @@ $config = [
     'aesKey' => 'easyswoole',
    
     // 微信公众平台后台配置的 AppSecret
-    'secret' => 'your-AppSecret'
+    'appSecret' => 'your-AppSecret'
 ];
 
 // 公众号
