@@ -25,7 +25,7 @@ $config = [
     'aesKey' => 'easyswoole',
 
     // 企业微信平台后台配置的 AppSecret
-    'secret' => 'your-AppSecret'
+    'appSecret' => 'your-AppSecret'
 ];
 
 // 企业微信
