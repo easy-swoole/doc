@@ -268,7 +268,7 @@ class EasySwooleEvent implements Event
 ```
 
 ::: tip
-  注意：针对 `EasySwoole 3.4.x` 之前版本，请在 `initialize` 事件中，使用 `\EasySwoole\EasySwoole\Logger::getInstance(new \App\Log\LogHandler());` 方式注册自定义日志处理器。
+  注意：针对 `EasySwoole 3.4.x` 之前版本，请在 `bootstrap` 事件（即项目根目录的 `bootstrap.php` 文件）中，使用 `\EasySwoole\EasySwoole\Logger::getInstance(new \App\Log\LogHandler());` 方式注册自定义日志处理器。
 :::
 
 ## 日志中心
