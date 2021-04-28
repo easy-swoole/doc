@@ -349,7 +349,7 @@ go(function () {
 });
 ```
 
-> 上述 `Cache` 参考 [Cache 实现](https://github.com/ice-leng/easyswoole-skeleton/blob/master/src/Component/Cache/SimpleCache.php)仅仅实现了文件缓存，开发者若想使用其他缓存实现，可以自行实现 [PSR-16 CacheInterface 接口]，或使用 [`easyswoole-cache` 组件](https://github.com/easy-swoole/cache)。
+> 上述 `Cache` 参考 [Cache 实现](https://github.com/ice-leng/easyswoole-skeleton/blob/master/src/Component/Cache/SimpleCache.php)仅仅实现了文件缓存，开发者若想使用其他缓存实现，可以自行实现 [PSR-16 CacheInterface 接口](https://www.php-fig.org/psr/psr-16/) 进行调用。
 
 ## 目前已支持的指令
 
