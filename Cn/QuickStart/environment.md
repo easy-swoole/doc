@@ -9,13 +9,13 @@ meta:
 
 # 环境要求
 
-满足基本的环境要求才能运行框架，`EasySwoole` 框架对环境的要求十分简单，只需要满足运行 `Swoole` 扩展的条件，并且 `PHP` 版本在 7.1 以上即可
+满足基本的环境要求才能运行框架，`EasySwoole` 框架对环境的要求十分简单，只需要满足运行 `Swoole` 扩展的条件，并且 `PHP` 版本在 7.3 以上即可
 
 - [GitHub](https://github.com/easy-swoole/easyswoole)  喜欢记得点个 ***star***
 - [Github for Doc](https://github.com/easy-swoole/doc) 文档贡献
 
 ## 基础运行环境
-- 保证 **PHP** 版本大于等于 **7.1**
+- 保证 **PHP** 版本大于等于 **7.3**
 - 保证 **Swoole** 拓展版本大于等于 **4.4.23**
 - 需要 **pcntl** 拓展的任意版本
 - 使用 **Linux** / **FreeBSD** / **MacOS** 这三类操作系统
