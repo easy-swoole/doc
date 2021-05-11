@@ -139,7 +139,7 @@ class Index extends Controller
     function index()
     {
         // 要下载 excel 文件的指定路径，例如这里是项目根目录下的 test.xlsx 文件
-        $this->response()->readFile(EASYSWOOLE_ROOT . '/test.xlsx');
+        $this->response()->sendFile(EASYSWOOLE_ROOT . '/test.xlsx');
         // 设置文件流内容类型，这里以 xlsx 为例
         $this->response()->withHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         // 设置要下载的文件名称，一定要带文件类型后缀
