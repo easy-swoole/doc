@@ -44,12 +44,12 @@ class EasySwooleEvent implements Event
 
         $globalParamHook = new Hook();
 
-        $globalParamHook->register();
-
         // 如果不需要使用 session 请勿注册
         // 使用时请先参考 session 章节 https://www.easyswoole.com/HttpServer/session.html，新增 \App\Tools\Session 类文件。
         # \App\Tools\Session::getInstance($sesionHandler);
         # $globalParamHook->enableSession(Session::getInstance());
+
+        $globalParamHook->register();
 
         // onRequest v3.4.x+
         \EasySwoole\Component\Di::getInstance()->set(\EasySwoole\EasySwoole\SysConst::HTTP_GLOBAL_ON_REQUEST, function (\EasySwoole\Http\Request $request, \EasySwoole\Http\Response $response) use ($globalParamHook) {
