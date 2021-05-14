@@ -29,6 +29,15 @@ meta:
 
 - [更新说明](/Update/main.md)
 
+很多同学，在使用 `Swoole 4.6.x` 扩展时，在使用 `EasySwoole` 进行开发时（一般是在使用到 `Swoole` 协程时），遇到了类似如下错误：`\[FATAL ERROR\]: all coroutines
+ (count: 1) are asleep - deadlock!`，这个错误属于 `Swoole 4.6.x` 扩展的 `debug` 信息，详细可查看 [协程配置](https://wiki.swoole.com/#/coroutine/coroutine?id=deadlock_check)，如果不想看到这个信息，可在 `bootstrap` 事件（即项目根目录的 `bootstrap.php` 文件）中最开始的位置，对协程的使用进行配置。配置示例代码如下：
+
+```php
+<?php
+date_default_timezone_set('Asia/Shanghai');
+// 关闭死锁检测相关堆栈信息输出到日志
+\Swoole\Coroutine::set(['enable_deadlock_check' => false]);
+```
 
 ## 切换 Composer 镜像
 ````
