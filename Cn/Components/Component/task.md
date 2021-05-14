@@ -9,7 +9,7 @@ meta:
 
 # Task
 
-`EasySwoole 3.3.0+` 异步任务放弃了 `Swoole` 的原生 `task`，采用独立组件实现实现。
+`EasySwoole 3.3.0+` 异步任务放弃了 `Swoole` 的原生 `task`，采用独立组件实现。
 
 相对于原生 `Swoole Task`，[easyswoole/task](https://github.com/easy-swoole/task) 组件实现了以下功能：
 

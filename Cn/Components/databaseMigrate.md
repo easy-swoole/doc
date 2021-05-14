@@ -89,7 +89,7 @@ $config->setMigrateTemplateDdlSyntax("DDLSyntax");
 
 执行 `php easyswoole migrate -h`
 
-```text
+```bash
 php easyswoole migrate -h
 Database migrate tool
 

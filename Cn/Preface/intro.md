@@ -44,8 +44,8 @@ EasySwoole 高度封装了 Swoole Server 而依旧维持 Swoole Server 原有特
 - 协程 Apollo 配置中心
 - 协程 Actor 组件
 - 协程 SMTP 客户端
-- 协程微信公众号与小程序 SDK
-- 协程协程版微信、支付宝支付 SDK
+- 协程版微信公众号与小程序 SDK
+- 协程版微信、支付宝支付 SDK
 - 协程 ElasticSearch 客户端
 - 协程 HTTP 客户端组件
 - 协程上下文管理

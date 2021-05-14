@@ -279,4 +279,4 @@ if ($bool) {
 
 > 暂不支持 `inArray`、`notInArray`、`func`、`callUserRule`、`allowFile`、`allowFileType` 等规则。
 
-其他的具体的验证规则，可查看 [验证规则列表](/Components/validate.html#方法列表)
+其他的具体的验证规则，可查看 [验证规则列表](/Components/Validate/validate_1.3.x.html#方法列表)
