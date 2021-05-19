@@ -101,7 +101,7 @@ Core::getInstance()->initialize();
 ```php
 <?php
 
-namespace Test;
+namespace Tests;
 use EasySwoole\Mysqli\QueryBuilder;
 use PHPUnit\Framework\TestCase;
 use EasySwoole\ORM\DbManager;
@@ -118,7 +118,7 @@ class DbTest extends TestCase
 }
 ```
 
-注：请注册 `composer.json` 下 `Test` 命名空间与 `tests` 目录的映射关系。
+注：请注册 `composer.json` 下 `Tests` 命名空间与 `tests` 目录的映射关系。
 
 映射关系大致如下所示：
 
@@ -137,6 +137,8 @@ class DbTest extends TestCase
     }
 }
 ```
+
+然后执行 `composer dumpautoload`。
 
 ### 执行
 
