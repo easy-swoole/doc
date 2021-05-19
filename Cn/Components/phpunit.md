@@ -101,7 +101,7 @@ Core::getInstance()->initialize();
 ```php
 <?php
 
-namespace Test;
+namespace Tests;
 use EasySwoole\Mysqli\QueryBuilder;
 use PHPUnit\Framework\TestCase;
 use EasySwoole\ORM\DbManager;
