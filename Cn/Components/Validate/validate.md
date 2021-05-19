@@ -37,7 +37,15 @@ meta:
 
 ## 基本使用
 
-### 使用组件提供的默认的验证错误信息提示
+### 普通验证
+
+#### 支持的验证方法
+
+普通验证支持的验证方法有如下：`activeUrl`、`allDigital`、`allowFile`、`allowFileType`、`alpha`、`alphaDash`、`alphaNum`、`between`、`betweenLen`、`bool`、`dateAfter`、`dateBefore`、`decimal`、`different`、`differentWithColumn`、`equal`、`equalWithColumn`、`float`、`func`、`greaterThanWithColumn`、`inArray`、`integer`、`isArray`、`isIp`、`length`、`lengthMax`、`lengthMin`、`lessThanWithColumn`、`max`、`min`、`url`、`money`、`notEmpty`、`notInArray`、`numeric`、`optional`、`regex`、`required`、`timestampAfter`、`timestampAfterDate`、`timestampBefore`、`timestampBeforeDate`、`url`。
+
+验证方法的具体使用可查看 [方法列表](/Components/Validate/validate_1.3.x.html#验证规则用法说明)
+
+#### 使用组件提供的默认的验证错误信息提示
 
 `validate` 验证器提供了默认验证错误信息的规则，点击查看 [默认验证错误信息的规则](https://github.com/easy-swoole/validate/blob/2.x/src/Error.php)。
 
@@ -76,7 +84,7 @@ if ($bool) {
 
 > 注意：验证器组件的验证顺序是按照添加验证规则时的 `添加字段的先后顺序` 和 `验证规则的先后顺序` 逐个进行验证的，先添加的验证规则不通过则直接返回验证失败，然后就可以获取对应的验证错误信息。例如上述示例中，会优先验证 `name` 字段是否存在。下面示例也是一样的原理。
 
-### 使用自定义的验证错误信息提示
+#### 使用自定义的验证错误信息提示
 
 使用示例如下：
 
@@ -126,7 +134,9 @@ if ($bool) {
  */
 ```
 
-### 使用自定义验证器类的自定义验证规则
+### 自定义验证
+
+#### 使用自定义验证器类的自定义验证规则
 
 使用示例如下：
 
@@ -187,7 +197,9 @@ if ($bool) {
  */
 ```
 
-### 使用带 * 号的匹配规则进行验证
+### 特殊验证
+
+#### 使用带 * 号的匹配规则进行验证
 
 使用示例如下：
 
