@@ -11,7 +11,6 @@ meta:
 
 ```php
 <?php
-
 $config = [
     // 微信公众平台后台的 appid
     'appId' => 'wxefe41fdeexxxxxx', 
@@ -31,6 +30,3 @@ $miniProgram = \EasySwoole\WeChat\Factory::miniProgram($config);
 ```
 
 `$miniProgram` 在所有相关小程序的文档都是指 `Factory::miniProgram` 得到的实例，就不在每个页面单独写了。
-
-
-其他文档暂时没写。详细使用可参考 `easywechat` 对应 `API` 的用法。

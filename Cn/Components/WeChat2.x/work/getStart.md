@@ -13,24 +13,18 @@ meta:
 
 ```php
 <?php
-
 $config = [
-    // 企业微信平台后台的 appid
-    'appId' => 'wxefe41fdeexxxxxx', 
-
-    // 企业微信平台后台配置的 Token
-    'token' => 'dczmnau31ea9nzcnxxxxxxxxx',
-
-    // 企业微信平台后台配置的 EncodingAESKey
-    'aesKey' => 'easyswoole',
-
-    // 企业微信平台后台配置的 AppSecret
-    'appSecret' => 'your-AppSecret'
+    // 企业微信后台的 企业 ID
+    'corpId' => 'xxxxxxxxxxxxxxxxx',
+    
+    // 企业微信后台的 secret
+    'corpSecret' => 'xxxxxxxxxxxxxxxxx',
+    
+    // 企业微信后台的 agentid
+    'agentId' => 100020, // 如果有 agentid 则填写
 ];
 
 // 企业微信
 $work = \EasySwoole\WeChat\Factory::work($config);
 ```
 然后你就可以用 `$work` 来调用企业微信的服务了。
-
-其他文档暂时没写。详细使用可参考 `easywechat` 对应 `API` 的用法。
