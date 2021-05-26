@@ -206,6 +206,7 @@
       - [onDuplicate](Components/Mysqli/Chain/onDuplicateMethod.md)
   - ORM
     - [安装](Components/Orm/install.md)
+    - [必看章节，不看勿提问](Components/Orm/readme.md)
     - [核心文件](Components/Orm/core.md)
     - [定义模型](Components/Orm/definitionModel.md)
     - [Invoke执行](Components/Orm/invoke.md)
