@@ -85,7 +85,7 @@ class Index extends Controller
 
         /**
          * $replyResponse 是一个显式实现了 PSR-7 的对象，用户只需要处理该对象即可正确响应给微信
-         * 下面是一个原生swoole的响应方法
+         * 下面是一个使用 EasySwoole 的响应方法
          */
         $this->response()->withStatus($replyResponse->getStatusCode());
 
