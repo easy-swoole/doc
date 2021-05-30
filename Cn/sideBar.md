@@ -298,7 +298,6 @@
     - [RPC 配置及使用](Microservices/Rpc/config.md)
     - [服务端](Microservices/Rpc/server.md)
     - [客户端](Microservices/Rpc/client.md)
-    - [跨语言](Microservices/Rpc/otherPlatform.md)
     - [服务注册中心](Microservices/Rpc/registerCenter.md)
 - 微信 SDK
   - 微信公众号
