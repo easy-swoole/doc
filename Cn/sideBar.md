@@ -301,7 +301,7 @@
     - [服务注册中心](Microservices/Rpc/registerCenter.md)
 - 微信 SDK
   - 微信公众号
-    - [安装](Components/WeChat2.x/install.md)
+    - [安装](Components/WeChat2.x/officialAccount/install.md)
     - [入门](Components/WeChat2.x/officialAccount/getStart.md)
     - [快速开始](Components/WeChat2.x/officialAccount/quickStart.md)
     - [配置](Components/WeChat2.x/officialAccount/config.md)
@@ -329,7 +329,7 @@
     - [评论数据管理](Components/WeChat2.x/officialAccount/comment.md)
     - [返佣商品](Components/WeChat2.x/officialAccount/goods.md)
   - 微信小程序
-    - [安装](Components/WeChat2.x/install.md)
+    - [安装](Components/WeChat2.x/miniProgram/install.md)
     - [入门](Components/WeChat2.x/miniProgram/getStart.md)
     - [小程序码](Components/WeChat2.x/miniProgram/appCode.md)
     - [客服消息](Components/WeChat2.x/miniProgram/customerService.md)
@@ -346,12 +346,12 @@
     - [安全风控](Components/WeChat2.x/miniProgram/safetyControl.md)
     - [URL Scheme](Components/WeChat2.x/miniProgram/urlSchemeGenerate.md)
   - 微信开放平台
-    - [安装](Components/WeChat2.x/install.md)
+    - [安装](Components/WeChat2.x/openPlatform/install.md)
     - [入门](Components/WeChat2.x/openPlatform/getStart.md)
     - [服务端](Components/WeChat2.x/openPlatform/server.md)
     - [代授权](Components/WeChat2.x/openPlatform/authorizerDelegate.md)
   - 企业微信
-    - [安装](Components/WeChat2.x/install.md)
+    - [安装](Components/WeChat2.x/work/install.md)
     - [入门](Components/WeChat2.x/work/getStart.md)
     - [服务端](Components/WeChat2.x/work/server.md)
     - [应用管理](Components/WeChat2.x/work/agents.md)
