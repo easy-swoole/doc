@@ -147,13 +147,13 @@ static function moveFile($source, $target, $overwrite = true):bool
 
 
 
-### scanDir
+### scanDirectory
 
 获得文件目录或目录文件数组：
 
 - string $dirPath 目录路径
 
 ```php
-static function scanDir($dirPath)
+static function scanDirectory($dirPath)
 ```
 
