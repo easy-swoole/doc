@@ -162,7 +162,7 @@ php easyswoole server start
    - 存在 `Index` 控制器，但是文件大小写、路径都对了吗？
 
 - task socket listen fail
-   - 注意，在部分环境下，例如 `win10` 的 `docker` 环境中，不可把虚拟机共享目录作为 `EasySwoole` 的 `Temp` 目录，否则会因为权限不足无法创建 `socket`，产生报错：`listen xxxxxx.sock fail`，为此可以手动在 `dev.php` 配置文件里把 `Temp` 目录改为其他路径即可，如：`'/Tmp'`
+   - 注意，在部分环境下，例如 `win10` 的 `docker` 环境中，不可把虚拟机共享目录作为 `EasySwoole` 的 `Temp` 目录，否则会因为权限不足无法创建 `socket`，产生报错：`listen xxxxxx.sock fail`，为此可以手动在 `dev.php` 配置文件里把 `Temp` 目录改为其他路径即可，如：`'/tmp'`
    
 - 外网无法正常访问
   - 注意：用户如果外网无法正常访问时，请检查机器环境的防火墙/安全组是否开放 `9501` 或其他对应端口。详细解决方案请看 [常见问题](/QuickStart/problem.md)
