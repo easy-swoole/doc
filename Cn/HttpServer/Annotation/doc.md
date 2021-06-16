@@ -35,9 +35,12 @@ class Index extends AnnotationController
 
 在项目根目录下执行如下命令：
 ```
-php vendor/bin/easy-doc App/HttpController
+php easyswoole doc --dir=App/HttpController
+
+// 或者执行如下命令
+php vendor/bin/annotation-doc --dir=App/HttpController
 ```
-即可生成对应的离线文档。
+即可生成对应的离线文档。具体使用可查看 [基础命令章节 - 生成 API 文档](/QuickStart/command.html#生成%20API%20文档)
 
 > 注意，仅当有@Api标记的控制器方法才会被渲染到文档中。
 
