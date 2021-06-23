@@ -9,9 +9,10 @@ meta:
 
 # EasySwoole RPC 自定义注册中心
 
-`EasySwoole` 默认为通过 `UDP` 广播 + 自定义进程定时刷新自身节点信息的方式来实现无主化/注册中心的服务发现。在服务正常关闭的时候，自定义定时进程的`onShutdown` 方法会执行 `deleteServiceNode` 方法来实现节点下线。在非正常关闭的时候，心跳超时也会被节点管理器踢出。
+`EasySwoole` 默认为通过 `UDP` 广播 + 自定义进程定时刷新自身节点信息的方式来实现无主化/注册中心的服务发现。在服务正常关闭的时候，自定义定时进程的`onShutdown`
+方法会执行 `deleteServiceNode` 方法来实现节点下线。在非正常关闭的时候，心跳超时也会被节点管理器踢出。
 
-有些情况，不方便用 `UDP` 广播的情况下，那么 `EasySwoole` 支持你自定义一个节点管理器，来变更服务发现方式。
+有些情况，比如服务都不在一个网段上，由于udp协议的设置，将会广播不到，只能点对点的进行广播数据，就不是很方便。那么 `EasySwoole` 支持你自定义一个节点管理器，来变更服务注册及发现方式。
 
 ## 例如使用 `Redis` 来实现
 
@@ -37,7 +38,7 @@ class RedisManager implements NodeManagerInterface
      */
     protected $pool;
 
-    public function __construct(RedisPool $pool, string $hashKey = 'rpc', int $ttl = 30)
+    public function __construct(Pool $pool, string $hashKey = 'rpc', int $ttl = 30)
     {
         $this->pool = $pool;
         $this->redisKey = $hashKey;
@@ -50,8 +51,7 @@ class RedisManager implements NodeManagerInterface
         $hits = [];
         $time = time();
 
-        /** @var Pool $redisPool */
-        $redisPool = $this->pool->getPool();
+        $redisPool = $this->pool;
 
         /** @var Redis $redis */
         $redis = $redisPool->defer(15);
@@ -103,8 +103,8 @@ class RedisManager implements NodeManagerInterface
         }
         $allWeight = 0;
 
-        /** @var Pool $redisPool */
-        $redisPool = $this->pool->getPool();
+        
+        $redisPool = $this->pool;;
 
         /** @var Redis $redis */
         $redis = $redisPool->getObj(15);
@@ -146,8 +146,8 @@ class RedisManager implements NodeManagerInterface
 
     function failDown(ServiceNode $serviceNode): bool
     {
-        /** @var Pool $redisPool */
-        $redisPool = $this->pool->getPool();
+        
+        $redisPool = $this->pool;;
 
         /** @var Redis $redis */
         $redis = $redisPool->getObj(15);
@@ -172,8 +172,8 @@ class RedisManager implements NodeManagerInterface
 
     function offline(ServiceNode $serviceNode): bool
     {
-        /** @var Pool $redisPool */
-        $redisPool = $this->pool->getPool();
+        
+        $redisPool = $this->pool;;
 
         /** @var Redis $redis */
         $redis = $redisPool->getObj(15);
@@ -204,8 +204,8 @@ class RedisManager implements NodeManagerInterface
             'lastFailTime' => 0
         ];
 
-        /** @var Pool $redisPool */
-        $redisPool = $this->pool->getPool();
+        
+        $redisPool = $this->pool;;
 
         /** @var Redis $redis */
         $redis = $redisPool->getObj();
@@ -228,8 +228,7 @@ class RedisManager implements NodeManagerInterface
 
     private function deleteServiceNode($serviceName, $failKey): bool
     {
-        /** @var Pool $redisPool */
-        $redisPool = $this->pool->getPool();
+        $redisPool = $this->pool;;
 
         /** @var Redis $redis */
         $redis = $redisPool->getObj(15);
@@ -247,6 +246,71 @@ class RedisManager implements NodeManagerInterface
 }
 ```
 
-::: warning 
- 即使关闭了 `UDP` 定时广播，`EasySwoole Rpc` 的 `` 进程依旧会每 5 秒执行一次 `serviceAlive` 用于更新自身的节点心跳信息。
-:::
+```php
+ /** @var \EasySwoole\Rpc\Config $config */
+$assistConfig = $config->getAssist();
+
+// 服务定时自刷新到节点管理器
+$assistConfig->setAliveInterval(5000);
+```
+
+> 即使关闭了 `UDP` 定时广播，`EasySwoole Rpc` 的 `AssistWorker` 进程依旧会每 5 秒执行一次 `serviceAlive` 用于更新自身的节点心跳信息。
+
+## 注册
+
+```php
+<?php
+
+namespace EasySwoole\EasySwoole;
+
+use EasySwoole\EasySwoole\AbstractInterface\Event;
+use EasySwoole\EasySwoole\Swoole\EventRegister;use EasySwoole\Redis\Config\RedisConfig;use EasySwoole\RedisPool\Pool;use EasySwoole\RedisPool\RedisPool;
+
+class EasySwooleEvent implements Event
+{
+    public static function initialize()
+    {
+        date_default_timezone_set('Asia/Shanghai');
+    }
+
+    public static function mainServerCreate(EventRegister $register)
+    {
+        ###### 注册 rpc 服务 ######
+        /** rpc 服务端配置 */
+        // 采用了redis 节点管理器 可以关闭udp 广播了。
+        $redisM = new RedisManager(new Pool(new RedisConfig(['host' => '127.0.0.1'])));
+        $config = new \EasySwoole\Rpc\Config($redisM);
+        $config->setNodeId('EasySwooleRpcNode1');
+        $config->setServerName('EasySwoole'); // 默认 EasySwoole
+        $config->setOnException(function (\Throwable $throwable) {
+
+        });
+
+        $serverConfig = $config->getServer();
+        $serverConfig->setServerIp('127.0.0.1');
+
+        // rpc 具体配置请看配置章节
+        $rpc = new \EasySwoole\Rpc\Rpc($config);
+
+        // 创建 Goods 服务
+        $goodsService = new \App\RpcServices\Goods();
+        // 添加 GoodsModule 模块到 Goods 服务中
+        $goodsService->addModule(new \App\RpcServices\GoodsModule());
+        // 添加 Goods 服务到服务管理器中
+        $rpc->serviceManager()->addService($goodsService);
+
+        // 创建 Common 服务
+        $commonService = new \App\RpcServices\Common();
+        // 添加 CommonModule 模块到 Common 服务中
+        $commonService->addModule(new \App\RpcServices\CommonModule());
+        // 添加 Common 服务到服务管理器中
+        $rpc->serviceManager()->addService($commonService);
+        
+        // 此刻的rpc实例需要保存下来 或者采用单例模式继承整个Rpc类进行注册 或者使用Di
+        
+        // 注册 rpc 服务
+        $rpc->attachServer(ServerManager::getInstance()->getSwooleServer());
+        
+    }
+}
+```

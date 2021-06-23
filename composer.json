@@ -11,7 +11,8 @@
         "easyswoole/socket": "^1.1",
         "easyswoole/redis-pool": "^2.2",
         "easyswoole/queue": "2.1.x",
-        "easyswoole/doc-system": "dev-master"
+        "easyswoole/doc-system": "dev-master",
+        "easyswoole/rpc": "^5.0"
     },
     "require-dev": {
         "easyswoole/swoole-ide-helper": "^1.3"
