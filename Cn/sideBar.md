@@ -295,10 +295,10 @@
     - [Tracker](Components/tracker.md)
   - RPC服务
     - [架构说明](Microservices/Rpc/introduction.md)
-    - [RPC 配置及使用](Microservices/Rpc/config.md)
+    - [配置](Microservices/Rpc/config.md)
     - [服务端](Microservices/Rpc/server.md)
     - [客户端](Microservices/Rpc/client.md)
-    - [服务注册中心](Microservices/Rpc/registerCenter.md)
+    - [自定义节点管理器](Microservices/Rpc/registerCenter.md)
 - 微信 SDK
   - 微信公众号
     - [安装](Components/WeChat2.x/officialAccount/install.md)
