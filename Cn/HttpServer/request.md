@@ -88,6 +88,8 @@ $post = $request->getParsedBody();
 
 ### 获得 raw 内容
 
+> 例如在常用的 `post` 请求中，`Content-Type` 为 `application/json` 时就可用如下方法获取 `json` 请求体内容。
+
 ```php
 $content = $request->getBody()->__toString();
 $raw_array = json_decode($content, true);

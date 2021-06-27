@@ -119,6 +119,14 @@ $this->response()->withStatus($statusCode);
 $this->response()->withHeader('Content-Type', 'application/json;charset=utf-8');
 ```
 
+### 其他方法
+
+用于获取响应内容，即需要响应给客户端的数据。一般用于在响应客户端之前记录响应日志之类的业务。具体使用可查看框架的 [`afterRequest` 事件](/FrameDesign/event/afterRequest.md)
+
+```php
+$this->response()->getBody()->__toString();
+```
+
 ## 其他响应
 
 ### 向客户端响应文件流，实现文件下载
