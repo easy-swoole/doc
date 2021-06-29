@@ -466,7 +466,6 @@
   - [CurlSSL错误](Other/curlSsl.md)
   - [ChromeHeadless](Other/chromeHeadless.md)
   - [GraphQL](Other/graphQL.md)
-  - [双机热备](Other/deploy.md)
   - [延迟队列](Other/delayQueue.md)
 - 开源项目推荐
   - [栏目说明](OpenSource/explanation.md)
@@ -477,4 +476,5 @@
   - [Docker](Deploy/docker.md)
   - [Nginx](Deploy/nginx.md)
   - [Supervisor](Deploy/supervisor.md)
+  - [双机热备](Deploy/deploy.md)
 
