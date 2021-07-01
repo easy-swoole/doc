@@ -25,7 +25,7 @@ meta:
 *请在终端执行以下命令*
 > docker pull easyswoole/easyswoole3
 
-docker hub上的环境为 `php7.2` + `swoole4.4.23` + `easyswoole 3.4.x`
+docker hub上的环境为 `php7.4` + `swoole4.4.26` + `easyswoole 3.4.x`
 
 
 ## 框架启动
