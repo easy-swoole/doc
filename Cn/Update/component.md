@@ -1,6 +1,43 @@
 # 组件更新记录
 > 框架更新记录仅仅整理自2020年10-24后的记录，其余记录以老版本文档或github记录为准。
 
+## Http-Annotation
+
+### 2.2.0 - 2021-07-01
+
+#### 新增
+
+- `Param` 参数注解增加支持对中文字符串长度的相关验证（`mbLength`、`mbLengthMax`、`mbLengthMin`、`betweenMbLen`）（`validate 2.1.0`）
+
+## Validate
+
+### 2.1.0 - 2021-07-01
+
+#### 新增
+
+- 新增 `mbLength`、`mbLengthMax`、`mbLengthMin`、`betweenMbLen` 等验证规则，支持对中文字符串长度相关的单独验证
+
+#### 废弃
+
+- 取消原有 `length` 对中文字符串长度的验证
+
+## Http
+
+### 2.0.3 - 2021-06-26
+
+#### 修复
+
+- 修复由于 `PHP 8` 的 `libxml_disable_entity_loader` 函数废弃导致 `PHP 8` 下的 `xml` 请求参数无法接收的兼容问题
+
+## Pay
+
+### 1.2.20 - 2021-06-25
+
+#### 修复
+
+- 修复微信支付组件中由于 `PHP 8` 的 `libxml_disable_entity_loader` 函数废弃导致 `PHP 8` 的不兼容问题
+- 修复微信支付组件的扫码支付 `notify_url` 参数导致无法支付的问题
+
 ## Wechat
 
 ### 2.0 - 2021-05-25
