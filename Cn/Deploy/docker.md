@@ -52,13 +52,19 @@ docker hub上的环境为 `php7.2` + `swoole4.4.23` + `easyswoole 3.4.x`
 FROM centos:8
 
 #version defined
-ENV SWOOLE_VERSION 4.4.23
+ENV SWOOLE_VERSION 4.4.26
 ENV EASYSWOOLE_VERSION 3.4.x
 
 #install libs
-RUN yum install -y curl zip unzip  wget openssl-devel gcc-c++ make autoconf git
+RUN yum install -y curl zip unzip  wget openssl-devel gcc-c++ make autoconf git epel-release
+RUN dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
 #install php
-RUN yum install -y php-devel php-openssl php-mbstring php-json php-simplexml
+RUN yum --enablerepo=remi install -y php74-php php74-php-devel php74-php-mbstring php74-php-json php74-php-simplexml php74-php-gd
+
+RUN ln -s /opt/remi/php74/root/usr/bin/php /usr/bin/php \
+    && ln -s /opt/remi/php74/root/usr/bin/phpize /usr/bin/phpize \
+    && ln -s /opt/remi/php74/root/usr/bin/php-config /usr/bin/php-config
+
 # composer
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/bin/composer && chmod +x /usr/bin/composer
@@ -77,7 +83,7 @@ RUN wget https://github.com/swoole/swoole-src/archive/v${SWOOLE_VERSION}.tar.gz 
     && make \
     && make install \
     ) \
-    && sed -i "2i extension=swoole.so" /etc/php.ini \
+    && sed -i "2i extension=swoole.so" /etc/opt/remi/php74/php.ini \
     && rm -r swoole
 
 # Dir
