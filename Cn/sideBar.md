@@ -127,6 +127,11 @@
     - [自定义进程](Video/ExtraVideo/customProcess.md)
     - [Http上传](Video/ExtraVideo/httpUpload.md)
     - [Words-match文本检测](Video/ExtraVideo/words-match.md)
+- 应用部署
+  - [Docker](Deploy/docker.md)
+  - [Nginx](Deploy/nginx.md)
+  - [Supervisor](Deploy/supervisor.md)
+  - [双机热备](Deploy/deploy.md)
 - 框架设计
   - [启动流程](FrameDesign/start.md)
   - 核心文件
@@ -472,9 +477,4 @@
   - [XlsWriter-excel解析项目](OpenSource/xlsWriter.md)
   - [RitaswcIpAddress IP地址归属地](OpenSource/ritaswcIpAddress.md)
 - [Demo](demo.md)
-- 应用部署
-  - [Docker](Deploy/docker.md)
-  - [Nginx](Deploy/nginx.md)
-  - [Supervisor](Deploy/supervisor.md)
-  - [双机热备](Deploy/deploy.md)
 
