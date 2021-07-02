@@ -11,6 +11,63 @@ meta:
 
 [Nginx](http://nginx.org/)是一款轻量级的`Web`服务器/反向代理服务器及电子邮件`（IMAP/POP3）`代理服务器。其特点是占有内存少，并发能力强。可以做为`EasySwoole`的前置服务器，实现负载均衡等。
 
+## Dockerfile
+```dockerfile
+FROM centos:8
+RUN yum install -y nginx
+VOLUME ["/data"]
+
+RUN echo " \
+user nginx; \
+worker_processes auto; \
+error_log /var/log/nginx/error.log; \
+pid /run/nginx.pid; \
+include /usr/share/nginx/modules/*.conf; \
+events { \
+    worker_connections 1024; \
+} \
+http { \
+    sendfile            on; \
+    tcp_nopush          on; \
+    tcp_nodelay         on; \
+    keepalive_timeout   65; \
+    types_hash_max_size 2048; \
+    include             /etc/nginx/mime.types; \
+    default_type        application/octet-stream; \
+    include /etc/nginx/conf.d/*.conf; \
+    include /data/*.conf; \
+} " > /etc/nginx/nginx.conf
+
+WORKDIR /hello
+RUN cd /hello && echo "hello world" > index.html
+RUN echo " \
+server { \
+    listen 80; \
+    server_name _; \
+    location / { \
+       root /hello; \
+    } \
+} " > /etc/nginx/conf.d/hello.conf
+
+EXPOSE 80
+EXPOSE 443
+```
+## Docker使用
+```bash
+docker pull easyswoole/nginx
+# 启动容器
+docker run --privileged -tid -p 80:80 -p 443:443 easyswoole/nginx /usr/sbin/init
+# 进入容器
+docker exec -ti {CONTAINER ID} bash
+# 检查配置文件语法
+nginx -t
+# 启动nginx 
+nginx 
+# 停止nginx
+nginx -s stop
+```
+
+
 ## http代理
 
 ```nginx
