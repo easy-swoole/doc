@@ -12,7 +12,8 @@ meta:
 [Nginx](http://nginx.org/)是一款轻量级的`Web`服务器/反向代理服务器及电子邮件`（IMAP/POP3）`代理服务器。其特点是占有内存少，并发能力强。可以做为`EasySwoole`的前置服务器，实现负载均衡等。
 
 ## Dockerfile
-```dockerfile
+
+```
 FROM centos:8
 RUN yum install -y nginx
 VOLUME ["/data"]
