@@ -7,20 +7,29 @@ meta:
     content: swoole consul|easyswoole consul|swoole协程consul
 ---
 
-# Consul
+# Consul 协程客户端
 
-`EasySwoole`提供了一个协程安全的[consul](https://github.com/easy-swoole/consul)协程版本客户端，方便用户做分布式的微服务开发。
+`EasySwoole` 提供了一个协程安全的 [Consul](https://www.consul.io/) 协程版本客户端，方便用户做分布式的微服务开发。
 
-## 安装
+## 组件要求
+ 
+- easyswoole/spl: ^1.1
+- easyswoole/http-client: ^1.2.5
+
+## 安装方法
 
 > composer require easyswoole/consul
 
+## 仓库地址
+
+[easy-swoole/consul](https://github.com/easy-swoole/consul)
+
 ## 使用方式
-* 使用下面的接口方式，都需要先给`Consul`注入`Config`配置。
+
+* 使用下面的接口方式，都需要先给 `Consul` 注入 `Config` 配置。
 * 接口只展示用法，具体的命名空间需要开发者自己引入
 
-```
-
+```php
 use EasySwoole\Consul\Config;
 use EasySwoole\Consul\Consul;
 
@@ -39,12 +48,11 @@ $config->setPort('8500');
 $config->setVersion('v1');    
 
 $consul = new Consul($config);
-
 ```
 
 ## ACLs
 
-```
+```php
 // Bootstrap ACLs
 $bootstrap = new Bootstrap();
 $this->consul->acl()->bootstrap($bootstrap);
@@ -126,7 +134,9 @@ $this->consul->acl()->delete($delete);
 $token = new Tokens();
 $this->consul->acl()->tokens($token);
 ```
+
 ### Legacy Tokens
+
 ```php
 // Create ACL Token
 $create = new Create([
@@ -168,7 +178,9 @@ $getList = new Lists();
 $this->consul->acl()->getList($getList);
 $this->assertEquals('x','x');
 ```
+
 ### Policies
+
 ```php
 // Create a Policy
 $policy = new Policy([
@@ -204,7 +216,9 @@ $this->consul->acl()->deletePolicy($policy);
 $policies = new Policies();
 $this->consul->acl()->policies($policies);
 ```
+
 ### Roles
+
 ```php
 // Create a Role
 $role = new Role([
@@ -242,7 +256,9 @@ $this->consul->acl()->deleteRole($role);
 $roles = new Roles();
 $this->consul->acl()->roles($roles);
 ```
+
 ### Auth Method
+
 ```php
 // Create an Auth Method
 $method = new AuthMethod([
@@ -286,7 +302,9 @@ $this->consul->acl()->deleteAuthMethod($method);
 $method = new AuthMethods();
 $this->consul->acl()->authMethods($method);
 ```
+
 ### Binding Rules
+
 ```php
 // Create a Binding Rule
 $bindingRule = new BindingRule([
@@ -325,7 +343,9 @@ $this->consul->acl()->deleteBindingRule($bindingRule);
 $bindingRules = new BindingRules();
 $this->consul->acl()->bindingRules($bindingRules);
 ```
+
 ## Agent 
+
 ```php
 // List Members
 $this->consul->agent()->members(new Members([
@@ -384,7 +404,9 @@ $token = new Token([
 ]);
 $this->consul->agent()->token($token);
 ```
+
 ### Checks
+
 ```php
 // List Checks
 $checks = new Checks([
@@ -445,7 +467,9 @@ $update = new Update([
 ]);
 $this->consul->agent()->update($update);
 ```
+
 ### Services
+
 ```php
 // List Services
 $services = new Services([
@@ -515,7 +539,9 @@ $maintenance= new Service\Maintenance([
 ]);
 $this->consul->agent()->serviceMaintenance($maintenance);
 ```
+
 ### Connect
+
 ```php
 // Authorize
 $authorize = new Authorize([
@@ -535,7 +561,9 @@ $leaf = new Leaf([
 ]);
 $this->consul->agent()->leaf($leaf);
 ```
+
 ## Catalog
+
 ```php
 // Register Entity
 $register = new Register([
@@ -659,7 +687,9 @@ $node = new Node([
 ]);
 $this->consul->catalog()->node($node);
 ```
+
 ## Config
+
 ```php
 // Apply Configuration
 $config = new \EasySwoole\Consul\Request\Config([
@@ -689,8 +719,11 @@ $config = new \EasySwoole\Consul\Request\Config([
 ]);
 $this->consul->config()->deleteConfig($config);
 ```
+
 ## Connect
+
 ### Certificate Authority (CA) 
+
 ```php
 // List CA Root Certificates
 $roots = new Roots();
@@ -709,7 +742,9 @@ $configuration = new Configuration([
 ]);
 $this->consul->connect()->updateConfiguration($configuration);
 ```
+
 ### Intentions
+
 ```php
 // Create Intention
 $intentions = new Intentions([
@@ -760,7 +795,9 @@ $intentions = new Intentions\Match([
 ]);
 $this->consul->connect()->match($intentions);
 ```
+
 ## Coordinate
+
 ```php
 // Read WAN Coordinates
 $datacenters = new Datacenters();
@@ -790,7 +827,9 @@ $update = new Update([
 ]);
 $this->consul->coordinates()->update($update);
 ```
+
 ## Events
+
 ```php
 // Fire Event
 $fire = new Fire([
@@ -805,7 +844,9 @@ $listEvent = new ListEvent([
 ]);
 $this->consul->event()->listEvent($listEvent);
 ```
+
 ## Health
+
 ```php
 // List Checks for Node
 $node = new Node([
@@ -840,7 +881,9 @@ $state = new State([
 ]);
 $this->consul->health()->state($state);
 ```
+
 ## KV Store
+
 ```php
 // Read Key
 $kv = new Kv([
@@ -870,8 +913,11 @@ $delete = new Kv([
 ]);
 $this->consul->kvStore()->delete($delete);
 ```
+
 ## Operator
+
 ### Area
+
 ```php
 // Create Network Area
 $area = new Area([
@@ -921,7 +967,9 @@ $area = new Area([
 ]);
 $this->consul->operator()->membersArea($area);
 ```
+
 ### Autopilot
+
 ```php
 // Read Configuration
 $configuration = new Configuration([
@@ -951,7 +999,9 @@ $health = new Health([
 ]);
 $this->consul->operator()->health($health);
 ```
+
 ### Keyring
+
 ```php
 // List Gossip Encryption Keys
 $keyring = new Keyring();
@@ -979,7 +1029,9 @@ $keyring = new Keyring([
 ]);
 $this->consul->operator()->deleteKeyring($keyring);
 ```
+
 ### License
+
 ```php
 // Getting the Consul License
 $license = new License([
@@ -999,7 +1051,9 @@ $license = new License([
 ]);
 $this->consul->operator()->resetLicense($license);
 ```
+
 ### Raft
+
 ```php
 // Read Configuration
 $raft = new \EasySwoole\Consul\Request\Operator\Raft\Configuration();
@@ -1012,13 +1066,17 @@ $peer = new Peer([
 ]);
 $this->consul->operator()->peer($peer);
 ```
+
 ### Segment
+
 ```php
 // List Network Segments
 $segment = new Segment();
 $this->consul->operator()->segment($segment);
 ```
+
 ## Prepared Query
+
 ```php
 // Create Prepared Query
 $query = new Query([
@@ -1082,7 +1140,9 @@ $execute = new Query\Explain([
 ]);
 $this->consul->query()->explain($execute);
 ```
+
 ## Sessions
+
 ```php
 // Create Session
 $create = new Create([
@@ -1130,7 +1190,9 @@ $renew = new Renew([
 ]);
 $this->consul->session()->renew($renew);
 ```
+
 ## Snapshots
+
 ```php
 // Generate Snapshot
 $generate = new Snapshot([
@@ -1145,6 +1207,7 @@ $this->consul->snapshot()->restore($restore);
 ```
 
 ## Status
+
 ```php
 // Get Raft Leader
 $leader = new Leader();
@@ -1156,7 +1219,9 @@ $peers = new Peers([
 ]);
 $this->consul->status()->peers($peers);
 ```
+
 ## Transactions
+
 ```php
 // Create Transaction
 $transaction = new Txn([]);
