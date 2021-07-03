@@ -174,6 +174,7 @@
     - [参数注解](HttpServer/Annotation/param.md)
     - [行为注解](HttpServer/Annotation/action.md)
     - [成员属性注解](HttpServer/Annotation/property.md)
+    - [CircuitBreaker 注解](HttpServer/Annotation/circuitBreaker.md)
     - [自动注解文档](HttpServer/Annotation/doc.md)
 - 数据库
   - [DDL定义](Components/ddl.md)
@@ -287,17 +288,6 @@
     - [安装及使用](Components/FastCache/fastCacheQueue.md)
 - 微服务
   - [微服务理念](Microservices/introduction.md)
-  - 服务注册
-    - [Consul](Components/consul.md)
-  - 服务熔断及降级
-    - [CircuitBreaker注解](Microservices/circuitBreaker.md)
-  - 服务限流
-    - [Atomic-limit](Components/atomicLimit.md)
-    - [IP限流](Components/ipLimit.md)
-  - 配置中心
-    - [Apollo](Components/apollo.md)
-  - 链路追踪
-    - [Tracker](Components/tracker.md)
   - RPC服务
     - [架构说明](Microservices/Rpc/introduction.md)
     - [配置](Microservices/Rpc/config.md)
@@ -383,6 +373,15 @@
     - [Swoole Table](Components/Component/tableManager.md)
     - [Atomic 计数器](Components/Component/atomic.md)
     - [Channel Lock协程锁](Components/Component/channelLock.md)
+  - (微)服务限流
+    - [Atomic-Limit](Components/atomicLimit.md)
+    - [IP 限流案例](Components/ipLimit.md)
+  - 微服务注册
+    - [Consul](Components/consul.md)
+  - 微服务配置中心
+    - [Apollo](Components/apollo.md)
+  - 链路追踪
+    - [Tracker](Components/tracker.md)
   - ElasticSearch客户端
     - [安装和使用](Components/ElasticSearch/install.md)
     - [插入](Components/ElasticSearch/create.md)
