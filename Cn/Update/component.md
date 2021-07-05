@@ -1,6 +1,18 @@
 # 组件更新记录
 > 框架更新记录仅仅整理自2020年10-24后的记录，其余记录以老版本文档或github记录为准。
 
+## JWT
+
+### 1.2.0 - 2021-07-05
+
+#### 新增
+
+- 新增对 `Json Web Token` 的前缀设置支持
+
+#### 修复
+
+- 修复不能使用 `RS256` 签名算法生成 `Json Web Token` 的问题
+
 ## Http-Annotation
 
 ### 2.2.0 - 2021-07-01
@@ -8,6 +20,7 @@
 #### 新增
 
 - `Param` 参数注解增加支持对中文字符串长度的相关验证（`mbLength`、`mbLengthMax`、`mbLengthMin`、`betweenMbLen`）（`validate 2.1.0`）
+- `Api` 注解增加支持对路由设置路由前缀（`prefix`）及忽略路由前缀 （`ignorePrefix`）配置项
 
 ## Validate
 
