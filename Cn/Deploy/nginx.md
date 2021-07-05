@@ -93,7 +93,7 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
         # 转发Cookie，设置 SameSite
-        proxy_cookie_path / "/; secure; HttpOnly; SameSite=strict";
+        proxy_cookie_path / "/;";
 
         # 代理访问真实服务器
         proxy_pass http://easyswoole;
