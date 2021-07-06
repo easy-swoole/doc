@@ -47,10 +47,10 @@ return [
     /**
      * 账号基本信息，请从微信公众平台/开放平台获取
      */
-    'appId'   => 'your-app-id',         // AppID
-    'secret'  => 'your-app-secret',     // AppSecret
-    'token'   => 'your-token',          // Token
-    'aesKey'  => 'your-EncodingAESKey', // EncodingAESKey，兼容与安全模式下请一定要填写！！！
+    'appId'      => 'your-app-id',         // AppID
+    'appSecret'  => 'your-app-secret',     // AppSecret
+    'token'      => 'your-token',          // Token
+    'aesKey'     => 'your-EncodingAESKey', // EncodingAESKey，兼容与安全模式下请一定要填写！！！
     
     
     /** 

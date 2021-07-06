@@ -294,6 +294,7 @@
     - [服务端](Microservices/Rpc/server.md)
     - [客户端](Microservices/Rpc/client.md)
     - [自定义节点管理器](Microservices/Rpc/registerCenter.md)
+    - [跨语言](Microservices/Rpc/otherPlatform.md)
 - 微信 SDK
   - 微信公众号
     - [安装](Components/WeChat2.x/officialAccount/install.md)

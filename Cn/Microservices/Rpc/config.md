@@ -37,7 +37,7 @@ $config->setOnException(function (\Throwable $throwable) {
 /** @var \EasySwoole\Rpc\Config $config */
 $serverConfig = $config->getServer();
 
-// 【必须设置】设置本机ip 外网 或者 内网 ip 向其他服务端同步本机信息
+// 【必须设置】设置本机 ip 外网 或者 内网 ip 向其他服务端同步本机信息
 $serverConfig->setServerIp('127.0.0.1');
 
 // 设置工作进程数量
@@ -87,7 +87,7 @@ $serviceFinderConfig->setEncryptKey('EasySwoole');
 
 ```php
 <?php
-// 如果只是暴露rpc服务 不进行调用别的rpc服务 可不用设置
+// 如果只是暴露 rpc 服务 不进行调用别的rpc服务 可不用设置
 /** @var \EasySwoole\Rpc\Config $config */
 $clientConfig = $config->getClient();
 
@@ -111,7 +111,7 @@ $clientConfig->setOnGlobalFail(function (\EasySwoole\Rpc\Protocol\Response $resp
 
 ### 注册 rpc 服务
 
-`EasySwooleEvent`事件`mainServerCreate`注册
+`EasySwooleEvent` 事件 `mainServerCreate` 注册
 ```php
 <?php
 
@@ -164,8 +164,8 @@ $http = \EasySwoole\EasySwoole\ServerManager::getInstance()->getSwooleServer();
 $rpc->attachServer($http);
 ```
 
-::: tip 用户可以自行实现 `Redis` 节点管理器实现类(实现 `NodeManagerInterface` 接口即可)，来完成 `rpc` 服务端的配置。下文将介绍使用默认节点管理器(即 `MemoryManager`)
-完成 `rpc` 服务端的配置、`rpc` 服务的注册及服务调用。
+::: tip 
+ `Redis` 节点管理器实现类(实现 `NodeManagerInterface` 接口即可)，来完成 `rpc` 服务端的配置。下文将介绍使用默认节点管理器(即 `MemoryManager`) 完成 `rpc` 服务端的配置、`rpc` 服务的注册及服务调用。
 :::
 
 
