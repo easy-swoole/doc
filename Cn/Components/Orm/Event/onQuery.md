@@ -21,7 +21,7 @@ onQuery回调会注入三个参数
 
 - `res`查询结果对象, 类名为`EasySwoole\ORM\Db\Result`
 
-可以参考 [执行结果](../lastResult.md) 文档, 以获取更多的结果内容
+可以参考 [执行结果](../lastResult.html) 文档, 以获取更多的结果内容
 
 - `builder`查询语句对象, 类名为`EasySwoole\Mysqli\QueryBuilder`
 

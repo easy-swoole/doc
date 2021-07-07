@@ -14,6 +14,8 @@ meta:
 
 有些情况，比如服务都不在一个网段上，由于udp协议的设置，将会广播不到，只能点对点的进行广播数据，就不是很方便。那么 `EasySwoole` 支持你自定义一个节点管理器，来变更服务注册及发现方式。
 
+下面实现的 `Redis` 节点管理器示例是基于 `easyswoole/redis-pool` 组件 实现，所以请先执行 `composer require easyswoole/redis-pool` 安装 `redis-pool` 组件。关于 `easyswoole/redis-pool` 组件具体用户请查看 [easyswoole/redis-pool 章节](/Components/Redis/pool.md)。
+
 ## 例如使用 `Redis` 来实现
 
 ```php

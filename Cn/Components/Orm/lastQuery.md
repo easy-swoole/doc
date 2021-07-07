@@ -27,5 +27,5 @@ $lastQuery = DbManager::getInstance()->getLastQuery()->getLastQuery(); // 第一
 ```
 
 ::: warning
-$model->lastQuery() 返回的是query对象,具体文档可查看:[查询构造器](../Mysqli/builder.md) 文档
+$model->lastQuery() 返回的是query对象,具体文档可查看:[查询构造器](../Mysqli/builder.html) 文档
 :::
