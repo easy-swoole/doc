@@ -186,7 +186,7 @@
     <footer class="footer" style="padding-bottom: 1rem;padding-top: 1rem">
         <div class="container">
             <div class="content has-text-centered">
-                <p><a href="http://www.beian.miit.gov.cn" rel="nofollow noopener" target="_blank">闽ICP备19004753号-4</a></p>
+                <p><a href="https://beian.miit.gov.cn/" rel="nofollow noopener" target="_blank">闽ICP备19004753号-4</a></p>
             </div>
         </div>
     </footer>
