@@ -143,16 +143,8 @@ class Index extends Controller
     // 创建队列
     public function createQueue()
     {
-        // 配置 Redis 队列驱动器
-        $redisConfig = new RedisConfig([
-            'host' => '127.0.0.1', // 服务端地址 默认为 '127.0.0.1'
-            'port' => 6379, // 端口 默认为 6379
-            'auth' => '', // 密码 默认为 不设置
-            'db'   => 0, // 默认为 0 号库
-        ]);
-
         // 创建队列
-        $queue = new Queue(new RedisQueue($redisConfig, 'easyswoole_queue'));
+        $queue = MyQueue::getInstance();
         return $queue;
     }
 
