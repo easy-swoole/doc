@@ -9,7 +9,7 @@ meta:
 
 # Socket
 
-关于 `Socket` 控制器使用的具体示例，请查看 [demo](https://github.com/gaobinzhan/EasySwooleSocketDemo)
+关于 `Socket` 控制器使用的具体示例，请查看 [demo](https://github.com//Stitch-June/EasySwooleSocketDemo)
 
 ## 安装
 
