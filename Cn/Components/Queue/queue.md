@@ -123,132 +123,6 @@ $queue->producer()->push($job);
 $queue->consumer()->confirm($job);
 ```
 
-### 完整使用示例
-以在 `http` 服务中为例，使用示例代码如下：
-```php
-<?php
-
-namespace App\HttpController;
-
-use App\Utility\MyQueue;
-use EasySwoole\Http\AbstractInterface\Controller;
-use EasySwoole\Http\Message\Status;
-use EasySwoole\Queue\Driver\RedisQueue;
-use EasySwoole\Queue\Job;
-use EasySwoole\Queue\Queue;
-use EasySwoole\Redis\Config\RedisConfig;
-
-class Index extends Controller
-{
-    // 创建队列
-    public function createQueue()
-    {
-        // 创建队列
-        $queue = MyQueue::getInstance();
-        return $queue;
-    }
-
-    // 生产普通任务
-    public function producer1()
-    {
-        // 获取队列
-        $queue = $this->createQueue();
-
-        // 创建任务
-        $job = new Job();
-
-        // 设置任务数据
-        $job->setJobData("this is my job data time time " . date('Ymd h:i:s'));
-
-        var_dump('producer1 => ');
-        var_dump($job->getJobData());
-
-        // 生产普通任务
-        $produceRes = $queue->producer()->push($job);
-        if (!$produceRes) {
-            $this->writeJson(Status::CODE_OK, [], '队列生产普通任务失败!');
-        } else {
-            $this->writeJson(Status::CODE_OK, [], '队列生产普通任务成功!');
-        }
-    }
-
-    // 生产延迟任务
-    public function producer2()
-    {
-        // 获取队列
-        $queue = $this->createQueue();
-
-        // 创建任务
-        $job = new Job();
-
-        // 设置任务数据
-        $job->setJobData("this is my job data time time " . date('Ymd h:i:s'));
-
-        // 设置任务延后执行时间
-        $job->setDelayTime(5);
-
-        var_dump('producer2 => ');
-        var_dump($job->getJobData());
-
-        // 生产延迟任务
-        $produceRes = $queue->producer()->push($job);
-        if (!$produceRes) {
-            $this->writeJson(Status::CODE_OK, [], '队列生产延迟任务失败!');
-        } else {
-            $this->writeJson(Status::CODE_OK, [], '队列生产延迟任务成功!');
-        }
-    }
-
-    // 生产可信任务
-    public function producer3()
-    {
-        // 获取队列
-        $queue = $this->createQueue();
-
-        // 创建任务
-        $job = new Job();
-
-        // 设置任务数据
-        $job->setJobData("this is my job data time time " . date('Ymd h:i:s'));
-
-        var_dump('producer3 => ');
-        var_dump($job->getJobData());
-
-        // 设置任务重试次数为 3 次。任务如果没有确认，则会执行三次
-        $job->setRetryTimes(3);
-
-        // 如果5秒内没确认任务，会重新回到队列。默认为3秒
-        $job->setWaitConfirmTime(5);
-
-        // 投递任务
-        $queue->producer()->push($job);
-
-        // 确认一个任务
-        $queue->consumer()->confirm($job);
-    }
-
-    // 消费任务
-    public function consumer()
-    {
-        // 获取队列
-        $queue = $this->createQueue();
-
-        ### 消费任务
-        // 获取到需要消费的任务
-        $job = $queue->consumer()->pop();
-        
-        if (!$job) {
-            $this->writeJson(Status::CODE_OK, [], '没有队列任务需要消费了!');
-            return false;
-        }
-        
-        // 获取需要消费的任务的数据
-        $jobData = $job->getJobData();
-        var_dump($jobData);
-    }
-}
-```
-
 ## 在框架中生产任务和自定义进程中消费任务
 - 注册队列驱动器
 - 设置消费进程
@@ -348,6 +222,124 @@ class EasySwooleEvent implements Event
 }
 ```
 > 进程安全退出问题请看 [自定义进程 章节](/Components/Component/process.md)。
+
+### 控制器使用
+以在 `http` 服务中为例，使用示例代码如下：
+```php
+<?php
+
+namespace App\HttpController;
+
+use App\Utility\MyQueue;
+use EasySwoole\Http\AbstractInterface\Controller;
+use EasySwoole\Http\Message\Status;
+use EasySwoole\Queue\Driver\RedisQueue;
+use EasySwoole\Queue\Job;
+use EasySwoole\Queue\Queue;
+use EasySwoole\Redis\Config\RedisConfig;
+
+class Index extends Controller
+{
+    // 生产普通任务
+    public function producer1()
+    {
+        // 获取队列
+        $queue = MyQueue::getInstance();
+
+        // 创建任务
+        $job = new Job();
+
+        // 设置任务数据
+        $job->setJobData("this is my job data time time " . date('Ymd h:i:s'));
+
+        var_dump('producer1 => ');
+        var_dump($job->getJobData());
+
+        // 生产普通任务
+        $produceRes = $queue->producer()->push($job);
+        if (!$produceRes) {
+            $this->writeJson(Status::CODE_OK, [], '队列生产普通任务失败!');
+        } else {
+            $this->writeJson(Status::CODE_OK, [], '队列生产普通任务成功!');
+        }
+    }
+
+    // 生产延迟任务
+    public function producer2()
+    {
+        // 获取队列
+        $queue = MyQueue::getInstance();
+
+        // 创建任务
+        $job = new Job();
+
+        // 设置任务数据
+        $job->setJobData("this is my job data time time " . date('Ymd h:i:s'));
+
+        // 设置任务延后执行时间
+        $job->setDelayTime(5);
+
+        var_dump('producer2 => ');
+        var_dump($job->getJobData());
+
+        // 生产延迟任务
+        $produceRes = $queue->producer()->push($job);
+        if (!$produceRes) {
+            $this->writeJson(Status::CODE_OK, [], '队列生产延迟任务失败!');
+        } else {
+            $this->writeJson(Status::CODE_OK, [], '队列生产延迟任务成功!');
+        }
+    }
+
+    // 生产可信任务
+    public function producer3()
+    {
+        // 获取队列
+        $queue = MyQueue::getInstance();
+
+        // 创建任务
+        $job = new Job();
+
+        // 设置任务数据
+        $job->setJobData("this is my job data time time " . date('Ymd h:i:s'));
+
+        var_dump('producer3 => ');
+        var_dump($job->getJobData());
+
+        // 设置任务重试次数为 3 次。任务如果没有确认，则会执行三次
+        $job->setRetryTimes(3);
+
+        // 如果5秒内没确认任务，会重新回到队列。默认为3秒
+        $job->setWaitConfirmTime(5);
+
+        // 投递任务
+        $queue->producer()->push($job);
+
+        // 确认一个任务
+        $queue->consumer()->confirm($job);
+    }
+
+    // 消费任务
+    public function consumer()
+    {
+        // 获取队列
+        $queue = MyQueue::getInstance();
+
+        ### 消费任务
+        // 获取到需要消费的任务
+        $job = $queue->consumer()->pop();
+        
+        if (!$job) {
+            $this->writeJson(Status::CODE_OK, [], '没有队列任务需要消费了!');
+            return false;
+        }
+        
+        // 获取需要消费的任务的数据
+        $jobData = $job->getJobData();
+        var_dump($jobData);
+    }
+}
+```
 
 ## 进阶使用
 我们可以自定义驱动，实现 `RabbitMQ`、`Kafka` 等消费队列软件的封装。

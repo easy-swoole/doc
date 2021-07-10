@@ -37,7 +37,7 @@ meta:
 
 是基于 `EasySwoole V3` 并整合 `EasySwoole` 文档中的 `mysql/redis` 协程连接池、`Task` 异步任务、`Fast-Cache` 缓存、`chat` 聊天等功能的完整 `IM` 应用（demo）
 
-[im Demo 地址](https://github.com/gaobinzhan/jin-chat)(原作者暂时没维护,因此`fork`)
+[im Demo 地址](https://github.com/Stitch-June/jin-chat)(原作者暂时没维护,因此`fork`)
 
 [im Demo 地址](https://github.com/Double-Jin/jin-chat)(原作者仓库地址)
 
