@@ -377,8 +377,9 @@
   - (微)服务限流
     - [Atomic-Limit](Components/atomicLimit.md)
     - [IP 限流案例](Components/ipLimit.md)
-  - 微服务注册
+  - 微服务注册与发现
     - [Consul](Components/consul.md)
+    - [Etcd](Components/etcd.md)
   - 微服务配置中心
     - [Apollo](Components/apollo.md)
   - 链路追踪
@@ -411,9 +412,8 @@
     - [安装](Components/SyncInvoker/syncInvoker.md)
     - [MongoDB 客户端案例](Components/SyncInvoker/mongoDb.md)
   - 开发工具
-    - [热重载](Components/hotReload.md)
+    - [热重载 FileWatcher](Components/fileWatcher.md)
     - [LinuxDash](Components/linuxDash.md)
-    - [FileWatcher](Components/fileWatcher.md)
   - 辅助类(杂项工具)
     - [ArrayToTextTable](Components/Help/arrayToTextTable.md)
     - [File](Components/Help/file.md)
