@@ -9,7 +9,7 @@ meta:
 
 # Etcd 协程客户端
 
-`EasySwoole` 提供了一个协程安全的 [Etcd](https://etcd.io/) 协程版本客户端，方便用户做分布式的微服务开发。
+`EasySwoole` 提供了一个协程安全的 [Etcd](https://etcd.io/) 协程版本客户端，方便用户做分布式及微服务开发。
 
 ## 组件要求
  
