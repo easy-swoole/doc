@@ -250,7 +250,123 @@ protected function gc()
 
 - 只有第一次请求时才会调用构造函数
 - 对象池模式只重置非静态 public 属性
-- 对象池复用模式只针对单一进程，多个 worker 进程不共享
+- 对象池复用模式只针对单一进程，多个 `worker` 进程不共享
 - 文件夹、文件、类名为大驼峰，变量与类方法小驼峰(规范)
-- action 返回的字符串将会被 url 解析规则以及 route 路由规则解析
-- 两个 action 的 return 不能互相调用，否则将导致死循环
+- `action` 返回的字符串将会被 `url` 解析规则以及 `route` 路由规则解析
+- 两个 `action` 的 `return` 不能互相调用，否则将导致死循环
+
+::: warning
+ 另外注意：在控制器类的方法（`onRequest/action` 等方法）中创建子协程，在子协程中使用 `$this` 的相关属性值时必须使用 `use` 引入，不使用 `use` 引入时将导致协程上下文数据错乱。
+:::
+
+> 错误使用示例：
+
+下面以在 `Index` 控制器类中的 `action（index）` 中使用为示例：
+
+```php
+<?php
+/**
+ * This file is part of EasySwoole.
+ *
+ * @link https://www.easyswoole.com
+ * @document https://www.easyswoole.com
+ * @contact https://www.easyswoole.com/Preface/contact.html
+ * @license https://github.com/easy-swoole/easyswoole/blob/3.x/LICENSE
+ */
+
+namespace App\HttpController;
+
+use EasySwoole\Http\AbstractInterface\Controller;
+use EasySwoole\Utility\Random;
+
+class Index extends Controller
+{
+    public function index()
+    {
+        // 设置请求标识
+        $requestFlag = Random::number(3);
+        $this->request()->withAttribute('requestFlag', $requestFlag);
+        $rq = '第 ' . $this->request()->getRequestParam('times') . ' 次请求：';
+        var_dump($rq . $this->request()->getAttribute('requestFlag'));
+        go(function () {
+            $rq = '第 ' . $this->request()->getRequestParam('times') . ' 次请求：';
+            go(function () {
+                $rq = '第 ' . $this->request()->getRequestParam('times') . ' 次请求：';
+                \co::sleep(2);
+                var_dump($rq . $this->request()->getAttribute('requestFlag'));
+            });
+            \co::sleep(4);
+            // 【这里的数据会错乱】
+            var_dump($rq . $this->request()->getAttribute('requestFlag'));
+        });
+        $this->response()->write('this is index!' . $this->request()->getRequestParam('times'));
+    }
+}
+```
+
+然后我们访问 `http://127.0.0.1:9501/?times=1（示例请求地址）`，隔 `1s` 后我们再次访问 `http://127.0.0.1:9501/?times=2（示例请求地址）`，发现出现如下运行结果，控制台输出结果：
+
+```bash
+string(21) "第 1 次请求：765"
+string(21) "第 1 次请求：765"
+string(21) "第 2 次请求：823"
+string(21) "第 1 次请求：823"
+string(21) "第 2 次请求：823"
+string(21) "第 2 次请求：823"
+```
+
+发现和我们想象中的完全不一样，第 `1` 次请求挂载的数据被“污染”了，因为 `EasySwoole` 控制器采用的是对象池模式。
+
+> 正确使用方式如下：
+
+```php
+<?php
+/**
+ * This file is part of EasySwoole.
+ *
+ * @link https://www.easyswoole.com
+ * @document https://www.easyswoole.com
+ * @contact https://www.easyswoole.com/Preface/contact.html
+ * @license https://github.com/easy-swoole/easyswoole/blob/3.x/LICENSE
+ */
+
+namespace App\HttpController;
+
+use EasySwoole\Http\AbstractInterface\Controller;
+use EasySwoole\Utility\Random;
+
+class Index extends Controller
+{
+    public function index()
+    {
+        // 设置请求标识
+        $requestFlag = Random::number(3);
+        $this->request()->withAttribute('requestFlag', $requestFlag);
+        $rq = '第 ' . $this->request()->getRequestParam('times') . ' 次请求：';
+        var_dump($rq . $this->request()->getAttribute('requestFlag'));
+        go(function () use ($rq, $requestFlag) {
+            go(function () use ($rq, $requestFlag) {
+                \co::sleep(2);
+                var_dump($rq . $requestFlag);
+            });
+            \co::sleep(4);
+            // 【这里的数据会错乱】
+            var_dump($rq . $requestFlag);
+        });
+        $this->response()->write('this is index!' . $this->request()->getRequestParam('times'));
+    }
+}
+```
+
+然后我们访问 `http://127.0.0.1:9501/?times=1（示例请求地址）`，隔 `1s` 后我们再次访问 `http://127.0.0.1:9501/?times=2（示例请求地址）`，发现出现如下运行结果，控制台输出结果：
+
+```bash
+string(21) "第 1 次请求：690"
+string(21) "第 1 次请求：690"
+string(21) "第 2 次请求：820"
+string(21) "第 1 次请求：690"
+string(21) "第 2 次请求：820"
+string(21) "第 2 次请求：820"
+```
+
+发现数据正常了。

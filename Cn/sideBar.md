@@ -401,6 +401,7 @@
   - 连接池组件
     - [连接池](Components/Pool/introduction.md)
     - [为什么使用连接池](Components/Pool/whyUsePool.md)
+    - [简单Redis连接池示例](Components/Pool/singleRedisPool.md)
   - 协程客户端
     - [HttpClient](Components/httpClient.md)
     - [Smtp](Components/Stmp/smtp.md)
