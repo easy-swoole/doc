@@ -82,7 +82,7 @@ class EasySwooleEvent implements Event
         // 配置 words-match
         $wdConfig = new \EasySwoole\WordsMatch\Config();
         $wdConfig->setDict(__DIR__ . '/dictionary.txt'); // 配置 词库地址
-        $wdConfig->setMaxMEM(1024); // 配置 每个进程最大占用内存(M)，默认为 512 M
+        $wdConfig->setMaxMEM('1024M'); // 配置 每个进程最大占用内存(M)，默认为 512 M
         $wdConfig->setTimeout(3.0); // 配置 内容检测超时时间。默认为 3.0 s
         $wdConfig->setWorkerNum(3); // 配置 进程数
         // $wdConfig->setSockDIR(sys_get_temp_dir()); // (不建议修改)配置 socket 存放地址，默认为 sys_get_temp_dir()，即 '/tmp'
