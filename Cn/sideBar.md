@@ -149,6 +149,7 @@
   - [日志](BaseUsage/log.md)
   - [异常](BaseUsage/trigger.md)
   - [自定义命令](BaseUsage/customCommand.md)
+  - [自定义事件](BaseUsage/event.md)
   - [单元测试](Components/phpunit.md)
   - [异步任务](Components/Component/task.md)
   - [自定义进程](Components/Component/process.md)

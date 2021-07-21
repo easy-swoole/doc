@@ -1,10 +1,10 @@
 ---
-title: easyswooe框架自定义命令
+title: easyswoole框架自定义命令
 meta:
   - name: description
-    content: easyswooe框架自定义命令
+    content: easyswoole框架自定义命令
   - name: keywords
-    content: easyswooe框架自定义命令
+    content: easyswoole框架自定义命令
 ---
 
 # 自定义命令
@@ -150,8 +150,15 @@ class Test implements CommandInterface
 //全局bootstrap事件
 date_default_timezone_set('Asia/Shanghai');
 
+# 【可选：调用 `initialize` 事件进行初始化】
+// EasySwoole\EasySwoole\Core::getInstance()->initialize();
+
 \EasySwoole\Command\CommandManager::getInstance()->addCommand(new \App\Command\Test());
 ```
+
+::: tip
+  注意：如果用户需要获取配置文件的配置，需要先执行 `initialize` 事件，调用 `EasySwoole\EasySwoole\Core::getInstance()->initialize();` 进行初始化。
+:::
 
 ::: warning 
   `bootstrap 事件` 是 `3.2.5` 新增的事件，它允许用户在框架初始化之前执行自定义事件。
