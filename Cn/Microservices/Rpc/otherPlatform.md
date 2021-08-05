@@ -13,7 +13,7 @@ meta:
 
 下面客户端使用的服务端是 [微服务 - 服务端章节](/Microservices/Rpc/server.md) 基于自定义节点管理器 `Redis 节点管理器` 实现的。
 
-具体 `RPC` 服务端 `demo` 代码可查看 Github [RPC 5.x Demo Github](https://github.com/easy-swoole/demo/tree/5.x-rpc-demo) 或者 Gitee [RPC 5.x Demo Gitee](https://gitee.com/1592328848/easyswoole_demo/tree/5.x-rpc-demo)
+具体 `RPC` 服务端 `demo` 代码可查看 Github [RPC 5.x Demo Github](https://github.com/easy-swoole/demo/tree/5.x-rpc-demo) 或者 Gitee [RPC 5.x Demo Gitee](https://gitee.com/1592328848/easyswoole_demo/tree/5.x-rpc/)
 
 ## PHP RPC 客户端示例代码
 
@@ -42,10 +42,24 @@ $raw = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 $fp = stream_socket_client('tcp://127.0.0.1:9600');
 fwrite($fp, pack('N', strlen($raw)) . $raw); // pack 数据校验
 
-$data = fread($fp, 65533);
+$try = 3;
+$data = fread($fp, 4);
+if (strlen($data) < 4 && $try > 0) {
+    $data .= fread($fp, 4);
+    $try--;
+    usleep(1);
+}
+
 // 做长度头部校验
 $len = unpack('N', $data);
-$data = substr($data, '4');
+$data = '';
+$try = 3;
+if (strlen($data) < $len[1] && $try > 0) {
+    $data .= fread($fp, $len[1]);
+    $try--;
+    usleep(1);
+}
+
 if (strlen($data) != $len[1]) {
     echo 'data error';
 } else {
@@ -53,12 +67,13 @@ if (strlen($data) != $len[1]) {
     // 这就是服务端返回的结果
     var_dump($data);
 }
+
 fclose($fp);
 
 /**
  * 调用结果如下：
  * 其中 
- * statue 为服务端返回给客户端的调用状态码 （具体可查看服务端：https://www.easyswoole.com/Microservices/Rpc/client.html）
+ * statue 为服务端返回给客户端的调用状态码 （具体可查看服务端：https://www.easyswoole.com/Microservices/Rpc/server.html）
  * result 为服务端返回给客户端的调用结果
  * msg    为服务端返回给客户端的调用状态信息
  * responseUUID 为服务端响应客户端的唯一标识
@@ -93,6 +108,8 @@ array(4) {
   string(36) "3897f7ea-12a0-39c1-8948-ee9b9bc37274"
 }
 ```
+
+> 注意：可能由于网络问题，并不是一次就能 `recv` 获取到调用结果。
 
 ## Go RPC 客户端示例代码
 
