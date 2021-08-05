@@ -89,6 +89,85 @@ $processConfig = new \EasySwoole\Component\Process\Config([
 推荐使用 `\EasySwoole\Component\Process\Manager` 类进行注册自定义进程，注册方式示例代码如上所示。如果您的框架版本过低，不支持 `\EasySwoole\Component\Process\Manager` 类，可使用如下方式进行注册自定义进程: ```\EasySwoole\EasySwoole\ServerManager::getInstance()->getSwooleServer()->addProcess((new TickProcessnew CustomProcess($processConfig));```
 :::
 
+::: warning
+  注意：用户在注册多个相同配置的自定义进程时，请一定不要复用实例化后的进程对象，而应该重新实例化一个新的进程对象。如果复用了将导致不可预知的结果。正确注册和错误注册的参考示例代码如下：
+:::
+
+> 错误的注册示例：
+
+`EasySwooleEvent.php`：
+
+```php
+<?php
+
+namespace EasySwoole\EasySwoole;
+
+use EasySwoole\EasySwoole\AbstractInterface\Event;
+use EasySwoole\EasySwoole\Swoole\EventRegister;
+
+class EasySwooleEvent implements Event
+{
+    public static function initialize()
+    {
+        date_default_timezone_set('Asia/Shanghai');
+    }
+
+    public static function mainServerCreate(EventRegister $register)
+    {
+        $processConfig = new \EasySwoole\Component\Process\Config([
+            'processName' => 'TestProcess', // 设置 进程名称为 TickProcess
+        ]);
+
+        // 【推荐】使用 \EasySwoole\Component\Process\Manager 类注册自定义进程
+        $testProcess = new \App\Process\TestProcess($processConfig);
+        
+        ### !!! 错误原因：把上述实例化得到的自定义进程对象 $testProcess 进行了复用，注册了 2 次，将导致未知错误。
+        // 注册进程
+        \EasySwoole\Component\Process\Manager::getInstance()->addProcess($testProcess);
+        \EasySwoole\Component\Process\Manager::getInstance()->addProcess($testProcess);
+    }
+}
+```
+
+> 正确的注册示例：
+
+`EasySwooleEvent.php`：
+
+```php
+<?php
+
+namespace EasySwoole\EasySwoole;
+
+use EasySwoole\EasySwoole\AbstractInterface\Event;
+use EasySwoole\EasySwoole\Swoole\EventRegister;
+
+class EasySwooleEvent implements Event
+{
+    public static function initialize()
+    {
+        date_default_timezone_set('Asia/Shanghai');
+    }
+
+    public static function mainServerCreate(EventRegister $register)
+    {
+        $processConfig = new \EasySwoole\Component\Process\Config([
+            'processName' => 'TestProcess', // 设置 进程名称为 TickProcess
+        ]);
+
+        // 【推荐】使用 \EasySwoole\Component\Process\Manager 类注册自定义进程
+        $testProcess1 = new \App\Process\TestProcess($processConfig);
+        $testProcess2 = new \App\Process\TestProcess($processConfig);
+        
+        ### 正确的注册进程的示例：重新使用 new 实例化另外 1 个新的自定义进程对象，然后进行注册
+        // 注册进程
+        \EasySwoole\Component\Process\Manager::getInstance()->addProcess($testProcess1);
+        \EasySwoole\Component\Process\Manager::getInstance()->addProcess($testProcess2);
+    }
+}
+```
+
+上文的 `\App\Process\TestProcess` 和下文的 `\App\Process\CustomProcess` 类的代码类似，这里不做重复说明。
+
 ## 完整示例代码
 ### 1. 定义自定义进程类示例
 首先，我们定义一个自定义进程类继承 `\EasySwoole\Component\Process\AbstractProcess` 类，示例代码如下：
