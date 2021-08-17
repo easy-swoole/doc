@@ -59,7 +59,7 @@ ENV EASYSWOOLE_VERSION 3.4.x
 RUN yum install -y curl zip unzip  wget openssl-devel gcc-c++ make autoconf git epel-release
 RUN dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
 #install php
-RUN yum --enablerepo=remi install -y php74-php php74-php-devel php74-php-mbstring php74-php-json php74-php-simplexml php74-php-gd
+RUN yum --enablerepo=remi install -y php74-php php74-php-devel php74-php-mbstring php74-php-json php74-php-simplexml php74-php-gd php74-php-bcmath
 
 RUN ln -s /opt/remi/php74/root/usr/bin/php /usr/bin/php \
     && ln -s /opt/remi/php74/root/usr/bin/phpize /usr/bin/phpize \
