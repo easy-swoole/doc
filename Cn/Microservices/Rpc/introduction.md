@@ -85,4 +85,4 @@ meta:
 
 ## 基础使用 Demo
 
-关于 `RPC 5.x` 版本使用的基础 `demo` 可查看 Github [RPC 5.x Demo Github](https://github.com/easy-swoole/demo/tree/5.x-rpc-demo) 或者 Gitee [RPC 5.x Demo Gitee](https://gitee.com/1592328848/easyswoole_demo/tree/5.x-rpc-demo)
+关于 `RPC 5.x` 版本使用的基础 `demo` 可查看 Github [RPC 5.x Demo Github](https://github.com/easy-swoole/demo/tree/3.x-rpc-5.x) 或者 Gitee [RPC 5.x Demo Gitee](https://gitee.com/1592328848/easyswoole_demo/tree/5.x-rpc/)
