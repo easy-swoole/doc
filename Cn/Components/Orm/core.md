@@ -76,7 +76,7 @@ $config->setStrictType(true);
 
 ```php
 /** @var \EasySwoole\ORM\Db\Config  $config **/
-$config->setFetchMode(true);
+$config->setFetchMode(false); // 建议关闭
 ```
 
 **设置超时时间**
