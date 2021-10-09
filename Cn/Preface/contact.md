@@ -14,6 +14,7 @@ meta:
 - EasySwoole 官方三群 932625047(已满)
 - EasySwoole 官方四群 779897753(已满)
 - EasySwoole 官方五群 853946743 
+- EasySwoole 官方六群 524475224
 
 # 联系作者
 - 微信
