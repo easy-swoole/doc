@@ -236,7 +236,7 @@ go(function () use ($wechatConfig) {
 ```php
 $pay = new \EasySwoole\Pay\Pay();
 $content = '';//content为xml原始数据,在easyswoole中可通过$this->request()->getBody()->__toString()取出
-$data = $pay->weChat($wechatConfig)->verify($content  )
+$data = $pay->weChat($wechatConfig)->verify($content);
 ```
 
 ## 服务器确认收到异步通知字符串获取
