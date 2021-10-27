@@ -169,33 +169,27 @@ use App\IpList;
 
 public static function initialize()
 {
-    // TODO: Implement initialize() method.
     date_default_timezone_set('Asia/Shanghai');
 
-    public static function initialize()
-    {
-        date_default_timezone_set('Asia/Shanghai');
+    Di::getInstance()->set('HTTP_GLOBAL_ON_REQUEST', function (Request $request, Response $response) {
+        $fd = $request->getSwooleRequest()->fd;
+        $ip = ServerManager::getInstance()->getSwooleServer()->getClientInfo($fd)['remote_ip'];
 
-        Di::getInstance()->set('HTTP_GLOBAL_ON_REQUEST', function (Request $request, Response $response) {
-            $fd = $request->getSwooleRequest()->fd;
-            $ip = ServerManager::getInstance()->getSwooleServer()->getClientInfo($fd)['remote_ip'];
-
-            // 如果当前周期的访问频率已经超过设置的值，则拦截
-            // 测试的时候可以将 30 改小，比如 3
-            if (IpList::getInstance()->access($ip) > 3) {
-                /**
-                 * 直接强制关闭连接
-                 */
-                ServerManager::getInstance()->getSwooleServer()->close($fd);
-                // 调试输出 可以做逻辑处理
-                echo '被拦截' . PHP_EOL;
-                return false;
-            }
+        // 如果当前周期的访问频率已经超过设置的值，则拦截
+        // 测试的时候可以将 30 改小，比如 3
+        if (IpList::getInstance()->access($ip) > 3) {
+            /**
+             * 直接强制关闭连接
+             */
+            ServerManager::getInstance()->getSwooleServer()->close($fd);
             // 调试输出 可以做逻辑处理
-            echo '正常访问' . PHP_EOL;
-            return true;
-        });
-    }
+            echo '被拦截' . PHP_EOL;
+            return false;
+        }
+        // 调试输出 可以做逻辑处理
+        echo '正常访问' . PHP_EOL;
+        return true;
+    });
 }
 ```
 
