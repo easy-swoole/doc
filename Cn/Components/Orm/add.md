@@ -51,7 +51,7 @@ $user = UserModel::create()->data([
 
 saveAll可以传递二维数组，批量插入数据，但由于ORM的工作职责，他需要将数据映射为对象，所以在内部处理中还是通过遍历处理，而非一条sql插入
 
-（如果有此需求的用户请自行自定义执行sql语句）（mysqli组件中提供了 insertMulti `方法，ORM可以使用func方式调用）
+（如果有此需求的用户请自行自定义执行sql语句）（mysqli组件中提供了 insertMulti 方法，ORM可以使用func方式调用）
 
 ```php
 function saveAll($data, $replace = true, $transaction = true)
