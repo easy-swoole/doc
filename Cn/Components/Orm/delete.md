@@ -25,8 +25,16 @@ $user->destroy();
 
 ```php
 $res = UserModel::create()->destroy(1); //通过直接指定主键(如果存在)
-$res = UserModel::create()->destroy('2,4,5');//指定多个参数每个参数为不同主键
 $res = UserModel::create()->destroy([3, 7]);//数组指定多个主键
+
+### orm 组件版本 >= 1.5.0 时不再支持以下写法来删除多条数据
+$res = UserModel::create()->destroy('2,4,5');//指定多个参数每个参数为不同主键
+/**
+// orm 组件版本为 1.5.0 或者 1.5.1 时，下面等价于 DELETE FROM `test`
+$res = UserModel::create()->destroy('2,4,5');
+// orm 组件版本 >= 1.5.2 时，下面等价于 DELETE FROM `test` where id = '2,4,5'
+$res = UserModel::create()->destroy('2,4,5');
+*/
 ```
 
 ### 通过 where 条件
