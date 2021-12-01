@@ -270,7 +270,7 @@
     - [有序集合(SortedSets)](Components/Redis/sortedSets.md)
     - [HyperLogLog](Components/Redis/hyperLogLog.md)
     - [发布/订阅(Pub/Sub)](Components/Redis/pubSub.md)
-    - [事物(Transaction)](Components/Redis/transaction.md)
+    - [事务(Transaction)](Components/Redis/transaction.md)
     - [管道(Pipe)](Components/Redis/pipe.md)
     - [Server命令](Components/Redis/server.md)
     - [Geohash](Components/Redis/geoHash.md)
