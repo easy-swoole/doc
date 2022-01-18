@@ -29,7 +29,7 @@ meta:
 
 - [更新说明](/Update/main.md)
 
-很多同学，在使用 `Swoole 4.6.x` 扩展时，在使用 `EasySwoole` 进行开发时（一般是在使用到 `Swoole` 协程时），遇到了类似如下错误：`\[FATAL ERROR\]: all coroutines
+很多小伙伴，在使用 `Swoole 4.6.x` 扩展时，在使用 `EasySwoole` 进行开发时（一般是在使用到 `Swoole` 协程时），遇到了类似如下错误：`\[FATAL ERROR\]: all coroutines
  (count: 1) are asleep - deadlock!`，这个错误属于 `Swoole 4.6.x` 扩展的 `debug` 信息，详细可查看 [协程配置](https://wiki.swoole.com/#/coroutine/coroutine?id=deadlock_check)，如果不想看到这个信息，可在 `bootstrap` 事件（即项目根目录的 `bootstrap.php` 文件）中最开始的位置，对协程的使用进行配置。配置示例代码如下：
 
 ```php
@@ -40,13 +40,10 @@ date_default_timezone_set('Asia/Shanghai');
 ```
 
 ## 切换 Composer 镜像
-````
-# 由于最近阿里云composer镜像不稳定，暂时废弃使用，请使用其他稳定的镜像
-# composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
-
-# 推荐暂时使用腾讯云镜像（如果使用此镜像还是不行请自行更换其他源下载）
-composer config -g repo.packagist composer https://mirrors.cloud.tencent.com/composer/
-````
+```
+# 推荐暂时使用阿里云镜像（如果使用此镜像还是不行请自行更换其他源下载）
+composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+```
 
 删除镜像
 ```
@@ -58,13 +55,13 @@ composer config -g --unset repos.packagist
 按下面的步骤进行手动安装
 
 ```bash
-composer require easyswoole/easyswoole=3.4.x
+composer require easyswoole/easyswoole=3.5.x
 php vendor/easyswoole/easyswoole/bin/easyswoole install
 ```
 
 或者
 ```bash
-composer require easyswoole/easyswoole=3.4.x
+composer require easyswoole/easyswoole=3.5.x
 php vendor/bin/easyswoole install
 ```
 
@@ -166,6 +163,9 @@ php easyswoole server start
    
 - 外网无法正常访问
   - 注意：用户如果外网无法正常访问时，请检查机器环境的防火墙/安全组是否开放 `9501` 或其他对应端口。详细解决方案请看 [常见问题](/QuickStart/problem.md)
+  
+- 使用 `Composer 2.2.x` 时服务无法启动
+  - 注意：在使用 `3.5.x` 之前版本的 `EasySwoole` 和 `Composer 2.2.x` 环境进行开发时，有些开发小伙伴可能遇到类似 `PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in Xxxx` 报错。解决方法：请直接执行 `composer require easyswoole/easyswoole=3.5.x` 升级到 `3.5.x`（或者修改项目根目录下的 `vendor` 目录下的 `bin` 目录下的 `easyswoole` 文件 (即 `vendor/bin/easyswoole`)，删除该文件的第一行 `#!/usr/bin/env php`），然后重新执行 `php easyswoole server start` 启动服务即可。
 
 
 ## 其他
@@ -176,7 +176,8 @@ php easyswoole server start
     - EasySwoole 官方二群 709134628(已满)
     - EasySwoole 官方三群 932625047(已满)
     - EasySwoole 官方四群 779897753(已满)
-    - EasySwoole 官方五群 853946743
+    - EasySwoole 官方五群 853946743(已满)
+    - EasySwoole 官方六群 524475224
     
 - 商业支持：
     - QQ 291323003

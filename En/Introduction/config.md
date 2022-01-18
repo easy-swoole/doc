@@ -182,7 +182,8 @@ Since swoole is multi-process, if you use SplArray to store, after a single proc
     - EasySwoole official two groups 709134628 (full)
     - EasySwoole official three groups 932625047 (full)
     - EasySwoole official four groups 779897753 (full)
-    - EasySwoole official five groups 853946743
+    - EasySwoole official five groups 853946743 (full)
+    - EasySwoole official six groups 524475224 
     
 - Business support:
     - QQ 291323003
