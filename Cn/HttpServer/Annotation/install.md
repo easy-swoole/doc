@@ -21,6 +21,25 @@ composer require easyswoole/http-annotation
   在使用 `EasySwoole Http` 注解组件进行开发时，可以很方便地生成 `API` 接口文档，可以极大地提高了我们 `phper` 的开发效率。具体如何使用请看 [自动注解文档 章节](/HttpServer/Annotation/doc.md)
 :::
 
+## Ide 提示
+用户在使用 EasySwoole 注解组件 进行 EasySwoole 开发时，仍需要 use 注解相对应的命名空间。这显然不是一个高效的做法。我们推荐在 PhpStorm 环境下进行开发，并且在 PhpStorm 中安装 Jetbrain 自带的 PHP Annotation 组件，可以提供注解命名空间自动补全、注解属性代码提醒、注解类跳转等非常有帮助的。
+::: tip
+在高版本的PhpStorm中，由于自带了@Param注解，与easyswoole提供的@Param冲突，无法实现ide提示，因此可以使用别名的方式实现，代码如下。
+:::
+
+```php
+    use EasySwoole\HttpAnnotation\AnnotationTag\Param as ReqParam;
+
+    /**
+     * @ReqParam(name="deviceId",required="",from={"JSON"})
+     */
+    function reportAction()
+    {
+
+    }
+
+```
+
 ## 实现原理
 注解控制器，完整命名空间为```EasySwoole\HttpAnnotation\AnnotationController```，是继承自
 ```use EasySwoole\Http\AbstractInterface\Controller```的子类。它重写了父类的```__construct```和```__exec```方法，从而实现的注解支持。
