@@ -94,6 +94,7 @@ These companies are using EasySwoole.
     - Siam(宣言) 59419979@qq.com
     - 仙士可 1067197739@qq.com
     - 史迪仔 975975398@qq.com
+    - XueSi 1592328848@qq.com
     
 
 ::: warning 
@@ -112,7 +113,8 @@ These companies are using EasySwoole.
     - EasySwoole official two groups 709134628 (full)
     - EasySwoole official three groups 932625047 (full)
     - EasySwoole official four groups 779897753 (full)
-    - EasySwoole official five groups 853946743 
+    - EasySwoole official five groups 853946743 (full)
+    - EasySwoole official six groups 524475224 
     
 - Business support:
     - QQ 291323003

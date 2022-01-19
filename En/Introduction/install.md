@@ -39,13 +39,13 @@ Follow the steps below to manually install
 
 (Recommended)
 ```bash
-composer require easyswoole/easyswoole=3.4.x
+composer require easyswoole/easyswoole=3.5.x
 php vendor/easyswoole/easyswoole/bin/easyswoole install
 ```
 
 Or (may be wrong)
 ```bash
-composer require easyswoole/easyswoole=3.4.x
+composer require easyswoole/easyswoole=3.5.x
 php vendor/bin/easyswoole install
 ```
 ```bash
@@ -96,7 +96,8 @@ At this point you can visit `http://localhost:9501` to see the welcome page of t
     - EasySwoole official two groups 709134628 (full)
     - EasySwoole official three groups 932625047 (full)
     - EasySwoole official four groups 779897753 (full)
-    - EasySwoole official five groups 853946743
+    - EasySwoole official five groups 853946743 (full)
+    - EasySwoole official six groups 524475224
     
 - Business support:
     - QQ 291323003
