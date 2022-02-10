@@ -9,36 +9,40 @@ meta:
 
 # 定时任务
 
-开发者执行定时任务会通过Linux的`Crontab`去实现，不方便去管理。`EasySwoole`提供了根据`Linux`下`Crontab`规则的定时任务，最小粒度为1分钟。
+开发者执行定时任务会通过 Linux 的 `Crontab` 去实现，不方便去管理。`EasySwoole` 提供了根据 `Linux` 下 `Crontab` 规则的定时任务，最小粒度为1分钟。
 
-##  创建一个定时任务
+::: tip
+注意：旧版本（3.5.x 之前版本）的定时任务的使用请查看 [旧版本(3.5.x之前)定时任务](/BaseUsage/crontab3.4.x.md)
+:::
 
-需要定义一个定时任务类继承`EasySwoole\EasySwoole\Crontab\AbstractCronTask`。
+## 创建一个定时任务
+
+需要定义一个定时任务类实现 `\EasySwoole\Crontab\JobInterface` 接口。
 
 ### 定义执行规则
-```
-public static function getRule(): string
+```php
+public function crontabRule(): string
 {
     // 定义执行规则 根据Crontab来定义
     return '*/1 * * * *';
 }
 ```
 
-### 定义Crontab名称
-```
-public static function getTaskName(): string
+### 定义 Crontab 名称
+```php
+public function jobName(): string
 {
     // 定时任务的名称
-    return 'custom crontab';
+    return 'CustomCrontab';
 }
 ```
 
 ### 定义执行逻辑
-```
-public function run(int $taskId, int $workerIndex)
+```php
+public function run()
 {
     // 定时任务的执行逻辑
-
+    
     // 开发者可投递给task异步处理
     TaskManager::getInstance()->async(function (){
         // todo some thing
@@ -47,61 +51,198 @@ public function run(int $taskId, int $workerIndex)
 ```
 
 ### 定义异常捕获
-```
-public function onException(\Throwable $throwable, int $taskId, int $workerIndex)
+```php
+public function onException(\Throwable $throwable)
 {
     // 捕获run方法内所抛出的异常
 }
 ```
 
-### 注册Crontab
+### 注册 Crontab
 
-在`EasySwoole`全局的`mainServerCreate`事件中进行进程注册
+在 `EasySwoole` 框架全局的 `mainServerCreate` 事件（即项目根目录的 `EasySwooleEvent.php` 文件的 `mainServerCreate` 方法中）中进行定时任务注册。
+```php
+public static function mainServerCreate(EventRegister $register)
+{
+    // 配置定时任务
+    $crontabConfig = new \EasySwoole\Crontab\Config();
+    
+    // 1.设置执行定时任务的 socket 服务的 socket 文件存放的位置，默认值为 当前文件所在目录
+    // 这里设置为框架的 Temp 目录
+    $crontabConfig->setTempDir(EASYSWOOLE_TEMP_DIR);
+    
+    // 2.设置执行定时任务的 socket 服务的名称，默认值为 'EasySwoole'
+    $crontabConfig->setServerName('EasySwoole');
+    
+    // 3.设置用来执行定时任务的 worker 进程数，默认值为 3
+    $crontabConfig->setWorkerNum(3);
+    
+    // 4.设置定时任务执行出现异常的异常捕获回调
+    $crontabConfig->setOnException(function (\Throwable $throwable) {
+        // 定时任务执行发生异常时触发（如果未在定时任务类的 onException 中进行捕获异常则会触发此异常回调）
+    });
+    
+    // 创建定时任务实例
+    $crontab = new \EasySwoole\Crontab\Crontab($crontabConfig);
+    
+    // 注册定时任务
+    $crontab->register(new \App\Crontab\CustomCrontab());
+    $crontab->attachToServer(ServerManager::getInstance()->getSwooleServer());
+}
+```
 
-> Crontab::getInstance()->addTask(CustomCrontab::class);
 
-## 完整示例代码
+## 完整使用示例代码
+
+### 在 EasySwoole 中使用
+
+1.定义定时任务类，新增 `\App\Crontab\CustomCrontab` 文件，文件内容如下：
+
 ```php
 <?php
 
 namespace App\Crontab;
 
+use EasySwoole\Crontab\JobInterface;
 
-use EasySwoole\EasySwoole\Crontab\AbstractCronTask;
-use EasySwoole\EasySwoole\Task\TaskManager;
-
-class CustomCrontab extends AbstractCronTask
+class CustomCrontab implements JobInterface
 {
-    public static function getRule(): string
-    {
-        // 定义执行规则 根据Crontab来定义
-        return '*/1 * * * *';
-    }
-
-    public static function getTaskName(): string
+    public function jobName(): string
     {
         // 定时任务的名称
         return 'CustomCrontab';
     }
 
-    public function run(int $taskId, int $workerIndex)
+    public function crontabRule(): string
+    {
+        // 定义执行规则 根据 Crontab 来定义
+        // 这里是每分钟执行 1 次
+        return '*/1 * * * *';
+    }
+
+    public function run()
     {
         // 定时任务的执行逻辑
-
-        // 开发者可投递给task异步处理
+        
+        // 相当于每分钟打印1次时间戳，这里只是参考示例。
+        echo time();
+        
+        // 开发者可投递给 task 异步处理
         TaskManager::getInstance()->async(function (){
             // todo some thing
         });
     }
 
-    public function onException(\Throwable $throwable, int $taskId, int $workerIndex)
+    public function onException(\Throwable $throwable)
     {
-        // 捕获run方法内所抛出的异常
+        // 捕获 run 方法内所抛出的异常
     }
 }
 ```
 
-## Crontab表达式
+2.注册定时任务，在 `EasySwoole` 框架全局的 `mainServerCreate` 事件（即项目根目录的 `EasySwooleEvent.php` 文件的 `mainServerCreate` 方法中）中进行定时任务注册，如下所示：
+
+```php
+<?php
+
+namespace EasySwoole\EasySwoole;
+
+use App\Crontab\CustomCrontab;
+use EasySwoole\EasySwoole\AbstractInterface\Event;
+use EasySwoole\EasySwoole\Swoole\EventRegister;
+use EasySwoole\Crontab\Crontab;
+
+class EasySwooleEvent implements Event
+{
+    public static function initialize()
+    {
+        date_default_timezone_set('Asia/Shanghai');
+    }
+
+    public static function mainServerCreate(EventRegister $register)
+    {
+        ###### 注册一个定时任务 ######
+        // 配置定时任务
+        $crontabConfig = new \EasySwoole\Crontab\Config();
+
+        // 1.设置执行定时任务的 socket 服务的 socket 文件存放的位置，默认值为 当前文件所在目录
+        // 这里设置为框架的 Temp 目录
+        $crontabConfig->setTempDir(EASYSWOOLE_TEMP_DIR);
+
+        // 2.设置执行定时任务的 socket 服务的名称，默认值为 'EasySwoole'
+        $crontabConfig->setServerName('EasySwoole');
+
+        // 3.设置用来执行定时任务的 worker 进程数，默认值为 3
+        $crontabConfig->setWorkerNum(3);
+
+        // 4.设置定时任务执行出现异常的异常捕获回调
+        $crontabConfig->setOnException(function (\Throwable $throwable) {
+            // 定时任务执行发生异常时触发（如果未在定时任务类的 onException 中进行捕获异常则会触发此异常回调）
+        });
+
+        // 创建定时任务实例
+        $crontab = new Crontab($crontabConfig);
+
+        // 注册定时任务
+        $crontab->register(new CustomCrontab());
+        $crontab->attachToServer(ServerManager::getInstance()->getSwooleServer());
+    }
+}
+```
+
+### 在 Swoole 中使用
+
+```php
+<?php
+use EasySwoole\Crontab\Crontab;
+use EasySwoole\Crontab\JobInterface;
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+$http = new Swoole\Http\Server('0.0.0.0', 9501);
+
+class JobPerMin implements JobInterface
+{
+    public function jobName(): string
+    {
+        return 'JobPerMin';
+    }
+
+    public function crontabRule(): string
+    {
+        return '*/1 * * * *';
+    }
+
+    public function run()
+    {
+        var_dump(time());
+        return time();
+    }
+
+    public function onException(\Throwable $throwable)
+    {
+        throw $throwable;
+    }
+}
+
+// 配置及注册定时任务
+$crontab = new Crontab();
+$crontab->register(new JobPerMin());
+$crontab->attachToServer($http);
+
+$http->on('request', function ($request, $response) use ($crontab) {
+
+    // 在 http 服务中直接触发执行定时任务
+    $ret = $crontab->rightNow('JobPerMin');
+
+    $response->header('Content-Type', 'text/plain');
+    $response->end('Hello World ' . $ret);
+});
+
+$http->start();
+```
+
+## Crontab 表达式
 
 通用表达式：
 ```bash
@@ -124,62 +265,4 @@ class CustomCrontab extends AbstractCronTask
 @weekly                    每周一次 等同于(0 0 * * 0) 
 @daily                     每日一次 等同于(0 0 * * *) 
 @hourly                    每小时一次 等同于(0 * * * *)
-```
-
-## Crontab管理
-
-`EasySwoole`内置对于`Crontab`的命令行操作，方便开发者友好的去管理`Crontab`。
-
-可执行`php easyswoole crontab -h`来查看具体操作。
-
-**查看所有注册的Crontab**
-
-> php easyswoole crontab show
-
-**停止指定的Crontab**
-
-> php easyswoole crontab stop --name=TASK_NAME
-
-**恢复指定的Crontab**
-
-> php easyswoole crontab resume --name=TASK_NAME
-
-**立即跑一次指定的Crontab**
-
-> php easyswoole crontab run --name=TASK_NAME
-
-## 版本强调
-
-`EasySwoole3.3.0`如何定义：
-
-```php
-<?php
-namespace App\Crontab;
-
-use EasySwoole\EasySwoole\Crontab\AbstractCronTask;
-
-class TaskOne extends AbstractCronTask
-{
-
-    public static function getRule(): string
-    {
-        // TODO: Implement getRule() method.
-        // 定时周期 （每小时）
-        return '@hourly';
-    }
-
-    public static function getTaskName(): string
-    {
-        // TODO: Implement getTaskName() method.
-        // 定时任务名称
-        return 'taskOne';
-    }
-
-    static function run(\swoole_server $server, int $taskId, int $fromWorkerId,$flags=null)
-    {
-        // TODO: Implement run() method.
-        // 定时任务处理逻辑
-        var_dump('run once per hour');
-    }
-}
 ```

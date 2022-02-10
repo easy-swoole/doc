@@ -145,6 +145,7 @@
     - [AfterRequest 事件](FrameDesign/event/afterRequest.md)
 - 基础使用
   - [Timer定时器](Components/Component/timer.md)
+  - [秒级 Crontab 定时任务](BaseUsage/secondCrontab.md)
   - [Crontab定时任务](BaseUsage/crontab.md)
   - [日志](BaseUsage/log.md)
   - [异常](BaseUsage/trigger.md)
