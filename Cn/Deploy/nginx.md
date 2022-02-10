@@ -120,6 +120,7 @@ server {
     location / {
         # websocket的header
         proxy_http_version 1.1;
+        
         # 升级http1.1到websocket协议
         proxy_set_header Upgrade websocket;
         proxy_set_header Connection "Upgrade";
@@ -128,6 +129,8 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header Host $http_host;
+        proxy_pass_request_body on;
+        proxy_pass_request_headers on;
 
         # 客户端与服务端60s之内无交互，将自动断开连接。
         proxy_read_timeout 60s ;
@@ -137,3 +140,7 @@ server {
     }
 }
 ```
+
+::: warning
+注意: 当配置了 ```升级 http1.1 到 websocket协议，如 proxy_set_header Upgrade websocket; proxy_set_header Connection "Upgrade";``` 上述配置强制兼容 `WebSocket` 的时候。非表单类数据，将无法代理给上游服务器。
+:::
