@@ -83,7 +83,7 @@ public static function mainServerCreate(EventRegister $register)
     });
     
     // 创建定时任务实例
-    $crontab = new \EasySwoole\Crontab\Crontab($crontabConfig);
+    $crontab = \EasySwoole\EasySwoole\Crontab\Crontab::getInstance($crontabConfig);
     
     // 注册定时任务
     $crontab->register(new \App\Crontab\CustomCrontab());
@@ -150,7 +150,7 @@ namespace EasySwoole\EasySwoole;
 use App\Crontab\CustomCrontab;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
-use EasySwoole\Crontab\Crontab;
+use EasySwoole\EasySwoole\Crontab\Crontab;
 
 class EasySwooleEvent implements Event
 {
@@ -181,7 +181,7 @@ class EasySwooleEvent implements Event
         });
 
         // 创建定时任务实例
-        $crontab = new Crontab($crontabConfig);
+        $crontab = \EasySwoole\EasySwoole\Crontab\Crontab::getInstance($crontabConfig);
 
         // 注册定时任务
         $crontab->register(new CustomCrontab());
@@ -194,7 +194,6 @@ class EasySwooleEvent implements Event
 
 ```php
 <?php
-use EasySwoole\Crontab\Crontab;
 use EasySwoole\Crontab\JobInterface;
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -226,7 +225,7 @@ class JobPerMin implements JobInterface
 }
 
 // 配置及注册定时任务
-$crontab = new Crontab();
+$crontab = \EasySwoole\EasySwoole\Crontab\Crontab::getInstance();
 $crontab->register(new JobPerMin());
 $crontab->attachToServer($http);
 
