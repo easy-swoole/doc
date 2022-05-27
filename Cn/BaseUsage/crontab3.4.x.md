@@ -86,11 +86,8 @@ class CustomCrontab extends AbstractCronTask
     public function run(int $taskId, int $workerIndex)
     {
         // 定时任务的执行逻辑
-
-        // 开发者可投递给task异步处理
-        TaskManager::getInstance()->async(function (){
-            // todo some thing
-        });
+        // 例如：每隔1分钟打印当前时间
+        echo date('Y-m-d H:i:s') . PHP_EOL;
     }
 
     public function onException(\Throwable $throwable, int $taskId, int $workerIndex)

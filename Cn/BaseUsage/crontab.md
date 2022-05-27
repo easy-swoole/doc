@@ -87,7 +87,6 @@ public static function mainServerCreate(EventRegister $register)
     
     // 注册定时任务
     $crontab->register(new \App\Crontab\CustomCrontab());
-    $crontab->attachToServer(ServerManager::getInstance()->getSwooleServer());
 }
 ```
 
@@ -126,11 +125,6 @@ class CustomCrontab implements JobInterface
         
         // 相当于每分钟打印1次时间戳，这里只是参考示例。
         echo time();
-        
-        // 开发者可投递给 task 异步处理
-        TaskManager::getInstance()->async(function (){
-            // todo some thing
-        });
     }
 
     public function onException(\Throwable $throwable)
