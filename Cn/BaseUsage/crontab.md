@@ -179,7 +179,6 @@ class EasySwooleEvent implements Event
 
         // 注册定时任务
         $crontab->register(new CustomCrontab());
-        $crontab->attachToServer(ServerManager::getInstance()->getSwooleServer());
     }
 }
 ```
