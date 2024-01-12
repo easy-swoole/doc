@@ -363,9 +363,3 @@ interface QueueDriverInterface
     public function confirm(Job $job,float $timeout = 3.0): bool;
 }
 ```
-
-## 相关仓库
-
-[EasySwoole 中利用 Redis 实现消息队列](https://www.umdzz.cn/article/36/easyswooleredis)  
-
-[如何利用 EasySwoole 多进程多协程 Redis 队列实现爬虫](https://www.umdzz.cn/article/37/easyswooleredis)
