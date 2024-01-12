@@ -46,6 +46,29 @@ class EasySwooleEvent implements Event
         $en->getTemplate()->setPageNotFoundTpl('404.tpl');
         DocContainer::getInstance()->add($en);
 
-        Manager::getInstance()->addProcess(new TickProcess());
+        // Manager::getInstance()->addProcess(new TickProcess());
+        self::initSearch();
+    }
+
+    private static function initSearch()
+    {
+        $scheduler = new \Swoole\Coroutine\Scheduler();
+        $scheduler->add(function() {
+            go(function () {
+                // 写入搜索内容json
+                $list = Config::getInstance()->getConf("DOC.ALLOW_LANGUAGE");
+                try {
+                    foreach ($list as $dir => $value) {
+                        $json = DocSearchParser::parserDoc2JsonUrlMap(EASYSWOOLE_ROOT, "{$dir}");
+                        file_put_contents(EASYSWOOLE_ROOT . "/Static/keyword{$dir}.json", json_encode($json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+                    }
+                } catch (\Throwable $throwable) {
+                    \EasySwoole\EasySwoole\Trigger::getInstance()->throwable($throwable);
+                }
+            });
+        });
+        $scheduler->start();
+        // 清除全部定时器
+        \Swoole\Timer::clearAll();
     }
 }
