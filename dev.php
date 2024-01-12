@@ -8,7 +8,7 @@ return [
         'SOCK_TYPE' => SWOOLE_TCP,
         'RUN_MODEL' => SWOOLE_PROCESS,
         'SETTING' => [
-            'worker_num' => 8,
+            'worker_num' => swoole_cpu_num(),
             'reload_async' => true,
             'max_wait_time'=>3,
             'document_root'            => EASYSWOOLE_ROOT . '/Static',
