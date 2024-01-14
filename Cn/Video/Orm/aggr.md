@@ -7,13 +7,6 @@ meta:
     content: easyswoole免费视频课程|swoole框架免费教程
 ---
 # 聚合
-<script type="text/javascript" src="/Js/Ckplayer/ckplayer.js"></script>
-<div class="video" style="width: 50rem;height: 30rem;"></div>
-<script type="text/javascript">
-    var videoObject = {
-    		container: '.video',
-    		variable: 'player',
-    		video:'http://easyswoole.oss-cn-shenzhen.aliyuncs.com/es-orm/10.%E8%81%9A%E5%90%88.mp4'
-    	};
-    var player=new ckplayer(videoObject);
-</script>
+<div>
+    <iframe id="videoFrame" src="//player.bilibili.com/player.html?bvid=BV1bh4y1Y79a" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="900px" height="500px"></iframe>
+</div>
