@@ -116,10 +116,10 @@ $validate->addColumn('age')->required('年龄不为空')->func(function ($itemDa
     // 获取验证的字段名，为 'age'，即 addColumn() 中设置的字段名
     var_dump($column);
 
-    // 获取验证的字段名的值，为 18
+    // 获取验证的字段名的值，为 16
     var_dump($itemData);
 
-    return ($validate->getVerifyData() instanceof \EasySwoole\Spl\SplArray) && $column === 'age' && $itemData === 0.001;
+    return ($validate->getVerifyData() instanceof \EasySwoole\Spl\SplArray) && $column === 'age' && $itemData === 18;
 }, '只允许18岁的进入');
 
 // 验证结果：验证通过返回 true 反之返回 false
