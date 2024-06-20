@@ -350,7 +350,6 @@ class Index extends Controller
                 var_dump($rq . $requestFlag);
             });
             \co::sleep(4);
-            // 【这里的数据会错乱】
             var_dump($rq . $requestFlag);
         });
         $this->response()->write('this is index!' . $this->request()->getRequestParam('times'));
